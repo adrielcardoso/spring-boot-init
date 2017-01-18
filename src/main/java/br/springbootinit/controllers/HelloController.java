@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.springbootinit.config.Controller;
 
 @RestController
-public class HelloController extends Controller 
+public class HelloController extends Controller
 {
 	 @RequestMapping(
     		value ="/hello", 

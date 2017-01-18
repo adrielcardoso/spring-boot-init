@@ -1,3 +1,6 @@
-br\springbootinit\config\Controller.class
-br\springbootinit\LogtrackerSpringApplication.class
 br\springbootinit\controllers\HelloController.class
+br\springbootinit\entity\ClienteEntity.class
+br\springbootinit\entity\PetEntity.class
+br\springbootinit\LogtrackerSpringApplication.class
+br\springbootinit\config\Entity.class
+br\springbootinit\config\Controller.class
