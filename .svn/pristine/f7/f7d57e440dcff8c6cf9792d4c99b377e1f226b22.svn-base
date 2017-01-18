@@ -1,0 +1,274 @@
+//package br.intelidata.entity;
+//
+//import java.util.List;
+//import br.intelidata.component.AbstractEnumComponent;
+//import br.intelidata.component.FamiliaComponent;
+//import br.intelidata.service.IdentificadorIncrementoUsuarioService;
+//import br.intelidata.service.IdentificadorPacoteManager;
+//import br.intelidata.service.IdentificadorStart;
+//import br.intelidata.service.IncrementoUsuarioService;
+//import br.intelidata.service.ValidadorIncrementoUsuarioStartService;
+//
+//public enum ProdutoLicencaEntity implements AbstractEnumComponent<Integer> 
+//{
+//    TODOS(0, "Todos", "TODOS", true, false, true, false, false, null, null, null, FamiliaComponent.START, FamiliaComponent.MANAGER, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    START(1, "UNICO Start", "S", true, false, true, false, true, new IdentificadorStart(), null, null, FamiliaComponent.START),
+//    PMANAGER(2, "Pacote de atualização de Start para Manager", "PM", false, false, false, false, true, new IdentificadorPacoteManager(), null, null, FamiliaComponent.START),
+//    INCREMENTO_USUARIO_START(
+//            3,
+//            "Incremento de usuários START",
+//            "IST",
+//            false,
+//            false,
+//            false,
+//            false,
+//            true,
+//            new IdentificadorIncrementoUsuarioService("IST"),
+//            new ValidadorIncrementoUsuarioStartService(),
+//            new IncrementoUsuarioService(),
+//            FamiliaComponent.START),
+//    MANAGER(4, "UNICO Manager", "U", true, false, true, false, true, new IdentificadorPacoteManager(), null, null, FamiliaComponent.MANAGER),
+//    ENTERPRISE(5, "Enterprise", "E", true, false, false, false, true, new IdentificadorEnterpriseManager(), new ValidadorEnterpriseManager(), null, FamiliaComponent.MANAGER),
+//    INCREMENTO_USUARIO_MANAGER(
+//            6,
+//            "Incremento de usuários",
+//            "IU",
+//            false,
+//            false,
+//            false,
+//            false,
+//            true,
+//            new IdentificadorIncrementoUsuario("IU"),
+//            new ValidadorIncrementoUsuarioManager(),
+//            new IncrementoUsuario(),
+//            FamiliaComponent.MANAGER),
+//    INCREMENTO_FILIAL(
+//            7,
+//            "Incremento de filiais",
+//            "IE",
+//            false,
+//            false,
+//            false,
+//            false,
+//            true,
+//            new IdentificadorIncrementoFilial(),
+//            new ValidadorIncrementoEnterprise(),
+//            new IncrementoFilial(),
+//            FamiliaComponent.MANAGER),
+//    UNIPLUS(8, "UNIPLUS", "PLUS", true, false, true, false, true, null, null, null, FamiliaComponent.PLUS),
+//    ENTERPRISE_PLUS(9, "Enterprise PLUS", "EPLUS", true, false, false, false, true, null, new ValidadorEnterprisePlusGnio(), null, FamiliaComponent.PLUS),
+//    INCREMENTO_USUARIO_PLUS(
+//            10,
+//            "Incremento de usuários do UNIPLUS",
+//            "IPLUS",
+//            false,
+//            false,
+//            false,
+//            false,
+//            true,
+//            new IdentificadorIncrementoUsuario("IPLUS"),
+//            null,
+//            new IncrementoUsuario(),
+//            FamiliaComponent.PLUS),
+//    SPED_PISCOFINS(11, "SPED Contribuições", "SPPC", false, false, false, false, false, null, new ValidadorSpedContribuicoes(), null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    GNIO(12, "G-nio", "G-nio", true, false, true, false, true, null, null, null, FamiliaComponent.GNIO),
+//    ENTERPRISE_GNIO(13, "Enterprise G-nio", "EG-nio", true, false, false, false, true, null, new ValidadorEnterprisePlusGnio(), null, FamiliaComponent.GNIO),
+//    INCREMENTO_USUARIO_GNIO(14, "Incremento de usuários para G-nio", "IG", false, false, false, false, true, new IdentificadorIncrementoUsuario("IG"), null, new IncrementoUsuario(), FamiliaComponent.GNIO),
+//    OS(15, "Ordem de serviço", "OS", false, false, false, false, true, null, null, null, FamiliaComponent.MANAGER),
+//    SPED(16, "SPED", "SP", false, false, false, false, true, null, null, null, FamiliaComponent.MANAGER),
+//    UNICHEF(17, "Unichef", "Chef", false, false, false, false, false, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    PRODUCAO(18, "Registro de produçao", "RP", false, false, false, false, true, new IdentificadorFichaProducao(), null, null, FamiliaComponent.MANAGER),
+//    CONCENTRADOR(19, "Concentrador de dados", "CD", false, true, false, false, false, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    NF_SERVICO(10, "Nota Fiscal de Serviço Eletrônica", "NFSE", false, false, false, false, true, null, null, null, FamiliaComponent.MANAGER, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    CRM(21, "CRM", "CRM", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    RS2012(22, "Atualização UNICO Start", "RS2012", false, false, false, true, true, new IdentificadorRenovacao("RS2012"), null, null, FamiliaComponent.START),
+//    RU2012(23, "Atualização UNICO Manager", "RU2012", false, false, false, true, true, new IdentificadorRenovacao("RU2012"), null, null, FamiliaComponent.MANAGER),
+//    RE2012(24, "Atualização UNICO Enterprise", "RE2012", false, false, false, true, true, new IdentificadorRenovacao("RE2012"), null, null, FamiliaComponent.MANAGER),
+//    TEF_UNICO(25, "TEF UNICO", "TEFU", false, false, false, false, true, null, null, null, FamiliaComponent.START, FamiliaComponent.MANAGER, FamiliaComponent.PLUS_START, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    TEF_OUTROS(26, "TEF Outros", "TEFO", false, false, false, false, true, null, null, null, FamiliaComponent.START, FamiliaComponent.MANAGER, FamiliaComponent.PLUS_START, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    CTE(27, "CT-e", "CTE", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    MATERIAIS_CONSTRUCAO(28, "Materiais de construção", "MC", false, false, false, false, true, null, null, null, FamiliaComponent.GNIO),
+//    UNIPAF(29, "UNIPAF", "UPAF", false, false, false, false, true, null, new ValidadorUniPaf(), null, FamiliaComponent.START, FamiliaComponent.MANAGER, FamiliaComponent.PLUS),
+//    UNIPDV(30, "UNIPDV", "UPDV", false, false, false, false, false, null, new ValidadorUniPdv(), null, FamiliaComponent.START, FamiliaComponent.MANAGER),
+//    CARTAO_FIDELIDADE(31, "Cartão fidelidade", "CARTFID", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    INCREMENTO_USUARIO_ANTIGO(32, "Incremento de usuários", "I", false, false, false, false, true, new IdentificadorIncrementoUsuario("I"), null, new IncrementoUsuario(), FamiliaComponent.NENHUMA),
+//    RS2013(33, "Atualização UNICO Start", "RS2013", false, false, false, true, true, new IdentificadorRenovacao("RS2013"), null, null, FamiliaComponent.START),
+//    RU2013(34, "Atualização UNICO Manager", "RU2013", false, false, false, true, true, new IdentificadorRenovacao("RU2013"), null, null, FamiliaComponent.MANAGER),
+//    RE2013(35, "Atualização UNICO Enterprise", "RE2013", false, false, false, true, true, new IdentificadorRenovacao("RE2013"), null, null, FamiliaComponent.MANAGER),
+//    RS2014(36, "Atualização UNICO Start", "RS2014", false, false, false, true, true, new IdentificadorRenovacao("RS2014"), null, null, FamiliaComponent.START),
+//    RU2014(37, "Atualização UNICO Manager", "RU2014", false, false, false, true, true, new IdentificadorRenovacao("RU2014"), null, null, FamiliaComponent.MANAGER),
+//    RE2014(38, "Atualização UNICO Enterprise", "RE2014", false, false, false, true, true, new IdentificadorRenovacao("RE2014"), null, null, FamiliaComponent.MANAGER),
+//    COMPRAS(39, "Cotação de compras", "COMP", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    MDFE(40, "MDF-e", "MDFE", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    GNRE(41, "GNRE On-line", "GNRE", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    UNINFCE(42, "UNINFCE", "NFCE", false, false, false, false, true, null, null, null, FamiliaComponent.START, FamiliaComponent.MANAGER),
+//    TROCAR_RAZAO_SOCIAL(43, "Alterar Razão Social", "TROCARZ", false, true, false, false, true, null, null, null, FamiliaComponent.START, FamiliaComponent.MANAGER, FamiliaComponent.PLUS_START, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    FRANQUIA(44, "Franquia", "FRQA", false, false, false, false, false, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    FRANQUEADO(45, "Franqueado", "FRQD", false, false, false, false, false, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    MULTICNPJ(46, "Multi-CNPJ", "MCNPJ", true, false, false, false, false, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    SMS(47, "Serviço de SMS", "SMS", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    R2D2REST(48, "R2D2REST", "R2D2RST", false, false, false, false, false, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    CONTROLE_LOTE(49, "Controle de Lote/Validade", "LOTE", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS),
+//    UNIPAFPLUS(50, "UNIPAF+", "UPAF+", false, true, false, false, true, null, new ValidadorUniPafPlus(), null, FamiliaComponent.PLUS_START, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    UNIPDVPLUS(51, "UNIPDV+", "UPDV+", false, true, false, false, false, null, new ValidadorUniPdvPlus(), null, FamiliaComponent.PLUS_START, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    UNINFCEPLUS(52, "UNINFCE+", "NFCE+", false, true, false, false, true, null, null, null, FamiliaComponent.PLUS_START, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    OPFISCAL(53, "Operação fiscal", "OPFISCAL", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    EMULADOR_ECF(54, "Emulador ECF", "DBECF", false, false, false, false, true, null, null, null, FamiliaComponent.MANAGER, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    SAIDAVIP(55, "SAIDAVIP", "SAIDAVIP", false, false, false, false, false, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    UNIMOB(56, "Unimobile Vendas", "UNIMOB", false, false, false, false, true, new IdentificadorIncrementoUsuarioUnimob(), null, new IncrementoUsuarioUnimob(), FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    BOLETO(57, "Boleto", "BOLETO", false, true, false, false, true, null, null, null, FamiliaComponent.MANAGER, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    RECLASSIFICACAO(58, "Reclassificação", "RECLAS", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    PROG_REAJUSTE_PRECO(59, "Programação e reajuste de preço", "PROGPRECO", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    DELIVERYWEB(60, "Integração com DeliveryWeb", "DELIVERYW", false, false, false, false, false, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    ECOMMERCE(61, "Integração com Único ECommerce", "WEBC", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    SPED_CONTRIBUICOES(62, "SPED Contribuições Mensal", "SPCONTR", false, false, false, false, false, null, new ValidadorSpedContribuicoesMensal(), null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    EXPEDICAO(63, "Expedição", "EXPEDICAO", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    UNICHEF2(64, "Unichef 2", "Chef2", false, false, false, false, false, null, new ValidadorUnichef(), null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    ATUALIZACAO(65, "Atualização UNICO Antiga", "A", false, false, false, true, false, new IdentificadorAtualizacao(), null, null, FamiliaComponent.START, FamiliaComponent.MANAGER, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    RS2015(66, "Atualização UNICO Start", "RS2015", false, false, false, true, true, new IdentificadorRenovacao("RS2015"), null, null, FamiliaComponent.START),
+//    RU2015(67, "Atualização UNICO Manager", "RU2015", false, false, false, true, true, new IdentificadorRenovacao("RU2015"), null, null, FamiliaComponent.MANAGER),
+//    RE2015(68, "Atualização UNICO Enterprise", "RE2015", false, false, false, true, true, new IdentificadorRenovacao("RE2015"), null, null, FamiliaComponent.MANAGER),
+//    CONTRATO(69, "Contrato", "CONTRATO", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    COMANDA(70, "Unimobile Comanda", "MOBCOM", false, false, false, false, true, new IdentificadorIncrementoUsuarioComanda(), null, new IncrementoUsuarioComanda(), FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    TEF_DISCADO(71, "TEF Discado", "TEFD", false, false, false, false, true, null, null, null, FamiliaComponent.START, FamiliaComponent.MANAGER, FamiliaComponent.PLUS_START, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    INVENTARIO_ESTOQUE(72, "Inventário de estoque", "IVENT", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS),
+//    INTEGRACAO_BOA_VISTA(73, "Integração Boa Vista", "INTBV", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    UNISATPLUS(74, "UNISAT+", "SAT+", false, true, false, false, true, null, null, null, FamiliaComponent.PLUS_START, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    INTEGRACAO_MERCAFACIL(75, "Integração Mercafácil", "INTMF", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    CENTRO_CUSTO_UNIPLUS(76, "Centro de custo", "CENCTP", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS),
+//    CENTRO_CUSTO_GNIO(77, "Centro de custo", "CENCTG", false, false, false, false, true, null, null, null, FamiliaComponent.GNIO),
+//    ATACAREJO(78, "Atacarejo", "ATACAREJO", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS),
+//    ATIVO_IMOBILIZADO(79, "Ativo imobilizado", "ATIVIM", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    TABELA_PRECO(80, "Tabela de preços", "TBPR", false, false, false, false, true, new IdentificadorIncrementoTBPR(), null, new IncrementoTBPR(), FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    FAMILIA_PRODUTO(81, "Família de produtos", "FPR", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS),
+//    UNICHEFPLUS(82, "Unichef+", "Chef+", false, true, false, false, true, null, new ValidadorUnichefPlus(), null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    SPED_PISCOFINS_PLUS(83, "SPED Contribuições+", "SPPC+", false, true, false, false, true, null, new ValidadorSpedContribuicoesPlus(), null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    SPED_CONTRIBUICOES_PLUS(84, "SPED Contribuições Mensal+", "SPCONTR+", false, true, false, false, true, null, new ValidadorSpedContribuicoesMensalPlus(), null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    UNICO_DBA(85, "UnicoDBA", "DBA", false, false, false, false, true, null, null, null, FamiliaComponent.MANAGER, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    ALERTA_FISCAL_GNIO(86, "Alerta fiscal", "AFISG", false, true, false, false, true, null, (chave, cnpj) -> LicencaManager.validarLicencaAlertaFiscal(cnpj), null, FamiliaComponent.GNIO),
+//    ALERTA_FISCAL_PLUS(87, "Alerta fiscal", "AFISP", false, true, false, false, true, null, (chave, cnpj) -> LicencaManager.validarLicencaAlertaFiscal(cnpj), null, FamiliaComponent.PLUS),
+//    COCKPIT(88, "Cockpit", "CCPT", false, false, false, false, true, null, null, null, FamiliaComponent.GNIO),
+//    RS2016(89, "Atualização UNICO Start", "RS2016", false, false, false, true, true, new IdentificadorRenovacao("RS2016"), null, null, FamiliaComponent.START),
+//    RU2016(90, "Atualização UNICO Manager", "RU2016", false, false, false, true, true, new IdentificadorRenovacao("RU2016"), null, null, FamiliaComponent.MANAGER),
+//    RE2016(91, "Atualização UNICO Enterprise", "RE2016", false, false, false, true, true, new IdentificadorRenovacao("RE2016"), null, null, FamiliaComponent.MANAGER),
+//    DESTDA(92, "DeSTDA", "DESTDA", false, false, false, false, false, null, null, null, FamiliaComponent.MANAGER, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    LIMITE_FORMA_PGMTO(93, "Limite de crédito por forma de pagamento", "LFPGMTO", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS),
+//    ESTOQUE_TERCEIROS(94, "Estoque de terceiros", "ESTOQUETER", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS),
+//    UNIPLUS_START(95, "Uniplus Starter Edition", "PLUSSTRT", true, false, true, false, true, null, null, null, FamiliaComponent.PLUS_START),
+//    PPLUS(96, "Pacote de atualização de Uniplus Starter Edition para Uniplus", "PPLUS", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS_START),
+//    PROMOCAO_QUOTA(97, "Promoção por Quota", "PROMQUOTA", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),
+//    CONTABILIDADE(98, "Contabilidade", "CONTAB", false, false, false, false, true, null, null, null, FamiliaComponent.PLUS),
+//    CONFERENCIA_PED_FAT(99, "Conferência de pedido de faturamento", "CONPEDFAT", false, false, false, false, true, null, null, null, Familia.GNIO),
+//    MULTIEMPRESA(100, "Multi-Empresa", "MLTEMP", true, false, false, false, true, null, null, null, FamiliaComponent.PLUS, FamiliaComponent.GNIO),;
+//
+//    private Integer id;
+//    private String descricao;
+//    private String prefixo;
+//    private boolean requerCNPJ;
+//    private boolean perguntaFilial;
+//    private boolean base;
+//    private boolean atualizacao;
+//    private boolean ativoParaCompra;
+//    private InterfaceIncrementoLicenca interfaceIncrementoLicenca;
+//    private InterfaceIdentificadorProdutoLicenca identificadorProdutoLicenca;
+//    private InterfaceValidadorLicenca interfaceValidadorLicenca;
+//    private List<FamiliaComponent> familia;
+//
+//    private ProdutoLicencaEntity(Integer id, String descricao, String prefixo, boolean requerCNPJ, boolean perguntaFilial, boolean base, boolean atualizacao, boolean ativoParaCompra,
+//            InterfaceIdentificadorProdutoLicenca interfaceIdentificadorProdutoLicenca, InterfaceValidadorLicenca interfaceValidadorLicenca, InterfaceIncrementoLicenca interfaceIncrementoLicenca,
+//            FamiliaComponent... familia) {
+//        this.id = id;
+//        this.descricao = descricao;
+//        this.prefixo = prefixo;
+//        if (!Util.arrayNullOrEmpty(familia)) {
+//            this.familia = Util.array2List(familia);
+//        }
+//        this.requerCNPJ = requerCNPJ;
+//        this.perguntaFilial = perguntaFilial;
+//        this.base = base;
+//        this.atualizacao = atualizacao;
+//        this.ativoParaCompra = ativoParaCompra;
+//        this.identificadorProdutoLicenca = interfaceIdentificadorProdutoLicenca;
+//        this.interfaceValidadorLicenca = interfaceValidadorLicenca;
+//        this.interfaceIncrementoLicenca = interfaceIncrementoLicenca;
+//    }
+//
+//    @Override
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    @Override
+//    public String getDescricao() {
+//        return descricao;
+//    }
+//
+//    public List<Familia> getFamilia() {
+//        return familia;
+//    }
+//
+//    public boolean isPertenceNaFamilia(Familia f) {
+//        if (this.equals(TODOS)) {
+//            return true;
+//        } else {
+//            if (f != null && familia != null) {
+//                for (Familia f1 : familia) {
+//                    if (f1.equals(f)) {
+//                        return true;
+//                    }
+//                }
+//            }
+//        }
+//        return false;
+//    }
+//
+//    public boolean isRequerCNPJ() {
+//        return requerCNPJ;
+//    }
+//
+//    public boolean isBase() {
+//        return base;
+//    }
+//
+//    public String getPrefixo() {
+//        return prefixo;
+//    }
+//
+//    public boolean isAtualizacao() {
+//        return atualizacao;
+//    }
+//
+//    public boolean isPerguntaFilial() {
+//        return perguntaFilial;
+//    }
+//
+//    public boolean isAtivoParaCompra() {
+//        return ativoParaCompra;
+//    }
+//
+//    public InterfaceIncrementoLicenca getInterfaceIncrementoLicenca() {
+//        return interfaceIncrementoLicenca;
+//    }
+//
+//    public InterfaceIdentificadorProdutoLicenca getIdentificadorProdutoLicenca() {
+//        return identificadorProdutoLicenca;
+//    }
+//
+//    public InterfaceValidadorLicenca getInterfaceValidadorLicenca() {
+//        return interfaceValidadorLicenca;
+//    }
+//
+//    public boolean equalsPorChave(String chave) {
+//        if (identificadorProdutoLicenca != null) {
+//            return identificadorProdutoLicenca.identificar(chave);
+//        } else {
+//            return prefixo.equals(LicencaCommonRN.getInstance().getPrefixo(chave));
+//        }
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return getDescricao();
+//    }
+//
+//}

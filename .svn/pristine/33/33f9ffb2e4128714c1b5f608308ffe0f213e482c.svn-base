@@ -1,0 +1,105 @@
+package br.intelidata.service;
+
+import java.io.ByteArrayOutputStream;
+import java.time.LocalDate;
+import javax.sql.DataSource;
+import br.intelidata.component.EncryptionComponent;
+import br.intelidata.component.ImpressoraFiscalComponent;
+import br.intelidata.component.LogComponent;
+import br.intelidata.component.UtilComponent;
+import br.intelidata.config.Service;
+import br.intelidata.entity.DadosAutorizacaoEcfEntity;
+import br.intelidata.entity.DadosEcfAutorizadaEntity;
+import br.intelidata.service.ValidarDadosAutorizacaoService;
+import br.intelidata.interace.IEnviaArquivoAutorizacaoInterface;
+import br.intelidata.component.FileLogComponent;
+
+public class PedidoAutorizacaoECFService extends Service
+{
+	 public String validaEnviaArquivo(
+			 DataSource dataSource,
+			 LogComponent logComponent,
+			 String history,
+			 boolean enviarPorEmail) throws Exception 
+	 {
+	    String msg = "";
+	    String pedido = UtilComponent.filtra(history);
+	    Long agora = System.currentTimeMillis();
+	
+	    DadosAutorizacaoEcfEntity dadosAutorizacao = DadosAutorizacaoEcfEntity.converte(pedido);
+	    DadosEcfAutorizadaEntity ecfAutorizada = DadosEcfAutorizadaEntity.getDadosEcfAutorizada(
+	    		dataSource, 
+	    		dadosAutorizacao.getNumeroSerie(),
+	    		dadosAutorizacao.getCnpj());
+	
+	    ByteArrayOutputStream baos = null;
+	    try {
+	        ValidarDadosAutorizacaoService.validarDados(logComponent, dataSource, dadosAutorizacao, ecfAutorizada, enviarPorEmail, agora);
+	        baos = geraArquivo(dadosAutorizacao);
+	    } catch (Exception e) {
+	        throw new Exception(e.getMessage());
+	    }
+	
+	    IEnviaArquivoAutorizacaoInterface arquivo;
+	
+	    if (enviarPorEmail) {
+	        arquivo = new EnviaArquivoAutorizacaoEmailService(dadosAutorizacao, ecfAutorizada, baos);
+	    } else {
+	        arquivo = (IEnviaArquivoAutorizacaoInterface) new EnviaArquivoAutorizacaoService(baos);
+	    }
+	
+	    msg = arquivo.enviaArquivo();
+	
+	    //Grava os dados do pedido de autorização na tabela ecfautorizada, e cria um historico na tabela ecfautorizadahistorico
+	    UtilComponent.gravaPedidoUso(dataSource, logComponent, dadosAutorizacao, agora, ecfAutorizada.getId());
+	
+	    return msg;
+	 }
+	 
+	 public static ByteArrayOutputStream geraArquivo(DadosAutorizacaoEcfEntity dadosAutorizacao) throws Exception 
+	 {
+        try {
+            String pedidoOriginal = "1;" + dadosAutorizacao.getCodigoModelo() + ";" + dadosAutorizacao.getNumeroSerie() + ";"
+                    + UtilComponent.formataNumero(dadosAutorizacao.getGt(), ImpressoraFiscalComponent.MASCARA_VALOR, 2);
+            
+            int checksum = 0;
+            for (int i = 0; i < pedidoOriginal.length(); i++) {
+                checksum += pedidoOriginal.charAt(i);
+            }
+            pedidoOriginal = pedidoOriginal + ";" + checksum;
+            String senhaOriginal = EncryptionComponent.encrypt64(pedidoOriginal, ImpressoraFiscalComponent.key2);
+            LocalDate hoje = LocalDate.now();
+            ImpressoraFiscalComponent impressoraFiscalControle = new ImpressoraFiscalComponent();
+            impressoraFiscalControle.setNumeroSerie(dadosAutorizacao.getNumeroSerie());
+            impressoraFiscalControle.setFabricante(dadosAutorizacao.getFabricante());
+            impressoraFiscalControle.setModelo(dadosAutorizacao.getModelo());
+            impressoraFiscalControle.setSenha(senhaOriginal);
+            impressoraFiscalControle.setGtAtual(dadosAutorizacao.getGt());
+            impressoraFiscalControle.setAnoLmf(hoje.getYear());
+            impressoraFiscalControle.setMesLmf(hoje.getMonthValue());
+            impressoraFiscalControle.setMd5(dadosAutorizacao.getMd5());
+            impressoraFiscalControle.setVersaoPaf(dadosAutorizacao.getVersaoPaf());
+            return impressoraFiscalControle.gera();
+
+        } catch (Exception e) {
+            FileLogComponent.getInstance().write(e);
+            throw new Exception("Falhou ao gerar o arquivo de autorização de uso da ecf");
+        }
+	 }
+    
+	 public static String pedidoAutorizacaoEcf(
+    		DataSource dataSource,
+    		LogComponent logComponent,
+    		String history) throws Exception 
+	 {
+        try {
+            return new ValidaEnviaArquivoAutorizacaoService().validaEnviaArquivo(
+            		dataSource,  
+            		logComponent,
+            		history, 
+            		true);
+        } catch (Exception e) {
+            throw e;
+        }
+	 }
+}

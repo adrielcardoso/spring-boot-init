@@ -1,0 +1,61 @@
+package br.intelidata.entity;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class FormulaEntity implements Serializable 
+{
+    public static final long serialVersionUID = 7432507183897415668L;
+    private List<Componente> componentes;
+    public FormulaEntity() {}
+
+    public FormulaEntity(String alias) {
+        componentes = new ArrayList<Componente>();
+        componentes.add(new Componente(alias, OperadorNumericoEntity.ADICAO));
+    }
+
+    public FormulaEntity mais(String alias) {
+        componentes.add(new Componente(alias, OperadorNumericoEntity.ADICAO));
+        return this;
+    }
+
+    public FormulaEntity menos(String alias) {
+        componentes.add(new Componente(alias, OperadorNumericoEntity.SUBTRACAO));
+        return this;
+    }
+
+    public FormulaEntity multiplicadoPor(String alias) {
+        componentes.add(new Componente(alias, OperadorNumericoEntity.MULTIPLICADOPOR));
+        return this;
+    }
+
+    public List<Componente> getComponentes() {
+        return componentes;
+    }
+
+    public static class Componente implements Serializable {
+
+        /**
+         * 
+         */
+        public static final long serialVersionUID = -216625579779521050L;
+        String alias;
+        OperadorNumericoEntity operadorNumerico;
+
+        public Componente() {}
+
+        public Componente(String alias, OperadorNumericoEntity operadorNumerico) {
+            this.alias = alias;
+            this.operadorNumerico = operadorNumerico;
+        }
+
+        public String getAlias() {
+            return alias;
+        }
+
+        public OperadorNumericoEntity getOperadorNumerico() {
+            return operadorNumerico;
+        }
+    }
+}

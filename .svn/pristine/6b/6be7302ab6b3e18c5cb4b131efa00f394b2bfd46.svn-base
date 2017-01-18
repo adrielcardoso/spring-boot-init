@@ -1,0 +1,29 @@
+package br.intelidata.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.intelidata.controllers.retorno.RetornoIAmHere;
+import br.intelidata.excecao.ErroAoGravarException;
+import br.intelidata.pojo.Info;
+
+@RestController
+@RequestMapping("/iamhere")
+public class IAmHereController {
+
+    @Autowired
+    LogComponent logComponent;
+
+    @RequestMapping(method = RequestMethod.POST)
+    public RetornoIAmHere iAmHere(@RequestBody Info info) {
+        try {
+            logComponent.logarIAmHere(info);
+            return new RetornoIAmHere(100, "Deu certo");
+        } catch (ErroAoGravarException e) {
+            return new RetornoIAmHere(200, e.getMessage());
+        }
+    }
+}

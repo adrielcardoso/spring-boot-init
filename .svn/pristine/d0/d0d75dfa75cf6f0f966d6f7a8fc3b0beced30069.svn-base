@@ -1,0 +1,29 @@
+package br.intelidata.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.intelidata.entity.SomethingIsWrongEntity;
+
+@RestController
+@RequestMapping("/somethingiswrong")
+public class SomethingIsWrongController 
+{
+    @Autowired
+    LogComponent logComponent;
+
+    @RequestMapping(
+    		method = RequestMethod.POST)
+    public SomethingIsWrongEntity somethingIsWrong(@RequestBody SomethingIsWrongEntity somethingIsWrongEntity) 
+    {
+        try {
+            logComponent.logarSomethingIsWrong(somethingIsWrongEntity.getInfo(), somethingIsWrongEntity.getHistory());
+            return somethingIsWrongEntity;
+        } catch (Exception e) {
+            return new SomethingIsWrongEntity();
+        }
+    }
+}

@@ -1,0 +1,28 @@
+package br.intelidata.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import br.intelidata.component.ResponseComponent;
+import br.intelidata.component.UnicoCryptComponent;
+import br.intelidata.config.Entity;
+import br.intelidata.entity.IAmHereEntity;
+import br.intelidata.entity.ResponseEntity;
+import br.intelidata.service.IAmHereService;
+
+@RestController
+public class IamhereController 
+{   
+	@Autowired
+    private LogComponent logComponent;
+	
+    @RequestMapping(
+    		value ="/iamhere", 
+    		method = RequestMethod.POST)
+    public Entity iAmHere(@RequestBody IAmHereEntity iAmHereEntity)
+    {
+    	return IAmHereService.parseRequest(logComponent, iAmHereEntity);
+    }
+}

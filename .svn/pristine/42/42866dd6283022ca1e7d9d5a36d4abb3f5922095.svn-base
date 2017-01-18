@@ -1,0 +1,298 @@
+package br.intelidata.service;
+
+import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import br.intelidata.component.AbstractDataSourceComponent;
+import br.intelidata.component.FileLogComponent;
+import br.intelidata.component.LogComponent;
+import br.intelidata.entity.ClienteEntity;
+import br.intelidata.entity.ContratoVenda;
+import br.intelidata.entity.ContratoVendaItem;
+import br.intelidata.entity.Filial;
+import br.intelidata.entity.LicencaEntity;
+import br.intelidata.entity.Produto;
+import br.intelidata.entity.SalesLicenceLog;
+import br.intelidata.entity.StatusContrato;
+
+import javax.sql.DataSource;
+
+public class ContratoService extends AbstractDataSourceComponent<ContratoVenda> 
+{
+	private static ContratoVenda contrato;
+	private static javax.sql.DataSource cDataSource;
+	private static LogComponent logComponent;
+	private static String cnpjIntelidata = "01.212.344/0001-27";
+
+	public ContratoService(DataSource dataSourceParam, LogComponent cLogComponentParam)
+	{
+		logComponent = cLogComponentParam;
+		cDataSource = dataSourceParam;
+	}
+
+	public HashMap<String, Object> addItemContrato(ContratoVenda contratoVenda, long idService) throws Exception
+	{
+		HashMap<String, Object> parseTemp = new HashMap<String, Object>();
+		logComponent.setDataSouce(cDataSource);
+		
+		try{
+			
+			ContratoVendaItem item = new ContratoVendaItem();
+			
+			item.setIdContrato(contratoVenda.getId());
+			item.setQuantidade(BigDecimal.ONE);
+			item.setId(null);
+			item.setIdServico(idService);
+			
+			Produto produto = (Produto) findProduto(idService);
+			item.setPrecoUnitario(produto.getExtra5());
+			item.setValorTotal(produto.getExtra5());
+
+			logComponent.persist(item);
+			
+			// realizar contagem de valor unitário sobre itens e atualizar valor do contrato
+			somarValorUnitarioContrato(contratoVenda);
+			
+			parseTemp.put("contrato", contratoVenda);
+			parseTemp.put("item", item);
+		}catch(Exception e){
+			FileLogComponent.getInstance().write(e);
+			throw new Exception(e);
+		}
+		return parseTemp;
+	}
+	
+	
+	public static Object addFirstItemContrato(javax.sql.DataSource cDataSourceParam, LogComponent logComponentParam,
+			ContratoVenda contratoVenda) throws Exception
+	{
+		HashMap<String, Object> parseTemp = new HashMap<String, Object>();
+		cDataSource = cDataSourceParam;
+		logComponent = logComponentParam;
+		logComponent.setDataSouce(cDataSource);
+		
+		try{
+			ContratoVendaItem item = new ContratoVendaItem();
+			item.setIdContrato(contratoVenda.getId());
+			item.setQuantidade(BigDecimal.ONE);
+			item.setId(null);
+			
+			if(contratoVenda.getIdTipoContrato() != null){
+				
+				long idService;
+				
+				// PLUS
+				if(contratoVenda.getIdTipoContrato() == 4){
+					idService = 103L;
+				}else
+					
+				// PLUS START
+				if(contratoVenda.getIdTipoContrato() == 23){
+					idService = 2095L;
+				}else{
+					throw new Exception("Não identificamos o produto");
+				}
+				
+				item.setIdServico(idService);
+				Produto produto = (Produto) findProduto(idService);
+				item.setPrecoUnitario(produto.getExtra5());
+				item.setValorTotal(produto.getExtra5());
+			}
+			
+			logComponentParam.setDataSouce(cDataSourceParam);
+			logComponentParam.persist(item);
+			
+			// realizar contagem de valor unitário sobre itens e atualizar valor do contrato
+			somarValorUnitarioContrato(contratoVenda);
+			
+			parseTemp.put("contrato", contratoVenda);
+			parseTemp.put("item", item);
+		}catch(Exception e){
+			FileLogComponent.getInstance().write(e);
+			throw new Exception(e);
+		}
+		return parseTemp;
+	}
+	
+	public static ContratoVenda somarValorUnitarioContrato(ContratoVenda contratoVenda) throws Exception
+	{
+		long idContrato = contratoVenda.getId();
+		ArrayList<ContratoVendaItem> itens = findItemByIdContrato(idContrato);
+		BigDecimal total = BigDecimal.ZERO;
+		FileLogComponent.getInstance().write("inicial: "+total);
+		for(ContratoVendaItem iten : itens){
+			
+			FileLogComponent.getInstance().write("valor: "+total);
+			total = iten.getValorTotal().add(total);
+			
+			FileLogComponent.getInstance().write("somando: "+iten.getValorTotal());
+			FileLogComponent.getInstance().write("total: "+total);
+		}
+		
+		FileLogComponent.getInstance().write("total: "+total);
+		
+		contratoVenda.setValorTotal(total);
+		ArrayList<String> skipe = new ArrayList<String>();
+		skipe.add("id");
+		logComponent.update(cDataSource, contratoVenda, skipe);
+		return contratoVenda;
+	}
+	
+	public static HashMap<String, Object> create(javax.sql.DataSource cDataSourceParam, LogComponent logComponentParam,
+			ClienteEntity entidadeCliente, LicencaEntity licencaEntity, SalesLicenceLog salesLicenceEntity)
+			throws Exception {
+		
+		HashMap<String, Object> parseTemp = new HashMap<String, Object>();
+		
+		try {
+			cDataSource = cDataSourceParam;
+			logComponent = logComponentParam;
+			logComponent.setDataSouce(cDataSource);
+
+			if (entidadeCliente == null) {
+				throw new Exception("Revenda com CNPJ " + entidadeCliente.getCnpjCpf() + " não encontrada");
+			}
+			
+			contrato = new ContratoVenda();
+			contrato.setIdCliente(entidadeCliente.getId());
+			contrato.setDataInicial(licencaEntity.getcDataAtivacao());
+			contrato.setDataFinal(licencaEntity.getcDataAtivacao().plusYears(1));
+			contrato.setStatus(StatusContrato.ABERTO.getId());
+			long idServico = 0;
+
+			if (salesLicenceEntity.getLicence().toString().equals("PLUS")) {
+				contrato.setIdTipoContrato(4L);
+				contrato.setExtra12("PLUS");
+				idServico = 103L;
+				contrato.setExtra3("2");
+			} else if (salesLicenceEntity.getLicence().toString().equals("PLUSSTART")) {
+				contrato.setIdTipoContrato(23L);
+				contrato.setExtra12("PLUS START");
+				contrato.setExtra3("3");
+				idServico = 2095L;
+			}
+			
+			Produto produto = (Produto) findProduto(idServico);
+			contrato.setValorTotal(produto.getExtra5());
+
+			Filial filial = FilialService.findByCNPJ(cDataSourceParam, cnpjIntelidata);
+			contrato.setIdFilial(filial.getId());
+
+			contrato.setDiaFaturamento(
+					((entidadeCliente.getExtra7() == null) ? null : Integer.valueOf(entidadeCliente.getExtra7())));
+			// contrato.setValorTotal(ativacao.getValorUsuario());
+
+			String nomeCliente = salesLicenceEntity.getRazaosocial();
+			if (nomeCliente.length() > 50) {
+				nomeCliente = nomeCliente.substring(0, 49);
+			}
+			contrato.setExtra1(nomeCliente);
+			contrato.setExtra2(salesLicenceEntity.getCnpj()); // cliente final
+
+			try {
+				ClienteEntity entidade = (ClienteEntity) SalesService.findEntidade(cDataSource,
+						Long.valueOf(entidadeCliente.getIdRepresentante()));
+				contrato.setExtra6(entidade.getNome());
+			} catch (Exception e) {
+				FileLogComponent.getInstance()
+						.write("Não foi possível identificar o gerente: id-" + entidadeCliente.getIdRepresentante());
+			}
+
+			contrato.setExtra7(licencaEntity.getChaveAtivacao());
+			contrato.setExtra8("1");
+			contrato.setId(null);
+			
+			FileLogComponent.getInstance().write("Contrato tentando registrar: ID:"+contrato.getId());
+			logComponent.persist(contrato);
+			
+			ContratoVendaItem item = new ContratoVendaItem();
+			item.setId(null);
+			item.setIdContrato(contrato.getId());
+			item.setIdServico(idServico);
+			item.setQuantidade(BigDecimal.ONE);
+			item.setPrecoUnitario(produto.getExtra5());
+			item.setValorTotal(produto.getExtra5());
+			
+			logComponent.persist(item);
+			
+			parseTemp.put("contrato", contrato);
+			parseTemp.put("item", item);
+			
+		} catch (Exception e) {
+			throw new Exception(e);
+		}
+		
+		return parseTemp;
+	}
+	
+	public static Object findProduto(long idProduto) throws Exception
+	{
+		String sql = "select "
+				+ "id, "
+				+ "extra5 "
+				+ "from produto where id = ?";
+		
+		Connection connection = cDataSource.getConnection();
+		PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setLong(1, idProduto);
+        ResultSet rs = statement.executeQuery();
+        
+        if (rs.next()) {
+        	Produto produto = new Produto();
+        	produto.setId(rs.getLong("id"));
+        	
+        	BigDecimal bigDecimal = new BigDecimal(rs.getString("extra5").replaceAll(",", ""));
+        	produto.setExtra5(bigDecimal);
+        	return produto;
+        }else{
+        	throw new Exception("Não foi possível encontrar o produto.");
+        }
+	}
+	
+	public static Object findProdutoByPrefixo(String prefixo) throws Exception
+	{
+		String sql = "select * from produto where extra1 = ?";
+		Connection connection = cDataSource.getConnection();
+		PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, prefixo);
+        ResultSet rs = statement.executeQuery();
+        
+        if (rs.next()) {
+        	Produto produto = new Produto();
+        	produto.setId(rs.getLong("id"));
+        	
+        	BigDecimal bigDecimal = new BigDecimal(rs.getString("extra5").replaceAll(",", ""));
+        	produto.setExtra5(bigDecimal);
+        	return produto;
+        }else{
+        	throw new Exception("Não foi possível encontrar o produto.");
+        }
+	}
+	
+	public static ArrayList<ContratoVendaItem> findItemByIdContrato(long idContrato) throws Exception
+	{
+		String sql = "select * from contratovendaitem where idcontrato = ?";
+		Connection connection = cDataSource.getConnection();
+		PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setLong(1, idContrato);
+        ResultSet rs = statement.executeQuery();
+        
+        if (rs.next()) {
+        	ArrayList<ContratoVendaItem> itens = new ArrayList<ContratoVendaItem>();
+        	while(rs.next()){
+        		ContratoVendaItem contratoVendaItem = new ContratoVendaItem();
+            	contratoVendaItem.setId(rs.getLong("id"));
+            	contratoVendaItem.setValorTotal(rs.getBigDecimal("valortotal"));
+            	itens.add(contratoVendaItem);
+        	}
+        	return itens;
+        }else{
+        	throw new Exception("Não foi possível encontrar o produto.");
+        }
+	}
+
+}

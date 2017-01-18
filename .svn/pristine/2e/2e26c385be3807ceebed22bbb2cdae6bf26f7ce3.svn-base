@@ -1,0 +1,32 @@
+package br.intelidata.pojo.enums;
+
+public enum TipoAutorizado implements AbstractEnum<Integer> {
+
+    NAO(0, "Não"),
+    SIM(1, "Sim"),
+    CONTRATO_NAO_ENCONTRADO(2, "Contrato não encontrado");
+
+    TipoAutorizado(Integer id, String descricao) {
+        this.id = id;
+        this.descricao = descricao;
+    }
+
+    private Integer id;
+    private String descricao;
+
+    @Override
+    public Integer getId() {
+        return id;
+    }
+
+    @Override
+    public String getDescricao() {
+        return descricao;
+    }
+
+    @Override
+    public String toString() {
+        return descricao;
+    }
+
+}

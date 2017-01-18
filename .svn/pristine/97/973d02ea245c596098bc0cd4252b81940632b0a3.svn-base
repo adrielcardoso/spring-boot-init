@@ -1,0 +1,13 @@
+//package br.intelidata.service;
+//
+//import br.intelidata.entity.LicencaEntity;
+//import br.intelidata.interace.InterfaceIncrementoLicenca;
+//
+//public class IncrementoUsuarioService implements InterfaceIncrementoLicenca {
+//
+//    @Override
+//    public int getIncremento(LicencaEntity licenca) {
+//        return get(licenca);
+//    }
+//
+//}

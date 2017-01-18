@@ -1,0 +1,7 @@
+package br.intelidata.service;
+
+public interface InscricaoEstadual {
+
+    public boolean validar(String numero);
+
+}

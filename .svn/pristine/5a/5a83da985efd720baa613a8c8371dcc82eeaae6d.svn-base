@@ -1,0 +1,18 @@
+package br.intelidata.service;
+
+import java.io.ByteArrayOutputStream;
+import br.intelidata.component.UnicoCryptComponent;
+import br.intelidata.config.Service;
+
+public class EnviaArquivoAutorizacaoService extends Service
+{
+	private ByteArrayOutputStream baos;
+
+    public EnviaArquivoAutorizacaoService(ByteArrayOutputStream baos) {
+        this.baos = baos;
+    }
+
+    public String enviaArquivo() {
+        return UnicoCryptComponent.cript(baos.toByteArray());
+    }
+}

@@ -1,0 +1,37 @@
+package br.intelidata.entity;
+
+import java.util.ArrayList;
+import br.intelidata.config.Entity;
+
+public class IsItOkEntityRequestRelation extends Entity
+{
+	private Info info;
+	private ArrayList<Filial> filial = new ArrayList<Filial>();
+	private ArrayList<LicencaEntity> licenca = new ArrayList<LicencaEntity>();
+	private String dependents;
+	
+	public Info getInfo() {
+		return info;
+	}
+	public void setInfo(Info info) {
+		this.info = info;
+	}
+	public ArrayList<Filial> getFilial() {
+		return filial;
+	}
+	public void setFilial(ArrayList<Filial> filial) {
+		this.filial = filial;
+	}
+	public ArrayList<LicencaEntity> getLicenca() {
+		return licenca;
+	}
+	public void setLicenca(ArrayList<LicencaEntity> licenca) {
+		this.licenca = licenca;
+	}
+	public String getDependents() {
+		return dependents;
+	}
+	public void setDependents(String dependents) {
+		this.dependents = dependents;
+	}
+}

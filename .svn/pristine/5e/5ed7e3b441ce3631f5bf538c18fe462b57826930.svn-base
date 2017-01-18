@@ -1,0 +1,29 @@
+package br.intelidata.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.intelidata.controllers.requisicao.SomethingIsWrongRequisicao;
+import br.intelidata.controllers.retorno.RetornoSomethingIsWrong;
+import br.intelidata.excecao.ErroAoGravarException;
+
+@RestController
+@RequestMapping("/somethingiswrong")
+public class SomethingIsWrongController {
+
+    @Autowired
+    LogComponent logComponent;
+
+    @RequestMapping(method = RequestMethod.POST)
+    public RetornoSomethingIsWrong somethingIsWrong(@RequestBody SomethingIsWrongRequisicao somethingIsWrongModel) {
+        try {
+            logComponent.logarSomethingIsWrong(somethingIsWrongModel.getInfo(), somethingIsWrongModel.getHistory());
+            return new RetornoSomethingIsWrong(100, "Deu certo");
+        } catch (ErroAoGravarException e) {
+            return new RetornoSomethingIsWrong(200, e.getMessage());
+        }
+    }
+}

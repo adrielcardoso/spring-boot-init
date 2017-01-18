@@ -1,0 +1,18 @@
+//package br.intelidata.service;
+//
+//import br.intelidata.component.FamiliaComponent;
+//import br.intelidata.component.UtilComponent;
+//import br.intelidata.config.Service;
+//import br.intelidata.entity.LicencaManagerEntity;
+//
+//public class ValidadorIncrementoUsuarioStartService extends Service 
+//{
+//    public void validar(String chave, String cnpj) throws Exception 
+//    {
+//        int incremento = Integer.parseInt(UtilComponent.apenasNumeros(chave.substring(0, chave.indexOf("."))));
+//        int usuariosAtuais = LicencaManagerEntity.getInstance().getNumeroUsuariosLicenca() + incremento;
+//        if (usuariosAtuais > FamiliaComponent.START.getNumeroMaximoUsuarios()) {
+//            throw new Exception("Nessa instalação é permitido apenas " + FamiliaComponent.START.getNumeroMaximoUsuarios() + " usuário.");
+//        }
+//    }
+//}

@@ -1,0 +1,25 @@
+package br.intelidata.entity;
+
+public class OcorrenciaEntity 
+{
+    private String codigo;
+    private String descricao;
+
+    public OcorrenciaEntity(String codigo, String descricao) {
+        this.codigo = codigo;
+        this.descricao = descricao;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    @Override
+    public String toString() {
+        return codigo + "-" + descricao;
+    }
+}

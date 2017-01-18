@@ -1,0 +1,284 @@
+package br.intelidata.service;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.sql.DataSource;
+import org.jooq.DSLContext;
+import org.jooq.SQLDialect;
+import org.jooq.impl.DSL;
+import br.intelidata.component.FileLogComponent;
+import br.intelidata.component.LogComponent;
+import br.intelidata.config.Entity;
+import br.intelidata.config.Service;
+import br.intelidata.entity.UsuarioSite;
+import br.intelidata.exception.FormErrorException;
+
+public class UsuarioSiteService extends Service 
+{
+	private static DataSource cDataSource;
+	private static LogComponent cLogComponent;
+	private static Entity cUsuarioSite;
+	
+	
+	public static Entity parseFindById(DataSource dataSource, LogComponent logComponent, String id) throws Exception
+	{
+		cDataSource = dataSource;
+		cLogComponent = logComponent;
+		
+		FileLogComponent.getInstance().write("001");
+		if(id.equals("") || id.equals(null)){
+			FileLogComponent.getInstance().write("001-");
+			throw new FormErrorException("Indentificação incorreta para deletar");
+		}	
+		
+		FileLogComponent.getInstance().write("00-");
+		return findById(id);
+	}
+	
+	public static Entity parseDelete(DataSource dataSource, LogComponent logComponent, String id) throws Exception
+	{
+		cDataSource = dataSource;
+		cLogComponent = logComponent;
+		
+		if(id == null){
+			throw new FormErrorException("Indentificação incorreta para deletar");
+		}
+		
+		if(!userAtivo(id)){
+			throw new FormErrorException("Identificamos que esse usuário foi excluído");
+		}
+		
+		if(!userExist(id)){
+			throw new FormErrorException("Indentificação incorreta não foi possível encontrar o usuário");
+		}
+		
+		
+		FileLogComponent.getInstance().write("0");
+		
+		// persist update
+		UsuarioSite usuarioSite = new UsuarioSite();
+		usuarioSite.setId(Long.valueOf(id));
+		usuarioSite.setDtUpdate(String.valueOf(System.currentTimeMillis()));
+		usuarioSite.setAtivo(0);
+		
+		FileLogComponent.getInstance().write("1");
+		
+		ArrayList<String> skipe = new ArrayList<String>();
+		skipe.add("id");
+		
+		logComponent.update(dataSource, usuarioSite, skipe);
+		
+		return usuarioSite;	
+	}
+	
+	public static Entity parseUpdate(DataSource dataSource, LogComponent logComponent, UsuarioSite usuarioSite) throws Exception
+	{
+		cDataSource = dataSource;
+		cLogComponent = logComponent;
+		cUsuarioSite = usuarioSite;
+		
+		if(usuarioSite.getId() == null){
+			throw new FormErrorException("Indentificação incorreta para atualizar");
+		}
+		
+		if(!userExist(String.valueOf(usuarioSite.getId()))){
+			throw new FormErrorException("Indentificação incorreta não foi possível encontrar o usuário");
+		}
+		
+		//verifica se usuario ja foi excludo,lembrando que na base a referencia de deletado fica por coluna de 'ativo'
+		// uma vez falso sempre falso, impossibilitando o ajuste pelo sitema.
+		if(!userAtivo(String.valueOf(usuarioSite.getId()))){
+			throw new FormErrorException("Identificamos que esse usuário foi excluído");
+		}
+		
+		if(!emailValid(usuarioSite.getEmail().toString())){
+			throw new FormErrorException("E-mail inválido");
+		}
+		
+		if(emailExistById(usuarioSite.getEmail(), String.valueOf(usuarioSite.getId()))){
+			throw new FormErrorException("E-mail já utilizado por outro usuário");
+		}
+		
+		// persist update
+		usuarioSite.setDtUpdate(String.valueOf(System.currentTimeMillis()));
+		
+		ArrayList<String> skipe = new ArrayList<String>();
+		skipe.add("id");
+		
+		usuarioSite.setAtivo(1);
+		logComponent.update(dataSource, usuarioSite, skipe);
+		
+		return usuarioSite;
+	}
+	
+	public static Entity parseCreate(DataSource dataSource, LogComponent logComponent, UsuarioSite usuarioSite) throws Exception
+	{
+		FileLogComponent.getInstance().write("init");
+		cDataSource = dataSource;
+		cLogComponent = logComponent;
+		cUsuarioSite = usuarioSite;
+		
+		if(!emailValid(usuarioSite.getEmail().toString())){
+			throw new FormErrorException("E-mail inválido");
+		}
+		
+		if(emailExist(usuarioSite.getEmail(), String.valueOf(usuarioSite.getId()))){
+			throw new FormErrorException("E-mail já utilizado por outro usuário");
+		}
+		
+		// persist create
+		usuarioSite.setDtCreate(String.valueOf(System.currentTimeMillis()));
+		usuarioSite.setAtivo(1);
+		usuarioSite.setId(null);
+		logComponent.persist(dataSource, usuarioSite);
+		
+		return usuarioSite;	
+	}
+	
+	public static boolean emailValid(String email) throws AddressException
+	{
+		try{
+			InternetAddress emailAddr = new InternetAddress(email);
+			emailAddr.validate();
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
+	public static boolean emailExist(String email, String id) throws SQLException
+	{
+		boolean status = false;
+		Connection connection = cDataSource.getConnection();
+        String comando = "select "
+        		+ "				t1.email " 
+        		+		  "from usuariosite t1 "
+                + 		  "where email='" + email+"'";
+    
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(comando);
+
+        if (!rs.next()) {
+        	status = false;
+        }else{
+        	status = true;
+        }
+        
+        rs.close();
+        statement.close();
+		return status;
+	}
+	
+	public static boolean emailExistById(String email, String id) throws SQLException
+	{
+		boolean status = false;
+		Connection connection = cDataSource.getConnection();
+        String comando = "select "
+        		+ "				t1.email " 
+        		+		  "from usuariosite t1 "
+                + 		  "where email='" + email +"' and id != "+id;
+    
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(comando);
+        
+        if (!rs.next()) {
+        	status = false;
+        }else{
+        	status = true;
+        }
+        
+        rs.close();
+        statement.close();
+		return status;
+	}
+	
+	public static boolean userExist(String id) throws SQLException
+	{
+		boolean status = false;
+		Connection connection = cDataSource.getConnection();
+        String comando = "select "
+        		+ "				t1.id " 
+        		+		  "from usuariosite t1 "
+                + 		  "where id='" + id +"'";
+    
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(comando);
+        
+        if (!rs.next()) {
+        	status = false;
+        }else{
+        	status = true;
+        }
+        
+        rs.close();
+        statement.close();
+		return status;
+	}
+	
+	public static boolean userAtivo(String id) throws SQLException, FormErrorException
+	{
+		boolean status = false;
+		Connection connection = cDataSource.getConnection();
+        String comando = "select "
+        		+ "				t1.ativo " 
+        		+		  "from usuariosite t1 "
+                + 		  "where id='" + id +"'";
+    
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(comando);
+        
+        if (rs.next()) {
+        	status =(rs.getInt("ativo")==1);
+        	
+        	FileLogComponent.getInstance().write("status: "+status);
+        	rs.close();
+            statement.close();
+            return status;
+        }else{
+        	throw new FormErrorException("usuário não encontrado na base de dados");
+        }
+	}
+	
+	public static Entity findById(String id) throws FormErrorException, SQLException
+	{
+		boolean status = false;
+		Connection connection = cDataSource.getConnection();
+        String comando = "select "
+        		+ "				* " 
+        		+		  "from usuariosite  "
+                + 		  "where id='" + id +"'";
+    
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(comando);
+        if (rs.next()) {
+        	
+        	// usuarios com status 0 na coluna ativo, estão excluidos do sistema
+        	if(rs.getInt("ativo")==0){
+        		throw new FormErrorException("esse usuário foi excluído do sistema");
+        	}
+        	
+        	UsuarioSite usuarioSite = new UsuarioSite();
+        	
+        	usuarioSite.setAtivo(rs.getInt("ativo"));
+        	usuarioSite.setId(rs.getLong("id"));
+        	usuarioSite.setEmail(rs.getString("email"));
+        	usuarioSite.setDtCreate(rs.getString("dtcreate"));
+        	usuarioSite.setDtUpdate(rs.getString("dtupdate"));
+        	usuarioSite.setIdSubRevenda(rs.getString("idsubrevenda"));
+        	
+        	rs.close();
+            statement.close();
+            
+            return usuarioSite;
+        }else{
+        	throw new FormErrorException("usuário não encontrado na base de dados");
+        }
+	}
+	
+}

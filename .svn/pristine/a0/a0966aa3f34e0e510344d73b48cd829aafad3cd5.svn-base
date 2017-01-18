@@ -1,0 +1,36 @@
+package br.intelidata.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import br.intelidata.component.ResponseComponent;
+import br.intelidata.component.UnicoCryptComponent;
+import br.intelidata.config.Entity;
+import br.intelidata.config.Service;
+import br.intelidata.controllers.LogComponent;
+import br.intelidata.entity.IAmHereEntity;
+import br.intelidata.entity.ResponseEntity;
+
+public class IAmHereService extends Service
+{
+	@Autowired
+	static
+    LogComponent logComponent;
+	
+	public static Entity parseRequest(IAmHereEntity iAmHereEntity)
+	{
+		try {
+    		//criptografar
+    		String me = UnicoCryptComponent.decript(iAmHereEntity.getP1());
+			iAmHereEntity.setR1(UnicoCryptComponent.cript(me));
+			iAmHereEntity.setP1(UnicoCryptComponent.cript(me));
+			iAmHereEntity.setDataHora(System.currentTimeMillis());
+			
+			// realizar registro de log
+			logComponent.logarIAmHere(iAmHereEntity);
+			
+			// result in entity
+			return new ResponseEntity(iAmHereEntity, "Tudo Certo");
+		} catch (Exception e) {
+			return new ResponseComponent().handleResourceNotFoundException(400, e.getMessage());
+		}
+	}	
+}

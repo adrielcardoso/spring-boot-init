@@ -1,0 +1,28 @@
+package br.intelidata.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.intelidata.config.Controller;
+import br.intelidata.config.Entity;
+import br.intelidata.entity.SomethingIsWrongEntity;
+import br.intelidata.service.SomethingIsWrongService;
+
+@RestController
+public class SomethingIsWrongController extends Controller 
+{
+    @Autowired
+    LogComponent logComponent;
+
+    @RequestMapping(
+    		value = "/somethingiswrong",
+    		method = RequestMethod.POST)
+    public Entity somethingIsWrong(
+    		@RequestBody SomethingIsWrongEntity somethingIsWrongEntity) 
+    {
+        return SomethingIsWrongService.parseRequest(logComponent, somethingIsWrongEntity);
+    }
+}

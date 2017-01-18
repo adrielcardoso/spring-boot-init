@@ -1,0 +1,30 @@
+package br.intelidata.regranegocio;
+
+public class Atributo {
+
+    public String nome;
+    public Class<?> classe;
+
+    public Atributo(String nome, Class<?> classe) {
+        super();
+        this.nome = nome;
+        this.classe = classe;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Class<?> getClasse() {
+        return classe;
+    }
+
+    public void setClasse(Class<?> classe) {
+        this.classe = classe;
+    }
+
+}

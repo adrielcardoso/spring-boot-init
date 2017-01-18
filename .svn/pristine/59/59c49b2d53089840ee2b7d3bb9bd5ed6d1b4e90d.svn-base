@@ -1,0 +1,44 @@
+package br.intelidata.service;
+
+import java.io.ByteArrayOutputStream;
+
+import br.intelidata.component.FileLogComponent;
+import br.intelidata.config.Service;
+import br.intelidata.entity.DadosAutorizacaoEcfEntity;
+import br.intelidata.entity.DadosEcfAutorizadaEntity;
+import br.intelidata.interace.IEnviaArquivoAutorizacaoInterface;
+
+public class EnviaArquivoAutorizacaoEmailService extends Service implements IEnviaArquivoAutorizacaoInterface
+{	
+	private DadosAutorizacaoEcfEntity dadosAutorizacao;
+    private DadosEcfAutorizadaEntity ecfAutorizada;
+    private ByteArrayOutputStream baos;
+
+    public EnviaArquivoAutorizacaoEmailService(DadosAutorizacaoEcfEntity dadosAutorizacao, DadosEcfAutorizadaEntity ecfAutorizada, ByteArrayOutputStream baos) 
+    {
+        this.dadosAutorizacao = dadosAutorizacao;
+        this.ecfAutorizada = ecfAutorizada;
+        this.baos = baos;
+    }
+
+    @Override
+    public String enviaArquivo() 
+    {
+    	return "";
+//        try {
+//            String texto =
+//                    "Conforme solicitado segue anexo arquivo de criptografia que autoriza no UNIPAF o uso de impressora fiscal para:\r\n\r\n" + "Razão social: " + dadosAutorizacao.getRazaoSocial()
+//                            + "\r\n" + "CNPJ: " + dadosAutorizacao.getCnpj() + "\r\n" + "Fabricante: " + dadosAutorizacao.getFabricante() + "\r\n" + "Modelo: " + dadosAutorizacao.getModelo() + "\r\n"
+//                            + "Número de série: " + dadosAutorizacao.getNumeroSerie() + "\r\n" + "GT: " + dadosAutorizacao.getGt() + "\r\n" + "Versao: " + dadosAutorizacao.getVersaoPaf() + "\r\n\r\n"
+//                            + "Copie o arquivo anexo para a pasta onde o UNIPAF está instalado.\r\n\r\n" + "Att.\r\n" + "Intelidata";
+//            String arquivo = "ecf.properties";
+//            EmailComponent.enviar(ecfAutorizada.getEmail(), null,
+//                    "Autorização de uso da ecf " + dadosAutorizacao.getFabricante() + " " + dadosAutorizacao.getModelo() + " " + dadosAutorizacao.getNumeroSerie(), texto, arquivo, "application/text",
+//                    baos, "pafecf@sistemaunico.com.br", "5b4m3%}1xb~u5", "smtp.gmail.com", "465", true, false, false);
+//            return "Arquivo de criptografia foi enviado por email para " + ecfAutorizada.getEmail();
+//        } catch (Exception e) {
+//            FileLogComponent.getInstance().write(e);
+//            return "Falhou ao enviar o pedido de autorização de uso da ecf";
+//        }
+    }	
+}

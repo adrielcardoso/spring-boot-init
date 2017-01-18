@@ -1,0 +1,37 @@
+package br.intelidata.entity;
+
+import br.intelidata.config.Entity;
+
+/**
+ * Created by Adriel.Cardoso on 13/01/2017.
+ */
+public class PedidoDesinstalacaoRequest extends Entity
+{
+    private String token;
+    private String chavedesinstalacao;
+    private String chavelicenca;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getChavedesinstalacao() {
+        return chavedesinstalacao;
+    }
+
+    public void setChavedesinstalacao(String chavedesinstalacao) {
+        this.chavedesinstalacao = chavedesinstalacao;
+    }
+
+    public String getChavelicenca() {
+        return chavelicenca;
+    }
+
+    public void setChavelicenca(String chavelicenca) {
+        this.chavelicenca = chavelicenca;
+    }
+}

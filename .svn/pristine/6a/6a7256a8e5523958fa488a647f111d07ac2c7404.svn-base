@@ -1,0 +1,877 @@
+//package br.intelidata.entity;
+//
+//import java.time.LocalDate;
+//import java.util.ArrayList;
+//import java.util.HashMap;
+//import java.util.List;
+//import java.util.Map;
+//import java.util.stream.Collectors;
+//
+//import br.intelidata.component.FamiliaComponent;
+//
+//public class LicencaManagerEntity 
+//{
+//
+////    public static final String MENSAGEM_LICENCA_UNICO_EXPIRADA = "Informamos que o prazo de validade técnica desta versão está encerrando. " + Util.newLine()
+////            + "Após este prazo, o sistema não receberá mais atualizações, permanecendo em funcionamento, na forma em que se encontra. " + Util.newLine()
+////            + "Ressaltamos a importância da utilização de versões atualizadas do sistema, " + Util.newLine() + "sobretudo para o acompanhamento das constantes alterações fiscais. " + Util.newLine()
+////            + "Caso haja interesse na aquisição da nova versão do sistema, com as devidas atualizações, " + Util.newLine() + "entre em contato com o nosso parceiro comercial.";
+////    public static final String MENSAGEM_ATRASO_UNIPLUS = "A licença temporária de uso do sistema expira em @dataExpiracao, sendo que a partir desta data "
+////            + "nã será mais possível a utilização do programa." + Util.newLine() + "Para regularizar a situação, entre em contato com o nosso parceiro comercial. ";
+////    public static final String MENSAGEM_VENCIDO_UNIPLUS =
+////            "A licença temporária de uso do sistema se encontra suspensa. " + Util.newLine() + "Para regularizar a situação, entre em contato com o nosso parceiro comercial. ";
+//
+//    public static final int NUMERO_REGISTROS_DEMOSTRACAO = 10;
+//    public static final long QUANTIDADE_SEGUNDOS_EXPIRAR_CHAVE = 1500L;
+//
+//    private Map<ProdutoLicencaEntity, LicencaEntity> mapLicencas = new HashMap<>();
+//    private Map<ProdutoLicencaEntity, Map<String, LicencaEntity>> mapCNPJLicencas = new HashMap<>();
+//    private Map<ProdutoLicencaEntity, List<LicencaEntity>> mapLicencasIncremento = new HashMap<>();
+//    private List<LicencaEntity> licencas;
+//    private boolean demonstracao;
+//    private int numeroUsuariosLicenca;
+//    private int numeroUsuariosServidor;
+//    private int numeroUsuariosUnimobile;
+//    private int numeroUsuariosUnimobileServidor;
+//    private int numeroUsuariosComanda;
+//    private int numeroUsuariosComandaServidor;
+//    private int quantidadeFiliais = 1;
+//    private int quantidadeFiliaisPermitidas = 4;
+//    private int quantidadeLicencasEnterprise = 0;
+//    // Usado somente no metodo verificaEAloca para carregar as licencas somente no primeiro acesso
+//    private boolean carregarPrimeiroAcesso = true;
+//    private int numeroUsuariosTabelaPreco;
+//
+//    private static LicencaManagerEntity instance;
+//
+//    public static LicencaManagerEntity getInstance() {
+//        if (instance == null) {
+//            instance = new LicencaManagerEntity();
+//        }
+//        return instance;
+//    }
+//
+//    private LicencaManagerEntity() {}
+//
+////    public void carregarLicencas() {
+////        mapLicencas.clear();
+////        mapCNPJLicencas.clear();
+////        mapLicencasIncremento.clear();
+////
+////        demonstracao = false;
+////        numeroUsuariosLicenca = 0;
+////        numeroUsuariosServidor = 0;
+////        numeroUsuariosUnimobile = 0;
+////        numeroUsuariosUnimobileServidor = 0;
+////        numeroUsuariosComanda = 0;
+////        numeroUsuariosComandaServidor = 0;
+////        quantidadeFiliais = 1;
+////        quantidadeLicencasEnterprise = 0;
+////        quantidadeFiliaisPermitidas = getFamilia().getNumeroMaximoFiliais();
+////        numeroUsuariosTabelaPreco = 0;
+////
+////        licencas = LicencaCommonRN.getInstance().getLicencasInstaladas();
+////        for (Licenca licenca : licencas) {
+////            ProdutoLicenca produtoLicenca = ProdutoLicencaRN.getInstance().getProduto(licenca);
+////            if (produtoLicenca != null) {
+////                boolean verificaFamilia = true;
+////                if ((produtoLicenca.equals(ProdutoLicenca.START) && getFamilia().equals(Familia.MANAGER)) || (produtoLicenca.equals(ProdutoLicenca.UNIPLUS_START) && getFamilia().equals(Familia.PLUS))
+////                        || produtoLicenca.equals(ProdutoLicenca.INCREMENTO_USUARIO_ANTIGO)) {
+////                    verificaFamilia = false;
+////                }
+////                if (verificaFamilia && !produtoLicenca.isPertenceNaFamilia(getFamilia())) {
+////                    if (produtoLicenca.isBase()) {
+////                        break;
+////                    }
+////                    continue;
+////                }
+////
+////                if (isNumeroUsuarioStartAlternativa(licenca)) {
+////                    mapLicencas.put(ProdutoLicenca.INCREMENTO_USUARIO_ANTIGO, licenca);
+////                    continue;
+////                }
+////
+////                if (produtoLicenca.isBase()) {
+////                    numeroUsuariosLicenca = produtoLicenca.getFamilia().get(0).getNumeroUsuariosDefault();
+////                    if (produtoLicenca.getFamilia().get(0).isUtilizarWSParaControlarNumeroUsuario()) {
+////                        numeroUsuariosServidor = licenca.getNumeroUsuariosPermitidos() == null ? 0 : licenca.getNumeroUsuariosPermitidos();
+////                        numeroUsuariosUnimobileServidor = licenca.getNumeroUsuariosMobile() == null ? 0 : licenca.getNumeroUsuariosMobile();
+////                        numeroUsuariosComandaServidor = licenca.getNumeroUsuariosComanda() == null ? 0 : licenca.getNumeroUsuariosComanda();
+////                    }
+////                    if (produtoLicenca.equals(ProdutoLicenca.UNIPLUS_START)) {
+////                        UnicoSistema.setPlusStart(true);
+////                    }
+////                } else if (produtoLicenca.isPerguntaFilial() || produtoLicenca.isRequerCNPJ()) {
+////                    addLicencaCNPJ(produtoLicenca, licenca);
+////                    if (produtoLicenca.equals(ProdutoLicenca.MULTIEMPRESA)) {
+////                        addLicencaCNPJ(isPlus() ? ProdutoLicenca.ENTERPRISE_PLUS : ProdutoLicenca.ENTERPRISE_GNIO, licenca);
+////                        addLicencaCNPJ(ProdutoLicenca.MULTICNPJ, licenca);
+////                    }
+////                } else if (produtoLicenca.equals(ProdutoLicenca.PMANAGER)) {
+////                    mapLicencas.put(ProdutoLicenca.MANAGER, licenca);
+////                } else if (produtoLicenca.equals(ProdutoLicenca.PPLUS)) {
+////                    mapLicencas.put(ProdutoLicenca.UNIPLUS, licenca);
+////                    UnicoSistema.setPlus(true);
+////                    UnicoSistema.setPlusStart(false);
+////                }
+////                mapLicencas.put(produtoLicenca, licenca);
+////
+////                if (produtoLicenca.in(ProdutoLicenca.MULTIEMPRESA, ProdutoLicenca.ENTERPRISE, ProdutoLicenca.ENTERPRISE_GNIO, ProdutoLicenca.ENTERPRISE_PLUS)) {
+////                    ++quantidadeFiliais;
+////                    quantidadeLicencasEnterprise++;
+////                } else if (produtoLicenca.getInterfaceIncrementoLicenca() != null) {
+////                    if (produtoLicenca.getInterfaceIncrementoLicenca() instanceof IncrementoUsuario) {
+////                        numeroUsuariosLicenca += produtoLicenca.getInterfaceIncrementoLicenca().getIncremento(licenca);
+////                    } else if (produtoLicenca.getInterfaceIncrementoLicenca() instanceof IncrementoFilial) {
+////                        int incremento = produtoLicenca.getInterfaceIncrementoLicenca().getIncremento(licenca);
+////                        quantidadeFiliais += incremento;
+////                        quantidadeFiliaisPermitidas += incremento;
+////                    } else if (produtoLicenca.getInterfaceIncrementoLicenca() instanceof IncrementoUsuarioUnimob) {
+////                        numeroUsuariosUnimobile += produtoLicenca.getInterfaceIncrementoLicenca().getIncremento(licenca);
+////                    } else if (produtoLicenca.getInterfaceIncrementoLicenca() instanceof IncrementoUsuarioComanda) {
+////                        numeroUsuariosComanda += produtoLicenca.getInterfaceIncrementoLicenca().getIncremento(licenca);
+////                    } else if (produtoLicenca.getInterfaceIncrementoLicenca() instanceof IncrementoTBPR) {
+////                        numeroUsuariosTabelaPreco += produtoLicenca.getInterfaceIncrementoLicenca().getIncremento(licenca);
+////                    }
+////
+////                    addLicencaIncremento(produtoLicenca, licenca);
+////                }
+////            }
+////        }
+////
+////        if (numeroUsuariosLicenca == 0) {
+////            demonstracao = true;
+////            String valor = ConfiguracaoPdvCommonRN.getInstance().buscarValorPorChave("Pdv.DemonstracaoRestaurante");
+////            if (valor != null && valor.equals("1")) {
+////                mapLicencas.put(ProdutoLicenca.UNICHEF, null);
+////                mapLicencas.put(ProdutoLicenca.UNICHEF2, null);
+////            }
+////        }
+////    }
+//
+////    private boolean isNumeroUsuarioStartAlternativa(LicencaEntity licenca) {
+////        return mapLicencas.containsKey(ProdutoLicencaEntity.UNIPLUS_START) && ProdutoLicencaEntity.INCREMENTO_USUARIO_ANTIGO.equals(licenca.getProdutoLicenca());
+////    }
+//
+//    public int getNumeroUsuariosTabelaPreco() {
+//        return numeroUsuariosTabelaPreco;
+//    }
+//
+//    private void addLicencaCNPJ(ProdutoLicencaEntity produtoLicenca, LicencaEntity licenca) {
+//        Map<String, LicencaEntity> map = mapCNPJLicencas.get(produtoLicenca);
+//        if (map == null) {
+//            map = new HashMap<>();
+//            mapCNPJLicencas.put(produtoLicenca, map);
+//        }
+//        map.put(licenca.getCnpj(), licenca);
+//    }
+//
+//    private void addLicencaIncremento(ProdutoLicencaEntity produtoLicenca, LicencaEntity licenca) {
+//        List<LicencaEntity> lista = mapLicencasIncremento.get(produtoLicenca);
+//        if (lista == null) {
+//            lista = new ArrayList<>();
+//            mapLicencasIncremento.put(produtoLicenca, lista);
+//        }
+//        lista.add(licenca);
+//    }
+//
+////    public FamiliaComponent getFamilia() {
+////        if (isPlusStart() || UnicoSistema.isPlusStart()) {
+////            return Familia.PLUS_START;
+////        } else if (UnicoSistema.isPlus()) {
+////            return Familia.PLUS;
+////        } else if (UnicoSistema.isGnio()) {
+////            return Familia.GNIO;
+////        } else if (isStart()) {
+////            return Familia.START;
+////        } else {
+////            return Familia.MANAGER;
+////        }
+////    }
+//
+////    public void verificaSePermiteDesinstalarLicenca(String licenca) throws UnicoMensagemUsuarioException {
+////        ProdutoLicenca produto = ProdutoLicencaRN.getInstance().getProduto(licenca);
+////        if (licencas.size() > 1 && produto != null) {
+////            if (produto.isBase()) {
+////                if (licenca.startsWith("G")) {
+////                    throw new UnicoMensagemUsuarioException("COM330", "Para desinstalar uma licença G-nio você precisa desinstalar todas as outras licenças primeiro.");
+////                } else if (licenca.startsWith("PLUS")) {
+////                    throw new UnicoMensagemUsuarioException("COM331", "Para desinstalar uma licença PLUS você precisa desinstalar todas as outras licenças primeiro.");
+////                } else if (licenca.startsWith("U")) {
+////                    throw new UnicoMensagemUsuarioException("COM332", "Para desinstalar uma licença UNICO MANAGER você precisa desinstalar todas as outras licenças primeiro.");
+////                } else if (licenca.startsWith("S")) {
+////                    throw new UnicoMensagemUsuarioException("COM333", "Para desinstalar uma licença UNICO START você precisa desinstalar todas as outras licenças primeiro.");
+////                }
+////            } else {
+////                if (produto.equals(ProdutoLicenca.INCREMENTO_FILIAL)) {
+////                    Licenca licencaPrincipal = LicencaCommonRN.getInstance().buscarLicencaPrincipal();
+////
+////                    int incremento = Util.string2int(Util.apenasNumeros(licenca.substring(0, licenca.indexOf("."))));
+////
+////                    if (getQuantidadeFiliaisPermitidas() - incremento < licencaPrincipal.getEnterprises().size() + 1) {
+////                        throw new UnicoMensagemUsuarioException("COM334",
+////                                "Para desinstalar uma licença de incremento de enterprises você deve ter apenas " + (getQuantidadeFiliaisPermitidas() - incremento - 1) + " licenças Enterprise.");
+////                    }
+////                }
+////            }
+////        }
+////    }
+//
+////    public void validarQuantidadeDeRegistrosEmDemostracao() throws UnicoMensagemUsuarioException {
+////        if (isDemonstracao()) {
+////            int valor = FilialCommonRN.getInstance().buscarLista().size();
+////            if (valor > 1) {
+////                throw new UnicoMensagemUsuarioException("COM335", "Sua base de dados não é compatível com o modo demonstração. Por favor verifique.");
+////            }
+////
+////            // Produtos
+////            valor = ProdutoCommonRN.getInstance().getQuantidadeProdutos();
+////            if (valor > 10) {
+////                throw new UnicoMensagemUsuarioException("COM336", "Sua base de dados não é compatível com o modo demonstração. Por favor verifique.");
+////            }
+////
+////            // ServiÃ§os
+////            valor = ProdutoCommonRN.getInstance().getQuantidadeServicos();
+////            if (valor > 10) {
+////                throw new UnicoMensagemUsuarioException("COM337", "Sua base de dados não é compatível com o modo demonstração. Por favor verifique.");
+////            }
+////
+////            List<Entidade> listEntidade = EntidadeCommonRN.getInstance().buscarLista();
+////            if (listEntidade != null && listEntidade.size() > 0) {
+////                int countCliente = 0;
+////                int countFornecedor = 0;
+////                int countFabricante = 0;
+////                int countComprador = 0;
+////                int countTecnico = 0;
+////                int countTransportadora = 0;
+////                for (Entidade entidade : listEntidade) {
+////                    if (entidade.getCliente() > 0) {
+////                        countCliente++;
+////                        verificaRegistrosCount(countCliente, 10);
+////                    }
+////                    if (entidade.getFornecedor() > 0) {
+////                        countFornecedor++;
+////                        verificaRegistrosCount(countFornecedor, 10);
+////                    }
+////                    if (entidade.getFabricante() > 0) {
+////                        countFabricante++;
+////                        verificaRegistrosCount(countFabricante, 10);
+////                    }
+////                    if (entidade.getComprador() > 0) {
+////                        countComprador++;
+////                        verificaRegistrosCount(countComprador, 10);
+////                    }
+////                    if (entidade.getTecnico() > 0) {
+////                        countTecnico++;
+////                        verificaRegistrosCount(countTecnico, 10);
+////                    }
+////                    if (entidade.getTransportadora() > 0) {
+////                        countTransportadora++;
+////                        verificaRegistrosCount(countTransportadora, 10);
+////                    }
+////                }
+////            }
+////
+////            valor = NotaFiscalCommonRN.getInstance().buscarListaNotaFiscalEntrada().size();
+////            if (valor > 10) {
+////                throw new UnicoMensagemUsuarioException("COM338", "Sua base de dados não é compatível com o modo demonstração. Por favor verifique.");
+////            }
+////
+////            valor = NotaFiscalCommonRN.getInstance().buscarListaNotaFiscalSaida().size();
+////            if (valor > 10) {
+////                throw new UnicoMensagemUsuarioException("COM339", "Sua base de dados não é compatível com o modo demonstração. Por favor verifique.");
+////            }
+////
+////            valor = FinanceiroDadoCommonRN.getInstance().buscarLista().size();
+////            if (valor > 100) {
+////                throw new UnicoMensagemUsuarioException("COM340", "Sua base de dados não é compatível com o modo demonstração. Por favor verifique.");
+////            }
+////        }
+////    }
+////
+////    /**
+////     * Método usado por rotinas que liberar itens de menu
+////     * 
+////     * @param sessao {@link Sessao}
+////     * @param {@link List} de {@link ProdutoLicenca}
+////     * @return true se algum {@link ProdutoLicenca} da lista que estou está instalado no sistema
+////     */
+////    public boolean liberarMenu(Sessao sessao, List<ProdutoLicenca> licencasMenu) {
+////        Familia familiaSistema = getFamilia();
+////        // se não tiver nenhuma licença instalada é porque está em demonstração
+////        if (mapLicencas.isEmpty()) {
+////            // Percorre as licenças para verificar suas famílias
+////            for (ProdutoLicenca produtoLicenca : licencasMenu) {
+////                // Se a família do sistema pertence à família da licença, libera
+////                if (produtoLicenca.isPertenceNaFamilia(familiaSistema)) {
+////                    return true;
+////                } else {
+////                    // Senão, se a família da licenças for inferior à família do sistema, libera
+////                    for (Familia f : produtoLicenca.getFamilia()) {
+////                        if (f.getId() < familiaSistema.getId()) {
+////                            return true;
+////                        }
+////                    }
+////                }
+////            }
+////        }
+////        // se a licença for ProdutoLicenca.TODOS
+////        if (licencasMenu.size() == 1 && licencasMenu.get(0).equals(ProdutoLicenca.TODOS)) {
+////            return true;
+////        }
+////        // verifica se alguma das licenças do menu está instalada
+////        for (ProdutoLicenca produtoLicenca : licencasMenu) {
+////            if (sessao != null && produtoLicenca.isPerguntaFilial()) {
+////                if (contemLicencaPorCNPJ(produtoLicenca, sessao.getFilial().getCnpj())) {
+////                    return true;
+////                }
+////            } else if (mapLicencas.containsKey(produtoLicenca)) {
+////                return true;
+////            }
+////        }
+////        return false;
+////    }
+////
+////    /**
+////     * Método usado por rotinas que liberar itens de menu por sessão
+////     * 
+////     * @param {@link List} de {@link ProdutoLicenca}
+////     * @return true se algum {@link ProdutoLicenca} da lista que estou está instalado no sistema
+////     */
+////    public boolean liberarMenu(List<ProdutoLicenca> licencasMenu) {
+////        return liberarMenu(null, licencasMenu);
+////    }
+////
+////    public void setDemonstracao(boolean demo) {
+////        demonstracao = demo;
+////    }
+////
+////    public void setNumeroUsuariosLicenca(int numeroUsuarios) {
+////        this.numeroUsuariosLicenca = numeroUsuarios;
+////    }
+////
+////    public Licenca getLicencaPrincipal() {
+////        return LicencaCommonRN.getInstance().buscarLicencaPrincipal();
+////    }
+////
+////    private void verificaRegistrosCount(int count, int quanto) throws UnicoMensagemUsuarioException {
+////        if (Util.verificaRegistrosCount(count, quanto)) {
+////            throw new UnicoMensagemUsuarioException("COM341", "Sua base de dados não é compatível com o modo demonstração. Por favor verifique.");
+////        }
+////    }
+////
+////    private Map<String, Licenca> getMapCnpjPorProdutoLicenca(ProdutoLicenca produtoLicenca) {
+////        return mapCNPJLicencas.get(produtoLicenca);
+////    }
+////
+////    public boolean contemLicencaPorCNPJ(ProdutoLicenca produtoLicenca, String cnpj) {
+////        Map<String, Licenca> map = getMapCnpjPorProdutoLicenca(produtoLicenca);
+////        if (map != null) {
+////            return map.containsKey(cnpj);
+////        }
+////        return false;
+////    }
+////
+////    public boolean contemLicencaIncremento(ProdutoLicenca produtoLicenca, String chave) {
+////        List<Licenca> lista = mapLicencasIncremento.get(produtoLicenca);
+////        if (lista != null) {
+////            for (Licenca licenca : lista) {
+////                String prefixo = licenca.getChaveAtivacao().substring(0, licenca.getChaveAtivacao().indexOf("."));
+////                if (chave.startsWith(prefixo)) {
+////                    return true;
+////                }
+////            }
+////        }
+////        return false;
+////    }
+////
+////    public boolean contemLicenca(ProdutoLicenca produtoLicenca) {
+////        return mapLicencas.containsKey(produtoLicenca);
+////    }
+////
+////    public boolean isDemonstracao() {
+////        return demonstracao;
+////    }
+////
+//    /**
+//     * Número de usuários que é somado a partir das licenças de incremento de usuário
+//     * 
+//     * @return Número de usuários
+//     */
+//    public int getNumeroUsuariosLicenca() 
+//    {
+//        return numeroUsuariosLicenca;
+//    }
+////
+////    /**
+////     * Retorna o número de usuáriuo permitidos para uso do UniMobile. Se a licença possuir o numero
+////     * de usuário do UniMobile consultado no WS maior que zero, será esse valor que será
+////     * considerado. Senão será utilizado o valor que foi lido pelas licenças instaladas
+////     * 
+////     * @return numero de usuários do UniMobile
+////     */
+////    public int getNumeroUsuariosUnimobile() {
+////        if (numeroUsuariosUnimobileServidor > 0) {
+////            return numeroUsuariosUnimobileServidor;
+////        } else {
+////            return numeroUsuariosUnimobile;
+////        }
+////    }
+////
+////    /**
+////     * Retorna o número de usuáriuo permitidos para uso do Comanda. Se a licença possuir o numero de
+////     * usuário do Comanda consultado no WS maior que zero, será esse valor que será considerado.
+////     * Senão será utilizado o valor que foi lido pelas licenças instaladas
+////     * 
+////     * @return numero de usuários do Comamda
+////     */
+////    public int getNumeroUsuariosComanda() {
+////        if (numeroUsuariosComandaServidor > 0) {
+////            return numeroUsuariosComandaServidor;
+////        } else {
+////            return numeroUsuariosComanda;
+////        }
+////    }
+////
+////    public int getQuantidadeFiliais() {
+////        return quantidadeFiliais;
+////    }
+////
+////    public int getQuantidadeFiliaisPermitidas() {
+////        return quantidadeFiliaisPermitidas;
+////    }
+////
+////    public boolean isStart() {
+////        return mapLicencas.containsKey(ProdutoLicenca.START) && !mapLicencas.containsKey(ProdutoLicenca.PMANAGER);
+////    }
+////
+////    public boolean isMultiFilial() {
+////        return quantidadeFiliais > 1 || demonstracao;
+////    }
+////
+////    public boolean isOs() {
+////        if (isDemonstracao()) {
+////            return true;
+////        } else {
+////            return mapLicencas.containsKey(ProdutoLicenca.OS);
+////        }
+////    }
+////
+////    public boolean isEnterprise() {
+////        return quantidadeFiliais > 1;
+////    }
+////
+////    public List<Licenca> getLicencas() {
+////        return licencas;
+////    }
+////
+////    public boolean isPossuiLicencaEnterprise() {
+////        return mapLicencas.containsKey(ProdutoLicenca.ENTERPRISE) || mapLicencas.containsKey(ProdutoLicenca.ENTERPRISE_PLUS) || mapLicencas.containsKey(ProdutoLicenca.ENTERPRISE_GNIO);
+////    }
+////
+////    public boolean isPlusStart() {
+////        return !mapLicencas.containsKey(ProdutoLicenca.UNIPLUS) && mapLicencas.containsKey(ProdutoLicenca.UNIPLUS_START);
+////    }
+////
+////    public boolean isPlus() {
+////        return mapLicencas.containsKey(ProdutoLicenca.UNIPLUS);
+////    }
+////
+////    public boolean isGnio() {
+////        return mapLicencas.containsKey(ProdutoLicenca.GNIO);
+////    }
+////
+////    public boolean isManager() {
+////        return mapLicencas.containsKey(ProdutoLicenca.MANAGER);
+////    }
+////
+////    public boolean isUniChef() {
+////        return isUniChef2();
+////    }
+////
+////    public boolean isUniChef2() {
+////        return mapLicencas.containsKey(ProdutoLicenca.UNICHEF2);
+////    }
+////
+////    public int getQuantidadeLicencasEnterprise() {
+////        return quantidadeLicencasEnterprise;
+////    }
+////
+////    public void setQuantidadeFiliais(int quantidadeFiliais) {
+////        this.quantidadeFiliais = quantidadeFiliais;
+////    }
+////
+////    public boolean isMultiCNPJ() {
+////        return !Util.mapNullOrEmpty(getMapCnpjPorProdutoLicenca(ProdutoLicenca.MULTICNPJ));
+////    }
+////
+////    public boolean isSaidaVIP() {
+////        return mapLicencas.containsKey(ProdutoLicenca.SAIDAVIP);
+////    }
+////
+////    public boolean isUniMobileVendas() {
+////        return mapLicencas.containsKey(ProdutoLicenca.UNIMOB);
+////    }
+////
+////    public boolean isBoleto(String cnpj) {
+////        return contemLicencaPorCNPJ(ProdutoLicenca.BOLETO, cnpj);
+////    }
+////
+////    public boolean isProgramacaoReajustePreco() {
+////        return mapLicencas.containsKey(ProdutoLicenca.PROG_REAJUSTE_PRECO);
+////    }
+////
+////    public boolean isDeliveryWeb() {
+////        return mapLicencas.containsKey(ProdutoLicenca.DELIVERYWEB);
+////    }
+////
+////    public boolean isUnicoECommerce() {
+////        return mapLicencas.containsKey(ProdutoLicenca.ECOMMERCE);
+////    }
+////
+////    public boolean isTefUnico() {
+////        return mapLicencas.containsKey(ProdutoLicenca.TEF_UNICO);
+////    }
+////
+////    public boolean isTefOutros() {
+////        return mapLicencas.containsKey(ProdutoLicenca.TEF_OUTROS);
+////    }
+////
+////    public boolean isTefDiscado() {
+////        return mapLicencas.containsKey(ProdutoLicenca.TEF_DISCADO);
+////    }
+////
+////    public boolean isUniPaf() {
+////        return mapLicencas.containsKey(ProdutoLicenca.UNIPAF);
+////    }
+////
+////    public boolean isUniPafPlus(String cnpjFilial) {
+////        return contemLicencaPorCNPJ(ProdutoLicenca.UNIPAFPLUS, cnpjFilial);
+////    }
+////
+////    public boolean isUniChefPlus(String cnpjFilial) {
+////        return contemLicencaPorCNPJ(ProdutoLicenca.UNICHEFPLUS, cnpjFilial);
+////    }
+////
+////    public boolean temLicencaUniPafPlus() {
+////        return !Util.mapNullOrEmpty(getMapCnpjPorProdutoLicenca(ProdutoLicenca.UNIPAFPLUS));
+////    }
+////
+////    public boolean isUniPdv() {
+////        return mapLicencas.containsKey(ProdutoLicenca.UNIPDV);
+////    }
+////
+////    public boolean isUniPdvPlus(String cnpjFilial) {
+////        return contemLicencaPorCNPJ(ProdutoLicenca.UNIPDVPLUS, cnpjFilial);
+////    }
+////
+////    public boolean isTefHabilitado() {
+////        return isTefUnico() || isTefOutros();
+////    }
+////
+////    public boolean isCartaoFidelidade() {
+////        return mapLicencas.containsKey(ProdutoLicenca.CARTAO_FIDELIDADE);
+////    }
+////
+////    public boolean isCompras() {
+////        return mapLicencas.containsKey(ProdutoLicenca.COMPRAS);
+////    }
+////
+////    public boolean isGnre() {
+////        return mapLicencas.containsKey(ProdutoLicenca.GNRE);
+////    }
+////
+////    public boolean isFranquia() {
+////        return mapLicencas.containsKey(ProdutoLicenca.FRANQUIA);
+////    }
+////
+////    public boolean isFranqueado() {
+////        return mapLicencas.containsKey(ProdutoLicenca.FRANQUEADO);
+////    }
+////
+////    public boolean isSms() {
+////        return mapLicencas.containsKey(ProdutoLicenca.SMS);
+////    }
+////
+////    public boolean isControleLote() {
+////        return mapLicencas.containsKey(ProdutoLicenca.CONTROLE_LOTE);
+////    }
+////
+////    public boolean isOperacaoFiscal() {
+////        return mapLicencas.containsKey(ProdutoLicenca.OPFISCAL);
+////    }
+////
+////    public boolean isReclassificacao() {
+////        return mapLicencas.containsKey(ProdutoLicenca.RECLASSIFICACAO);
+////    }
+////
+////    public boolean isContrato() {
+////        return mapLicencas.containsKey(ProdutoLicenca.CONTRATO);
+////    }
+////
+////    public boolean isEmuladorEcf() {
+////        return mapLicencas.containsKey(ProdutoLicenca.EMULADOR_ECF);
+////    }
+////
+////    public boolean isSped() {
+////        return mapLicencas.containsKey(ProdutoLicenca.SPED);
+////    }
+////
+////    public boolean isErp() {
+////        return mapLicencas.containsKey(ProdutoLicenca.GNIO);
+////    }
+////
+////    public boolean isSpedPisCofins() {
+////        return mapLicencas.containsKey(ProdutoLicenca.SPED_PISCOFINS);
+////    }
+////
+////    public boolean isRegistroProducao() {
+////        return mapLicencas.containsKey(ProdutoLicenca.PRODUCAO);
+////    }
+////
+////    public boolean isSpedContribuicoes() {
+////        return mapLicencas.containsKey(ProdutoLicenca.SPED_CONTRIBUICOES);
+////    }
+////
+////    public boolean isExpedicao() {
+////        return mapLicencas.containsKey(ProdutoLicenca.EXPEDICAO);
+////    }
+////
+////    public void setConcentrador(boolean concentradorDados) {
+////        if (concentradorDados) {
+////            mapLicencas.put(ProdutoLicenca.CONCENTRADOR, null);
+////        } else {
+////            mapLicencas.remove(ProdutoLicenca.CONCENTRADOR);
+////        }
+////    }
+////
+////    public boolean isConcentrador() {
+////        return mapLicencas.containsKey(ProdutoLicenca.CONCENTRADOR);
+////    }
+////
+////    public boolean isMateriaisConstrucao() {
+////        return mapLicencas.containsKey(ProdutoLicenca.MATERIAIS_CONSTRUCAO);
+////    }
+////
+////    public boolean isNfse() {
+////        return mapLicencas.containsKey(ProdutoLicenca.NF_SERVICO);
+////    }
+////
+////    public boolean isCrm() {
+////        return mapLicencas.containsKey(ProdutoLicenca.CRM);
+////    }
+////
+////    public boolean isCte() {
+////        return mapLicencas.containsKey(ProdutoLicenca.CTE);
+////    }
+////
+////    public boolean isMdfe() {
+////        return mapLicencas.containsKey(ProdutoLicenca.MDFE);
+////    }
+////
+////    public boolean isUninfce() {
+////        return mapLicencas.containsKey(ProdutoLicenca.UNINFCE);
+////    }
+////
+////    public boolean isUniNfcePlus(String cnpjFilial) {
+////        return contemLicencaPorCNPJ(ProdutoLicenca.UNINFCEPLUS, cnpjFilial);
+////    }
+////
+////    public boolean isUniSatPlus(String cnpjFilial) {
+////        return contemLicencaPorCNPJ(ProdutoLicenca.UNISATPLUS, cnpjFilial);
+////    }
+////
+////    public boolean temLicencaUniNfcePlus() {
+////        return !Util.mapNullOrEmpty(getMapCnpjPorProdutoLicenca(ProdutoLicenca.UNINFCEPLUS));
+////    }
+////
+////    public boolean temLicencaCockpit() {
+////        return mapLicencas.containsKey(ProdutoLicenca.COCKPIT);
+////    }
+////
+////    public boolean isInventarioEstoque() {
+////        return mapLicencas.containsKey(ProdutoLicenca.INVENTARIO_ESTOQUE);
+////    }
+////
+////    /**
+////     * Número de usuários que é consultado no WS
+////     * 
+////     * @return Número de usuários
+////     */
+////    public int getNumeroUsuariosServidor() {
+////        return numeroUsuariosServidor;
+////    }
+////
+////    public void setNumeroUsuariosServidor(int numeroUsuariosServidor) {
+////        this.numeroUsuariosServidor = numeroUsuariosServidor;
+////    }
+////
+////    /**
+////     * Retorna o número de usuários que o sistema tem direito. Se foi consultado no webservice o
+////     * número de usuários do contrato do PLUS ou G-nio, e esse valor for maior que zero, esse número
+////     * será levado em consideração. Senão, será considerado o número de usuários das licenças
+////     * 
+////     * @return Número de usuários que o sistema pode liberar
+////     */
+////    public int getNumeroTotalUsuariosPermitidos() {
+////        if (numeroUsuariosServidor > 0) {
+////            return numeroUsuariosServidor;
+////        } else {
+////            return numeroUsuariosLicenca;
+////        }
+////    }
+////
+////    /**
+////     * Retorna o número de usuários que o sistema ainda pode usar, descontando os usuários que o PDV
+////     * alocou no dia
+////     * 
+////     * @return Número de usuários que o sistema pode liberar, subtraindo os PDs conectados
+////     */
+////    public int getNumeroUsuariosSistema() {
+////        int usuarios = getNumeroTotalUsuariosPermitidos();
+////
+////        Licenca licencaPrincipal = getLicencaPrincipal();
+////        if (licencaPrincipal != null) {
+////            if (!isLicencaLocal(licencaPrincipal.getChaveAtivacao())) {
+////                List<LocacaoPDV> listaLocacaoPDV = licencaPrincipal.getListaLocacaoPDV().get(DataHoraFactory.getData());
+////                if (listaLocacaoPDV != null) {
+////                    usuarios -= listaLocacaoPDV.size();
+////                }
+////            }
+////        }
+////        return usuarios;
+////    }
+////
+////    public boolean verificaEAloca(LocacaoPDV locacaoPdv, Sessao sessao) throws UnicoMensagemUsuarioException {
+////        // carrega a liceca somente no primeiro acesso, pois o pdv precisa
+////        // das licencas carregadas para verificar se tem usuario disponivel.
+////        if (carregarPrimeiroAcesso) {
+////            carregarLicencas();
+////            carregarPrimeiroAcesso = false;
+////        }
+////
+////        Licenca licencaPrincipal = getLicencaPrincipal();
+////        if (licencaPrincipal != null) {
+////            if (isLicencaLocal(licencaPrincipal.getChaveAtivacao())) {
+////                return true;
+////            }
+////
+////            List<LocacaoPDV> listaLocacaoPDV = licencaPrincipal.getListaLocacaoPDV().getOrDefault(DataHoraFactory.getData(), new ArrayList<>());
+////            if (!listaLocacaoPDV.contains(locacaoPdv)) {
+////                int usuarios = getNumeroUsuariosSistema() - ControleConexoes.getInstance().getNumeroUsuariosAtivos(ConnectionSql.getConnection());
+////                if (usuarios <= 0) {
+////                    return false;
+////                }
+////
+////                licencaPrincipal.getListaLocacaoPDV().clear();
+////                locacaoPdv.setInicio(DataHoraFactory.getDataHora());
+////                listaLocacaoPDV.add(locacaoPdv);
+////                licencaPrincipal.getListaLocacaoPDV().put(DataHoraFactory.getData(), listaLocacaoPDV);
+////                ConnectionSql.inicioTransacao();
+////                LicencaCommonRN.getInstance().gravar(Transacao.MODO_ALTERACAO, licencaPrincipal, sessao);
+////                ConnectionSql.commit();
+////            }
+////        }
+////        return true;
+////    }
+////
+////    public boolean isLicencaLocal(String licenca) {
+////        if (!Util.stringNullOrEmpty(licenca)) {
+////            String[] partes = licenca.split("\\.");
+////            String parte2 = partes[1];
+////            String parte3 = partes[2];
+////            if (Integer.parseInt(parte2) == 0 && Integer.parseInt(parte3) == 0) {
+////                return true;
+////            }
+////        }
+////        return false;
+////    }
+////
+////    public String getDescricaoLicencaAtual() {
+////        String descricaoLicenca = "";
+////
+////        if (isStart() || isPlusStart()) {
+////            descricaoLicenca = "START";
+////        } else if (isUniChef()) {
+////            descricaoLicenca = "UNICHEF";
+////        } else if (isUniChef2()) {
+////            descricaoLicenca = "UNICHEF 2";
+////        } else if (isManager()) {
+////            descricaoLicenca = "MANAGER";
+////        }
+////
+////        if (isEnterprise()) {
+////            descricaoLicenca += " ENTERPRISE";
+////        }
+////
+////        return descricaoLicenca;
+////    }
+////
+////    public void validarChaveAtivacaoOffline(String chaveOffline) throws UnicoMensagemUsuarioException {
+////        if (Util.stringNullOrEmpty(chaveOffline) || chaveOffline.length() == 19) {
+////            throw new UnicoMensagemUsuarioException("23441", "Chave de ativação off-line inválida");
+////        }
+////
+////        Licenca licencaPrincipal = getLicencaPrincipal();
+////
+////        chaveOffline = chaveOffline.replace(".", "");
+////        String chaveDesembaralhada = Codificacao.desembaralhar(chaveOffline);
+////
+////        String chaveDesembaralhadaFormatada = UtilDesktop.formatarString(chaveDesembaralhada, "***.***.***.***.***.***");
+////        String[] partesChave = chaveDesembaralhadaFormatada.split("\\.");
+////
+////        // Consulta
+////        LocalDate consulta = Codificacao.decodificarData(partesChave[0]);
+////        // Validade
+////        LocalDate validade = Codificacao.decodificarData(partesChave[1]);
+////
+////        int mod9999Licenca = Math.abs(licencaPrincipal.getChaveAtivacao().hashCode()) / 9999;
+////        String base35Licenca = Base35.gerarBase35(mod9999Licenca);
+////        if (!base35Licenca.equalsIgnoreCase(partesChave[2])) {
+////            throw new UnicoMensagemUsuarioException("23442", "Chave de ativação off-line inválida");
+////        }
+////
+////        int somaLicencasInstaladas = 0;
+////        int somaLicencasChave = Base35.decodificaBase35(partesChave[3]);
+////
+////        List<Integer> listaIdProdutoLicenca = licencaPrincipal.getLicencasInstaladas().stream().map(lic -> lic.getProdutoLicenca().getId()).sorted().collect(Collectors.toList());
+////        for (int i = 0; i < listaIdProdutoLicenca.size(); i++) {
+////            Integer id = listaIdProdutoLicenca.get(i);
+////            somaLicencasInstaladas += id * (i + 1);
+////        }
+////
+////        if (somaLicencasChave != somaLicencasInstaladas) {
+////            throw new UnicoMensagemUsuarioException("23443", "Chave de ativação off-line inválida");
+////        }
+////
+////        String base35Consulta = Codificacao.codificarData(consulta);
+////        String base35Validade = Codificacao.codificarData(validade);
+////        String base35Licencas = Base35.gerarBase35(somaLicencasInstaladas);
+////
+////        int somaUsuarios = licencaPrincipal.getNumeroUsuariosPermitidos() + licencaPrincipal.getNumeroUsuariosMobile() + licencaPrincipal.getNumeroUsuariosComanda();
+////        somaUsuarios = somaUsuarios * 999;
+////        String base35SomaUsuarios = Base35.gerarBase35(somaUsuarios);
+////
+////        String baseChave = base35Consulta + base35Validade + base35Licenca + base35SomaUsuarios + base35Licencas;
+////        int mod9999Chave = Math.abs(baseChave.hashCode()) / 9999;
+////        String base35Hash = Base35.gerarBase35(mod9999Chave);
+////
+////        if (!base35Hash.equalsIgnoreCase(partesChave[4])) {
+////            throw new UnicoMensagemUsuarioException("23444", "Chave de ativação off-line inválida");
+////        }
+////    }
+////
+////
+////    /**
+////     * Valida a ativação da licença quanto ao enquadramento da filial para ativar a licença.
+////     * 
+////     * @param cnpj {@link String}
+////     * @throws UnicoMensagemUsuarioException
+////     */
+////    public static void validarLicencaAlertaFiscal(String cnpj) throws UnicoMensagemUsuarioException {
+////        Filial filial = FilialCommonRN.getInstance().buscarFilialPorCnpj(cnpj);
+////        if (filial == null) {
+////            throw new UnicoMensagemUsuarioException("COM23661", "Filial não encontrada");
+////        }
+////    }
+//}

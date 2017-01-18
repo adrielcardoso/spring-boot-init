@@ -1,0 +1,53 @@
+package br.intelidata.controllers;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import br.intelidata.component.ResponseComponent;
+import br.intelidata.component.UnicoCryptComponent;
+import br.intelidata.config.Controller;
+import br.intelidata.config.Entity;
+import br.intelidata.entity.PedidoAutorizacaoECFEntity;
+import br.intelidata.service.PedidoAutorizacaoECFService;
+
+@RestController
+public class PedidoAutorizacaoECFController extends Controller 
+{
+	@Autowired
+    private LogComponent logComponent;
+	
+	@Autowired
+    private DataSource dataSource;
+	
+    @RequestMapping(
+    		value="/pedidoautorizacaoecf", 
+    		method = RequestMethod.POST)
+    public String pedidoAutorizacaoECFController(@RequestBody PedidoAutorizacaoECFEntity pedidoAutorizacaoECFEntity)
+    {
+	  try{
+		  
+//		  return new Entity();
+		  
+		  String retorno = "Não foi possível processar o pedido de uso da ecf";
+//	      org.json.JSONObject jsonObject = new org.json.JSONObject(jsonParams);
+          String pedido = UnicoCryptComponent.decript(pedidoAutorizacaoECFEntity.getP1());
+          
+          PedidoAutorizacaoECFService.pedidoAutorizacaoEcf(dataSource, pedido);
+          
+//          if (conn != null) {
+//              retorno = Sql.pedidoAutorizacaoEcf(conn, pedido);
+//          }
+//          JSONObject resposta = new JSONObject();
+//          resposta.put("r1", UnicoCrypt.cript(retorno));
+//          return R2D2RESTUtil.buildResponse(Status.OK, resposta);
+	  }catch(Exception e){
+//		  return new ResponseComponent().handleResourceNotFoundException(400, "pedidoautorizacaoecf falhou");
+	  }
+	  
+	  	return "pedidoautorizacaoecf Teste";
+    }
+}

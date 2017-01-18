@@ -1,0 +1,432 @@
+package br.intelidata.service;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.sql.DataSource;
+import br.intelidata.component.FileLogComponent;
+import br.intelidata.component.LogComponent;
+import br.intelidata.component.TagComponent;
+import br.intelidata.component.UtilComponent;
+import br.intelidata.config.Entity;
+import br.intelidata.config.Service;
+import br.intelidata.entity.ClienteAutenticate;
+import br.intelidata.entity.UsuarioSite;
+import br.intelidata.entity.UsuarioSiteLogin;
+import br.intelidata.exception.FormErrorException;
+
+public class UsuarioSiteService extends Service 
+{
+	private static DataSource cDataSource;
+	private static LogComponent cLogComponent;
+	private static Entity cUsuarioSite;
+	
+	public UsuarioSiteService(DataSource cDataSource, LogComponent cLogComponent)
+	{
+		this.cDataSource = cDataSource;
+		this.cLogComponent = cLogComponent;
+	}
+	
+	public static Object parseLogin(DataSource dataSource, LogComponent logComponent, UsuarioSiteLogin usuarioSiteLogin) throws Exception
+	{
+		cDataSource = dataSource;
+		cLogComponent = logComponent;
+		
+		if(!emailValid(usuarioSiteLogin.getEmail().toString())){
+			throw new FormErrorException("E-mail inválido");
+		}
+		
+		UsuarioSite usuarioSite = (UsuarioSite) autenticateUser(
+					usuarioSiteLogin.getEmail(), usuarioSiteLogin.getPassword());
+		
+		ClienteAutenticate clienteAutenticate = new ClienteAutenticate();
+		clienteAutenticate.setToken(usuarioSite.getUK());
+		
+		return clienteAutenticate;
+	}
+	
+	public static Entity parseFindById(DataSource dataSource, LogComponent logComponent, String id) throws Exception
+	{
+		cDataSource = dataSource;
+		cLogComponent = logComponent;
+		
+		if(id.equals("") || id.equals(null)){
+			throw new FormErrorException("Indentificação incorreta para deletar");
+		}	
+		
+		return findById(id);
+	}
+	
+	public static Entity parseDelete(DataSource dataSource, LogComponent logComponent, String id) throws Exception
+	{
+		cDataSource = dataSource;
+		cLogComponent = logComponent;
+		
+		if(id == null){
+			throw new FormErrorException("Indentificação incorreta para deletar");
+		}
+		
+		if(!userAtivo(id)){
+			throw new FormErrorException("Identificamos que esse usuário foi excluído");
+		}
+		
+		if(!userExist(id)){
+			throw new FormErrorException("Indentificação incorreta não foi possível encontrar o usuário");
+		}
+		
+		
+		FileLogComponent.getInstance().write("0");
+		
+		// persist update
+		UsuarioSite usuarioSite = new UsuarioSite();
+		usuarioSite.setId(Long.valueOf(id));
+		usuarioSite.setDtUpdate(String.valueOf(System.currentTimeMillis()));
+		usuarioSite.setAtivo(0);
+		
+		FileLogComponent.getInstance().write("1");
+		
+		ArrayList<String> skipe = new ArrayList<String>();
+		skipe.add("id");
+		
+		logComponent.update(dataSource, usuarioSite, skipe);
+		
+		return usuarioSite;	
+	}
+	
+	public static Entity parseUpdate(DataSource dataSource, LogComponent logComponent, UsuarioSite usuarioSite) throws Exception
+	{
+		cDataSource = dataSource;
+		cLogComponent = logComponent;
+		cUsuarioSite = usuarioSite;
+		
+		if(usuarioSite.getId() == null){
+			throw new FormErrorException("Indentificação incorreta para atualizar");
+		}
+		
+		if(!userExist(String.valueOf(usuarioSite.getId()))){
+			throw new FormErrorException("Indentificação incorreta não foi possível encontrar o usuário");
+		}
+		
+		//verifica se usuario ja foi excludo,lembrando que na base a referencia de deletado fica por coluna de 'ativo'
+		// uma vez falso sempre falso, impossibilitando o ajuste pelo sitema.
+		if(!userAtivo(String.valueOf(usuarioSite.getId()))){
+			throw new FormErrorException("Identificamos que esse usuário foi excluído");
+		}
+		
+		if(!emailValid(usuarioSite.getEmail().toString())){
+			throw new FormErrorException("E-mail inválido");
+		}
+		
+		if(emailExistById(usuarioSite.getEmail(), String.valueOf(usuarioSite.getId()))){
+			throw new FormErrorException("E-mail já utilizado por outro usuário");
+		}
+		
+		// persist update
+		usuarioSite.setDtUpdate(String.valueOf(System.currentTimeMillis()));
+		
+		ArrayList<String> skipe = new ArrayList<String>();
+		skipe.add("id");
+		
+		usuarioSite.setAtivo(1);
+		UsuarioSite usuariSiteLoad = (UsuarioSite) findById(usuarioSite.getId().toString());
+		
+		if( 	
+				(!String.valueOf(usuarioSite.getPassword()).equals(usuariSiteLoad.getPassword())) ||
+				(!String.valueOf(usuarioSite.getEmail()).equals(usuariSiteLoad.getEmail()) )){
+				FileLogComponent.getInstance().write("TrocandoMD5");
+				usuariSiteLoad.setUK(UtilComponent.generateMD5(usuarioSite.getEmail()+usuarioSite.getPassword()));
+				FileLogComponent.getInstance().write("TrocandoMD5 to: "+usuariSiteLoad.getUK());
+		 }
+		
+		if(String.valueOf(usuarioSite.getAtivo()).trim().toString() 
+				!= String.valueOf(usuariSiteLoad.getAtivo()).trim().toString()){
+			usuariSiteLoad.setAtivo(usuarioSite.getAtivo());
+		}
+		if(String.valueOf(usuarioSite.getEmail()).trim().toString() != 
+					String.valueOf(usuariSiteLoad.getEmail()).trim().toString()){
+			usuariSiteLoad.setEmail(usuarioSite.getEmail());
+		}
+		if(String.valueOf(usuarioSite.getPassword()).trim().toString() != 
+					String.valueOf(usuariSiteLoad.getPassword()).trim().toString()){
+			usuariSiteLoad.setPassword(usuarioSite.getPassword());
+		}
+		if(String.valueOf(usuarioSite.getIdSubRevenda()).trim().toString() != 
+					String.valueOf(usuariSiteLoad.getIdSubRevenda()).trim().toString()){
+			usuariSiteLoad.setIdSubRevenda(usuarioSite.getIdSubRevenda());
+		}
+		if(String.valueOf(usuarioSite.getIdentidade()).trim().toString() != 
+					String.valueOf(usuariSiteLoad.getIdentidade()).trim().toString()){
+			usuariSiteLoad.setIdentidade(usuarioSite.getIdentidade());
+		}
+		  
+		logComponent.update(dataSource, usuariSiteLoad, skipe);
+		return usuariSiteLoad;
+	}
+	
+	public static Entity parseCreate(DataSource dataSource, LogComponent logComponent, UsuarioSite usuarioSite) throws Exception
+	{
+		FileLogComponent.getInstance().write("init");
+		cDataSource = dataSource;
+		cLogComponent = logComponent;
+		cUsuarioSite = usuarioSite;
+		
+		if(!emailValid(usuarioSite.getEmail().toString())){
+			throw new FormErrorException("E-mail inválido");
+		}
+		
+		if(emailExist(usuarioSite.getEmail(), String.valueOf(usuarioSite.getId()))){
+			throw new FormErrorException("E-mail já utilizado por outro usuário");
+		}
+		
+		// persist create
+		usuarioSite.setDtCreate(String.valueOf(System.currentTimeMillis()));
+		usuarioSite.setAtivo(1);
+		usuarioSite.setId(null);
+		usuarioSite.setUK(UtilComponent.generateMD5(usuarioSite.getEmail()+usuarioSite.getPassword()));
+		logComponent.persist(dataSource, usuarioSite);
+		
+		return usuarioSite;	
+	}
+	
+	public static boolean emailValid(String email) throws AddressException
+	{
+		try{
+			InternetAddress emailAddr = new InternetAddress(email);
+			emailAddr.validate();
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
+	public static boolean emailExist(String email, String id) throws SQLException
+	{
+		boolean status = false;
+		Connection connection = cDataSource.getConnection();
+        String comando = "select "
+        		+ "				t1.email " 
+        		+		  "from usuariosite t1 "
+                + 		  "where email=?";
+    
+        PreparedStatement statement = connection.prepareStatement(comando);
+        statement.setString(1, email);
+        ResultSet rs = statement.executeQuery();
+
+        if (!rs.next()) {
+        	status = false;
+        }else{
+        	status = true;
+        }
+        
+        rs.close();
+        statement.close();
+		return status;
+	}
+	
+	public static boolean emailExistById(String email, String id) throws SQLException
+	{
+		boolean status = false;
+		Connection connection = cDataSource.getConnection();
+        String comando = "select "
+        		+ "				t1.email " 
+        		+		  "from usuariosite t1 "
+                + 		  "where email=? and id != ?";
+    
+        PreparedStatement statement = connection.prepareStatement(comando);
+        statement.setString(1, email);
+        statement.setString(2, id);
+        ResultSet rs = statement.executeQuery();
+        
+        if (!rs.next()) {
+        	status = false;
+        }else{
+        	status = true;
+        }
+        
+        rs.close();
+        statement.close();
+		return status;
+	}
+	
+	public static boolean userExist(String id) throws SQLException
+	{
+		boolean status = false;
+		Connection connection = cDataSource.getConnection();
+        String comando = "select "
+        		+ "				t1.id " 
+        		+		  "from usuariosite t1 "
+                + 		  "where id=?";
+    
+        PreparedStatement statement = connection.prepareStatement(comando);
+        statement.setString(1, id);
+        ResultSet rs = statement.executeQuery();
+        
+        if (!rs.next()) {
+        	status = false;
+        }else{
+        	status = true;
+        }
+        
+        rs.close();
+        statement.close();
+		return status;
+	}
+	
+	public static boolean userAtivo(String id) throws SQLException, FormErrorException
+	{
+		boolean status = false;
+		Connection connection = cDataSource.getConnection();
+        String comando = "select "
+        		+ "				t1.ativo " 
+        		+		  "from usuariosite t1 "
+                + 		  "where id=?";
+    
+        PreparedStatement statement = connection.prepareStatement(comando);
+        statement.setString(1, id);
+        ResultSet rs = statement.executeQuery();
+        
+        if (rs.next()) {
+        	status =(rs.getInt("ativo")==1);
+        	
+        	FileLogComponent.getInstance().write("status: "+status);
+        	rs.close();
+            statement.close();
+            return status;
+        }else{
+        	throw new FormErrorException("usuário não encontrado na base de dados");
+        }
+	}
+	
+	public static Entity findById(String id) throws FormErrorException, SQLException
+	{
+		boolean status = false;
+		Connection connection = cDataSource.getConnection();
+        String comando = "select "
+        		+ "				* " 
+        		+		  "from usuariosite  "
+                + 		  "where id=?";
+    
+        PreparedStatement statement = connection.prepareStatement(comando);
+        statement.setString(1, id);
+        ResultSet rs = statement.executeQuery();
+        
+        if (rs.next()) {
+        	
+        	// usuarios com status 0 na coluna ativo, estão excluidos do sistema
+        	if(rs.getInt("ativo")==0){
+        		throw new FormErrorException("esse usuário foi excluído do sistema");
+        	}
+        	
+        	UsuarioSite usuarioSite = new UsuarioSite();
+        	
+        	usuarioSite.setAtivo(rs.getInt("ativo"));
+        	usuarioSite.setId(rs.getLong("id"));
+        	usuarioSite.setEmail(rs.getString("email"));
+        	usuarioSite.setDtCreate(rs.getString("dtcreate"));
+        	usuarioSite.setDtUpdate(rs.getString("dtupdate"));
+        	usuarioSite.setIdSubRevenda(rs.getLong("idsubrevenda"));
+        	usuarioSite.setUK(rs.getString("UK"));
+        	usuarioSite.setCurrenttimemillis(rs.getString("currenttimemillis"));
+        	usuarioSite.setRole(rs.getString("role"));
+        	usuarioSite.setIdentidade(rs.getString("identidade"));
+        	usuarioSite.setPassword(rs.getString("password"));
+        	
+        	rs.close();
+            statement.close();
+            return usuarioSite;
+        }else{
+        	throw new FormErrorException("usuário não encontrado na base de dados");
+        }
+	}
+	
+	public static Entity autenticateUser(String email, String password) throws FormErrorException, SQLException
+	{
+		boolean status = false;
+		Connection connection = cDataSource.getConnection();
+        String comando = "select "
+        		+ "				* " 
+        		+		  "from usuariosite  "
+                + 		  "where password=?"
+        		+ 		  " and email=?";
+    
+        
+        PreparedStatement statement = connection.prepareStatement(comando);
+        statement.setString(1, password);
+        statement.setString(2, email);
+        
+        ResultSet rs = statement.executeQuery();
+        
+        if (rs.next()) {
+        	
+        	// usuarios com status 0 na coluna ativo, estão excluidos do sistema
+        	if(rs.getInt("ativo")==0){
+        		throw new FormErrorException("esse usuário foi excluído do sistema");
+        	}
+        	
+        	UsuarioSite usuarioSite = new UsuarioSite();
+        	
+        	usuarioSite.setAtivo(rs.getInt("ativo"));
+        	usuarioSite.setId(rs.getLong("id"));
+        	usuarioSite.setEmail(rs.getString("email"));
+        	usuarioSite.setDtCreate(rs.getString("dtcreate"));
+        	usuarioSite.setDtUpdate(rs.getString("dtupdate"));
+        	usuarioSite.setIdSubRevenda(rs.getLong("idsubrevenda"));
+        	usuarioSite.setUK(rs.getString("uk"));
+        	
+        	rs.close();
+            statement.close();
+            
+            return usuarioSite;
+        }else{
+        	throw new FormErrorException("usuário não encontrado na base de dados");
+        }
+	}
+	
+	public Entity autenticateUserByToken(String token) throws FormErrorException, SQLException, IOException
+	{
+		boolean status = false;
+		Connection connection = cDataSource.getConnection();
+        String comando = "select "
+        		+ "				* " 
+        		+		  "from usuariosite  "
+                + 		  "where uk = ?";
+        
+        PreparedStatement statement = connection.prepareStatement(comando);
+        statement.setString(1, token);
+        ResultSet rs = statement.executeQuery();
+        
+        if (rs.next()) {
+        	
+        	// usuarios com status 0 na coluna ativo, estão excluidos do sistema
+        	if(rs.getInt("ativo")==0){
+        		throw new FormErrorException("O usuário não se encontra ativo na base");
+        	}
+        	
+        	if(!String.valueOf(rs.getString("uk")).equals(token)){
+        		throw new FormErrorException("token sem permissão de acesso, não encontramos registros na base");
+        	}
+        		
+    		UsuarioSite usuarioSite = new UsuarioSite();
+        	usuarioSite.setAtivo(rs.getInt("ativo"));
+        	usuarioSite.setId(rs.getLong("id"));
+        	usuarioSite.setEmail(rs.getString("email"));
+        	usuarioSite.setDtCreate(rs.getString("dtcreate"));
+        	usuarioSite.setDtUpdate(rs.getString("dtupdate"));
+        	usuarioSite.setIdSubRevenda(rs.getLong("idsubrevenda"));
+        	usuarioSite.setUK(rs.getString("uk"));
+        	
+        	rs.close();
+            statement.close();
+        	return usuarioSite;
+        }else{
+        	throw new FormErrorException("permissão de acesso negada, verificar token de acesso.");
+        }
+	}
+	
+}

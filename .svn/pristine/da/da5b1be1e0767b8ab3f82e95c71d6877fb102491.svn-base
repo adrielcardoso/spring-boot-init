@@ -1,0 +1,43 @@
+package br.intelidata.entity;
+
+import br.intelidata.config.Entity;
+
+public class ClienteEntity extends Entity
+{
+	private String razaoSocial;
+	private String cnpjCpf;
+	private String idRepresentante;
+	private String extra7;
+	private String nome;
+	
+	public String getRazaoSocial() {
+		return razaoSocial;
+	}
+	public void setRazaoSocial(String razaoSocial) {
+		this.razaoSocial = razaoSocial;
+	}
+	public String getCnpjCpf() {
+		return cnpjCpf;
+	}
+	public void setCnpjCpf(String cnpjCpf) {
+		this.cnpjCpf = cnpjCpf;
+	}
+	public String getIdRepresentante() {
+		return idRepresentante;
+	}
+	public void setIdRepresentante(String idRepresentante) {
+		this.idRepresentante = idRepresentante;
+	}
+	public String getExtra7() {
+		return extra7;
+	}
+	public void setExtra7(String extra7) {
+		this.extra7 = extra7;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+}

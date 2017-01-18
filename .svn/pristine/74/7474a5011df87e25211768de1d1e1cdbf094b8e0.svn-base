@@ -1,0 +1,28 @@
+package br.intelidata.controllers.requisicao;
+
+import br.intelidata.pojo.Info;
+
+public class IsItOkRequisicao {
+
+    private Info info;
+    private String licenca;
+
+    public IsItOkRequisicao() {}
+
+    public Info getInfo() {
+        return info;
+    }
+
+    public void setInfo(Info info) {
+        this.info = info;
+    }
+
+    public String getLicenca() {
+        return licenca;
+    }
+
+    public void setLicenca(String licenca) {
+        this.licenca = licenca;
+    }
+
+}

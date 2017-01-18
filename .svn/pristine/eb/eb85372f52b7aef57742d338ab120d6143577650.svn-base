@@ -1,0 +1,81 @@
+package br.intelidata.entity;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
+import br.intelidata.config.Entity;
+
+public class PedidoInstalacao extends Entity
+{
+	private long idcliente;
+	private LocalDateTime datahora;
+	private String cnpjclientefinal;
+	private String razaosocialclientefinal;
+	private long idusuariositecadastro;
+	private long idusuariositeutilizacao;
+	private long idcontrato;
+	private int utilizado;
+	private LocalDateTime datahorautilizacao;
+	private ArrayList<PedidoInstalacaoItem> pedidoInstalacaoItem;
+	
+	public long getIdcliente() {
+		return idcliente;
+	}
+	public void setIdcliente(long idcliente) {
+		this.idcliente = idcliente;
+	}
+	public LocalDateTime getDatahora() {
+		return datahora;
+	}
+	public void setDatahora(LocalDateTime datahora) {
+		this.datahora = datahora;
+	}
+	public String getCnpjclientefinal() {
+		return cnpjclientefinal;
+	}
+	public void setCnpjclientefinal(String cnpjclientefinal) {
+		this.cnpjclientefinal = cnpjclientefinal;
+	}
+	public LocalDateTime getDatahorautilizacao() {
+		return datahorautilizacao;
+	}
+	public void setDatahorautilizacao(LocalDateTime datahorautilizacao) {
+		this.datahorautilizacao = datahorautilizacao;
+	}
+	public int getUtilizado() {
+		return utilizado;
+	}
+	public void setUtilizado(int utilizado) {
+		this.utilizado = utilizado;
+	}
+	public long getIdcontrato() {
+		return idcontrato;
+	}
+	public void setIdcontrato(long idcontrato) {
+		this.idcontrato = idcontrato;
+	}
+	public long getIdusuariositeutilizacao() {
+		return idusuariositeutilizacao;
+	}
+	public void setIdusuariositeutilizacao(long idusuariositeutilizacao) {
+		this.idusuariositeutilizacao = idusuariositeutilizacao;
+	}
+	public long getIdusuariositecadastro() {
+		return idusuariositecadastro;
+	}
+	public void setIdusuariositecadastro(long idusuariositecadastro) {
+		this.idusuariositecadastro = idusuariositecadastro;
+	}
+	public String getRazaosocialclientefinal() {
+		return razaosocialclientefinal;
+	}
+	public void setRazaosocialclientefinal(String razaosocialclientefinal) {
+		this.razaosocialclientefinal = razaosocialclientefinal;
+	}
+	public ArrayList<PedidoInstalacaoItem> getPedidoInstalacaoItem() {
+		return pedidoInstalacaoItem;
+	}
+	public void setPedidoInstalacaoItem(ArrayList<PedidoInstalacaoItem> pedidoInstalacaoItem) {
+		this.pedidoInstalacaoItem = pedidoInstalacaoItem;
+	}
+}

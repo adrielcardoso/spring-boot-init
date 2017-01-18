@@ -1,0 +1,22 @@
+package br.intelidata.entity;
+
+import br.intelidata.config.Entity;
+
+public class PedidoAutorizacaoECF extends Entity 
+{
+	private String pedido;
+	
+	public PedidoAutorizacaoECF()
+	{
+		super();
+	}
+
+	public String getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(String pedido) {
+		this.pedido = pedido;
+	}
+
+}

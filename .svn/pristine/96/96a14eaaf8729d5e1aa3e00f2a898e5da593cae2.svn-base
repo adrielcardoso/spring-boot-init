@@ -1,0 +1,61 @@
+package br.intelidata.component;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.RestController;
+import br.intelidata.config.Controller;
+import br.intelidata.config.Entity;
+import br.intelidata.entity.Atributo;
+
+@RestController
+public class LogComponent extends Controller
+{
+    private DBUtilComponent dbUtil;
+    private DataSource dataSource;
+
+    public LogComponent(@Autowired DBUtilComponent dbUtil, @Qualifier("logtrackerDataSource") DataSource dataSource) 
+    {
+        this.dbUtil = dbUtil;
+        this.dataSource = dataSource;
+    }
+
+    public void logarIAmHere(Entity iAmHere) throws Exception 
+    {
+    	dbUtil.incluirObjeto(dataSource, iAmHere);
+    }
+
+    public void logarIsItOk(Entity isItOk) throws Exception 
+    {
+        dbUtil.incluirObjeto(dataSource, isItOk);
+    }
+    
+    public void persist(Entity object) throws Exception
+    {
+    	dbUtil.incluirObjeto(dataSource, object);
+    }
+    
+    public void persist(DataSource dataSource, Entity object) throws Exception
+    {
+    	dbUtil.incluirObjeto(dataSource, object);
+    }
+    
+    public void update(DataSource dataSource, Entity object, ArrayList<String> skipe) throws Exception
+    {
+    	dbUtil.atualizarObjeto(dataSource, object, skipe);
+    }
+     
+    public Entity buscar(Class<?> object, String where)
+    {
+    	return dbUtil.buscar(dataSource, object, where);
+    }
+    
+    public List<Atributo> getAtributos(Entity entity) throws Exception
+    {
+    	return dbUtil.getAtributos(entity);
+    }
+    
+}

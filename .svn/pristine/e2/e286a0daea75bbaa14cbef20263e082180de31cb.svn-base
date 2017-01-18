@@ -1,0 +1,43 @@
+package br.intelidata.service;
+
+import java.io.ByteArrayOutputStream;
+import java.time.LocalDate;
+import br.intelidata.component.EncryptionComponent;
+import br.intelidata.component.FileLogComponent;
+import br.intelidata.component.ImpressoraFiscalComponent;
+import br.intelidata.component.UtilComponent;
+import br.intelidata.config.Service;
+import br.intelidata.entity.DadosAutorizacaoEcf;
+
+public class GeraArquivoAutorizacaoEcfService extends Service 
+{
+    public static ByteArrayOutputStream geraArquivo(DadosAutorizacaoEcf dadosAutorizacao) throws Exception {
+        try {
+            String pedidoOriginal = "1;" + dadosAutorizacao.getCodigoModelo() + ";" + dadosAutorizacao.getNumeroSerie() + ";"
+                    + UtilComponent.formataNumero(dadosAutorizacao.getGt(), ImpressoraFiscalComponent.MASCARA_VALOR, 2);
+            // Check sum
+            int checksum = 0;
+            for (int i = 0; i < pedidoOriginal.length(); i++) {
+                checksum += pedidoOriginal.charAt(i);
+            }
+            pedidoOriginal = pedidoOriginal + ";" + checksum;
+            String senhaOriginal = EncryptionComponent.encrypt64(pedidoOriginal, ImpressoraFiscalComponent.key2);
+            LocalDate hoje = LocalDate.now();
+            ImpressoraFiscalComponent impressoraFiscalControle = new ImpressoraFiscalComponent();
+            impressoraFiscalControle.setNumeroSerie(dadosAutorizacao.getNumeroSerie());
+            impressoraFiscalControle.setFabricante(dadosAutorizacao.getFabricante());
+            impressoraFiscalControle.setModelo(dadosAutorizacao.getModelo());
+            impressoraFiscalControle.setSenha(senhaOriginal);
+            impressoraFiscalControle.setGtAtual(dadosAutorizacao.getGt());
+            impressoraFiscalControle.setAnoLmf(hoje.getYear());
+            impressoraFiscalControle.setMesLmf(hoje.getMonthValue());
+            impressoraFiscalControle.setMd5(dadosAutorizacao.getMd5());
+            impressoraFiscalControle.setVersaoPaf(dadosAutorizacao.getVersaoPaf());
+            return impressoraFiscalControle.gera();
+
+        } catch (Exception e) {
+            FileLogComponent.getInstance().write(e);
+            throw new Exception("Falhou ao gerar o arquivo de autorização de uso da ecf");
+        }
+    }
+}

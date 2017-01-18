@@ -1,0 +1,124 @@
+package br.intelidata.pojo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Info {
+
+    private String nomeMaquina;
+    private String ip;
+    private String enderecoMAC;
+    private String versaoSistema;
+    private String buildSistema;
+    private String compilacaoSistema;
+    private String enderecoServidorBaseDados;
+    private String nomeBaseDados;
+    private Integer numeroUsuariosLicenca;
+    private List<InfoFilial> filiais;
+    private List<InfoLicenca> licencas;
+
+    public Info() {}
+
+    public String getNomeMaquina() {
+        return nomeMaquina;
+    }
+
+    public void setNomeMaquina(String nomeMaquina) {
+        this.nomeMaquina = nomeMaquina;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public String getEnderecoMAC() {
+        return enderecoMAC;
+    }
+
+    public void setEnderecoMAC(String enderecoMAC) {
+        this.enderecoMAC = enderecoMAC;
+    }
+
+    public String getVersaoSistema() {
+        return versaoSistema;
+    }
+
+    public void setVersaoSistema(String versaoSistema) {
+        this.versaoSistema = versaoSistema;
+    }
+
+    public String getBuildSistema() {
+        return buildSistema;
+    }
+
+    public void setBuildSistema(String buildSistema) {
+        this.buildSistema = buildSistema;
+    }
+
+    public String getCompilacaoSistema() {
+        return compilacaoSistema;
+    }
+
+    public void setCompilacaoSistema(String compilacaoSistema) {
+        this.compilacaoSistema = compilacaoSistema;
+    }
+
+    public String getEnderecoServidorBaseDados() {
+        return enderecoServidorBaseDados;
+    }
+
+    public void setEnderecoServidorBaseDados(String enderecoServidorBaseDados) {
+        this.enderecoServidorBaseDados = enderecoServidorBaseDados;
+    }
+
+    public String getNomeBaseDados() {
+        return nomeBaseDados;
+    }
+
+    public void setNomeBaseDados(String nomeBaseDados) {
+        this.nomeBaseDados = nomeBaseDados;
+    }
+
+    public Integer getNumeroUsuariosLicenca() {
+        return numeroUsuariosLicenca;
+    }
+
+    public void setNumeroUsuariosLicenca(Integer numeroUsuariosLicenca) {
+        this.numeroUsuariosLicenca = numeroUsuariosLicenca;
+    }
+
+    public List<InfoFilial> getFiliais() {
+        return filiais;
+    }
+
+    public void addFilial(InfoFilial infoFilial) {
+        if (filiais == null) {
+            filiais = new ArrayList<>();
+        }
+        filiais.add(infoFilial);
+    }
+
+    public void setFiliais(List<InfoFilial> filiais) {
+        this.filiais = filiais;
+    }
+
+    public List<InfoLicenca> getLicencas() {
+        return licencas;
+    }
+
+    public void setLicencas(List<InfoLicenca> licencas) {
+        this.licencas = licencas;
+    }
+
+    public void addLicenca(InfoLicenca infoLicenca) {
+        if (licencas == null) {
+            licencas = new ArrayList<>();
+        }
+        licencas.add(infoLicenca);
+    }
+
+}

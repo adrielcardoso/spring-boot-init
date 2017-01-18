@@ -1,0 +1,11 @@
+package br.intelidata.service;
+
+import br.intelidata.config.Service;
+
+public class LicencaCommonService extends Service 
+{
+    public static String getPrefixo(String chave) 
+    {
+        return chave.substring(0, chave.indexOf(".")).trim();
+    }
+}

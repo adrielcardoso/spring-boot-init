@@ -1,0 +1,45 @@
+package br.intelidata.entity;
+
+import br.intelidata.config.Entity;
+
+public class SomethingIsWrongEntity extends Entity {
+	private long dataHora;
+	private String info;
+	private String history;
+
+	public SomethingIsWrongEntity() {
+		super();
+	}
+
+	public SomethingIsWrongEntity(long dataHora, String history, String info) {
+		super();
+		this.dataHora = dataHora;
+		this.history = history;
+		this.info = info;
+	}
+
+	public long getDataHora() {
+		return dataHora;
+	}
+
+	public void setDataHora(long dataHora) {
+		this.dataHora = dataHora;
+	}
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
+	}
+
+	public String getHistory() {
+		return history;
+	}
+
+	public void setHistory(String history) {
+		this.history = history;
+	}
+
+}

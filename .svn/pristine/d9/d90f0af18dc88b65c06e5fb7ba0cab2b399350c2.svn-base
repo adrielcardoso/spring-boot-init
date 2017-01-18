@@ -1,0 +1,16 @@
+package br.intelidata.entity;
+
+import br.intelidata.config.Entity;
+
+public class Versaopafecfautorizada extends Entity
+{
+	public String pedido;
+	
+	public Versaopafecfautorizada()
+	{
+		super();
+	}
+	
+	public String getPedido(){ return this.pedido; }
+	public void setPedido(String pedido){ this.pedido = pedido; }
+}

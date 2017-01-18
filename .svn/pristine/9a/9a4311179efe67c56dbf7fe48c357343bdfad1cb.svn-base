@@ -1,0 +1,64 @@
+package br.intelidata.service;
+
+import java.io.ByteArrayOutputStream;
+import javax.sql.DataSource;
+import br.intelidata.component.LogComponent;
+import br.intelidata.component.UtilComponent;
+import br.intelidata.config.Service;
+import br.intelidata.entity.DadosAutorizacaoEcfEntity;
+import br.intelidata.entity.DadosEcfAutorizadaEntity;
+import br.intelidata.interace.IEnviaArquivoAutorizacaoInterface;
+
+public class ValidaEnviaArquivoAutorizacaoService extends Service 
+{
+	public String validaEnviaArquivo(
+			DataSource dataSource, 
+			LogComponent logComponent,
+			String history, 
+			boolean enviarPorEmail) throws Exception 
+	{
+        String msg = "";
+
+        String pedido = UtilComponent.filtra(history);
+        Long agora = System.currentTimeMillis();
+
+        DadosAutorizacaoEcfEntity dadosAutorizacao = DadosAutorizacaoEcfEntity.converte(pedido);
+        DadosEcfAutorizadaEntity ecfAutorizada = DadosEcfAutorizadaEntity.getDadosEcfAutorizada(
+        		dataSource, 
+        		dadosAutorizacao.getNumeroSerie(), 
+        		dadosAutorizacao.getCnpj());
+
+        ByteArrayOutputStream baos = null;
+        ValidarDadosAutorizacaoService.validarDados(logComponent, dataSource, dadosAutorizacao, ecfAutorizada, enviarPorEmail, agora);
+        baos = GeraArquivoAutorizacaoEcfService.geraArquivo(dadosAutorizacao);
+
+        IEnviaArquivoAutorizacaoInterface arquivo;
+
+        if (enviarPorEmail) {
+            arquivo = new EnviaArquivoAutorizacaoEmailService(dadosAutorizacao, ecfAutorizada, baos);
+        } else {
+            arquivo = (IEnviaArquivoAutorizacaoInterface) new EnviaArquivoAutorizacaoService(baos);
+        }
+
+        msg = arquivo.enviaArquivo();
+        
+        //gravaPedidoUso
+        UtilComponent.gravaPedidoUso(dataSource, logComponent, dadosAutorizacao, agora, ecfAutorizada.getId());
+
+        return msg;
+    }
+
+    public String validaArquivo(LogComponent logComponent, DataSource dataSouce, String history) throws Exception 
+    {
+        String pedido = UtilComponent.filtra(history);
+        Long agora = System.currentTimeMillis();
+
+        DadosAutorizacaoEcfEntity dadosAutorizacao = DadosAutorizacaoEcfEntity.converte(pedido);
+        DadosEcfAutorizadaEntity ecfAutorizada = DadosEcfAutorizadaEntity.getDadosEcfAutorizada(
+        		dataSouce, dadosAutorizacao.getNumeroSerie(), dadosAutorizacao.getCnpj());
+
+        ValidarDadosAutorizacaoService.validarDados(logComponent, dataSouce, dadosAutorizacao, ecfAutorizada, false, agora);
+
+        return "ok";
+    }
+}

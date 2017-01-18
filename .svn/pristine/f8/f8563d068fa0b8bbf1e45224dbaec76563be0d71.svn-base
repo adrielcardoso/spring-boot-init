@@ -1,0 +1,37 @@
+package br.intelidata.entity;
+
+import br.intelidata.component.AbstractEnumComponent;
+
+public enum StatusContratoVendaItemEntity implements AbstractEnumComponent<Integer> 
+{
+    NORMAL(0, "Normal"),
+    CANCELADO(1, "Cancelado"),
+    EXCLUIDO(2, "Excluído");
+
+    StatusContratoVendaItemEntity(Integer id, String descricao) 
+    {
+        this.id = id;
+        this.descricao = descricao;
+    }
+
+    private Integer id;
+    private String descricao;
+
+    @Override
+    public Integer getId() 
+    {
+        return id;
+    }
+
+    @Override
+    public String getDescricao() 
+    {
+        return descricao;
+    }
+
+    @Override
+    public String toString() 
+    {
+        return descricao;
+    }
+}

@@ -1,0 +1,91 @@
+package br.intelidata.service;
+
+import java.time.LocalDate;
+import javax.sql.DataSource;
+
+import br.intelidata.component.LogComponent;
+import br.intelidata.component.ResponseComponent;
+import br.intelidata.config.Entity;
+import br.intelidata.config.Service;
+import br.intelidata.entity.ContratoVendaEntity;
+import br.intelidata.entity.InfoFilialEntity;
+import br.intelidata.entity.InfoLicencaEntity;
+import br.intelidata.entity.IsItOkEntity;
+import br.intelidata.entity.TipoAutorizadoEntity;
+
+public class IsItOkService extends Service
+{
+	public static Entity parseRequest(
+			DataSource dataSource, 
+			LogComponent logComponent, 
+			IsItOkEntity iAmHereEntity)
+	{		
+		try{
+			
+			TipoAutorizadoEntity tipoAutorizado = TipoAutorizadoEntity.NAO;
+	        ContratoVendaService contratoVendaRN = new ContratoVendaService();
+	        ContratoVendaEntity contratoVenda = contratoVendaRN.buscarPorChave(dataSource, iAmHereEntity.getLicenca());
+	        if (contratoVenda != null) {
+	            if (contratoVenda.isAutorizado()) {
+	                tipoAutorizado = TipoAutorizadoEntity.SIM;
+	            }
+	        } else {
+	            tipoAutorizado = TipoAutorizadoEntity.CONTRATO_NAO_ENCONTRADO;
+	        }
+	        
+	        // verificando CNPJ da licenca com filiais
+	        boolean cnpjLicencaOk = false;
+	        boolean possuiPacotePlus = false;
+	        LocalDate vencimento = null;
+	        String cnpj = null;
+	        if (iAmHereEntity.getInfo().getLicencas() != null) {
+	            for (InfoLicencaEntity licenca : iAmHereEntity.getInfo().getLicencas()) {
+	                if (licenca.getLicenca().startsWith("PLUS") || licenca.getLicenca().startsWith("G-nio")) {
+	                    cnpj = licenca.getCnpj();
+	                    vencimento = licenca.getVencimento();
+	                } else if (licenca.getLicenca().startsWith("PPLUS")) {
+	                    possuiPacotePlus = true;
+	                }
+	            }
+	        }
+
+	        if (cnpj != null && iAmHereEntity.getInfo().getFiliais() != null) { // se achou o cnpj da
+	                                                                         // licenca PLUS
+	            for (InfoFilialEntity filial : iAmHereEntity.getInfo().getFiliais()) {
+	                if (filial.getCnpj().equals(cnpj)) {
+	                    cnpjLicencaOk = true;
+	                }
+	            }
+	        }
+
+	        if (iAmHereEntity.getLicenca().startsWith("PLUSSTRT") && possuiPacotePlus && contratoVenda != null) {
+	            if (contratoVenda.getTipoSistema() != null && !contratoVenda.getTipoSistema().equals("PLUS")) {
+	                tipoAutorizado = TipoAutorizadoEntity.NAO;
+	            }
+	        }
+
+	        int statusAchou = contratoVenda != null ? 1 : 0;
+	        if (cnpjLicencaOk == false) {
+	            statusAchou = 2;
+	            tipoAutorizado = TipoAutorizadoEntity.NAO;
+	        }
+
+	        IsItOkEntity isItOk = new IsItOkEntity();
+	        isItOk.setAchou(statusAchou);
+	        isItOk.setAutorizado(tipoAutorizado.getId());
+	        isItOk.setDataHora(System.currentTimeMillis());
+	        isItOk.setDependents(iAmHereEntity.getLicenca());
+//	        isItOk.setInfo(Util.formatarInfo(requisicao.getInfo()));
+	        isItOk.setInfo(iAmHereEntity.getInfo());
+	        isItOk.setLicenca(iAmHereEntity.getLicenca());
+	        isItOk.setUsuarios(contratoVenda != null ? contratoVenda.getUsuariosLiberados().toString() : "0");
+
+	        logComponent.logarIsItOk(isItOk);
+
+	        return new IsItOkEntity();
+			
+		}catch(Exception e){
+			return new ResponseComponent().handleResourceNotFoundException(400, e.getMessage());
+		}
+	}
+}

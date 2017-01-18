@@ -1,0 +1,24 @@
+package br.intelidata.service;
+
+import javax.sql.DataSource;
+import br.intelidata.component.LogComponent;
+import br.intelidata.component.UnicoCryptComponent;
+import br.intelidata.config.Entity;
+import br.intelidata.config.Service;
+import br.intelidata.entity.Pedidoautorizacaoecfarquivo;
+
+public class PedidoautorizacaoecfarquivoService extends Service
+{	
+	public static Entity parseRequest(DataSource dataSource, LogComponent logComponent, Pedidoautorizacaoecfarquivo pedidoautorizacaoecfarquivoEntity) throws Exception
+	{
+		String mensagemRequest = UnicoCryptComponent.decript(
+					pedidoautorizacaoecfarquivoEntity.getP1()
+				);
+		
+		PedidoAutorizacaoECFService pedidoAutorizacaoECFService = new PedidoAutorizacaoECFService();
+		String mensagem = pedidoAutorizacaoECFService.validaEnviaArquivo(dataSource, logComponent, mensagemRequest, false);
+		pedidoautorizacaoecfarquivoEntity.setMensagem(mensagem);
+		
+		return pedidoautorizacaoecfarquivoEntity;
+	}
+}

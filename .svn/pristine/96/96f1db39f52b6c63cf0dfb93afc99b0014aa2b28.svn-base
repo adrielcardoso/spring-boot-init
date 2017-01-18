@@ -1,0 +1,16 @@
+package br.intelidata.entity;
+
+import br.intelidata.config.Entity;
+
+public class VersaopafecfautorizadaEntity extends Entity
+{
+	public String p1;
+	
+	public VersaopafecfautorizadaEntity()
+	{
+		super();
+	}
+	
+	public String getP1(){ return this.p1; }
+	public void setP1(String p1){ this.p1 = p1; }
+}

@@ -1,0 +1,8 @@
+package br.intelidata.entity;
+
+import br.intelidata.config.Entity;
+
+public class VersaoPafestadoEntity extends Entity
+{
+	
+}

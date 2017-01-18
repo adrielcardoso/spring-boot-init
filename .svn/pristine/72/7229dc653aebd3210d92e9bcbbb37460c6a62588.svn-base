@@ -1,0 +1,18 @@
+package br.intelidata.controllers;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.intelidata.component.MensagemComponent;
+
+@RestController
+public class MensagemController 
+{
+    @RequestMapping("/mensagem")
+    public String mensagem(String numero) 
+    {
+        return MensagemComponent.getTexto(numero);
+    }
+
+}
+

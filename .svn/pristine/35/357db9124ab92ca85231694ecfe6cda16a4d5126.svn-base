@@ -1,0 +1,50 @@
+package br.intelidata.entity;
+
+import br.intelidata.config.Entity;
+
+public class SaldoLicencaParse extends Entity
+{
+	private static String produtoNome;
+	private static String produtoTipo;
+	private static String produtoPrefixo;
+	private static String quantidade;
+	private static String idCliente;
+	private static String revendaNome;
+	
+	public static String getProdutoNome() {
+		return produtoNome;
+	}
+	public static void setProdutoNome(String produtoNome) {
+		SaldoLicencaParse.produtoNome = produtoNome;
+	}
+	public static String getProdutoTipo() {
+		return produtoTipo;
+	}
+	public static void setProdutoTipo(String produtoTipo) {
+		SaldoLicencaParse.produtoTipo = produtoTipo;
+	}
+	public static String getProdutoPrefixo() {
+		return produtoPrefixo;
+	}
+	public static void setProdutoPrefixo(String produtoPrefixo) {
+		SaldoLicencaParse.produtoPrefixo = produtoPrefixo;
+	}
+	public static String getQuantidade() {
+		return quantidade;
+	}
+	public static void setQuantidade(String quantidade) {
+		SaldoLicencaParse.quantidade = quantidade;
+	}
+	public static String getIdCliente() {
+		return idCliente;
+	}
+	public static void setIdCliente(String idCliente) {
+		SaldoLicencaParse.idCliente = idCliente;
+	}
+	public static String getRevendaNome() {
+		return revendaNome;
+	}
+	public static void setRevendaNome(String revendaNome) {
+		SaldoLicencaParse.revendaNome = revendaNome;
+	}
+}

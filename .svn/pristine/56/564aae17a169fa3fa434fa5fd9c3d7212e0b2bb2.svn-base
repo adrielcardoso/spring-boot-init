@@ -1,0 +1,11 @@
+package br.intelidata.service;
+
+import br.intelidata.interace.InterfaceIdentificadorProdutoLicenca;
+
+public class IdentificadorPacoteManager implements InterfaceIdentificadorProdutoLicenca 
+{
+	@Override
+    public boolean identificar(String chave) {
+        return achou(LicencaCommonService.getPrefixo(chave), "PM\\d{2,2}", "PM\\d{4,4}");
+    }
+}

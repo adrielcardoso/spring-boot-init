@@ -1,0 +1,113 @@
+package br.intelidata.component;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.math.BigDecimal;
+
+import br.intelidata.config.Service;
+
+public class ImpressoraFiscalComponent extends Service
+{
+	public static final String MASCARA_VALOR = "###########0.00";
+    private String numeroSerie;
+    private String senhaEncriptado;
+    private BigDecimal gtAtual;
+    private int mesLmf;
+    private int anoLmf;
+    private String md5;
+    private String versaoPaf;
+    private String modelo;
+    private String fabricante;
+    public static String key2 = "94" + "E5" + "7C" + "B9" + "5D" + "29" + "11" + "24" + "4F" + "AD" + "62" + "63" + "98" + "BC" + "90" + "07";
+
+    public ImpressoraFiscalComponent() 
+    {
+        gtAtual = BigDecimal.ZERO;
+    }
+
+    public ByteArrayOutputStream gera() throws IOException 
+    {
+        String gtEncriptado = EncryptionComponent.encrypt64(UtilComponent.formataNumero(gtAtual, MASCARA_VALOR, 0), key2);
+        String anolmfEncriptado = EncryptionComponent.encrypt64(Integer.toString(anoLmf), key2);
+        String meslmfEncriptado = EncryptionComponent.encrypt64(Integer.toString(mesLmf), key2);
+        String md5Encriptado = EncryptionComponent.encrypt64(md5, key2);
+        SortedPropertiesComponent ecfProperties = new SortedPropertiesComponent();
+        ecfProperties.setProperty("1", senhaEncriptado);
+        ecfProperties.setProperty("2", gtEncriptado);
+        ecfProperties.setProperty("3", anolmfEncriptado);
+        ecfProperties.setProperty("4", meslmfEncriptado);
+        ecfProperties.setProperty("5", md5Encriptado);
+        if (versaoPaf != null) {
+            String versaoPafEncriptado = EncryptionComponent.encrypt64(versaoPaf, key2);
+            ecfProperties.setProperty("6", versaoPafEncriptado);
+        }
+        if (getNumeroSerie() != null && !getNumeroSerie().isEmpty()) {
+            String numeroSerieEncriptado = EncryptionComponent.encrypt64(getNumeroSerie(), key2);
+            ecfProperties.setProperty("7", numeroSerieEncriptado);
+        }
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ecfProperties.sortedStore(baos, toString());
+        return baos;
+    }
+
+    public void setGtAtual(BigDecimal gtAtual) 
+    {
+        this.gtAtual = gtAtual;
+    }
+
+    public void setMesLmf(int mesLmf) 
+    {
+        this.mesLmf = mesLmf;
+    }
+
+    public void setAnoLmf(int anoLmf) 
+    {
+        this.anoLmf = anoLmf;
+    }
+
+    public void setSenha(String senha) 
+    {
+        this.senhaEncriptado = senha;
+    }
+
+    public void setMd5(String md5) 
+    {
+        this.md5 = md5;
+    }
+
+    public String getNumeroSerie() 
+    {
+        return numeroSerie;
+    }
+
+    public void setNumeroSerie(String numeroSerie) 
+    {
+        this.numeroSerie = numeroSerie;
+    }
+
+    public String getVersaoPaf() 
+    {
+        return versaoPaf;
+    }
+
+    public void setVersaoPaf(String versaoPaf) 
+    {
+        this.versaoPaf = versaoPaf;
+    }
+
+    public void setModelo(String modelo) 
+    {
+        this.modelo = modelo;
+    }
+
+    public void setFabricante(String fabricante) 
+    {
+        this.fabricante = fabricante;
+    }
+
+    @Override
+    public String toString() 
+    {
+        return fabricante + " " + modelo + " " + numeroSerie;
+    }
+}

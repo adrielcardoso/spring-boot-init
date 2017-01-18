@@ -1,0 +1,100 @@
+package br.intelidata.service;
+
+public enum ProdutoLicencaService {
+    UNIPLUS(8, "UNIPLUS", "PLUS"),
+    ENTERPRISE_PLUS(9, "Enterprise PLUS", "EPLUS"),
+    INCREMENTO_USUARIO_PLUS(10, "Incremento de usuários do UNIPLUS", "IPLUS"),
+    SPED_PISCOFINS(11, "SPED Contribuições", "SPPC"),
+    GNIO(12, "G-nio", "G-nio"),
+    ENTERPRISE_GNIO(13, "Enterprise G-nio", "EG-nio"),
+    INCREMENTO_USUARIO_GNIO(14, "Incremento de usuários para G-nio", "IG"),
+    UNICHEF(17, "Unichef", "Chef"),
+    CONCENTRADOR(19, "Concentrador de dados", "CD"),
+    NF_SERVICO(10, "Nota fiscal de serviço eletrônica", "NFSE"),
+    CRM(21, "CRM", "CRM"),
+    TEF_UNICO(25, "TEF UNICO", "TEFU"),
+    TEF_OUTROS(26, "TEF Outros", "TEFO"),
+    CTE(27, "CT-e", "CTE"),
+    MATERIAIS_CONSTRUCAO(28, "Materiais de construção", "MC"),
+    UNIPAF(29, "UNIPAF", "UPAF"),
+    UNIPDV(30, "UNIPDV", "UPDV"),
+    CARTAO_FIDELIDADE(31, "Cartão fidelidade", "CARTFID"),
+    COMPRAS(39, "Compras", "COMP"),
+    MDFE(40, "MDF-e", "MDFE"),
+    GNRE(41, "GNRE On-line", "GNRE"),
+    UNINFCE(42, "UNINFCE", "NFCE"),
+    TROCAR_RAZAO_SOCIAL(43, "Trocar razão social", "TROCARZ"),
+    FRANQUIA(44, "Franquia", "FRQA"),
+    FRANQUEADO(45, "Franqueado", "FRQD"),
+    MULTICNPJ(46, "Multi-CNPJ", "MCNPJ"),
+    SMS(47, "SMS", "SMS"),
+    R2D2REST(48, "R2D2REST", "R2D2RST"),
+    CONTROLE_LOTE(49, "Controle de lote", "LOTE"),
+    UNIPAFPLUS(50, "UNIPAF+", "UPAF+"),
+    UNIPDVPLUS(51, "UNIPDV+", "UPDV+"),
+    UNINFCEPLUS(52, "UNINFCE+", "NFCE+"),
+    OPFISCAL(53, "Operação fiscal", "OPFISCAL"),
+    EMULADOR_ECF(54, "Emulador ECF", "DBECF"),
+    SAIDAVIP(55, "SAIDAVIP", "SAIDAVIP"),
+    UNIMOB(56, "Unimobile Vendas", "UNIMOB"),
+    BOLETO(57, "Boleto", "BOLETO"),
+    RECLASSIFICACAO(58, "Reclassificação", "RECLAS"),
+    PROG_REAJUSTE_PRECO(59, "Programação e reajuste de preço", "PROGPRECO"),
+    DELIVERYWEB(60, "Integração com DeliveryWeb", "DELIVERYW"),
+    ECOMMERCE(61, "Integração com Único ECommerce", "WEBC"),
+    SPED_CONTRIBUICOES(62, "SPED Contribuições Mensal", "SPCONTR"),
+    EXPEDICAO(63, "Expedição", "EXPEDICAO"),
+    UNICHEF2(64, "Unichef 2", "Chef2"),
+    CONTRATO(69, "Contrato", "CONTRATO"),
+    COMANDA(70, "Unimobile Comanda", "MOBCOM"),
+    TEF_DISCADO(71, "TEF Discado", "TEFD"),
+    INVENTARIO_ESTOQUE(72, "Inventário de estoque", "IVENT"),
+    INTEGRACAO_BOA_VISTA(73, "Integração Boa Vista", "INTBV"),
+    UNISATPLUS(74, "UNISAT+", "SAT+"), ;
+
+    private Integer id;
+    private String descricao;
+    private String prefixo;
+
+    private ProdutoLicencaService(Integer id, String descricao, String prefixo) {
+        this.id = id;
+        this.descricao = descricao;
+        this.prefixo = prefixo;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public String getPrefixo() {
+        return prefixo;
+    }
+
+    @Override
+    public String toString() {
+        return getDescricao();
+    }
+
+    public static ProdutoLicencaService getProdutoLicencaPorLicenca(String licenca) {
+        if (licenca != null) {
+            String parte1 = licenca.split("\\.")[0];
+            if (parte1.equalsIgnoreCase("Chef2")) {
+                return UNICHEF2;
+            } else {
+                // retira todos os números
+                parte1 = parte1.replaceAll("[0123456789]", "");
+                for (ProdutoLicencaService prod : ProdutoLicencaService.class.getEnumConstants()) {
+                    if (prod.getPrefixo().equalsIgnoreCase(parte1)) {
+                        return prod;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+}

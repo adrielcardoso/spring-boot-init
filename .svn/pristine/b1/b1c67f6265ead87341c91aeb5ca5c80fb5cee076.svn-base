@@ -1,0 +1,28 @@
+package br.intelidata.service;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.sql.DataSource;
+import br.intelidata.config.Service;
+import br.intelidata.entity.Filial;
+
+public class FilialService extends Service
+{
+	public static Filial findByCNPJ(
+			DataSource cDataSource, String cnpjIntelidata) throws Exception
+	{
+		Connection connection = cDataSource.getConnection();
+        String comando = "select * from filial where cnpj = ?";
+        PreparedStatement statement = connection.prepareStatement(comando);
+        statement.setString(1, cnpjIntelidata);
+        ResultSet rs = statement.executeQuery();
+        if (rs.next()) {
+        	Filial filial = new Filial();
+        	filial.setId(rs.getLong("id"));
+        	return filial;
+        }else{
+        	throw new Exception("Não foi possível identificar a filial");
+        }
+	}
+}

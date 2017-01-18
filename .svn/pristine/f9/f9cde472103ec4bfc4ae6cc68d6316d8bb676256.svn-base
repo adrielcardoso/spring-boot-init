@@ -1,0 +1,15 @@
+package br.intelidata.regranegocio;
+
+import javax.sql.DataSource;
+
+import br.intelidata.pojo.ContratoVenda;
+
+public class ContratoVendaRN extends AbstractRegraNegocio<ContratoVenda> {
+
+    public ContratoVendaRN() {}
+
+    public ContratoVenda buscarPorChave(DataSource dataSource, String chave) {
+        return buscarPor(dataSource, "extra7='" + chave + "'");
+    }
+
+}

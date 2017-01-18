@@ -1,0 +1,10 @@
+package br.intelidata.service;
+
+import br.intelidata.component.AbstractDataSourceComponent;
+import br.intelidata.entity.ContratoVendaItemEntity;
+
+public class ContratoVendaItemService extends AbstractDataSourceComponent<ContratoVendaItemEntity> 
+{
+    public ContratoVendaItemService() 
+    {}
+}

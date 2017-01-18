@@ -1,0 +1,22 @@
+package br.intelidata.entity;
+
+import br.intelidata.config.Entity;
+
+public class MensagemEntity extends Entity 
+{
+	private String numero;
+	private Info me;
+	
+	public String getNumero() {
+		return numero;
+	}
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+	public Info getMe() {
+		return me;
+	}
+	public void setMe(Info me) {
+		this.me = me;
+	}
+}

@@ -1,0 +1,31 @@
+package br.intelidata.controllers;
+
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.intelidata.config.Controller;
+import br.intelidata.config.Entity;
+import br.intelidata.entity.IsItOkEntity;
+import br.intelidata.service.IsItOkService;
+
+@RestController
+public class IsItOkController extends Controller 
+{
+    @Autowired
+    private DataSource dataSource;
+    @Autowired
+    private LogComponent logComponent;
+
+    @RequestMapping(
+    		value="/isitok", 
+    		method = RequestMethod.POST)
+    public Entity isItOk(
+    		@RequestBody IsItOkEntity isItOkEntity)
+    {
+        return IsItOkService.parseRequest(dataSource, logComponent, isItOkEntity); 
+    }
+}

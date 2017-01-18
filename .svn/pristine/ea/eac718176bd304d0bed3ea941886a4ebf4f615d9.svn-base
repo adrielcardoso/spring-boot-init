@@ -1,0 +1,37 @@
+package br.intelidata.controllers;
+
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import br.intelidata.component.FileLogComponent;
+import br.intelidata.component.LogComponent;
+import br.intelidata.component.ResponseComponent;
+import br.intelidata.config.Controller;
+import br.intelidata.entity.SalesLicenceLog;
+import br.intelidata.service.SalesService;
+
+@RestController
+public class SalesController extends Controller
+{
+	@Autowired
+    private DataSource dataSource;
+    
+    @Autowired
+    private LogComponent logComponent;
+
+    @RequestMapping(
+    		value="/sales-licence", 
+    		method = RequestMethod.POST)
+    public Object runSales(@RequestBody SalesLicenceLog salesLicenceEntity) throws Exception
+    {
+    	try {
+    		return SalesService.parseSaleLicence(dataSource, logComponent, salesLicenceEntity);
+		} catch (Exception e) {
+			FileLogComponent.getInstance().write(e.getMessage());
+			return new ResponseComponent().handleResourceNotFoundException(e.getMessage());
+		}
+    }
+}

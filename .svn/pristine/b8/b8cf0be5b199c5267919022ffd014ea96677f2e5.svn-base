@@ -1,0 +1,112 @@
+package br.intelidata.entity;
+
+import br.intelidata.config.Entity;
+
+public class IsItOk extends Entity 
+{
+    private long dataHora;
+    private String info;
+    private String dependents;
+    private int achou;
+    private int autorizado;
+    private String licenca;
+    private String usuarios;
+    public Info request;
+    public String token;
+    
+    public String getToken()
+    {
+    	return this.token;
+    }
+    
+    public void setToken(String token)
+    {
+    	this.token = token;
+    }
+    
+    public IsItOk() 
+    {
+        super();
+    }
+
+    public long getDataHora() 
+    {
+        return dataHora;
+    }
+
+    public void setDataHora(long dataHora) 
+    {
+        this.dataHora = dataHora;
+    }
+
+    public String getInfo() 
+    {
+        return info;
+    }
+
+    public void setInfo(String info) 
+    {
+        this.info = info;
+    }
+
+    public String getDependents() 
+    {
+        return dependents;
+    }
+
+    public void setDependents(String dependents) 
+    {
+        this.dependents = dependents;
+    }
+
+    public int getAchou() 
+    {
+        return achou;
+    }
+
+    public void setAchou(int achou) 
+    {
+        this.achou = achou;
+    }
+
+    public int getAutorizado() 
+    {
+        return autorizado;
+    }
+
+    public void setAutorizado(int autorizado) 
+    {
+        this.autorizado = autorizado;
+    }
+
+    public String getLicenca() 
+    {
+        return licenca;
+    }
+
+    public void setLicenca(String licenca) 
+    {
+        this.licenca = licenca;
+    }
+
+    public String getUsuarios() 
+    {
+        return usuarios;
+    }
+
+    public void setUsuarios(String usuarios) 
+    {
+        this.usuarios = usuarios;
+    }
+    
+    public Info getRequest() 
+    {
+        return request;
+    }
+
+    public void setRequest(Info request) 
+    {
+        this.request = request;
+    }
+
+}

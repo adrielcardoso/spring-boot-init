@@ -1,0 +1,102 @@
+package br.intelidata.util;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.Temporal;
+
+import br.intelidata.pojo.Info;
+import br.intelidata.pojo.InfoFilial;
+import br.intelidata.pojo.InfoLicenca;
+
+public class Util {
+
+    private static final String separadorCampo = ";";
+    private static final String separadorLista = "||";
+    private static final String separadorGrupo = "##";
+
+    public static String formatarInfo(Info info) {
+        StringBuilder builder = new StringBuilder();
+        String dadosMaquina = info.getNomeMaquina() + separadorCampo + info.getIp() + separadorCampo + info.getEnderecoMAC() + separadorCampo + info.getVersaoSistema() + separadorCampo
+                + info.getBuildSistema() + separadorCampo + info.getCompilacaoSistema() + separadorCampo + info.getEnderecoServidorBaseDados() + separadorCampo + info.getNomeBaseDados();
+
+        builder = builder.append(dadosMaquina).append(separadorGrupo);
+
+        String dadosFiliais = "";
+        if (info.getFiliais() != null) {
+            for (InfoFilial filial : info.getFiliais()) {
+                if (!dadosFiliais.isEmpty()) {
+                    dadosFiliais += separadorLista;
+                }
+                dadosFiliais += filial.getRazaoSocial() + separadorCampo + filial.getCnpj() + separadorCampo + filial.getCidade() + separadorCampo + filial.getEstado() + separadorCampo
+                        + filial.getEndereco() + separadorCampo + filial.getNumero() + separadorCampo + filial.getCep() + separadorCampo + filial.getEmail() + separadorCampo + filial.getTelefone();
+            }
+        }
+
+        builder = builder.append(dadosFiliais).append(separadorGrupo);
+
+        if (info.getLicencas() != null) {
+            String dadosLicencas = "";
+            for (InfoLicenca licenca : info.getLicencas()) {
+                if (!dadosLicencas.isEmpty()) {
+                    dadosLicencas += separadorLista;
+                }
+                dadosLicencas += licenca.getRazaoSocial() + separadorCampo + licenca.getCnpj() + separadorCampo + licenca.getChaveInstalacao() + separadorCampo + licenca.getLicenca() + separadorCampo
+                        + formataDataHora(licenca.getAtivacao(), "dd/MM/yyyy") + separadorCampo + licenca.getVersaoAtual() + separadorCampo + licenca.getBuildAtual() + separadorCampo
+                        + formataDataHora(licenca.getVencimento(), "dd/MM/yyyy");
+            }
+
+            builder = builder.append(dadosLicencas);
+        }
+
+        builder = builder.append(separadorGrupo).append(info.getNumeroUsuariosLicenca());
+        return builder.toString();
+    }
+
+    public static String formataDataHora(Temporal dataHora, String mascara) {
+        if (dataHora == null) {
+            return "";
+        }
+        try {
+            DateTimeFormatter formatador = DateTimeFormatter.ofPattern(mascara);
+            String dateStr = formatador.format(dataHora);
+            return dateStr;
+        } catch (DateTimeException ex) {
+            return "";
+        }
+    }
+
+    public static LocalDate string2LocalDate(String str, String mascara) {
+        LocalDate data;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat();
+            sdf.applyPattern(mascara);
+            data = sdf.parse(str).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        } catch (IllegalArgumentException | NullPointerException | ParseException e) {
+            data = null;
+        }
+        return data;
+    }
+
+    public static boolean intNullOuZero(Integer valor) {
+        return valor == null || valor.equals(0);
+    }
+
+    public static boolean stringNullOrEmpty(String txt) {
+        return txt == null || txt.trim().isEmpty();
+    }
+
+    public static Integer string2Integer(String str) {
+        int valor;
+        try {
+            valor = Integer.parseInt(str);
+        } catch (NumberFormatException | NullPointerException e) {
+            valor = 0;
+        }
+        return valor;
+    }
+
+}

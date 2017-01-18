@@ -1,0 +1,11 @@
+# Base Gnio
+spring.datasource.url = jdbc:postgresql://localhost:5432/gnio
+spring.datasource.username = gnio
+spring.datasource.password = gn34
+spring.datasource.driverClassName = org.postgresql.Driver
+
+# Base do Logtracker
+spring.logtrackerDatasource.url = jdbc:postgresql://localhost:5432/gnioweb
+spring.logtrackerDatasource.username = gnio
+spring.logtrackerDatasource.password = gn34
+spring.logtrackerDatasource.driverClassName = org.postgresql.Driver

@@ -1,0 +1,10 @@
+br\intelidata\component\CodecsComponent.class
+br\intelidata\component\DBUtilComponent.class
+br\intelidata\controllers\IamhereController.class
+br\intelidata\component\AbstractEnumComponent.class
+br\intelidata\config\Service.class
+br\intelidata\component\ConversionComponent.class
+br\intelidata\config\Controller.class
+br\intelidata\config\Entity.class
+br\intelidata\controllers\HelloController.class
+br\intelidata\controllers\SomethingIsWrongController.class

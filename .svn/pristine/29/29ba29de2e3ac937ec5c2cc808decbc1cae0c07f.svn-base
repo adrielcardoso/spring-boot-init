@@ -1,0 +1,23 @@
+package br.intelidata.service;
+
+import br.intelidata.interace.InterfaceValidadorLicenca;
+
+public class ValidadorEnterpriseBase implements InterfaceValidadorLicenca {
+	
+//   @Override
+//    public void validar(String chave, String cnpj) throws Exception {
+//        if (isCnpjJaCadastrado(cnpj)) {
+//            throw new Exception("CNPJ: " + cnpj + " já está em uso por outra filial");
+//        }
+//    }
+
+//    private boolean isCnpjJaCadastrado(String cnpj) {
+//        boolean jaCadastrado = FilialCommonRN.getInstance().isCnpjCpfCadastrado(cnpj, null);
+//        if (jaCadastrado) {
+//            if (FilialCommonRN.getInstance().buscarLista().size() >= LicencaManager.getInstance().getQuantidadeLicencasEnterprise() + 2) {
+//                jaCadastrado = false;
+//            }
+//        }
+//        return jaCadastrado;
+//    }
+}

@@ -1,0 +1,48 @@
+package br.intelidata.controllers;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.intelidata.pojos.Contrato;
+
+/**
+ * Controller isitok somente para exemplo de consulta na base de dados principal, mapeando o
+ * resultset para uma lista de pojos
+ * 
+ * @author clayton
+ *
+ */
+@RestController
+public class IsItOkController {
+
+    @Autowired
+    private DataSource dataSource;
+
+    @Autowired
+    LogComponent logComponent;
+
+    @RequestMapping("/isitok")
+    public List<Contrato> isItOk(@RequestParam Long id) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        List<Contrato> contratos = jdbcTemplate.query("select codigo,cliente from entidade where id = ?", new Object[] {id}, new RowMapper<Contrato>() {
+            public Contrato mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Contrato contrato = new Contrato();
+                contrato.setNumero(rs.getString("codigo"));
+                contrato.setAtivo(rs.getInt("cliente") == 0);
+                return contrato;
+            }
+        });
+        logComponent.loga("127.0.0.1", Long.toString(id));
+        return contratos;
+    }
+}

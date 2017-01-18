@@ -1,0 +1,12 @@
+package br.intelidata.component;
+
+import java.io.Serializable;
+
+public abstract class AbstractPojoSimplificadoComponent implements Serializable {
+
+    /**
+	 * 
+	 */
+    public static final long serialVersionUID = 685352514640873538L;
+
+}

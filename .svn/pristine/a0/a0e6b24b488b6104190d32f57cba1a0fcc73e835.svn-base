@@ -1,0 +1,93 @@
+package br.intelidata.service;
+
+import br.intelidata.component.FileLogComponent;
+import br.intelidata.component.LogComponent;
+import br.intelidata.config.Service;
+import br.intelidata.entity.PedidoDesinstalacao;
+import br.intelidata.entity.PedidoDesinstalacaoRequest;
+import br.intelidata.entity.UsuarioSite;
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Date;
+
+/**
+ * Created by Adriel.Cardoso on 13/01/2017.
+ */
+public class PedidoDesinstalacaoService extends Service
+{
+    private static final int TIME_LIMIT_HOUR = 24;
+    private static DataSource cDataSource;
+    private static LogComponent cLogComponent;
+
+    public PedidoDesinstalacaoService(DataSource dataSourceParam, LogComponent logComponentParam)
+    {
+        cDataSource = dataSourceParam;
+        cLogComponent = logComponentParam;
+    }
+
+    public void parseRequestPedidoDesinstalacao(PedidoDesinstalacaoRequest pedidoDesinstalacaoRequest) throws Exception
+    {
+        FileLogComponent.getInstance().write("verificando se token de acesso está vinculado a um usuário verdadeiro");
+        UsuarioSiteService usuarioSiteService = new UsuarioSiteService(cDataSource, cLogComponent);
+        UsuarioSite userReference = (UsuarioSite) usuarioSiteService.autenticateUserByToken(pedidoDesinstalacaoRequest.getToken());
+
+
+
+        FileLogComponent.getInstance().write("verificar se chave está valida, com relação ao usuário site e verifiar se está vinculado a uma revenda " +
+                "com vinculo a essa chave de desinstalação");
+        PedidoDesinstalacao pedidoDesinstalacao = findProdutoByChaveCliente(
+                                                pedidoDesinstalacaoRequest.getChavedesinstalacao());
+
+
+        FileLogComponent.getInstance().write("validar periodoo de 24horas apos a criação");
+        if(false == verificarDataDeAbertura(
+                pedidoDesinstalacao.getCurrenttimemillis(),
+                System.currentTimeMillis(),
+                TIME_LIMIT_HOUR)){
+
+            throw new Exception("O limite de tempo para usar a chave de instalação excedeu, ultrapassou o prazo de "+TIME_LIMIT_HOUR+" horas");
+        }
+
+
+//        FileLogComponent.getInstance().write("pedido de instalacao: "+pedidoDesinstalacao.getCurrenttimemillis());
+        //validar se licença foi instalada no periodo de 30 dias, caso sim no ato da desinstalação voltara para estoque
+        //caso todas as validações estiverem OK, sera realizado a desinstalação do contrato, alterando a coluna
+    }
+
+    public boolean verificarDataDeAbertura(long de, long ate, int hora)
+    {
+        Date deDate = new Date(de);
+        Date ateDate = new Date(ate);
+
+        long diff = (ateDate.getTime() - deDate.getTime());
+        long diffHours = diff / (60 * 60 * 1000) % 24;
+
+        FileLogComponent.getInstance().write("Horas de abertura até esse momento: "+diffHours + " horas");
+
+        return (diffHours > hora ? false : true);
+    }
+
+    public PedidoDesinstalacao findProdutoByChaveCliente(String chave) throws Exception
+    {
+        String sql = "select pd.* from pedidodesinstalacao pd join contratovenda cv on cv.id = pd.idcontrato where pd.chave = ?";
+        Connection connection = cDataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, chave);
+        ResultSet rs = statement.executeQuery();
+        if(rs.next()) {
+            PedidoDesinstalacao pedidoDesinstalacao = new PedidoDesinstalacao();
+            pedidoDesinstalacao.setId(rs.getLong("id"));
+            pedidoDesinstalacao.setChave(rs.getString("chave"));
+            pedidoDesinstalacao.setIdcontrato(rs.getLong("idcontrato"));
+            pedidoDesinstalacao.setData(rs.getDate("data"));
+            pedidoDesinstalacao.setIdusuario(rs.getLong("idusuario"));
+            pedidoDesinstalacao.setUtilizado(rs.getInt("utilizado"));
+            pedidoDesinstalacao.setCurrenttimemillis(rs.getLong("currenttimemillis"));
+            return pedidoDesinstalacao;
+        }else{
+            throw new Exception("Não foi possível encontrar a chave de desinstalação '"+chave.toUpperCase()+"'");
+        }
+    }
+}

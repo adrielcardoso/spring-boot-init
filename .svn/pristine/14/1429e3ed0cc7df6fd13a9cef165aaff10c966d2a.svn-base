@@ -1,0 +1,23 @@
+package br.intelidata.service;
+
+import br.intelidata.component.LogComponent;
+import br.intelidata.component.UtilComponent;
+import br.intelidata.config.Entity;
+import br.intelidata.config.Service;
+import br.intelidata.entity.SomethingIsWrong;
+
+public class SomethingIsWrongService extends Service
+{
+	public static Entity parseRequest(LogComponent logComponent, SomethingIsWrong somethingIsWrongEntity) throws Exception
+	{
+		try {
+			somethingIsWrongEntity.setInfo(UtilComponent.formatarInfo(somethingIsWrongEntity.getMe().getInfo()));
+			somethingIsWrongEntity.setDataHora(System.currentTimeMillis());
+			somethingIsWrongEntity.setMe(null);
+	        logComponent.persist(somethingIsWrongEntity);
+	    	return somethingIsWrongEntity;
+	    } catch (Exception e) {
+	    	throw e;
+	    }
+	}
+}

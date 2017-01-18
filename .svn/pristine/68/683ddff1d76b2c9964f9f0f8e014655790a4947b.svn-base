@@ -1,0 +1,31 @@
+package br.intelidata.entity;
+
+import br.intelidata.component.AbstractEnumComponent;
+
+public enum OperadorLogicoEntity implements AbstractEnumComponent<String> 
+{
+    E(" and ", "E"), OU(" or ", "OU");
+
+    private OperadorLogicoEntity(String id, String descricao) {
+        this.id = id;
+        this.descricao = descricao;
+    }
+
+    private String id;
+    private String descricao;
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public String getDescricao() {
+        return descricao;
+    }
+
+    @Override
+    public String toString() {
+        return descricao;
+    }
+}

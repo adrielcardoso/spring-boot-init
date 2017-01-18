@@ -1,0 +1,9 @@
+package br.intelidata.regranegocio;
+
+import br.intelidata.pojo.ContratoVendaItem;
+
+public class ContratoVendaItemRN extends AbstractRegraNegocio<ContratoVendaItem> {
+
+    public ContratoVendaItemRN() {}
+
+}

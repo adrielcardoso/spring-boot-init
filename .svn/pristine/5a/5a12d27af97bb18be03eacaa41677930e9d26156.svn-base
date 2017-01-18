@@ -1,0 +1,41 @@
+package br.intelidata.entity;
+
+import br.intelidata.config.Entity;
+
+public class ErrorMessageEntity extends Entity
+{
+	private int status;
+	private String message;
+	
+	public ErrorMessageEntity()
+	{
+		super();
+	}
+	
+	public ErrorMessageEntity(int status, String message)
+	{
+		super();
+		this.status=status;
+		this.message=message;
+	}
+	
+	public String getMessage()
+	{
+		return this.message;
+	}
+	
+	public int getStatus()
+	{
+		return this.status;
+	}
+	
+	public void setMessage(String message)
+	{
+		this.message=message;
+	}
+	
+	public void setStatus(int status)
+	{
+		this.status=status;
+	}
+}

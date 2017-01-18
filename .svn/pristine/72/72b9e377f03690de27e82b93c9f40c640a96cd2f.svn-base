@@ -1,0 +1,28 @@
+package br.intelidata.component;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import br.intelidata.config.Entity;
+import br.intelidata.entity.ErrorMessage;
+
+public class ResponseComponent extends Exception
+{
+	@ResponseBody
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ErrorMessage handleResourceNotFoundException(int status, String message) {
+	    return new ErrorMessage(status, message);
+	}
+
+	@ResponseBody
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	public ErrorMessage handleInternalServerErrorException(int status, String message) {
+	    return new ErrorMessage(status, message);
+	}
+	
+	@ResponseBody
+	@ResponseStatus(HttpStatus.ACCEPTED)
+	public Entity handleResponseSuccess(Entity entity) {
+	    return entity;
+	}
+}

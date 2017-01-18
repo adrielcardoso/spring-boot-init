@@ -1,0 +1,88 @@
+package br.intelidata.service;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import br.intelidata.component.AbstractEnumComponent;
+import br.intelidata.config.Service;
+
+public class EnumUtilsService extends Service
+{
+    private static Map<Class<? extends AbstractEnumComponent>, Map<Object, AbstractEnumComponent>> cache = null;
+
+    public EnumUtilsService() {}
+
+    static {
+        cache = new HashMap<Class<? extends AbstractEnumComponent>, Map<Object, AbstractEnumComponent>>();
+    }
+
+    public static <T extends AbstractEnumComponent> T getPorCampo(Class<? extends T> tipo, String campo, Object id) throws Exception {
+        for (AbstractEnumComponent enumeracao : tipo.getEnumConstants()) {
+            Object valorEn = BeanUtilService.get(enumeracao, campo);
+            if (valorEn != null && valorEn.equals(id)) {
+                return (T) enumeracao;
+            }
+        }
+        return null;
+    }
+
+    public static <T extends AbstractEnumComponent> T getPorId(Class<? extends T> tipo, Object id) {
+        cachearEnum(tipo);
+        return (T) cache.get(tipo).get(id);
+    }
+
+    public static <T extends Enum> List<T> criarLista(Class<? extends T> classeEnum) {
+        T[] enumeracoes = classeEnum.getEnumConstants();
+        List<T> lista = new ArrayList<T>(enumeracoes.length);
+        for (T enumeracao : enumeracoes) {
+            lista.add(enumeracao);
+        }
+        return lista;
+    }
+
+    private static void cachearEnum(Class<? extends AbstractEnumComponent> tipo) {
+        if (!cache.containsKey(tipo)) {
+            AbstractEnumComponent[] enumeracoes = tipo.getEnumConstants();
+            Map<Object, AbstractEnumComponent> valoresEnum = new HashMap<Object, AbstractEnumComponent>(enumeracoes.length);
+            for (AbstractEnumComponent enumeracao : enumeracoes) {
+                valoresEnum.put(enumeracao.getId(), enumeracao);
+            }
+            cache.put(tipo, valoresEnum);
+        }
+    }
+
+    public static Object[] getArrayDeIds(Class<? extends AbstractEnumComponent> tipo) {
+    	AbstractEnumComponent[] enumeracoes = tipo.getEnumConstants();
+        List valoresEnum = new ArrayList();
+        for (AbstractEnumComponent enumeracao : enumeracoes) {
+            valoresEnum.add(enumeracao.getId());
+        }
+        return valoresEnum.toArray();
+    }
+
+    /**
+     * Varre a enum e retorna um array de constantes existentes no array de id.
+     * 
+     * @param tipo {@link AbstractEnum}
+     * @param ids {@link Object}[]
+     * @return enus {@link AbstractEnum}[]
+     */
+    public static <T extends AbstractEnumComponent> T[] getPorArrayId(Class<? extends T> tipo, Object[] ids) {
+        if (ids == null) {
+            return null;
+        }
+
+        cachearEnum(tipo);
+
+        T[] array = (T[]) Array.newInstance(tipo, ids.length);
+
+        for (int i = 0; i < ids.length; i++) {
+            array[i] = (T) cache.get(tipo).get(ids[i]);
+        }
+
+        return array;
+    }
+
+}

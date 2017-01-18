@@ -1,0 +1,31 @@
+package br.intelidata.entity;
+
+import br.intelidata.component.AbstractEnumComponent;
+
+public enum FuncaoUnicoEntity implements AbstractEnumComponent<String> 
+{
+    SOMA_COM_FATOR_CONVERSAO("sum(%q * case when %f is null or %f = 0 then 1 else %f end)", "%q=alias quantidade %f=alias fator conversão");
+
+    private FuncaoUnicoEntity(String id, String descricao) {
+        this.id = id;
+        this.descricao = descricao;
+    }
+
+    private String id;
+    private String descricao;
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public String getDescricao() {
+        return descricao;
+    }
+
+    @Override
+    public String toString() {
+        return descricao;
+    }
+}

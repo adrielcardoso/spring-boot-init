@@ -1,0 +1,103 @@
+package br.intelidata.entity;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotEmpty;
+import br.intelidata.config.Entity;
+
+public class UsuarioSite extends Entity
+{
+	@NotNull
+	@NotEmpty
+	private String email;
+	
+	private String UK;
+	
+	@NotNull
+	@NotEmpty
+	@Size(min = 6, max = 20)
+	private String password;
+	
+	@NotEmpty
+	private long idSubRevenda;
+	
+	private String identidade;
+	private String dtCreate;
+	private String dtUpdate;
+	private String role;
+	private String currenttimemillis;
+	private int ativo;
+	
+	public String getEmail() 
+	{
+		return email;
+	}
+	public void setEmail(String email) 
+	{
+		this.email = email;
+	}
+	public String getPassword() 
+	{
+		return password;
+	}
+	public void setPassword(String password) 
+	{
+		this.password = password;
+	}
+	public String getIdentidade() 
+	{
+		return identidade;
+	}
+	public void setIdentidade(String identidade) 
+	{
+		this.identidade = identidade;
+	}
+	public String getRole() 
+	{
+		return role;
+	}
+	public void setRole(String role) 
+	{
+		this.role = role;
+	}
+	public String getCurrenttimemillis() 
+	{
+		return currenttimemillis;
+	}
+	public void setCurrenttimemillis(String currenttimemillis) 
+	{
+		this.currenttimemillis = currenttimemillis;
+	}
+	public long getIdSubRevenda() 
+	{
+		return idSubRevenda;
+	}
+	public void setIdSubRevenda(long idSubRevenda) 
+	{
+		this.idSubRevenda = idSubRevenda;
+	}
+	public String getDtCreate() {
+		return dtCreate;
+	}
+	public void setDtCreate(String dtCreate) {
+		this.dtCreate = dtCreate;
+	}
+	public String getDtUpdate() {
+		return dtUpdate;
+	}
+	public void setDtUpdate(String dtUpdate) {
+		this.dtUpdate = dtUpdate;
+	}
+	public int getAtivo() {
+		return ativo;
+	}
+	public void setAtivo(int ativo) {
+		this.ativo = ativo;
+	}
+	public String getUK() {
+		return UK;
+	}
+	public void setUK(String uK) {
+		UK = uK;
+	}
+}

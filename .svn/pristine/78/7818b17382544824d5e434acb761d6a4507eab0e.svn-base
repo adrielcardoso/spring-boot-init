@@ -1,0 +1,49 @@
+package br.intelidata.entity;
+
+import br.intelidata.config.Entity;
+
+public class Ecfautorizada extends Entity
+{
+	private String razaosocial;
+	private String marca;
+	private String modelo;
+	private Long currenttimemillis;
+	
+	public Ecfautorizada()
+	{
+		super();
+	}
+	
+	public String getRazaosocial() {
+		return razaosocial;
+	}
+	
+	public void setRazaosocial(String razaosocial) {
+		this.razaosocial = razaosocial;
+	}
+	
+	public String getMarca() {
+		return marca;
+	}
+	
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+	
+	public String getModelo() {
+		return modelo;
+	}
+	
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
+	}
+	
+	public Long getCurrenttimemillis() {
+		return currenttimemillis;
+	}
+	
+	public void setCurrenttimemillis(Long currenttimemillis) {
+		this.currenttimemillis = currenttimemillis;
+	}
+	
+}

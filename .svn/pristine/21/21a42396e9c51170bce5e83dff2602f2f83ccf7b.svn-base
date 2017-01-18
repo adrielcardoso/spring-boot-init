@@ -1,0 +1,230 @@
+package br.intelidata.service;
+
+import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.sql.DataSource;
+import br.intelidata.component.FileLogComponent;
+import br.intelidata.component.LogComponent;
+import br.intelidata.config.Service;
+import br.intelidata.entity.ClienteEntity;
+import br.intelidata.entity.ContratoVenda;
+import br.intelidata.entity.PedidoInstalacao;
+import br.intelidata.entity.PedidoInstalacaoItem;
+import br.intelidata.entity.PedidoInstalacaoRequest;
+import br.intelidata.entity.Produto;
+import br.intelidata.entity.SaldoLicenca;
+import br.intelidata.entity.UsuarioSite;
+
+public class PedidoInstalacaService extends Service
+{
+	private static DataSource cDataSource;
+	private static LogComponent cLogComponent;
+	private static UsuarioSite userReference;
+	
+	public PedidoInstalacaService(DataSource dataSouceParam, LogComponent logComponentParam)
+	{
+		cDataSource = dataSouceParam;
+		cLogComponent = logComponentParam;
+	}
+	
+	public PedidoInstalacao parsePedidoInstalacao(PedidoInstalacaoRequest entity) throws Exception
+	{
+		// autenticando usuario pelo token;
+		UsuarioSiteService usuarioSiteService = new UsuarioSiteService(cDataSource, cLogComponent);
+		userReference = (UsuarioSite) usuarioSiteService.autenticateUserByToken(entity.getToken());
+		PedidoInstalacao pedidoInstalacao = findPedidoInstalacaoByCNPJ(entity.getCnpj());
+
+		FileLogComponent.getInstance().write("pedidoInstalacao: "+pedidoInstalacao);
+
+		// verificar se existe pedido para instalacao
+		//verificar se o pedido de instalcao ja foi usado
+		if(pedidoInstalacao == null){
+			throw new Exception("Não encontramos pedido de instalação com disponibilidade de uso para o cliente: "+entity.getCnpj());
+		}
+
+		SalesService salesService = new SalesService(cDataSource, cLogComponent);
+		ArrayList<PedidoInstalacaoItem> piObject = new ArrayList<PedidoInstalacaoItem>();
+
+		if(pedidoInstalacao.getPedidoInstalacaoItem().size() <= 0){
+			throw new Exception("Não encontramos itens do pedido de instalação para o cliente: "+entity.getCnpj());
+		}
+
+		for(PedidoInstalacaoItem pedidoInstalacaoItemSingle : pedidoInstalacao.getPedidoInstalacaoItem()){
+
+			// verificar itens e quantidade em estoque da revenda
+			long idProduto = pedidoInstalacaoItemSingle.getIdproduto();
+			long idCliente = pedidoInstalacao.getIdcliente();
+
+			SaldoLicenca saldoLicenca = (SaldoLicenca) salesService.findSaldoLicenca(idCliente, idProduto);
+			// regerencia nao existe quantidade de licencas em estoque para esse produto
+
+			int quantidade = (int) Integer.parseInt(saldoLicenca.getQuantidade().toString());
+			if(quantidade <= 0){
+				throw new Exception("Existe licenças para esse cliente que não está com saldo suficiente para realizar a instalação, favor analisar todos os "
+						+ "pedidos de instalação e validar se estão com saldo suficiente.");
+			}
+
+			pedidoInstalacaoItemSingle.setSaldoLicenca(saldoLicenca);
+			piObject.add(pedidoInstalacaoItemSingle);
+		}
+
+		// realizar registro no contrato
+		// fazer recalculo de itens do contrato
+		ContratoVenda contratoVenda = (ContratoVenda) salesService.findContrato(entity.getCnpj());
+		// rodando sobre os itens do pedido de instalação, onde contem os produtos que deveram ser analisados e registrados
+
+		for(PedidoInstalacaoItem piSingle : pedidoInstalacao.getPedidoInstalacaoItem()){
+
+			// validar tipo de produto
+			ContratoService contratoService = new ContratoService(cDataSource, cLogComponent);
+			Produto produto = (Produto) contratoService.findProduto(piSingle.getIdproduto());
+			HashMap<String, Object> itemContrato = contratoService.addItemContrato(contratoVenda, piSingle.getIdproduto());
+
+			// dar baixa
+			ClienteEntity cliente = (ClienteEntity) salesService.findEntidade(
+													cDataSource, userReference.getIdRevenda());
+			salesService.baixaProduto(
+						cliente.getId(),
+						piSingle.getIdproduto(),
+						br.intelidata.entity.TipoMovimentoLicenca.ATIVACAO,
+						BigDecimal.ONE);
+		}
+
+		// realizar rotina de baixa de pedido de instalacao
+		// atualizar pedido instalacao como utilizado
+		ArrayList<String> skipe = new ArrayList<String>();
+		skipe.add("id");
+		pedidoInstalacao.setUtilizado(1);
+		pedidoInstalacao.setPedidoInstalacaoItem(null);
+		cLogComponent.update(cDataSource, pedidoInstalacao, skipe);
+
+		pedidoInstalacao.setPedidoInstalacaoItem(piObject);
+		return pedidoInstalacao;
+	}
+	
+	public static PedidoInstalacao findPedidoInstalacaoByCNPJ(String cnpjclientefinal) throws Exception
+	{
+		/**
+		 * 
+		 * Poderá apenas ter um registro de instalação não utilizado, justificando o LIMIT na consulta SQL;
+		 * 
+		 */
+
+		int pedidoInstalacaoUtilizado = 0; //0 = NAO - 1 = sim;
+		
+		String sql = "select" +
+				" distinct(p.cnpjclientefinal), "
+				+ "p.id id, "
+				+ "p.razaosocialclientefinal razaosocialclientefinal, "
+				+ "p.idcliente idcliente, "
+				+ "p.cnpjclientefinal cnpjclientefinal, "
+				+ "p.idusuariositecadastro idusuariositecadastro, "
+				+ "p.idusuariositeutilizacao idusuariositeutilizacao, "
+				+ "p.idcontrato idcontrato, "
+				+ "p.utilizado utilizado, "
+				+ "pi.id piid, "
+				+ "pi.idproduto piidproduto "
+				+ " from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id "
+				+ " where p.cnpjclientefinal = ? and p.utilizado = ?";
+		Connection connection = cDataSource.getConnection();
+		PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, cnpjclientefinal);
+        statement.setInt(2, pedidoInstalacaoUtilizado);
+        ResultSet rs = statement.executeQuery();
+
+        if(rs.next()){
+    		PedidoInstalacao pedidoInstalacao = new PedidoInstalacao();
+    		pedidoInstalacao.setId(rs.getLong("id"));
+    		pedidoInstalacao.setRazaosocialclientefinal(rs.getString("razaosocialclientefinal"));
+    		pedidoInstalacao.setIdcliente(rs.getLong("idcliente"));
+    		pedidoInstalacao.setCnpjclientefinal(rs.getString("cnpjclientefinal"));
+    		pedidoInstalacao.setIdusuariositecadastro(rs.getLong("idusuariositecadastro"));
+    		pedidoInstalacao.setIdusuariositeutilizacao(rs.getLong("idusuariositeutilizacao"));
+    		pedidoInstalacao.setIdcontrato(rs.getLong("idcontrato"));
+    		pedidoInstalacao.setUtilizado(rs.getInt("utilizado"));
+
+    		PedidoInstalacaService pedidoInstalacaService = new PedidoInstalacaService(cDataSource, cLogComponent);
+    		return pedidoInstalacaService.findPedidoInstalacaoItem(pedidoInstalacao);
+    	}else{
+			FileLogComponent.getInstance().write("NADA");
+		}
+
+        return null;
+	}
+	
+	public static PedidoInstalacao findPedidoInstalacaoById(long idPedidoInstalacao) throws Exception
+	{
+		String sql = "select "
+				+ "p.id id, "
+				+ "p.razaosocialclientefinal razaosocialclientefinal, "
+				+ "p.idcliente idcliente, "
+				+ "p.cnpjclientefinal cnpjclientefinal, "
+				+ "p.idusuariositecadastro idusuariositecadastro, "
+				+ "p.idusuariositeutilizacao idusuariositeutilizacao, "
+				+ "p.idcontrato idcontrato, "
+				+ "p.utilizado utilizado, "
+				+ "pi.id piid, "
+				+ "pi.idproduto piidproduto "
+				+ " from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id "
+				+ " where p.id = ?";
+		
+		FileLogComponent.getInstance().write(sql);
+		
+		Connection connection = cDataSource.getConnection();
+		PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setLong(1, idPedidoInstalacao);
+        ResultSet rs = statement.executeQuery();
+
+		if(rs.next()){
+			PedidoInstalacao pedidoInstalacao = new PedidoInstalacao();
+			pedidoInstalacao.setId(rs.getLong("id"));
+			pedidoInstalacao.setRazaosocialclientefinal(rs.getString("razaosocialclientefinal"));
+			pedidoInstalacao.setIdcliente(rs.getLong("idcliente"));
+			pedidoInstalacao.setCnpjclientefinal(rs.getString("cnpjclientefinal"));
+			pedidoInstalacao.setIdusuariositecadastro(rs.getLong("idusuariositecadastro"));
+			pedidoInstalacao.setIdusuariositeutilizacao(rs.getLong("idusuariositeutilizacao"));
+			pedidoInstalacao.setIdcontrato(rs.getLong("idcontrato"));
+			pedidoInstalacao.setUtilizado(rs.getInt("utilizado"));
+
+			PedidoInstalacaoItem pedidoInstalacaoItem = new PedidoInstalacaoItem();
+			pedidoInstalacaoItem.setId(rs.getLong("piid"));
+			pedidoInstalacaoItem.setIdproduto(rs.getLong("piidproduto"));
+
+			return pedidoInstalacao;
+		}
+		throw new Exception("Não encontramos registros de pedido para instalação");
+	}
+
+	private PedidoInstalacao findPedidoInstalacaoItem(PedidoInstalacao pedidoInstalacao) throws SQLException
+	{
+		String sql = "select * from pedidoinstalacaoitem where idpedidoinstalacao = ?";
+		FileLogComponent.getInstance().write(sql);
+		Connection connection = cDataSource.getConnection();
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setLong(1, pedidoInstalacao.getId());
+		ResultSet rs = statement.executeQuery();
+
+		FileLogComponent.getInstance().write("pedidoInstalacao.getId(): "+pedidoInstalacao.getId());
+
+		ArrayList<PedidoInstalacaoItem> pedidoInstalacaoItem = new ArrayList<PedidoInstalacaoItem>();
+
+		while(rs.next()){
+			PedidoInstalacaoItem pedido = new PedidoInstalacaoItem();
+			pedido.setId(rs.getLong("id"));
+			pedido.setIdpedidoinstalacao(rs.getLong("idpedidoinstalacao"));
+			pedido.setIdproduto(rs.getLong("idproduto"));
+			pedidoInstalacaoItem.add(pedido);
+
+			FileLogComponent.getInstance().write("!" + pedido.getId());
+		}
+
+		FileLogComponent.getInstance().write("Quantidade: "+pedidoInstalacaoItem.size());
+		pedidoInstalacao.setPedidoInstalacaoItem(pedidoInstalacaoItem);
+		return pedidoInstalacao;
+	}
+}

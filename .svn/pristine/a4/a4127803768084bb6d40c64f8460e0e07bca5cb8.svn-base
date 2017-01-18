@@ -1,0 +1,40 @@
+package br.intelidata.service;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import javax.sql.DataSource;
+import br.intelidata.component.LogComponent;
+import br.intelidata.entity.SaldoLicenca;
+import br.intelidata.entity.TipoMovimento;
+
+public class SaldoLicencaService 
+{
+	 public static Object atualizarSaldo(
+			 DataSource dataSouce,
+			 LogComponent logComponent, 
+			 Long idCliente, 
+			 Long idProduto, 
+			 TipoMovimento tipoMovimento, 
+			 BigDecimal quantidade) throws Exception
+	 {
+		logComponent.setDataSouce(dataSouce);
+        if (TipoMovimento.SAIDA.equals(tipoMovimento)) {
+            quantidade = quantidade.negate();
+        }
+        
+        SaldoLicenca saldoLicenca = (SaldoLicenca) SalesService.findSaldoLicenca(idCliente, idProduto);
+        if (saldoLicenca == null) {
+            saldoLicenca = new SaldoLicenca();
+            saldoLicenca.setIdCliente(idCliente);
+            saldoLicenca.setIdProduto(idProduto);
+            saldoLicenca.setQuantidade(BigDecimal.ONE);
+            logComponent.persist(saldoLicenca);
+        } else {
+            saldoLicenca.setQuantidade(saldoLicenca.getQuantidade().add(quantidade));
+            ArrayList<String>skipe=new ArrayList<String>();
+            skipe.add("id");
+            logComponent.update(dataSouce, saldoLicenca, skipe);
+        }
+        return saldoLicenca;
+    }
+}

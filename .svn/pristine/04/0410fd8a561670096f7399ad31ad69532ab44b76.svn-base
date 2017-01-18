@@ -1,0 +1,9 @@
+package br.intelidata.controllers.retorno;
+
+public interface RetornoController {
+
+    public int getStatus();
+
+    public String getMensagem();
+
+}

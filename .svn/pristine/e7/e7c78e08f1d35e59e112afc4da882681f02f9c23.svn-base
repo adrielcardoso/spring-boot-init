@@ -1,0 +1,35 @@
+package br.intelidata.entity;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ComponentePojoNovoEntity implements Serializable 
+{
+
+    public static final long serialVersionUID = -4056102446407946034L;
+    private AtributoPojoEntity atributo;
+    private List<AtributoPojoEntity> atributos = new ArrayList<AtributoPojoEntity>();
+
+
+    public AtributoPojoEntity getAtributo() {
+        return atributo;
+    }
+
+    public void setAtributo(AtributoPojoEntity atributo) {
+        this.atributo = atributo;
+    }
+
+    public List<AtributoPojoEntity> getAtributos() {
+        return atributos;
+    }
+
+    public void setAtributos(List<AtributoPojoEntity> atributos) {
+        this.atributos = atributos;
+    }
+
+    public void addAtributo(AtributoPojoEntity atributo) {
+        getAtributos().add(atributo);
+    }
+
+}

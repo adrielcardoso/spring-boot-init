@@ -1,0 +1,31 @@
+package br.intelidata.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import br.intelidata.component.LogComponent;
+import br.intelidata.component.ResponseComponent;
+import br.intelidata.config.Controller;
+import br.intelidata.entity.IsItOkEntityRequest;
+import br.intelidata.service.IAmHereService;
+
+@RestController
+public class IamhereController extends Controller 
+{   
+	@Autowired
+    private LogComponent logComponent;
+	
+    @RequestMapping(
+    		value = "/iamhere", 
+    		method = RequestMethod.POST)
+    public Object iAmHere(@RequestBody IsItOkEntityRequest isItOkEntityRequest)
+    {
+    	try{
+    		return IAmHereService.parseRequest(logComponent, isItOkEntityRequest);
+    	}catch(Exception e){
+    		return new ResponseComponent().handleResourceNotFoundException(e.getMessage());
+    	}
+    }
+}

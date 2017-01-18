@@ -1,0 +1,42 @@
+package br.intelidata.controllers;
+
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.intelidata.component.DBUtilComponent;
+import br.intelidata.config.Controller;
+import br.intelidata.entity.IAmHereEntity;
+import br.intelidata.entity.InfoEntity;
+import br.intelidata.entity.IsItOkEntity;
+import br.intelidata.entity.SomethingIsWrongEntity;
+
+@RestController
+public class LogComponent extends Controller
+{
+    private DBUtilComponent dbUtil;
+    private DataSource dataSource;
+
+    public LogComponent(@Autowired DBUtilComponent dbUtil, @Qualifier("logtrackerDataSource") DataSource dataSource) 
+    {
+        this.dbUtil = dbUtil;
+        this.dataSource = dataSource;
+    }
+
+    public void logarIAmHere(IAmHereEntity iAmHere) throws Exception 
+    {
+    	dbUtil.incluirObjeto(dataSource, iAmHere);
+    }
+
+    public void logarSomethingIsWrong(InfoEntity info, String history) throws Exception 
+    {
+        SomethingIsWrongEntity somethingIsWrong = new SomethingIsWrongEntity(System.currentTimeMillis(), history, info);
+        dbUtil.incluirObjeto(dataSource, somethingIsWrong);
+    }
+
+    public void logarIsItOk(IsItOkEntity isItOk) throws Exception 
+    {
+        dbUtil.incluirObjeto(dataSource, isItOk);
+    }
+}

@@ -1,0 +1,32 @@
+package br.intelidata.controllers.retorno;
+
+public class RetornoIAmHere implements RetornoController {
+
+    private int status;
+    private String mensagem;
+
+    public RetornoIAmHere(int status, String mensagem) {
+        super();
+        this.status = status;
+        this.mensagem = mensagem;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    @Override
+    public int getStatus() {
+        return status;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
+    }
+
+    @Override
+    public String getMensagem() {
+        return mensagem;
+    }
+
+}

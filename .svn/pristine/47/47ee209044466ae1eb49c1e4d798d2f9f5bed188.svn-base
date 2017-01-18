@@ -1,0 +1,29 @@
+package br.intelidata.controllers;
+
+import java.util.HashMap;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import br.intelidata.component.FileLogComponent;
+import br.intelidata.component.MensagemComponent;
+import br.intelidata.component.ResponseComponent;
+import br.intelidata.config.Controller;
+import br.intelidata.entity.MensagemEntity;
+
+@RestController
+public class MensagemController extends Controller
+{
+    @RequestMapping("/mensagem")
+    public Object mensagem(@RequestBody MensagemEntity mensagem) 
+    {
+    	try{
+    		HashMap<String, String> response = new HashMap<String, String>();
+        	response.put("mensagem", MensagemComponent.getTexto(mensagem.getNumero()));
+            return response;
+    	}catch(Exception e){
+    		FileLogComponent.getInstance().write(e.getMessage());
+    		return new ResponseComponent().handleResourceNotFoundException(e.getMessage());
+    	}
+    }
+}	
+

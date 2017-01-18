@@ -1,0 +1,33 @@
+package br.intelidata.controllers.requisicao;
+
+import br.intelidata.pojo.Info;
+
+public class SomethingIsWrongRequisicao {
+
+    private Info info;
+    private String history;
+
+    public SomethingIsWrongRequisicao() {}
+
+    public SomethingIsWrongRequisicao(String history, Info info) {
+        this.history = history;
+        this.info = info;
+    }
+
+    public Info getInfo() {
+        return info;
+    }
+
+    public void setInfo(Info info) {
+        this.info = info;
+    }
+
+    public String getHistory() {
+        return history;
+    }
+
+    public void setHistory(String history) {
+        this.history = history;
+    }
+
+}

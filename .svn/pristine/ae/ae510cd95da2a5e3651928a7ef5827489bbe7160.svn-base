@@ -1,0 +1,32 @@
+package br.intelidata.pojo.enums;
+
+public enum StatusContratoVendaItem implements AbstractEnum<Integer> {
+
+    NORMAL(0, "Normal"),
+    CANCELADO(1, "Cancelado"),
+    EXCLUIDO(2, "Excluído");
+
+    StatusContratoVendaItem(Integer id, String descricao) {
+        this.id = id;
+        this.descricao = descricao;
+    }
+
+    private Integer id;
+    private String descricao;
+
+    @Override
+    public Integer getId() {
+        return id;
+    }
+
+    @Override
+    public String getDescricao() {
+        return descricao;
+    }
+
+    @Override
+    public String toString() {
+        return descricao;
+    }
+
+}

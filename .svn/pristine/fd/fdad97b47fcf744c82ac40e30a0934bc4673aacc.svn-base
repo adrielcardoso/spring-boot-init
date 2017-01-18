@@ -1,0 +1,26 @@
+package br.intelidata.pojo.enums;
+
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.stream.Stream;
+
+public interface AbstractEnum<E> {
+
+    E getId();
+
+    String getDescricao();
+
+    static Class getTipoGenerico(Class<?> cls) {
+        Class<?> clazz = null;
+        Type tp = cls.getGenericInterfaces()[0];
+        if (tp instanceof ParameterizedType) {
+            clazz = (Class<?>) ((ParameterizedType) tp).getActualTypeArguments()[0];
+        }
+        return clazz;
+    }
+
+    default boolean in(AbstractEnum<E>... lista) {
+        return Stream.of(lista).anyMatch(abenum -> abenum.getId().equals(getId()));
+    }
+
+}

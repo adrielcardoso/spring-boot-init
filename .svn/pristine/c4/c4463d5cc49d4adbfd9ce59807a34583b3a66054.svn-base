@@ -1,0 +1,3728 @@
+//package br.intelidata.entity;
+//
+//import java.awt.Color;
+//import java.awt.Graphics2D;
+//import java.awt.image.BufferedImage;
+//import java.io.BufferedInputStream;
+//import java.io.BufferedOutputStream;
+//import java.io.BufferedReader;
+//import java.io.ByteArrayInputStream;
+//import java.io.ByteArrayOutputStream;
+//import java.io.File;
+//import java.io.FileInputStream;
+//import java.io.FileOutputStream;
+//import java.io.FileWriter;
+//import java.io.IOException;
+//import java.io.InputStream;
+//import java.io.InputStreamReader;
+//import java.io.ObjectInputStream;
+//import java.io.ObjectOutputStream;
+//import java.io.OutputStream;
+//import java.io.RandomAccessFile;
+//import java.io.UnsupportedEncodingException;
+//import java.lang.management.ManagementFactory;
+//import java.lang.reflect.Array;
+//import java.lang.reflect.Field;
+//import java.lang.reflect.InvocationTargetException;
+//import java.lang.reflect.Method;
+//import java.lang.reflect.Modifier;
+//import java.math.BigDecimal;
+//import java.math.BigInteger;
+//import java.math.RoundingMode;
+//import java.net.Authenticator;
+//import java.net.InetAddress;
+//import java.net.NetworkInterface;
+//import java.net.PasswordAuthentication;
+//import java.net.UnknownHostException;
+//import java.nio.channels.FileChannel;
+//import java.nio.file.Files;
+//import java.nio.file.Path;
+//import java.nio.file.Paths;
+//import java.security.MessageDigest;
+//import java.security.NoSuchAlgorithmException;
+//import java.sql.Connection;
+//import java.sql.DriverManager;
+//import java.sql.ResultSet;
+//import java.sql.SQLException;
+//import java.sql.Statement;
+//import java.text.DecimalFormat;
+//import java.text.Normalizer;
+//import java.text.ParseException;
+//import java.text.SimpleDateFormat;
+//import java.text.Normalizer.Form;
+//import java.time.DateTimeException;
+//import java.time.DayOfWeek;
+//import java.time.Duration;
+//import java.time.Instant;
+//import java.time.LocalDate;
+//import java.time.LocalDateTime;
+//import java.time.LocalTime;
+//import java.time.Month;
+//import java.time.Year;
+//import java.time.ZoneId;
+//import java.time.ZonedDateTime;
+//import java.time.format.DateTimeFormatter;
+//import java.time.format.DateTimeParseException;
+//import java.time.temporal.ChronoUnit;
+//import java.time.temporal.Temporal;
+//import java.util.ArrayList;
+//import java.util.Collection;
+//import java.util.Date;
+//import java.util.Enumeration;
+//import java.util.Iterator;
+//import java.util.List;
+//import java.util.Map;
+//import java.util.TimeZone;
+//import java.util.TreeMap;
+//import java.util.UUID;
+//import java.util.Map.Entry;
+//import java.util.stream.Collectors;
+//import java.util.stream.Stream;
+//import java.util.zip.GZIPInputStream;
+//import java.util.zip.ZipEntry;
+//import java.util.zip.ZipInputStream;
+//import java.util.zip.ZipOutputStream;
+//import javax.imageio.ImageIO;
+//import javax.imageio.stream.ImageOutputStream;
+//import javax.management.AttributeNotFoundException;
+//import javax.management.InstanceNotFoundException;
+//import javax.management.MBeanException;
+//import javax.management.MBeanServer;
+//import javax.management.MalformedObjectNameException;
+//import javax.management.ObjectName;
+//import javax.management.ReflectionException;
+//import javax.sound.sampled.AudioInputStream;
+//import javax.sound.sampled.AudioSystem;
+//import javax.sound.sampled.Clip;
+//import javax.sound.sampled.LineEvent;
+//import javax.sound.sampled.LineListener;
+//import javax.sound.sampled.LineUnavailableException;
+//import javax.sound.sampled.UnsupportedAudioFileException;
+//import javax.sound.sampled.LineEvent.Type;
+//import javax.swing.ImageIcon;
+//import javax.swing.text.MaskFormatter;
+//
+//public class UtilEntity 
+//{
+//    private static final byte[] HEX_CHAR_TABLE = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+//
+//    public static final String MASCARA_CEP = "#####-###";
+//    public static final String MASCARA_CHAVE_ACESSO = "#### #### #### #### #### #### #### #### #### #### ####";
+//    public static final String MASCARA_CHAVE_ACESSO_CONTIGENCIA = "#### #### #### #### #### #### #### #### ####";
+//    public static final String MASCARA_CHAVE_ACESSO_DACTE = "##-####-##.###.###/####-##-##-###-###.###.###-###.###.###-#";
+//    public static final String MASCARA_TELEFONE = "(#XX##) ####-####";
+//    public static final int VALIDA_CPF = 0;
+//    public static final int VALIDA_CNPJ = 1;
+//    public static final int VALIDA_CPF_CNPJ = 2;
+//    /** Do tipo String caracter para separa Arquivos WINDOWS="/" */
+//    public static final String fileSeparator = System.getProperties().getProperty("file.separator");
+//
+//    /** Do tipo String caracter para separa linhas UNIX = "\n" */
+//    public static final String lineSeparator = System.getProperties().getProperty("line.separator");
+//    /** Do tipo String Diretorio de trabalho */
+//    // public static final String PATHWORK =
+//    // System.getProperties().getProperty("user.dir");
+//    /** Do tipo String diretorio temporario do OS */
+//    public static final String PATHTMP = System.getProperty("java.io.tmpdir");
+//    /** Inteiro [WINDOWS = 0 ] */
+//    public static final int WINDOWS = 0;
+//    /** Inteiro [LINUX = 1] */
+//    private static final int LINUX = 1;
+//    // Constantes usadas pela rotina que valida Inscrição estadual
+//    public static final BigDecimal DEZ = new BigDecimal(10);
+//
+//    public static final BigDecimal MIL_VINTE_QUATRO = new BigDecimal(1024);
+//    public static final BigDecimal DEZ_MIL = new BigDecimal(10000);
+//    public static final String CARACTERES_NAO_PERMITIDOS_CAMPOS_TEXTO = "|";
+//    private static final String CARACTERES_VALIDOS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.";
+//    private static final String CARACTERES_VALIDOS_CODIGO_NOTA = "0123456789";
+//    // UniSync
+////    private static UniSyncLogger log;
+//
+//    public static final String CARACTERES_ACENTUADOS = "çÇáéíóúýÁÉÍÓÚÝàèìòùÀÈÌÒÙãõñäëïöüÿÄËÏÖÜÃÕÑâêîôûÂÊÎÔÛ\"'"; // Remove
+//                                                                                                                 // tambem
+//                                                                                                                 // aspas
+//                                                                                                                 // simples
+//                                                                                                                 // e
+//                                                                                                                 // dupla
+//    public static final String CARACTERES_NAO_ACENTUADOS = "cCaeiouyAEIOUYaeiouAEIOUaonaeiouyAEIOUAONaeiouAEIOU  ";
+//
+//    public static final BigDecimal _9999 = new BigDecimal("9999");
+//    public static final BigDecimal CEM = new BigDecimal(100);
+//    public static final String MASCARA_CPF = "###.###.###-##";
+//    public static final String MASCARA_CNPJ = "##.###.###/####-##";
+//    public static final String MASCARA_VALOR = "#,###,###,##0.00";
+//
+//    public static String limpaMascara(String valorOriginal, String mascara) {
+//        if (valorOriginal == null) {
+//            return null;
+//        } else {
+//            String valor = valorOriginal;
+//            for (int i = 0; i < mascara.length(); i++) {
+//                valor = valor.replace(mascara.substring(i, i + 1), "");
+//            }
+//            return valor.trim();
+//        }
+//    }
+//
+//    public static String apenasNumeros(String string) {
+//        if (string == null) {
+//            return "";
+//        }
+//        String retorno = "";
+//        for (int i = 0; i < string.length(); i++) {
+//            if ("0123456789".contains(string.substring(i, i + 1))) {
+//                retorno += string.substring(i, i + 1);
+//            }
+//        }
+//        return retorno;
+//    }
+//
+//    public static String apenasLetras(String string) {
+//        if (string == null) {
+//            return "";
+//        }
+//        String retorno = "";
+//        for (int i = 0; i < string.length(); i++) {
+//            if (!"0123456789".contains(string.substring(i, i + 1))) {
+//                retorno += string.substring(i, i + 1);
+//            }
+//        }
+//        return retorno;
+//    }
+//
+//    public static boolean isApenasNumeros(String string) {
+//        if (string == null) {
+//            return false;
+//        }
+//        for (int i = 0; i < string.length(); i++) {
+//            if (!Character.isDigit(string.charAt(i))) {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
+//
+//    public static String limpaString(String string) {
+//        if (string == null) {
+//            return "";
+//        }
+//        String retorno = "";
+//        for (int i = 0; i < string.length(); i++) {
+//            if (!"\\/:*?\"<>|".contains(string.substring(i, i + 1))) {
+//                retorno += string.substring(i, i + 1);
+//            }
+//        }
+//        return retorno;
+//    }
+//
+//    /**
+//     * 
+//     * @param tipo Determina qual será o tipo de validação
+//     * @param valor Valor a ser validado
+//     * @throws UnicoMensagemUsuarioException
+//     */
+//    public static void validaCPFCNPJ(int tipo, String valor) throws Exception {
+//        boolean ok = false;
+//        String mensagem = null;
+//        valor = apenasNumeros(valor);
+//        // CPF
+//        if (tipo == VALIDA_CPF || tipo == VALIDA_CPF_CNPJ) {
+//            if (valor.length() == 11) {
+//                int d1, d2;
+//                int digito1, digito2, resto;
+//                int digitoCPF;
+//                String nDigResult;
+//                d1 = d2 = 0;
+//                digito1 = digito2 = resto = 0;
+//                for (int n_Count = 1; n_Count < valor.length() - 1; n_Count++) {
+//                    digitoCPF = Integer.parseInt(valor.substring(n_Count - 1, n_Count));
+//                    // --------- Multiplique a ultima casa por 2 a seguinte por
+//                    // 3 a seguinte por 4 e assim por diante.
+//                    d1 = d1 + (11 - n_Count) * digitoCPF;
+//                    // --------- Para o segundo digito repita o procedimento
+//                    // incluindo o primeiro digito calculado no passo anterior.
+//                    d2 = d2 + (12 - n_Count) * digitoCPF;
+//                }
+//                // --------- Primeiro resto da divisão por 11.
+//                resto = (d1 % 11);
+//                // --------- Se o resultado for 0 ou 1 o digito é 0 caso
+//                // contrário o digito é 11 menos o resultado anterior.
+//                if (resto < 2) {
+//                    digito1 = 0;
+//                } else {
+//                    digito1 = 11 - resto;
+//                }
+//                d2 += 2 * digito1;
+//                // --------- Segundo resto da divisão por 11.
+//                resto = (d2 % 11);
+//                // --------- Se o resultado for 0 ou 1 o digito é 0 caso
+//                // contrário o digito é 11 menos o resultado anterior.
+//                if (resto < 2) {
+//                    digito2 = 0;
+//                } else {
+//                    digito2 = 11 - resto;
+//                }
+//                // --------- Digito verificador do CPF que está sendo validado.
+//                String nDigVerific = valor.substring(valor.length() - 2, valor.length());
+//                // --------- Concatenando o primeiro resto com o segundo.
+//                nDigResult = String.valueOf(digito1) + String.valueOf(digito2);
+//                // --------- Comparar o digito verificador do cpf com o primeiro
+//                // resto + o segundo resto.
+//                ok = nDigVerific.equals(nDigResult);
+//            }
+//        }
+//
+//        // CNPJ
+//        if (tipo == VALIDA_CNPJ || tipo == VALIDA_CPF_CNPJ) {
+//            if (valor.length() == 14) {
+//                int soma = 0, dig;
+//                String cnpj_calc = valor.substring(0, 12);
+//                char[] chr_cnpj = valor.toCharArray();
+//                // --------- Primeira parte
+//                for (int i = 0; i < 4; i++) {
+//                    if (chr_cnpj[i] - 48 >= 0 && chr_cnpj[i] - 48 <= 9) {
+//                        soma += (chr_cnpj[i] - 48) * (6 - (i + 1));
+//                    }
+//                }
+//                for (int i = 0; i < 8; i++) {
+//                    if (chr_cnpj[i + 4] - 48 >= 0 && chr_cnpj[i + 4] - 48 <= 9) {
+//                        soma += (chr_cnpj[i + 4] - 48) * (10 - (i + 1));
+//                    }
+//                }
+//                dig = 11 - (soma % 11);
+//                cnpj_calc += (dig == 10 || dig == 11) ? "0" : Integer.toString(dig);
+//                // --------- Segunda parte
+//                soma = 0;
+//                for (int i = 0; i < 5; i++) {
+//                    if (chr_cnpj[i] - 48 >= 0 && chr_cnpj[i] - 48 <= 9) {
+//                        soma += (chr_cnpj[i] - 48) * (7 - (i + 1));
+//                    }
+//                }
+//                for (int i = 0; i < 8; i++) {
+//                    if (chr_cnpj[i + 5] - 48 >= 0 && chr_cnpj[i + 5] - 48 <= 9) {
+//                        soma += (chr_cnpj[i + 5] - 48) * (10 - (i + 1));
+//                    }
+//                }
+//                dig = 11 - (soma % 11);
+//                cnpj_calc += (dig == 10 || dig == 11) ? "0" : Integer.toString(dig);
+//                ok = valor.equals(cnpj_calc);
+//            }
+//        }
+//        // Caso tenha problema escolhe a mensagem apropriada
+//        if (!ok) {
+//            mensagem = "CNPJ ou CPF inválido. Verifique";
+//            switch (tipo) {
+//                case VALIDA_CPF:
+//                    mensagem = "CPF inválido. Verifique";
+//                    break;
+//                case VALIDA_CNPJ:
+//                    mensagem = "CNPJ inválido. Verifique";
+//                    break;
+//                default:
+//                    break;
+//            }
+//
+//        }
+//        if (!stringNullOrEmpty(mensagem)) {
+//            throw new Exception(mensagem);
+//        }
+//    }
+//
+//    /**
+//     * Formata com os segundos também
+//     * 
+//     * @param data
+//     * @return Date
+//     */
+//    public static Date localDateTime2DateSegundos(LocalDateTime data) { // ok
+//        if (data != null) {
+//            return Date.from(data.withNano(0).atZone(ZoneId.systemDefault()).toInstant());
+//            // SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+//            // Date dataConvertida = null;
+//            // try {
+//            // dataConvertida = format.parse(localDateTime2String(data, "dd/MM/yyyy HH:mm:ss"));
+//            // } catch (ParseException ex) {
+//            // UnicoTratamentoExcecao.logar(ex);
+//            // }
+//            // return dataConvertida;
+//        } else {
+//            return null;
+//        }
+//    }
+//
+//    public static String localDateTime2String(LocalDateTime data, String formato) {
+//        if (data != null) {
+//            DateTimeFormatter formater = DateTimeFormatter.ofPattern(formato);
+//            return formater.format(data);
+//        } else {
+//            return null;
+//        }
+//    }
+//
+//    public static Date localDate2Date(LocalDate data) { // ok
+//        if (data != null) {
+//            return Date.from(data.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+//            // SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+//            // Date dataConvertida = null;
+//            // try {
+//            // dataConvertida = format.parse(localDate2String(data, "dd/MM/yyyy"));
+//            // } catch (ParseException ex) {
+//            // UnicoTratamentoExcecao.logar(ex);
+//            // }
+//            // return dataConvertida;
+//        } else {
+//            return null;
+//        }
+//    }
+//
+//    public static LocalDateTime date2LocalDateTimeSegundos(Date data) { // ok
+//        if (data != null) {
+//            return LocalDateTime.ofInstant(data.toInstant(), ZoneId.systemDefault()).withNano(0);
+//            // SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+//            // LocalDateTime dataConvertida = null;
+//            // String dataString = format.format(data);
+//            // dataConvertida = string2LocalDateTime(dataString, "dd/MM/yyyy HH:mm:ss");
+//            //
+//            // return dataConvertida;
+//        } else {
+//            return null;
+//        }
+//    }
+//
+//    public static Date localDateTime2Date(LocalDateTime data) { // ok
+//        if (data != null) {
+//            return Date.from(data.withSecond(0).withNano(0).atZone(ZoneId.systemDefault()).toInstant());
+//            // SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+//            // Date dataConvertida = null;
+//            // try {
+//            // dataConvertida = format.parse(localDateTime2String(data, "dd/MM/yyyy HH:mm"));
+//            // } catch (ParseException ex) {
+//            // UnicoTratamentoExcecao.logar(ex);
+//            // }
+//            // return dataConvertida;
+//        }
+//        return null;
+//    }
+//
+//    public static LocalDate localDateTime2LocalDate(LocalDateTime dataHora) {
+//        LocalDate data = null;
+//        if (dataHora != null) {
+//            data = dataHora.toLocalDate();
+//        }
+//        return data;
+//    }
+//
+//    public static LocalDate date2LocalDate(Date data) { // ok
+//        if (data != null) {
+//            if (data instanceof java.sql.Date) {
+//                return ((java.sql.Date) data).toLocalDate();
+//            } else {
+//                return LocalDateTime.ofInstant(data.toInstant(), ZoneId.systemDefault()).toLocalDate();
+//            }
+//            // SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+//            // LocalDate dataConvertida = null;
+//            // String dataString = format.format(data);
+//            // dataConvertida = string2LocalDate(dataString, "dd/MM/yyyy");
+//            // return dataConvertida;
+//        } else {
+//            return null;
+//        }
+//    }
+//
+//    public static LocalDateTime date2LocalDateTime(Date data) { // ok
+//        if (data != null) {
+//            return LocalDateTime.ofInstant(data.toInstant(), ZoneId.systemDefault()).withSecond(0).withNano(0);
+//            // SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+//            // LocalDateTime dataConvertida = null;
+//            // String dataString = format.format(data);
+//            // dataConvertida = string2LocalDateTime(dataString, "dd/MM/yyyy HH:mm");
+//            // return dataConvertida;
+//        } else {
+//            return null;
+//        }
+//    }
+//
+//    public static String padl(String string, int tamanho) {
+//        StringBuilder sb = new StringBuilder(string);
+//        for (int i = sb.length(); i < tamanho; i++) {
+//            sb.append(' ');
+//        }
+//        return sb.toString();
+//    }
+//
+//    public static String padr(String string, int tamanho) {
+//        StringBuilder sb = new StringBuilder(string);
+//        for (int i = sb.length(); i < tamanho; i++) {
+//            sb.insert(0, ' ');
+//        }
+//        return sb.toString();
+//    }
+//
+//    public static BigDecimal percentual(BigDecimal valor1, BigDecimal valor2) {
+//        if (valor2.compareTo(BigDecimal.ZERO) > 0) {
+//            return valor1.divide(valor2, 10, BigDecimal.ROUND_HALF_EVEN).multiply(CEM).setScale(2, RoundingMode.HALF_EVEN);
+//        } else {
+//            return BigDecimal.ZERO;
+//        }
+//    }
+//
+//    /**
+//     * Pega os dois valores informados e calcula o quanto de aumento teve entre o menorValor para o
+//     * valorMaior.
+//     * 
+//     * @param valorMaior {@link BigDecimal} o valor novo, no caso o valor maior
+//     * @param valorMenor {@link BigDecimal} o valor anterior, no caso o valor menor
+//     * @return {@link BigDecimal} o aumento de valores em percentual
+//     */
+//    public static BigDecimal calcularAumentoEmPercentualEntreDoisValores(BigDecimal valorMaior, BigDecimal valorMenor) {
+//        if (valorMaior != null && valorMenor != null && valorMaior.compareTo(valorMenor) > 0) {
+//            return valorMaior.divide(valorMenor, 10, BigDecimal.ROUND_HALF_EVEN).subtract(BigDecimal.ONE).multiply(CEM).setScale(2, RoundingMode.HALF_EVEN);
+//        } else {
+//            return BigDecimal.ZERO;
+//        }
+//    }
+//
+//    /**
+//     * Descobre a base de cálculo, passando o valor e o percentual. Exemplo: cálculo de icms, base:
+//     * 385, percentual de icms: 12 %, valor de icms: 46,20. Caso o 385 seja desconhecido, é
+//     * necessário passar o 46,20 no parâmetro de valor e o 12 no parâmetro de percentual, o método
+//     * retorna o 385.
+//     * 
+//     * @param valor {@link BigDecimal} com o valor final.
+//     * @param percentual {@link BigDecimal} com o percentual.
+//     * @return {@link BigDecimal} com a base de cálculo.
+//     */
+//    public static BigDecimal calcularValorBase(BigDecimal valor, BigDecimal percentual) {
+//        if (!UtilEntity.bigDecimalNullOrZero(valor) && !UtilEntity.bigDecimalNullOrZero(percentual)) {
+//            return CEM.multiply(valor).divide(percentual, 10, RoundingMode.HALF_EVEN).setScale(2, RoundingMode.HALF_EVEN);
+//        }
+//        return BigDecimal.ZERO;
+//    }
+//
+//    public static BigDecimal calcularReducao(BigDecimal valorMenor, BigDecimal valorMaior) {
+//        BigDecimal valor = valorMenor.divide(valorMaior, 20, BigDecimal.ROUND_HALF_EVEN);
+//        valor = valor.subtract(BigDecimal.ONE);
+//        valor = valor.multiply(UtilEntity.CEM);
+//        valor = valor.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+//        if (valor.compareTo(BigDecimal.ZERO) < 0) {
+//            valor = valor.abs();
+//        }
+//        return valor;
+//    }
+//
+//    public static BigDecimal percentualComArredondamento(BigDecimal valor1, BigDecimal valor2) {
+//        BigDecimal percentual = percentual(valor1, valor2);
+//        BigDecimal decimal = percentual.subtract(new BigDecimal(percentual.intValue()));
+//        if (decimal.compareTo(BigDecimal.ZERO) > 0) {
+//            BigDecimal N95 = BigDecimal.valueOf(0.95).setScale(2, BigDecimal.ROUND_HALF_EVEN);
+//            BigDecimal N05 = BigDecimal.valueOf(0.05).setScale(2, BigDecimal.ROUND_HALF_EVEN);
+//            if (decimal.compareTo(N05) <= 0) {
+//                percentual = new BigDecimal(percentual.intValue()).setScale(2, BigDecimal.ROUND_HALF_EVEN);
+//            } else if (decimal.compareTo(N95) >= 0) {
+//                percentual = new BigDecimal(percentual.intValue()).add(BigDecimal.ONE).setScale(2, BigDecimal.ROUND_HALF_EVEN);
+//            }
+//        }
+//        return percentual;
+//    }
+//
+//    public static BigDecimal valorDesconto(BigDecimal valor, BigDecimal percentual, int casasDecimais) {
+//        return valor.multiply(percentual).divide(CEM, 10, RoundingMode.HALF_EVEN).setScale(casasDecimais, RoundingMode.HALF_EVEN);
+//    }
+//
+//    /** Gera um sequencia de n caracteres */
+//    public static String replicate(char caracter, int tamanho) {
+//        StringBuilder sb = new StringBuilder();
+//        for (int i = 0; i < tamanho; i++) {
+//            sb.append(caracter);
+//        }
+//        return sb.toString();
+//    }
+//
+//    /** Gera um sequencia de n String */
+//    public static String replicate(String texto, int tamanho) {
+//        if (tamanho > 0) {
+//            StringBuilder sb = new StringBuilder(texto != null ? texto.length() * tamanho : tamanho);
+//            for (int i = 0; i < tamanho; i++) {
+//                sb.append(texto);
+//            }
+//            return sb.toString();
+//        }
+//        return "";
+//    }
+//
+//    /**
+//     * Espera um tempo
+//     * 
+//     * @param tempo em milisegundos
+//     */
+//    public static void espera(int tempo) {
+//        try {
+//            Thread.sleep(tempo);
+//        } catch (InterruptedException ex) {
+//        	throw new Exception(ex.getMessage());
+//        }
+//    }
+//
+//    public static double string2Double(String str, int decimal) {
+//        BigDecimal valor = BigDecimal.ZERO;
+//        try {
+//            valor = new BigDecimal(str.replace(',', '.'));
+//        } catch (NumberFormatException e) {
+//            throw new Exception(e.getMessage());
+//        }
+//        return bigdecimal2Double(valor, decimal);
+//    }
+//
+//    public static double bigdecimal2Double(BigDecimal valor, int decimal) {
+//        if (valor == null) {
+//            valor = BigDecimal.ZERO;
+//        }
+//        valor = valor.setScale(decimal, BigDecimal.ROUND_DOWN);
+//        return valor.doubleValue();
+//    }
+//
+//    public static String formataNumero(String valor, String mascara, int tamanho) {
+//        Double d = string2Double(valor, tamanho);
+//        DecimalFormat formatoNumero = new DecimalFormat();
+//        formatoNumero.applyPattern(mascara);
+//        return formatoNumero.format(d);
+//    }
+//
+//    public static String formataNumero(BigDecimal valor, String mascara, int tamanho) {
+//        if (valor == null) {
+//            valor = BigDecimal.ZERO;
+//        }
+//        DecimalFormat formatoNumero = new DecimalFormat();
+//        formatoNumero.applyPattern(mascara);
+//        // String teste = formatoNumero.format(valor);
+//        return padr(formatoNumero.format(valor), tamanho);
+//    }
+//
+//    public static String formataData(LocalDate data, String mascara) {
+//        return localDate2String(data, mascara);
+//    }
+//
+//    public static LocalDate string2LocalDate(String str, String mascara) {
+//        LocalDate data;
+//        try {
+//            SimpleDateFormat sdf = new SimpleDateFormat();
+//            sdf.applyPattern(mascara);
+//            data = sdf.parse(str).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//        } catch (IllegalArgumentException | NullPointerException | ParseException e) {
+//            data = null;
+//        }
+//        return data;
+//    }
+//
+//    public static LocalDateTime string2LocalDateTime(String str, String mascara) {
+//
+//        if (UtilEntity.stringNullOrEmpty(str)) {
+//            return null;
+//        }
+//
+//        LocalDateTime dataTime;
+//        try {
+//            dataTime = LocalDateTime.parse(str, DateTimeFormatter.ofPattern(mascara));
+//        } catch (DateTimeParseException e) {
+//            dataTime = null;
+//        }
+//        return dataTime;
+//    }
+//
+//    public static LocalTime string2LocalTime(String str, String mascara) {
+//
+//        if (UtilEntity.stringNullOrEmpty(str)) {
+//            return null;
+//        }
+//
+//        LocalTime dataTime;
+//        try {
+//            dataTime = LocalTime.parse(str, DateTimeFormatter.ofPattern(mascara));
+//        } catch (DateTimeParseException e) {
+//            dataTime = null;
+//        }
+//        return dataTime;
+//    }
+//
+//    /**
+//     * Favor utilizar o método {@link #formataDataHora(Temporal, String)} passando a máscara
+//     * correta. Não é necessário ter os dois métodos.
+//     * 
+//     * @param data {@link LocalDateTime}
+//     * @param formato {@link String}
+//     * @return data formatada {@link String}
+//     */
+//    @Deprecated
+//    public static String localDate2String(LocalDate data, String formato) {
+//        if (data != null) {
+//            try {
+//                DateTimeFormatter formater = DateTimeFormatter.ofPattern(formato);
+//                return formater.format(data);
+//            } catch (DateTimeException ex) {
+//                return null;
+//            }
+//        } else {
+//            return null;
+//        }
+//    }
+//
+//    /**
+//     * Método responsável por formatar uma data ou datahora, basta utilizar a máscara correta.
+//     * 
+//     * Ex: ddMMyy, dd/MM/yyyy, HHmmss, yyyyMMdd.
+//     * 
+//     * @param data ou datahora de acordo com a situação {@link Temporal}
+//     * @param mascara {@link String}
+//     * @return data ou datahora formatada {@link String}
+//     */
+//    public static String formataDataHora(Temporal dataHora, String mascara) {
+//        if (dataHora == null) {
+//            return "";
+//        }
+//        try {
+//            DateTimeFormatter formatador = DateTimeFormatter.ofPattern(mascara);
+//            String dateStr = formatador.format(dataHora);
+//            return dateStr;
+//        } catch (DateTimeException ex) {
+//            return "";
+//        }
+//    }
+//
+//    /** Retorna o sistema operacional */
+//    public static int getOS() {
+//        int os = WINDOWS;
+//        String osnome = System.getProperty("os.name", "").toLowerCase();
+//        if (osnome.startsWith("linux")) {
+//            os = LINUX;
+//        }
+//        return os;
+//    }
+//
+//    public static String zeroEsquerda(Object objeto, int tamanho) {
+//        return zeroEsquerda(objeto.toString(), tamanho);
+//    }
+//
+//    /** Completa string com zeros a esquerda */
+//    public static String zeroEsquerda(String string, int tamanho) {
+//        for (int i = string.length(); i < tamanho; i++) {
+//            string = "0" + string;
+//        }
+//        return string;
+//    }
+//
+//    /** Completa string com zeros a direita */
+//    public static String zeroDireita(String string, int tamanho) {
+//        return string + Stream.generate(() -> "0").limit(tamanho - string.length()).collect(Collectors.joining());
+//    }
+//
+//    /**
+//     * Converte String para BigDecimal Exemplo: "0000001051",8,2 retorna 10.51
+//     */
+//    public static BigDecimal string2BigDecimal(String str, @SuppressWarnings("unused") int inteiro, int decimal) {
+//        BigDecimal valor;
+//        try {
+//
+//            if (stringNullOrEmpty(str)) {
+//                str = "0";
+//            }
+//
+//            valor = new BigDecimal(str);
+//        } catch (NumberFormatException e) {
+//            valor = BigDecimal.ZERO;
+//        }
+//        valor = valor.movePointLeft(decimal);
+//        return valor;
+//    }
+//
+//    public static BigDecimal string2BigDecimal(String str, int decimal) {
+//        BigDecimal valor = BigDecimal.ZERO;
+//        try {
+//            str = str.replace(".", "");
+//            str = str.replace(',', '.');
+//            valor = new BigDecimal(str);
+//        } catch (NullPointerException | NumberFormatException e) {
+//            valor = BigDecimal.ZERO;
+//        }
+//        valor = valor.setScale(decimal, BigDecimal.ROUND_HALF_EVEN);
+//        return valor;
+//    }
+//
+//    public static BigDecimal string2BigDecimalXml(String str, int decimal) {
+//        BigDecimal valor = BigDecimal.ZERO;
+//        try {
+//            valor = new BigDecimal(str.replace(',', '.'));
+//            if (valor.compareTo(BigDecimal.ZERO) == 0) { // linha anterior gera um número 0E-10
+//                valor = BigDecimal.ZERO;
+//                decimal = 2;
+//            }
+//        } catch (NumberFormatException e) {
+//            valor = BigDecimal.ZERO;
+//        }
+//        valor = valor.setScale(decimal, BigDecimal.ROUND_DOWN);
+//        return valor;
+//    }
+//
+//    public static BigDecimal string2BigDecimal(String str) {
+//        BigDecimal valor = BigDecimal.ZERO;
+//        try {
+//            str = str.replace(".", "");
+//            str = str.replace(',', '.');
+//            valor = new BigDecimal(str);
+//        } catch (NumberFormatException | NullPointerException e) {
+//            valor = BigDecimal.ZERO;
+//        }
+//        return valor;
+//    }
+//
+//    public static String bigDecimal2String(BigDecimal valor, String mascara) {
+//        String retorno = null;
+//        try {
+//            DecimalFormat fmt = new DecimalFormat(mascara);
+//            retorno = fmt.format(valor);
+//        } catch (IllegalArgumentException ex) {
+//            retorno = "";
+//        }
+//        return retorno;
+//    }
+//
+//    public static int string2int(String str) {
+//        int valor;
+//        try {
+//            valor = Integer.parseInt(str);
+//        } catch (NumberFormatException | NullPointerException e) {
+//            valor = 0;
+//        }
+//        return valor;
+//    }
+//
+//    public static long string2Long(String str) {
+//        long valor;
+//        try {
+//            valor = Long.parseLong(str);
+//        } catch (NumberFormatException | NullPointerException e) {
+//            valor = 0;
+//        }
+//        return valor;
+//    }
+//
+//    public static Integer string2Integer(String str) {
+//        int valor;
+//        try {
+//            valor = Integer.parseInt(str);
+//        } catch (NumberFormatException | NullPointerException e) {
+//            valor = 0;
+//        }
+//        return valor;
+//    }
+//
+//    public static String all2Atring(Object obj) {
+//        String valor = "";
+//        if (obj != null) {
+//            valor = String.valueOf(obj);
+//        }
+//        return valor;
+//    }
+//
+//    /**
+//     * Retorna o número de casas decimais (0 a 4)
+//     * 
+//     * @param valor
+//     * @return número de casas decimais
+//     */
+//    public static int getCasasDecimais(BigDecimal valor) {
+//        String s = new DecimalFormat("#,##0.##########").format(valor); // pega apenas as casas
+//                                                                        // decimais usadas
+//        s = s.replaceAll("\\.", "");
+//        s = s.replaceAll("\\,", ".");
+//
+//        return new BigDecimal(s).scale();
+//    }
+//
+//    public static BigDecimal valorComDesconto(BigDecimal valor, BigDecimal percentual, int casasDecimais) {
+//        return valor.subtract(valorDesconto(valor, percentual, casasDecimais));
+//    }
+//
+//    public static BigDecimal valorTotal(BigDecimal valorUnitario, BigDecimal quantidade) {
+//        return valorUnitario.multiply(quantidade).setScale(2, BigDecimal.ROUND_HALF_DOWN);
+//    }
+//
+//    /**
+//     * Retorna uma mascara para quantidades conforme o número de casas decimais
+//     * 
+//     * @param casasDecimais
+//     * @return máscara
+//     */
+//    public static String getMascaraQuantidade(int casasDecimais) {
+//        String mascara = "#,##0";
+//        if (casasDecimais > 0) {
+//            mascara += "." + zeroEsquerda(String.valueOf("0"), casasDecimais);
+//        }
+//        return mascara;
+//    }
+//
+//    /**
+//     * Retorna uma mascara para preços conforme o número de casas decimais
+//     * 
+//     * @param casasDecimais
+//     * @return máscara
+//     */
+//    public static String getMascaraPreco(int casasDecimais) {
+//        String mascara = "#,###,###,##0";
+//        if (casasDecimais > 0) {
+//            mascara += "." + zeroEsquerda(String.valueOf("0"), casasDecimais);
+//        }
+//        return mascara;
+//    }
+//
+//    /**
+//     * calcula modulo de 10
+//     * 
+//     * @return String
+//     */
+//    public static int modulo10(String numero) {
+//        int soma = 0, multiplicador = 2, dac;
+//        for (int posicao = numero.length() - 1; posicao >= 0; posicao--) {
+//            int parcial = Integer.parseInt(numero.substring(posicao, posicao + 1)) * multiplicador;
+//            if (parcial > 9) {
+//                String parcialString = Integer.toString(parcial);
+//                parcial = Integer.parseInt(parcialString.substring(0, 1)) + Integer.parseInt(parcialString.substring(1, 2));
+//            }
+//
+//            soma += parcial;
+//            multiplicador = multiplicador == 2 ? 1 : 2;
+//        }
+//
+//        dac = soma % 10;
+//        dac = 10 - dac;
+//        if (dac == 10) {
+//            dac = 0;
+//        }
+//        return dac;
+//    }
+//
+//    /**
+//     * Calcula dígito verificador
+//     * 
+//     * @param numero - número para o cálculo
+//     * @param tamanho - tamanho do dígito verificador
+//     * @return dígito verificador calculado
+//     */
+//    public static String digitoVerificador(String numero, int tamanho) {
+//        String digito = "";
+//        for (int l = 0; l < tamanho; l++) {
+//            int j = 2;
+//            int dv = 0;
+//            for (int i = numero.length() - 1; i >= 0; i--) {
+//                dv = dv + (j * Integer.parseInt(numero.substring(i, i + 1)));
+//                j++;
+//
+//                if (j == 10) {
+//                    j = 2;
+//                }
+//
+//            }
+//            dv = 11 - (dv % 11);
+//            if (dv > 9) {
+//                dv = 0;
+//            }
+//
+//            numero = numero + Integer.toString(dv);
+//            digito = digito + Integer.toString(dv);
+//        }
+//
+//        return digito;
+//    }
+//
+//    /**
+//     * Retorna o tamanho da string passada
+//     * 
+//     * @param texto
+//     * @param tamanho
+//     * @return
+//     */
+//    public static String stringLeft(String texto, int tamanho) {
+//        if (texto.length() < tamanho) {
+//            return texto;
+//        } else {
+//            return texto.substring(0, tamanho - 1);
+//        }
+//    }
+//
+//    private static String ltrim(String s) {
+//        int i;
+//        for (i = 0; i < s.length() && s.charAt(i) == ' '; i++) {
+//        }
+//        return s.substring(i, s.length());
+//    }
+//
+//    public static String rtrim(String s) {
+//        if (s != null) {
+//            int i = 0;
+//            int j;
+//            for (j = s.length() - 1; j >= 0; j--) {
+//                if (s.charAt(j) == ' ') {
+//                    continue;
+//                }
+//                i = j;
+//                break;
+//            }
+//            if (j < 0) {
+//                return "";
+//            } else {
+//                return s.substring(0, i + 1);
+//            }
+//        } else {
+//            return "";
+//        }
+//    }
+//
+//    public static String cortaString(String str, int caracteres) {
+//        if (caracteres < str.length()) {
+//            str = str.substring(0, caracteres);
+//        }
+//        return str;
+//    }
+//
+//    public static String padl(String s, int i, String s1) {
+//        String s2 = new String(ltrim(s));
+//        int j = s2.length();
+//        if (i > j) {
+//            int k = (i - j) / s1.length() + 1;
+//            String s3 = left(replicate(s1, k), i - j);
+//            return left(s3 + s2, i);
+//        } else {
+//            return left(s2, i);
+//        }
+//    }
+//
+//    public static String padc(String string, int tamanho) {
+//        if (string == null) {
+//            string = "";
+//        }
+//        StringBuilder sb = new StringBuilder(string);
+//        tamanho = (tamanho - string.length()) / 2;
+//        for (int i = 0; i < tamanho; i++) {
+//            sb.insert(0, ' ');
+//        }
+//        return sb.toString();
+//    }
+//
+//    public static String right(String s, int i) {
+//        int j = s.length();
+//        int k = j - i;
+//        return s.substring(k >= 0 ? k : 0, j);
+//    }
+//
+//    public static String left(String s, int i) {
+//        if (s == null) {
+//            return "";
+//        }
+//        int j = s.length();
+//        if (j < i || i < 0) {
+//            return s;
+//        } else {
+//            return s.substring(0, i >= j ? j : i);
+//        }
+//    }
+//
+//    public static String upper(String s) {
+//        int i = s.length();
+//        int j = -1;
+//        for (int k = i - 1; k >= 0; k--) {
+//            char c = s.charAt(k);
+//            if (Character.toUpperCase(c) == c) {
+//                continue;
+//            }
+//            j = k;
+//            break;
+//        }
+//
+//        if (j == -1) {
+//            return s;
+//        }
+//        char ac[] = new char[i];
+//        s.getChars(0, i, ac, 0);
+//        for (int l = j; l >= 0; l--) {
+//            ac[l] = Character.toUpperCase(ac[l]);
+//        }
+//
+//        return new String(ac);
+//    }
+//
+//    public static String newLine() {
+//        return "\r\n";
+//    }
+//
+//    /**
+//     * Valida uma inscrição estadual.
+//     * 
+//     * @param ie {@link String} com a inscrição estadual que será validada.
+//     * @param uf {@link Estado#getCodigo()} UF do estado.
+//     * @param aceitaIsento true se aceita a palavra ISENTO como inscrição estadual.
+//     * @return true se a IE estiver válida.
+//     */
+//    public static boolean validaIE(String ie, String uf, boolean aceitaIsento) {
+//
+//        ie = ie.trim();
+//
+//        if (aceitaIsento && ie.equalsIgnoreCase("ISENTO")) {
+//            return true;
+//        }
+//
+//        InscricaoEstadual instanciaIE = InscricaoEstadualFactory.getInstance(uf);
+//        if (instanciaIE != null) {
+//            return instanciaIE.validar(ie);
+//        } else {
+//            return false;
+//        }
+//
+//    }
+//
+//    public static boolean equals(Object o1, Object o2) {
+//        if (o1 != null && o2 != null) {
+//            return o1.equals(o2);
+//        } else if (o1 == null && o2 != null) {
+//            return false;
+//        } else if (o1 != null && o2 == null) {
+//            return false;
+//        }
+//        return true;
+//    }
+//
+//    /**
+//     * Os objetos a serem comparados deve implementar a interface Comparable
+//     * 
+//     * @see Comparable
+//     * @return (-1) - se o objeto1 for maior que objeto2 0 - se os objetos forem iguais 1 - se o
+//     *         objeto2 for maior que objeto1
+//     */
+//    public static int compararObjetos(Comparable o1, Comparable o2) {
+//        int result = 0;
+//        if (o1 != null && o2 != null) {
+//            result = o1.compareTo(o2);
+//        } else if (o1 != null) {
+//            result = -1;
+//        } else if (o2 != null) {
+//            result = 1;
+//        }
+//        return result;
+//    }
+//
+//    public static int compararObjetos(Map<String, Object> map1, Map<String, Object> map2, String... chaves) {
+//
+//        int result = 0;
+//        for (int i = 0; i < chaves.length; i++) {
+//            result = compararObjetos((Comparable<?>) map1.get(chaves[i]), (Comparable<?>) map2.get(chaves[i]));
+//            if (result != 0) {
+//                break;
+//            }
+//        }
+//        return result;
+//    }
+//
+//    public static int compararObjetos(Comparable... objs) {
+//
+//        if (objs.length % 2 != 0) {
+//            throw new UnicoException("COM23357", "Tamanho da Array deve ser multiplo de 2");
+//        }
+//
+//        int result = 0;
+//        for (int i = 0; i < objs.length; i++) {
+//            result = compararObjetos(objs[i], objs[++i]);
+//            if (result != 0) {
+//                break;
+//            }
+//        }
+//        return result;
+//
+//    }
+//
+//    public static int compararObjetos(Comparable[] objs1, Comparable[] objs2) {
+//        int result = 0;
+//        for (int i = 0; i < objs1.length; i++) {
+//            result = compararObjetos(objs1[i], objs2[i]);
+//            if (result != 0) {
+//                break;
+//            }
+//        }
+//        return result;
+//    }
+//
+//    public static LocalDate getInicioSemana() {
+//        LocalDate HOJE = DataHoraFactory.getData();
+//        if (HOJE.getDayOfWeek() == DayOfWeek.SUNDAY) {
+//            return HOJE;
+//        }
+//        return HOJE.minusDays(HOJE.getDayOfWeek().getValue());
+//    }
+//
+//    public static LocalDate getFimSemana() {
+//        return getInicioSemana().plusDays(6);
+//    }
+//
+//    public static LocalDate getLocalDateInicioMes() {
+//        return DataHoraFactory.getData().withDayOfMonth(1);
+//    }
+//
+//    public static LocalDate getLocalDateFimMes() {
+//        return getLocalDateInicioMes().plusMonths(1).minusDays(1);
+//    }
+//
+//    public static LocalDateTime getLocalDateTimeInicioMes() {
+//        return LocalDateTime.of(getLocalDateInicioMes(), LocalTime.of(0, 0, 0));
+//    }
+//
+//    public static LocalDateTime getLocalDateTimeFimMes() {
+//        return getLocalDateTimeInicioMes().plusMonths(1).minusDays(1);
+//    }
+//
+//    public static Date getDateInicioMes() {
+//        return Util.localDate2Date(getLocalDateInicioMes());
+//    }
+//
+//    public static Date getDateFimMes() {
+//        return Util.localDate2Date(getLocalDateFimMes());
+//    }
+//
+//    public static int getDiferencaEmDias(LocalDate inicio, LocalDate fim) {
+//        return new Long(ChronoUnit.DAYS.between(inicio, fim)).intValue();
+//    }
+//
+//    public static String removerAcentos(String texto) {
+//        if (texto == null) {
+//            return "";
+//        }
+//        texto = Normalizer.normalize(texto, Normalizer.Form.NFD);
+//        texto = texto.replaceAll("[^\\p{ASCII}]", "");
+//        texto = texto.replace("\t", " ");
+//        texto = texto.replace("\r\n", " ");
+//        texto = texto.replace("\n", " ");
+//        return texto;
+//    }
+//
+//    public static String removerAcentosSubstituiCaracteresEspeciais(String str) {
+//        str = removerAcentos(str);
+//        // str = str.replace("&", "&amp;"); XStream já trata esse caracter
+//        str = str.replace("\"", "&quot;");
+//        str = str.replace("'", "&#39;");
+//        // str = str.replace(">", "&gt;"); XStream já trata esse caracter
+//        // str = str.replace("<", "&lt;"); XStream já trata esse caracter
+//        str = str.replace("º", "o");
+//        str = str.replace("ª", "a");
+//
+//        StringBuilder retorno = new StringBuilder();
+//        for (int i = 0; i < str.length(); i++) {
+//            char ch = str.charAt(i);
+//            if (XMLChar.isValid(ch)) {
+//                retorno = retorno.append(ch);
+//            }
+//        }
+//
+//        return retorno.toString();
+//    }
+//
+//    public static String removerAcentosSubstituiCaracteresEspeciaisCte(String str) {
+//        str = removerAcentos(str);
+//        str = str.replace("&", "&amp;");
+//        str = str.replace("\"", "&quot;");
+//        str = str.replace("'", "&#39;");
+//        str = str.replace(">", "&gt;");
+//        str = str.replace("<", "&lt;");
+//        str = str.replace("º", "o");
+//        str = str.replace("ª", "a");
+//
+//        StringBuilder retorno = new StringBuilder();
+//        for (int i = 0; i < str.length(); i++) {
+//            char ch = str.charAt(i);
+//            if (XMLChar.isValid(ch)) {
+//                retorno = retorno.append(ch);
+//            }
+//        }
+//
+//        return retorno.toString();
+//    }
+//
+//    public static String retornaCarateresEspeciaisXml(String str) {
+//        str = removerAcentos(str);
+//        // str = str.replace("&amp;", "&"); XStream já trata esse caracter
+//        str = str.replace("&quot;", "\"");
+//        str = str.replace("&#39;", "'");
+//        // str = str.replace("&gt;", ">"); XStream já trata esse caracter
+//        // str = str.replace("&lt;", "<"); XStream já trata esse caracter
+//        return str;
+//    }
+//
+//    public static String removerAcentosPdv(String texto) {
+//        String acentuado = CARACTERES_ACENTUADOS;
+//        String semAcento = CARACTERES_NAO_ACENTUADOS;
+//        char[] tabela;
+//        tabela = new char[256];
+//        for (int i = 0; i < tabela.length; ++i) {
+//            tabela[i] = (char) i;
+//        }
+//        for (int i = 0; i < acentuado.length(); ++i) {
+//            tabela[acentuado.charAt(i)] = semAcento.charAt(i);
+//        }
+//        StringBuilder sb = new StringBuilder();
+//        char ch2;
+//        for (int i = 0; i < texto.length(); ++i) {
+//            char ch = texto.charAt(i);
+//            if (ch < 256) {
+//                ch2 = tabela[ch];
+//            } else {
+//                ch2 = ch;
+//            }
+//            if (ch2 != '\n') {
+//                int val = (ch2);
+//                if (val < 32 || val > 127 || ch2 == '\\' || ch2 == '|') {
+//                    ch2 = ' ';
+//                }
+//            }
+//            sb.append(ch2);
+//        }
+//        return sb.toString();
+//    }
+//
+//    public static boolean existeConexaoInternet(String ip) {
+//        try {
+//            InetAddress address = InetAddress.getByName(ip);
+//            if (address == null) {
+//                return false;
+//            }
+//        } catch (UnknownHostException | SecurityException e) {
+//            return false;
+//        }
+//        return true;
+//    }
+//
+//    public static boolean stringNullOrEmpty(String txt) {
+//        return txt == null || txt.trim().isEmpty();
+//    }
+//
+//    public static boolean arrayNullOrEmpty(Object[] array) {
+//        return array == null || array.length == 0;
+//    }
+//
+//    public static boolean listNullOrEmpty(List list) {
+//        return list == null || list.isEmpty();
+//    }
+//
+//    public static boolean bigDecimalNullOrZero(BigDecimal numero) {
+//        return numero == null || numero.compareTo(BigDecimal.ZERO) == 0;
+//    }
+//
+//    /**
+//     * Este metodo tem o mesmo efeito do contains da classe String, ele apenas ignora o case da
+//     * String Pode ser usado com String e StringBuilder
+//     */
+//    public static boolean stringContem(CharSequence fonte, CharSequence alvo) {
+//        return stringIndexOf(fonte, alvo) > -1;
+//    }
+//
+//    /**
+//     * Este metodo tem o mesmo efeito do indexOf da classe String, ele apenas ignora o case da
+//     * String Pode ser usado com String e StringBuilder
+//     * 
+//     * @return
+//     */
+//    public static int stringIndexOf(CharSequence fonte, CharSequence alvo) {
+//
+//        // É assim mesmo, to comparando referencia de memoria e nao String
+//        if (fonte == alvo) {
+//            return 0;
+//        }
+//
+//        if (alvo.length() == 0) {
+//            return 0;
+//        }
+//
+//        if (fonte.length() < alvo.length()) {
+//            return -1;
+//        }
+//
+//        char primeiro = Character.toUpperCase(alvo.charAt(0));
+//        for (int i = 0; i < fonte.length(); i++) {
+//
+//            if (Character.toUpperCase(fonte.charAt(i)) != primeiro) {
+//                while (++i < fonte.length()) {
+//                    if (Character.toUpperCase(fonte.charAt(i)) == primeiro) {
+//                        break;
+//                    }
+//                }
+//            }
+//
+//            int resto = fonte.length() - i;
+//
+//            if (resto < alvo.length()) {
+//                break;
+//            } else {
+//                int index = i;
+//                int semelhancas = 1;
+//                for (int x = 1; x < alvo.length(); x++) {
+//                    i++;
+//                    char ch1 = Character.toUpperCase(fonte.charAt(i));
+//                    char ch2 = Character.toUpperCase(alvo.charAt(x));
+//                    if (ch1 != ch2) {
+//                        break;
+//                    }
+//                    semelhancas++;
+//                }
+//
+//                if (semelhancas == alvo.length()) {
+//                    return index;
+//                }
+//            }
+//        }
+//        return -1;
+//    }
+//
+//    public static List<String> wrapStr(String texto, int tamanho) {
+//
+//        List<String> linhas = new ArrayList<String>();
+//        StringBuilder linha = new StringBuilder();
+//        StringBuilder palavra = new StringBuilder();
+//
+//        for (int i = 0; i < texto.length(); i++) {
+//
+//            char chr = texto.charAt(i);
+//
+//            if (chr == '\n') {
+//                if (linha.length() + palavra.length() > tamanho) {
+//                    linhas.add(linha.toString());
+//                    linhas.add(palavra.toString());
+//                } else {
+//                    linha.append(palavra);
+//                    linhas.add(linha.toString());
+//                }
+//                linha.delete(0, linha.length());
+//                palavra.delete(0, palavra.length());
+//            } else {
+//
+//                palavra.append(chr);
+//
+//                if (chr == ' ') {
+//                    if (linha.length() + palavra.length() > tamanho) {
+//                        linhas.add(linha.toString());
+//                        linha.delete(0, linha.length());
+//                    }
+//
+//                    linha.append(palavra);
+//                    palavra.delete(0, palavra.length());
+//                }
+//            }
+//
+//        }
+//
+//        if (palavra.length() > 0) {
+//            if ((linha.length() + palavra.length()) > tamanho) {
+//                linhas.add(linha.toString());
+//                linha.delete(0, linha.length());
+//            }
+//            linha.append(palavra);
+//        }
+//
+//        if (linha.length() > 0) {
+//            linhas.add(linha.toString());
+//        }
+//
+//        return linhas;
+//    }
+//
+//    public static <E> List<E> array2List(Object[] array) {
+//        if (array == null) {
+//            return null;
+//        }
+//        List<E> lista = new ArrayList<E>();
+//        for (Object object : array) {
+//            lista.add((E) object);
+//        }
+//        return lista;
+//    }
+//
+//    public static String array2String(Object[] array, String separador) {
+//        String str = "";
+//        if (!arrayNullOrEmpty(array)) {
+//            for (Object object : array) {
+//                str += (str.isEmpty() ? "" : separador) + object;
+//            }
+//        }
+//        return str;
+//    }
+//
+//    public static <E> E[] lista2Array(Class<E> classe, List<E> lista) {
+//        E[] array = (E[]) Array.newInstance(classe, lista.size());
+//        for (int i = 0; i < lista.size(); i++) {
+//            array[i] = lista.get(i);
+//        }
+//        return array;
+//    }
+//
+//    public static <E> List<E> criarLista(Collection<E> fonte) {
+//        List<E> lista = new ArrayList<E>(fonte.size());
+//        Iterator<E> iterator = fonte.iterator();
+//        while (iterator.hasNext()) {
+//            lista.add(iterator.next());
+//            iterator.remove();
+//        }
+//        return lista;
+//    }
+//
+//    public static String capitalizarString(String str) {
+//        if (str != null && str.length() > 0) {
+//            StringBuilder strb = new StringBuilder(str);
+//            strb.setCharAt(0, Character.toTitleCase(str.charAt(0)));
+//            str = strb.toString();
+//        }
+//        return str;
+//    }
+//
+//    public static void gravarObjetoSerializadoEmArquivo(Object objetoSrializado, String arquivo) {
+//        ObjectOutputStream oos = null;
+//
+//        try {
+//            oos = new ObjectOutputStream(new FileOutputStream(arquivo));
+//            oos.writeObject(objetoSrializado);
+//        } catch (IOException ex) {
+//            throw new UnicoException("COM845", ex);
+//        } finally {
+//            try {
+//                if (oos != null) {
+//                    oos.close();
+//                }
+//            } catch (IOException ex) {
+//                throw new UnicoException("COM846", ex);
+//            }
+//        }
+//    }
+//
+//    public static byte[] serializarObjeto(Object object) {
+//        try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+//            ObjectOutputStream oos = new ObjectOutputStream(baos);
+//            oos.writeObject(object);
+//            return baos.toByteArray();
+//        } catch (IOException e) {
+//            throw new UnicoException("COM966", e);
+//        }
+//    }
+//
+//    public static <E> E getObjetoSerializadoDeArquivo(String arquivo) throws UnicoMensagemUsuarioException {
+//        File file = new File(arquivo);
+//        if (!file.exists()) {
+//            throw new UnicoMensagemUsuarioException("COM847", "Arquivo " + arquivo + " não existe.");
+//        }
+//
+//        Object objeto;
+//        try (FileInputStream in = new FileInputStream(arquivo)) {
+//            objeto = getObjetoSerializadoDeInputStream(in);
+//        } catch (IOException e) {
+//            throw new UnicoMensagemUsuarioException("COM848", "Arquivo " + arquivo + " não existe.");
+//        }
+//
+//        return (E) objeto;
+//    }
+//
+//    public static <E> E getObjetoSerializadoDeInputStream(byte[] byteArray) {
+//        return getObjetoSerializadoDeInputStream(new ByteArrayInputStream(byteArray));
+//    }
+//
+//    public static <E> E getObjetoSerializadoDeInputStream(InputStream inputStream) {
+//        Object objeto = null;
+//        ObjectInputStream ois = null;
+//        try {
+//            ois = new ObjectInputStream(inputStream);
+//            objeto = ois.readObject();
+//        } catch (ClassNotFoundException | IOException ex) {
+//            throw new UnicoException("COM849", ex);
+//        } finally {
+//            try {
+//                if (ois != null) {
+//                    ois.close();
+//                }
+//            } catch (IOException ex) {
+//                throw new UnicoException("COM850", ex);
+//            }
+//        }
+//        return (E) objeto;
+//    }
+//
+//    public static String tiraZerosDaFrente(String valor) {
+//
+//        try {
+//            valor = Long.valueOf(valor).toString();
+//        } catch (NumberFormatException e) {
+//            while (valor.startsWith("0")) {
+//                valor = valor.substring(1);
+//            }
+//        }
+//
+//        return valor;
+//    }
+//
+//    public static boolean longNullOuZero(Long valor) {
+//        return valor == null || valor.equals(0L);
+//    }
+//
+//    public static boolean intNullOuZero(Integer valor) {
+//        return valor == null || valor.equals(0);
+//    }
+//
+//    public static String getStackTrace(Throwable e) {
+//        return ExceptionUtils.getFullStackTrace(e);
+//    }
+//
+//    public static boolean isLinux() {
+//        return System.getProperty("os.name", "").toLowerCase().startsWith("linux");
+//    }
+//
+//    public static String getDiretorioUsuario() {
+//        return System.getProperty("user.home");
+//    }
+//
+//    public static String getDiretorioAplicacao() {
+//        return System.getProperty("user.dir");
+//    }
+//
+//    public static String getArquivo(String arquivo) {
+//        return getDiretorioAplicacao() + System.getProperty("file.separator") + arquivo;
+//    }
+//
+//    public static String getArquivo(String diretorio, String arquivo) {
+//        return diretorio + System.getProperty("file.separator") + arquivo;
+//    }
+//
+//    public static List<String> string2List(String... valores) {
+//        return array2List(valores);
+//    }
+//
+//    public static <E> List<E> stringSplit2List(String strLista, String separador) {
+//        String[] partes = strLista.split(separador);
+//        return array2List(partes);
+//    }
+//
+//    public static String list2String(List lista, String separador) {
+//        StringBuilder strLista = new StringBuilder();
+//        for (Object object : lista) {
+//            if (lista.indexOf(object) != lista.size() - 1) {
+//                strLista.append(object.toString()).append(separador);
+//            } else {
+//                strLista.append(object.toString());
+//            }
+//        }
+//        return strLista.toString();
+//    }
+//
+//    public static LocalDate formataDataAnoSeculoXX(String valor, String formatoRetorno) {
+//        String[] partes = valor.split("/");
+//        String anoData = partes[partes.length - 1].trim();
+//        if (!anoData.equalsIgnoreCase("") && anoData.length() <= 2) {
+//            String ano = PropriedadeRN.getInstance().getPropriedade(null, PropriedadeRN.PRIMEIRO_ANO_SECULO_20);
+//            if (ano == null || ano.isEmpty() || ano.equalsIgnoreCase("0")) {
+//                ano = "30";
+//            }
+//            String seculo = "";
+//            if (Integer.parseInt(anoData) >= Integer.parseInt(ano)) {
+//                seculo = "19";
+//            } else {
+//                seculo = "20";
+//            }
+//            anoData = seculo + anoData;
+//            valor = "";
+//            for (int i = 0; i < partes.length - 1; i++) {
+//                valor += partes[i] + "/";
+//            }
+//            valor += anoData;
+//        }
+//        return Util.string2LocalDate(valor, formatoRetorno);
+//    }
+//
+//    public static void salvarInputStreamEmDisco(InputStream inputStream, String nomeArquivo) {
+//        if (inputStream != null) {
+//            try {
+//                OutputStream out = new FileOutputStream(nomeArquivo);
+//                int nextChar;
+//                while ((nextChar = inputStream.read()) != -1) {
+//                    out.write((char) nextChar);
+//                }
+//                out.flush();
+//                out.close();
+//            } catch (IOException ex) {
+//                throw new UnicoException("COM851", ex);
+//            }
+//        }
+//    }
+//
+//    /**
+//     * Método para zerar atributo de uma lista de pojo. O atributo deve ser do tipo
+//     * {@link BigDecimal}
+//     * 
+//     * @param lista que o valor será zerado
+//     * @param campo atributo que será zerado
+//     */
+//    public static void zeraValorListaPojo(List<? extends AbstractPojo> lista, String campo) {
+//        for (AbstractPojo pojo : lista) {
+//            BeanUtil.set(pojo, campo, BigDecimal.ZERO);
+//        }
+//    }
+//
+//    public static Class getClass(String nomeClasse) {
+//        Class classe = null;
+//        try {
+//            classe = Class.forName(nomeClasse);
+//        } catch (ClassNotFoundException e) {
+//            throw new UnicoException("COM854", e);
+//        }
+//        return classe;
+//    }
+//
+//    public static String getMd5String(String arquivo) {
+//        BigInteger bigInteger = new BigInteger(1, getMd5Arquivo(arquivo));
+//        String md5 = zeroEsquerda(bigInteger.toString(16), 32);
+//        return md5;
+//    }
+//
+//    public static String getIpLocal() {
+//        String ip;
+//        try {
+//            ip = InetAddress.getLocalHost().getHostAddress();
+//        } catch (UnknownHostException e) {
+//            ip = "0.0.0.0";
+//        }
+//        return ip;
+//    }
+//
+//    public static String getEnderecoMac() {
+//        String id = "";
+//        if (Util.getOS() == Util.LINUX) {
+//            id = "FFFF-FFFF-FFFF";
+//        } else {
+//            byte[] macAddressBytes = null;
+//            try {
+//                InetAddress localHost = InetAddress.getLocalHost();
+//                NetworkInterface netInter = NetworkInterface.getByInetAddress(localHost);
+//                macAddressBytes = netInter.getHardwareAddress();
+//            } catch (Throwable ex) {
+//                UnicoTratamentoExcecao.logar(ex);
+//            }
+//
+//            if (macAddressBytes != null && macAddressBytes.length >= 6) {
+//                id = String.format("%1$02x%2$02x-%3$02x%4$02x-%5$02x%6$02x", macAddressBytes[0], macAddressBytes[1], macAddressBytes[2], macAddressBytes[3], macAddressBytes[4], macAddressBytes[5])
+//                        .toUpperCase();
+//            } else {
+//                id = "FFFF-FFFF-FFFF";
+//            }
+//        }
+//        return id;
+//    }
+//
+//    public static List<String> getListaEnderecoMac() {
+//        List<String> macs = new ArrayList<>();
+//        try {
+//            Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+//            while (interfaces.hasMoreElements()) {
+//                NetworkInterface nif = interfaces.nextElement();
+//                byte[] macAddressBytes = nif.getHardwareAddress();
+//                if (macAddressBytes != null && macAddressBytes.length >= 6) {
+//                    String id = String
+//                            .format("%1$02x%2$02x-%3$02x%4$02x-%5$02x%6$02x", macAddressBytes[0], macAddressBytes[1], macAddressBytes[2], macAddressBytes[3], macAddressBytes[4], macAddressBytes[5])
+//                            .toUpperCase();
+//                    if (!macs.contains(id)) {
+//                        macs.add(id);
+//                    }
+//                }
+//            }
+//        } catch (Throwable ex) {
+//            UnicoTratamentoExcecao.logar(ex);
+//        }
+//        return macs;
+//    }
+//
+//    public static String getNomeMaquina() {
+//        String nome;
+//        try {
+//            nome = InetAddress.getLocalHost().getHostName();
+//        } catch (UnknownHostException e) {
+//            nome = "";
+//        }
+//        return nome;
+//    }
+//
+//    public static boolean collectionNullOrEmpty(Collection<?> collection) {
+//        return collection == null || collection.isEmpty();
+//    }
+//
+//    public static boolean mapNullOrEmpty(Map<?, ?> map) {
+//        return map == null || map.isEmpty();
+//    }
+//
+//    private static byte[] getMd5Arquivo(String arquivo) {
+//        /* A VM vai fechar o arquivo quando sair do try */
+//        try (InputStream is = new FileInputStream(new File(arquivo))) {
+//            MessageDigest digest = MessageDigest.getInstance("MD5");
+//            byte[] buffer = new byte[1024];
+//            int read = 0;
+//            while ((read = is.read(buffer)) > 0) {
+//                digest.update(buffer, 0, read);
+//            }
+//            byte[] bArray = digest.digest();
+//            return bArray;
+//        } catch (IOException | NoSuchAlgorithmException e) {
+//            throw new UnicoException(null, e);
+//        }
+//    }
+//
+//    public static String getMd5(byte[] binario) {
+//        /* A VM vai fechar o arquivo quando sair do try */
+//        try {
+//            MessageDigest digest = MessageDigest.getInstance("MD5");
+//            digest.update(binario);
+//            BigInteger bigInteger = new BigInteger(1, digest.digest());
+//            String md5 = zeroEsquerda(bigInteger.toString(16), 32);
+//            return md5;
+//        } catch (NoSuchAlgorithmException e) {
+//            throw new UnicoException(null, e);
+//        }
+//    }
+//
+//    public static void mesclarListaObjetos(List listaOrigem, List listaDestino, Class<?> classeObjetoDestino) {
+//        for (Object o : listaOrigem) {
+//            Object objetoNovo = mesclarObjetos(o, classeObjetoDestino);
+//            if (objetoNovo != null) {
+//                listaDestino.add(objetoNovo);
+//            }
+//        }
+//    }
+//
+//    private static Object mesclarObjetos(Object objetoOrigem, Class classeObjetoDestino) {
+//        try {
+//            Object objetoDestino = classeObjetoDestino.newInstance();
+//            for (Field field : objetoOrigem.getClass().getDeclaredFields()) {
+//                // Removido o isTransient() para que a mesclagem entre itemdav e
+//                // itempedido funcione
+//                if (!Modifier.isStatic(field.getModifiers())) {
+//                    String nomeAtributo = field.getName();
+//                    Class<?> tipo = field.getType();
+//                    Object valor = BeanUtil.get(objetoOrigem, nomeAtributo);
+//                    String nomeMetodo = "set" + nomeAtributo.substring(0, 1).toUpperCase() + nomeAtributo.substring(1);
+//                    Method metodo = objetoDestino.getClass().getMethod(nomeMetodo, tipo);
+//                    metodo.invoke(objetoDestino, valor);
+//                }
+//            }
+//            return objetoDestino;
+//        } catch (IllegalAccessException | IllegalArgumentException | SecurityException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
+//            throw new UnicoException("COM855", e);
+//        }
+//    }
+//
+//    public static void escreveInputStreamInZipEntry(ZipOutputStream zipOutputStream, byte[] arquivo, String nomeArquivo) {
+//        try {
+//            zipOutputStream.putNextEntry(new ZipEntry(nomeArquivo));
+//            zipOutputStream.write(arquivo);
+//            zipOutputStream.closeEntry();
+//        } catch (IOException e) {
+//            throw new UnicoException("COM856", e);
+//        }
+//    }
+//
+//    public static BigDecimal getSomaValor(List listaObjetos, String nomeCampo) {
+//        BigDecimal total = BigDecimal.ZERO;
+//        for (Object object : listaObjetos) {
+//            BigDecimal valor = BeanUtil.get(object, nomeCampo);
+//            if (valor != null) {
+//                total = total.add(valor);
+//            }
+//        }
+//        return total;
+//    }
+//
+//    public static String replaceFirst(String strOriginal, String strASerSubstituida, String strSubstituta) {
+//        int idx = strOriginal.indexOf(strASerSubstituida);
+//        strOriginal = strOriginal.substring(0, idx + strASerSubstituida.length()).replace(strASerSubstituida, strSubstituta) + strOriginal.substring(idx + strASerSubstituida.length());
+//        return strOriginal;
+//    }
+//
+//    public static LocalDateTime localDate2LocalDateTime(LocalDate data) {
+//        if (data != null) {
+//            return LocalDateTime.of(data.getYear(), data.getMonthValue(), data.getDayOfMonth(), 0, 0);
+//        }
+//        return null;
+//    }
+//
+//    public static long getSomaNumeros(String numeros) {
+//        long soma = 1;
+//        for (int i = 0; i < numeros.length(); i++) {
+//            String c = numeros.charAt(i) + "";
+//            if (Character.isDigit(c.charAt(0))) {
+//                int numero = Util.string2int(c);
+//                if (numero > 0) {
+//                    soma = soma * numero;
+//                }
+//            }
+//        }
+//        return soma;
+//    }
+//
+//    public static BigDecimal calculaFatorConversaoQuantidade(BigDecimal quantidade, BigDecimal embalagem, int casasDecimais) {
+//        if (bigDecimalNullOrZero(embalagem)) {
+//            embalagem = BigDecimal.ONE;
+//        }
+//        return quantidade.multiply(embalagem).setScale(casasDecimais, RoundingMode.HALF_EVEN);
+//    }
+//
+//    public static BigDecimal calculaFatorConversaoPrecoUnitario(BigDecimal preco, BigDecimal embalagem, int casasDecimais) {
+//        if (bigDecimalNullOrZero(embalagem)) {
+//            embalagem = BigDecimal.ONE;
+//        }
+//        return preco.divide(embalagem, 10, RoundingMode.HALF_EVEN).setScale(casasDecimais, RoundingMode.HALF_EVEN);
+//    }
+//
+//    public static String getUnidadeMedidaEmbalagem(String unidadeMedida, BigDecimal embalagem, int casasDecimais) {
+//        if (embalagem != null && embalagem.compareTo(BigDecimal.ONE) > 0) {
+//            unidadeMedida = unidadeMedida + "(" + Util.bigDecimal2String(embalagem, getMascaraQuantidade(casasDecimais)) + ")";
+//        }
+//        return unidadeMedida;
+//    }
+//
+//    public static LocalDate getDataPadrao() {
+//        return LocalDate.of(1753, 1, 1);
+//    }
+//
+//    public static String formatarDataSQL(LocalDate data) {
+//        return new StringBuilder("'").append(Util.formataData(data, "yyyyMMdd")).append("'").toString();
+//    }
+//
+//    public static String formatarDataHoraSQL(LocalDateTime data) {
+//        return new StringBuilder("'").append(Util.formataDataHora(data, "yyyyMMdd HHmm")).append("'").toString();
+//    }
+//
+//    public static String formatarString(String str) {
+//        if (str.indexOf('\'') > -1) {
+//            str = str.replace("'", "''");
+//        }
+//        if (str.indexOf("\\") > -1) {
+//            str = str.replace("\\", "\\\\");
+//        }
+//        StringBuilder sb = new StringBuilder(str.length() + 2);
+//        sb.append("'");
+//        sb.append(str);
+//        sb.append("'");
+//        return sb.toString();
+//    }
+//
+//    public static List<Long> getListaId(Collection<? extends AbstractPojo> pojos) {
+//        List<Long> ids = new ArrayList<Long>(pojos.size());
+//        for (AbstractPojo pojo : pojos) {
+//            ids.add(pojo.getId());
+//        }
+//        return ids;
+//    }
+//
+//    private static String formatarLista(Collection colecao) {
+//        StringBuilder sb = new StringBuilder(colecao.size() * 10);
+//        sb.append("(");
+//        for (Object elemento : colecao) {
+//            if (elemento instanceof String) {
+//                sb.append(Util.formatarString((String) elemento));
+//            } else if (elemento instanceof LocalDate) {
+//                sb.append(Util.formatarDataSQL((LocalDate) elemento));
+//            } else if (elemento instanceof Number) {
+//                sb.append(elemento);
+//            }
+//            sb.append(",");
+//        }
+//        sb.deleteCharAt(sb.length() - 1);
+//        sb.append(") ");
+//        return sb.toString();
+//    }
+//
+//    public static String formataListaEnum(Collection<? extends AbstractEnum> enums) {
+//        List ids = new ArrayList(enums.size());
+//        for (AbstractEnum pojo : enums) {
+//            ids.add(pojo.getId());
+//        }
+//        return formatarLista(ids);
+//    }
+//
+//    public static byte string2byte(String str) {
+//        byte valor;
+//        try {
+//            valor = Byte.parseByte(str);
+//        } catch (NumberFormatException numberFormatException) {
+//            valor = 0;
+//        }
+//        return valor;
+//    }
+//
+//    public static String getAliasColunaSQL(ColunaSQL colunaSQL) {
+//        return colunaSQL.getAlias();
+//    }
+//
+//    public static List<String> getListaTimeZone() {
+//        Map<BigDecimal, String> timeZones = new TreeMap<>();
+//
+//        Date today = new Date();
+//
+//        // Get all time zone ids
+//        String[] zoneIds = TimeZone.getAvailableIDs();
+//
+//        // View every time zone
+//        for (int i = 0; i < zoneIds.length; i++) {
+//            // Get time zone by time zone id
+//            TimeZone tz = TimeZone.getTimeZone(zoneIds[i]);
+//
+//            // Get the display name
+//            String longName = tz.getDisplayName(tz.inDaylightTime(today), TimeZone.LONG);
+//
+//            // Get the number of hours from GMT
+//            int rawOffset = tz.getRawOffset();
+//            int hour = rawOffset / (60 * 60 * 1000);
+//            int min = Math.abs(rawOffset / (60 * 1000)) % 60;
+//
+//            BigDecimal id = new BigDecimal(hour + "." + min);
+//            timeZones.put(id, zoneIds[i] + ", " + longName);
+//        }
+//
+//        return timeZones.entrySet().stream().map(item -> {
+//            String hour = Util.formataNumero(item.getKey().setScale(0, BigDecimal.ROUND_DOWN), "00", 0);
+//            String min = Util.formataNumero(item.getKey().remainder(BigDecimal.ONE).movePointRight(item.getKey().scale()).abs(), "00", 0);
+//            return item.getValue() + " " + hour + ":" + min;
+//        }).collect(Collectors.toList());
+//    }
+//
+//    public static byte[] file2ByteArray(File file) {
+//        try {
+//            RandomAccessFile f = new RandomAccessFile(file.getPath(), "r");
+//            byte[] b = new byte[(int) f.length()];
+//            if (f.read(b) == -1) {
+//                f.close();
+//                throw new UnicoException("COM23385", "Falhou ao ler o arquivo");
+//            }
+//            f.close();
+//            return b;
+//        } catch (IOException e) {
+//            throw new UnicoException("COM858", e);
+//        }
+//    }
+//
+//    public static boolean verificaNumeroCampo(String string) {
+//        if (string == null) {
+//            return false;
+//        }
+//        for (int i = 0; i < string.length(); i++) {
+//            if (!CARACTERES_VALIDOS_CODIGO_NOTA.contains(string.substring(i, i + 1))) {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
+//
+//    public static boolean verificaObservacaoComplementar(String string) {
+//        if (string == null) {
+//            return false;
+//        }
+//        for (int i = 0; i < string.length(); i++) {
+//            if (CARACTERES_NAO_PERMITIDOS_CAMPOS_TEXTO.contains(string.substring(i, i + 1))) {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
+//
+//    public static boolean verificaCodigoNota(String string) {
+//        if (string == null) {
+//            return false;
+//        }
+//        for (int i = 0; i < string.length(); i++) {
+//            if (!CARACTERES_VALIDOS_CODIGO_NOTA.contains(string.substring(i, i + 1))) {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
+//
+//    public static boolean validarCaracteres(String string) {
+//        if (string == null) {
+//            return false;
+//        }
+//        for (int i = 0; i < string.length(); i++) {
+//            if (!CARACTERES_VALIDOS.contains(string.substring(i, i + 1))) {
+//                return false;
+//            }
+//        }
+//
+//        return true;
+//    }
+//
+//    public static List<Long> carregaListaIdProdutosParaPatch() {
+//
+//        List<Long> idsProdutos = new ArrayList<Long>();
+//
+//        try {
+//            FileInputStream stream = new FileInputStream(Util.getDiretorioAplicacao() + Util.fileSeparator + "idsProdutosPatch.txt");
+//            InputStreamReader streamReader = new InputStreamReader(stream);
+//            BufferedReader reader = new BufferedReader(streamReader);
+//
+//            String linha = null;
+//            while ((linha = reader.readLine()) != null) {
+//                idsProdutos.add(Long.valueOf(linha.trim()));
+//            }
+//            reader.close();
+//            streamReader.close();
+//            stream.close();
+//        } catch (IOException e) {
+//            return null;
+//        }
+//
+//        return idsProdutos;
+//    }
+//
+//    public static boolean isFilialApenasVisualiza() {
+//        if (LicencaManager.getInstance().isConcentrador()) {
+//            Filial filial = Contexto.getInstance().getFilial();
+//            Long numeroPonto = ControleRN.getInstance().buscaNumeroPontoConcentrador();
+//            if (numeroPonto != null) {
+//                ConcentradorPonto concentradorPonto = ConcentradorPontoCommonRN.getInstance().buscarPontoPorNumero(numeroPonto);
+//                if (concentradorPonto == null) {
+//                    if (PropriedadeRN.getInstance().isHabilitaUniSync(filial) && verificaPonto()) {
+//                        return UniSyncData.usuarioOutraFilial(Contexto.getInstance().getUsuario().getId());
+//                    }
+//                }
+//                if (filial != null && concentradorPonto != null) {
+//                    ConcentradorPonto concentradorFilial = ConcentradorPontoCommonRN.getInstance().buscarPorIdFilial(filial.getId());
+//                    if (numeroPonto == 0 && concentradorFilial == null) {
+//                        return false;
+//                    } else if (filial.getId().equals(concentradorPonto.getIdFilial())) {
+//                        return false;
+//                    }
+//                }
+//            }
+//            return true;
+//        }
+//        return false;
+//    }
+//
+//    private static UniSyncLogger getLog() {
+//        if (log == null) {
+//            log = UniSyncLogManager.logger(UnisyncHost.class.getSimpleName());
+//        }
+//        return log;
+//    }
+//
+//    public static boolean verificaPonto() {
+//        boolean usuarioOutraFilial = false;
+//        try (Statement s = ConnectionSql.getConnection().createStatement(); ResultSet rs = s.executeQuery("select * from unisyncponto");) {
+//            usuarioOutraFilial = rs.next();
+//        } catch (SQLException e) {
+//            getLog().debug("Erro ao consultar base para determinar a filial usuario.", e);
+//        }
+//        return usuarioOutraFilial;
+//    }
+//
+//    public static char pegaPrimeiroCharString(String string) {
+//        char digito = 0;
+//        if (string != null) {
+//            digito = string.charAt(0);
+//        }
+//        return digito;
+//    }
+//
+//    public static boolean verificaRegistrosCount(int count, int quanto) {
+//        if (count > quanto) {
+//            return true;
+//        }
+//        return false;
+//    }
+//
+//    public static boolean stringExistsIn(String valor, String[] valores) {
+//        for (String value : valores) {
+//            if (valor.equals(value)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+//
+//    public static String byteArrayToString(byte[] byteArray) {
+//        String valor;
+//        try {
+//            valor = new String(byteArray, "UTF-8");
+//        } catch (UnsupportedEncodingException e) {
+//            valor = null;
+//        }
+//        return valor;
+//    }
+//
+//    public static String inputStreamToString(InputStream is) {
+//        StringBuilder sb = new StringBuilder();
+//
+//        byte[] buffer = new byte[1024];
+//        int len;
+//
+//        try {
+//            if (is.available() == 0) {
+//                is.reset();
+//            }
+//
+//            while ((len = is.read(buffer)) > 0) {
+//                sb.append(new String(buffer, 0, len));
+//            }
+//        } catch (IOException e) {
+//            throw new UnicoException("COM859", e);
+//        }
+//        return sb.toString();
+//    }
+//
+//    public static String file2String(File file) {
+//        try {
+//            return Files.lines(file.toPath()).collect(Collectors.joining());
+//        } catch (IOException e) {
+//            throw new UnicoException("COM860", e);
+//        }
+//    }
+//
+//    public static InputStream stringToInputStream(String xml) {
+//        try {
+//            return new ByteArrayInputStream(xml.getBytes("UTF-8"));
+//        } catch (UnsupportedEncodingException e) {
+//            throw new UnicoException("COM861", e);
+//        }
+//    }
+//
+//    /**
+//     * Método que retorna o espaço livre em disco em MB.
+//     */
+//    public static BigDecimal getEspacoLivre(String diretorio) {
+//        File file = new File(diretorio);
+//        BigDecimal espacoLivre = new BigDecimal(file.getFreeSpace());
+//
+//        return espacoLivre.divide(MIL_VINTE_QUATRO.multiply(MIL_VINTE_QUATRO)).setScale(2, BigDecimal.ROUND_HALF_EVEN);
+//    }
+//
+//    /**
+//     * Método que retorna o espaço total em disco em MB.
+//     */
+//    public static BigDecimal getEspacoTotal(String diretorio) {
+//        File file = new File(diretorio);
+//        BigDecimal espacoTotal = new BigDecimal(file.getTotalSpace());
+//
+//        return espacoTotal.divide(MIL_VINTE_QUATRO.multiply(MIL_VINTE_QUATRO)).setScale(2, BigDecimal.ROUND_HALF_EVEN);
+//    }
+//
+//    /**
+//     * Verifica se existe o pg_dump.exe em /pg/bin
+//     * 
+//     * @return true se existe instalação do postgres
+//     */
+//    public static boolean isExisteInstalacaoPostgres() {
+//        return new File(getDiretorioAplicacao() + "\\pg\\bin\\pg_dump.exe").exists();
+//    }
+//
+//    /**
+//     * Verifica se existe o pg_dump.exe em /pg/bin ou verifica se a propriedade banco.diretorio do
+//     * arquivo .properties foi configurada
+//     * 
+//     * @return true se existe instalação do postgres
+//     */
+//    public static boolean isExisteInstalacaoPostgresOuCaminhoConfigurado() {
+//        return Files.exists(Paths.get(getDiretorioPostgres() + "pg_dump.exe"));
+//    }
+//
+//    public static void validarFusoHorarioNfe() throws UnicoMensagemUsuarioException {
+//
+//        ZonedDateTime dt = DataHoraFactory.getDataHoraTimeZone();
+//
+//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("ZZ");
+//        String timeZone = dtf.format(dt);
+//        String fim = timeZone.substring(timeZone.length() - 2);
+//        if (fim.equals("30")) { // time zone não pode ser fracionado
+//            throw new UnicoMensagemUsuarioException("COM863", "Fuso horário " + dt.getZone() + "(" + timeZone + ") inválido");
+//        }
+//
+//    }
+//
+//    public static String quebraStringEmLinhas(String str, int charsPorLinha) {
+//        if (str.length() > charsPorLinha) {
+//            StringBuilder builder = new StringBuilder();
+//            int c = 0;
+//            for (int i = 0; i < str.length(); ++i, ++c) {
+//                if ((i != 0) && (c == charsPorLinha)) {
+//                    builder.append("<br>");
+//                    c = 0;
+//                }
+//                builder.append(str.charAt(i));
+//            }
+//            return builder.toString();
+//        } else {
+//            return str;
+//        }
+//    }
+//
+//    public static LocalDateTime long2LocalDateTime(long time) { // ok
+//        // Instant instant = Instant.ofEpochMilli(time);
+//        // return LocalDateTime.ofEpochSecond(instant.getEpochSecond(), instant.getNano(),
+//        // ZoneOffset.from(DataHoraFactory.getDataHoraTimeZone()));
+//        return LocalDateTime.ofInstant(Instant.ofEpochMilli(time), ZoneId.systemDefault());
+//    }
+//
+//    public static LocalDate long2LocalDate(long time) {
+//        return long2LocalDateTime(time).toLocalDate();
+//    }
+//
+//    public static long localDateTime2Millis(LocalDateTime localDateTime) { // ok
+//        // return
+//        // localDateTime.toInstant(ZoneOffset.from(DataHoraFactory.getDataHoraTimeZone())).toEpochMilli();
+//        return localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+//    }
+//
+//    public static long localDate2Millis(LocalDate localDate) { // ok
+//        // return
+//        // localDate.atStartOfDay().toInstant(ZoneOffset.from(DataHoraFactory.getDataHoraTimeZone())).toEpochMilli();
+//        return localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+//    }
+//
+//    public static org.joda.time.LocalDate javaTime2Joda(LocalDate localDate) {
+//        return new org.joda.time.LocalDate(localDate2Millis(localDate));
+//    }
+//
+//    public static LocalDate joda2JavaTime(org.joda.time.LocalDate localDate) {
+//        if (localDate == null) {
+//            return null;
+//        }
+//        return LocalDate.of(localDate.getYear(), localDate.getMonthOfYear(), localDate.getDayOfMonth());
+//    }
+//
+//    public static boolean isMac() {
+//        return System.getProperty("os.name", "").toLowerCase().startsWith("mac");
+//    }
+//
+//    /**
+//     * Método que converte uma string de números em um array de números.
+//     * 
+//     * @param s String com números separados por vírgula. Ex: 1, 2, 3, 99
+//     * @return Array dos números encontrados na string.
+//     */
+//    public static Integer[] explodeToIntegerArray(String s) {
+//
+//        if (s == null || s.trim().isEmpty()) {
+//            return new Integer[1];
+//        }
+//
+//        String strSemEspaco = s.replaceAll(" ", "");
+//
+//        if (strSemEspaco.isEmpty()) {
+//            return new Integer[1];
+//        }
+//
+//        String[] strArray = strSemEspaco.split(",");
+//
+//        Integer[] numArray = new Integer[strArray.length];
+//
+//        for (int i = 0; i < numArray.length; ++i) {
+//            try {
+//                numArray[i] = Integer.parseInt(strArray[i]);
+//            } catch (NumberFormatException ex) {
+//                UnicoTratamentoExcecao.logar(ex);
+//            }
+//        }
+//
+//        return numArray;
+//    }
+//
+//    /**
+//     * Calcula valor presente
+//     *
+//     * @param fv valor futuro
+//     * @param i taxa
+//     * @param n periodo
+//     * @return pv valor presente
+//     */
+//    public static BigDecimal valorPresente(BigDecimal fv, BigDecimal i, int n) {
+//        BigDecimal pv = BigDecimal.ZERO;
+//        if (i.compareTo(BigDecimal.ZERO) > 0) {
+//            pv = fv.divide(i.movePointLeft(2).add(BigDecimal.ONE).pow(n), 2, BigDecimal.ROUND_HALF_DOWN);
+//        }
+//        return pv;
+//    }
+//
+//    /**
+//     * Dado uma string contendo o nome de um método, cria uma instancia de Method que pode ser
+//     * invocado.
+//     * 
+//     * @param metodo nome do método
+//     * @param classe classe pai do método
+//     * @return Objeto Method que pode ser invocado.
+//     */
+//    public static Method getMethod(String metodo, Class<?> classe) {
+//        try {
+//            Method method = classe.getMethod(metodo);
+//            return method;
+//        } catch (SecurityException | NoSuchMethodException e) {
+//            UnicoTratamentoExcecao.logar(e);
+//            return null;
+//        }
+//    }
+//
+//    public static String formataNumero(BigDecimal valor, int tamanho) {
+//        String mascara = null;
+//        switch (valor.scale()) {
+//            case 0:
+//                mascara = "##########";
+//                break;
+//            case 1:
+//                mascara = "#######0.0";
+//                break;
+//            case 2:
+//                mascara = "######0.00";
+//                break;
+//            case 3:
+//                mascara = "#####0.000";
+//                break;
+//            default:
+//                mascara = "#####0.000";
+//        }
+//        DecimalFormat formatoNumero = new DecimalFormat();
+//        formatoNumero.applyPattern(mascara);
+//        return padr(formatoNumero.format(valor), tamanho);
+//    }
+//
+//    public static String formataNumero(BigDecimal valor, String mascara) {
+//        if (valor == null) {
+//            valor = BigDecimal.ZERO;
+//        }
+//        DecimalFormat formatoNumero = new DecimalFormat();
+//        formatoNumero.applyPattern(mascara);
+//        return formatoNumero.format(valor);
+//    }
+//
+//    public static Connection conectaBaseConcentrador(ConcentradorPonto ponto, boolean autoCommit) {
+//
+//        // dados da conexao da filial
+//        String base = null;
+//        if (ponto.getNumeroPonto().equals(0L)) {
+//            base = Contexto.getInstance().getProperties().getProperty(UnicoProperties.BASE_NOME);
+//        }
+//        if (Util.stringNullOrEmpty(base)) {
+//            base = ponto.getNomeBase() != null && !ponto.getNomeBase().trim().equals("") ? ponto.getNomeBase() : UnicoSistema.isGnio() ? "gnio" : "unico";
+//        }
+//
+//        String host = ponto.getHost();
+//        String porta = ponto.getPorta();
+//        SGBD sgbd = EnumUtils.getPorId(SGBD.class, Contexto.getInstance().getProperties().getProperty(UnicoProperties.BASE_SGDB));
+//
+//        return getConexao(sgbd, host, porta, base, autoCommit);
+//    }
+//
+//    public static Connection getConexao(SGBD sgbd, String host, String porta, String base, boolean autoCommit) {
+//
+//        // cria a url de conexao com a filial
+//        String url = sgbd != null ? sgbd.getUrl() : SGBD.POSTGRES.getUrl();
+//        url = url.replace("[HOST]", host);
+//        url = url.replace("[PORTA]", porta);
+//        url = url.replace("[BASEDADOS]", base);
+//
+//        String usuario = UnicoSistema.isGnio() ? "gnio" : "unico";
+//        String senha = UnicoSistema.isGnio() ? "gn34" : "5n3c4";
+//
+//        // cria a conexao com a filial...
+//        Connection connection;
+//        try {
+//            connection = DriverManager.getConnection(url, usuario, senha);
+//            connection.setAutoCommit(autoCommit);
+//        } catch (SQLException e) {
+//            throw new UnicoException("COM864", e);
+//        }
+//
+//        return connection;
+//    }
+//
+//    public static ParametroConexao getParametroConexaoConcentradorPonto(ConcentradorPonto ponto) {
+//        SGBD sgbd = EnumUtils.getPorId(SGBD.class, Contexto.getInstance().getProperties().getProperty(UnicoProperties.BASE_SGDB));
+//        return getParametroConexao(sgbd, ponto.getHost(), ponto.getPorta(), ponto.getNomeBase());
+//    }
+//
+//    public static ParametroConexao getParametroConexao(SGBD sgbd, String host, String porta, String base) {
+//        ParametroConexao parametroConexaoFilial = new ParametroConexao();
+//        parametroConexaoFilial.setSgdb(sgbd);
+//        parametroConexaoFilial.setHost(host);
+//        parametroConexaoFilial.setPorta(porta);
+//        parametroConexaoFilial.setBaseDados(base);
+//        if (UnicoSistema.isGnio()) {
+//            parametroConexaoFilial.setUsuario("gnio");
+//            parametroConexaoFilial.setSenha("gn34");
+//        } else {
+//            parametroConexaoFilial.setUsuario("unico");
+//            parametroConexaoFilial.setSenha("5n3c4");
+//        }
+//        return parametroConexaoFilial;
+//    }
+//
+//    public static void conectaBase(String database) {
+//        if (database == null) {
+//            database = UnicoSistema.isGnio() ? "gnio" : "unico";
+//        }
+//        ConnectionSql.getConfiguraConexao().setBaseDados(database);
+//        if (!ConnectionSql.conectaBancoDados()) {
+//            throw new UnicoException("COM865", "Não foi possível conectar na base " + database);
+//        }
+//        try {
+//            ConnectionSql.getConnection().setAutoCommit(true);
+//        } catch (SQLException e) {
+//            throw new UnicoException("COM866", e);
+//        }
+//    }
+//
+//    public static boolean isCnpjFilhoDe(String cnpjFilho, String cnpjPai) {
+//        cnpjPai = apenasNumeros(cnpjPai).substring(0, 8);
+//        return apenasNumeros(cnpjFilho).startsWith(cnpjPai);
+//    }
+//
+//    /**
+//     * Tenta fechar o outputstream. Se nÃ£o for possÃ­vel fechÃ¡-lo, resta apenas ao cÃ³digo
+//     * chamador anular a referÃªncia para ele.
+//     */
+//    public static void closeOutputStream(OutputStream outputStream) {
+//        try {
+//            if (outputStream != null) {
+//                outputStream.close();
+//            }
+//        } catch (IOException e) {
+//            throw new UnicoException("COM867", e);
+//        }
+//    }
+//
+//    /**
+//     * Testa se o inputStream Ã© nulo ou se tem 0 bytes disponÃ­veis no momento da chamada deste
+//     * mÃ©todo.
+//     */
+//    public static boolean inputStreamNullOrEmpty(InputStream inputStream) {
+//        if (inputStream == null)
+//            return true;
+//        try {
+//            if (inputStream.available() <= 0)
+//                return true;
+//        } catch (IOException e) {
+//            return true;
+//        }
+//        return false;
+//    }
+//
+//    /**
+//     * Faz o parse da string se estiver no formato ISO. Funciona para o formato retornado na NF-e:
+//     * yyyy-MM-ddThh:mm:ss[+|-]zz:zz
+//     */
+//    public static LocalDateTime stringISO2LocalDateTime(String dataHora) {
+//        DateTimeFormatter f = DateTimeFormatter.ISO_DATE_TIME;
+//        return LocalDateTime.parse(dataHora, f);
+//    }
+//
+//    public static String[] formataArrayCodigo(Collection<? extends AbstractPojo> pojos) {
+//        List<String> codigos = new ArrayList<String>(pojos.size());
+//        for (AbstractPojo pojo : pojos) {
+//            codigos.add((String) pojo.getCodigo());
+//        }
+//        return codigos.toArray(new String[codigos.size()]);
+//    }
+//
+//    /**
+//     * Salvar uma string em um arquivo texto
+//     * 
+//     * @param conteudo ConteÃºdo do arquivo
+//     * @param nomeArquivo Nome do arquivo
+//     * @throws UnicoMensagemUsuarioException
+//     */
+//    public static void salvarStringEmArquivo(String conteudo, String nomeArquivo) throws UnicoMensagemUsuarioException {
+//        try {
+//            FileWriter fw = new FileWriter(nomeArquivo);
+//            fw.write(conteudo);
+//            fw.flush();
+//            fw.close();
+//        } catch (IOException e) {
+//            throw new UnicoMensagemUsuarioException("COM868", "Erro ao salvar arquivo em disco");
+//        }
+//    }
+//
+//    public static String lerArquivo(InputStream fileInputStream) throws UnicoMensagemUsuarioException {
+//        InputStreamReader reader = new InputStreamReader(fileInputStream);
+//        BufferedReader br = new BufferedReader(reader);
+//        StringBuilder linhas;
+//        try {
+//            String linha = br.readLine();
+//            linhas = new StringBuilder();
+//            while (linha != null) {
+//                linhas = linhas.append(linha);
+//                linha = br.readLine();
+//            }
+//            reader.close();
+//            br.close();
+//        } catch (IOException e) {
+//            throw new UnicoMensagemUsuarioException("COM869", "Não foi possível ler o arquivo");
+//        }
+//        return linhas.toString();
+//    }
+//
+//    public static boolean intExistsIn(Integer valor, Integer[] valores) {
+//        for (Integer value : valores) {
+//            if (valor.equals(value)) {
+//                return true;
+//            }
+//        }
+//
+//        return false;
+//    }
+//
+//    /**
+//     * Gera um arquivo txt no diretorio do sistema
+//     * 
+//     * @param texto
+//     * @param nomeArquivo
+//     */
+//    public static void geraTxt(String texto, String nomeArquivo) {
+//        try {
+//            String arquivoLog = Util.getDiretorioAplicacao();
+//            File diretorio = new File(arquivoLog);
+//            Util.criarDiretorio(diretorio);
+//
+//            File file = new File(diretorio.getAbsolutePath() + Util.fileSeparator + nomeArquivo + ".txt");
+//            FileWriter fw = new FileWriter(file, true);
+//            fw.append(texto);
+//            fw.append(Util.lineSeparator);
+//            fw.flush();
+//            fw.close();
+//        } catch (IOException ex) {
+//            throw new UnicoException("COM870", ex);
+//        }
+//    }
+//
+//    public static ByteArrayOutputStream executaRelatorioEmPDF(String arquivo, Map<String, Object> parametros, ResultSet resultSet) throws UnicoMensagemUsuarioException {
+//        return executaRelatorioEmPDF(arquivo, parametros, new JRResultSetDataSource(resultSet));
+//    }
+//
+//    public static ByteArrayOutputStream executaRelatorioEmPDF(String arquivo, Map<String, Object> parametros, List<Map<String, ?>> fonteDados) throws UnicoMensagemUsuarioException {
+//        return executaRelatorioEmPDF(arquivo, parametros, new JRMapCollectionDataSource(fonteDados));
+//    }
+//
+//    private static ByteArrayOutputStream executaRelatorioEmPDF(String arquivo, Map<String, Object> parametros, JRDataSource dataSource) throws UnicoMensagemUsuarioException {
+//        try {
+//            InputStream is = Relatorio.getRelatorio(arquivo);
+//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//            JasperPrint jasperPrint = null;
+//
+//            if (dataSource == null) {
+//                jasperPrint = JasperFillManager.fillReport(is, parametros, ConnectionSql.getConnection());
+//            } else {
+//                jasperPrint = JasperFillManager.fillReport(is, parametros, dataSource);
+//            }
+//
+//            JasperExportManager.exportReportToPdfStream(jasperPrint, baos);
+//            return baos;
+//        } catch (JRException | NullPointerException ex) {
+//            throw new UnicoMensagemUsuarioException("COM871", "Não foi possível gerar o relatório", ex);
+//        }
+//
+//    }
+//
+//    public static BigDecimal calculaValorPresente(Integer quantidadeDias, BigDecimal valorDocumento, BigDecimal taxaJuros) {
+//        BigDecimal diasMes = BigDecimal.ONE.divide(new BigDecimal(30), 6, BigDecimal.ROUND_HALF_DOWN);
+//        BigDecimal percentualDescontoAntecipacaoDia = taxaJuros.movePointLeft(2).add(BigDecimal.ONE);
+//        double coeficienteDia = Math.pow(percentualDescontoAntecipacaoDia.doubleValue(), diasMes.doubleValue());
+//        double valorPresente = valorDocumento.doubleValue() / Math.pow(coeficienteDia, quantidadeDias.doubleValue());
+//        return new BigDecimal(valorPresente).setScale(2, BigDecimal.ROUND_HALF_EVEN);
+//    }
+//
+//    public static BigDecimal getPercentualDiferenca(BigDecimal valor1, BigDecimal valor2, boolean valorInferior) {
+//        if (valor1.compareTo(BigDecimal.ZERO) > 0 && valor2.compareTo(BigDecimal.ZERO) > 0) {
+//            BigDecimal percentual;
+//            if (valorInferior) {
+//                percentual = valor2.movePointRight(2).divide(valor1, 0, BigDecimal.ROUND_HALF_EVEN);
+//                return percentual.subtract(CEM).setScale(2, BigDecimal.ROUND_HALF_EVEN);
+//            } else {
+//                percentual = valor1.movePointRight(2).divide(valor2, 0, BigDecimal.ROUND_HALF_EVEN);
+//                return CEM.subtract(percentual).setScale(2, BigDecimal.ROUND_HALF_EVEN);
+//            }
+//        } else {
+//            return BigDecimal.ZERO;
+//        }
+//    }
+//
+//    public static int getUltimoDiaMes(int mes, int ano) {
+//        LocalDate data = LocalDate.of(ano, mes, 1);
+//        return data.getMonth().length(Year.isLeap(ano));
+//    }
+//
+//    public static String inputStream2String(InputStream is) throws UnicoMensagemUsuarioException {
+//        BufferedReader br = null;
+//        StringBuilder sb = new StringBuilder();
+//
+//        String line;
+//        try {
+//            if (is.markSupported()) {
+//                is.reset();
+//            }
+//            br = new BufferedReader(new InputStreamReader(is));
+//            while ((line = br.readLine()) != null) {
+//                sb.append(line);
+//            }
+//        } catch (IOException e) {
+//            throw new UnicoMensagemUsuarioException("COM872", "Não foi possível carregar o arquivo", e);
+//        } finally {
+//            if (br != null) {
+//                try {
+//                    br.close();
+//                } catch (IOException e) {
+//                    throw new UnicoMensagemUsuarioException("COM873", "Não foi possível carregar o arquivo", e);
+//                }
+//            }
+//        }
+//
+//        return sb.toString();
+//    }
+//
+//    public static List<String> inputStream2List(InputStream is) throws UnicoMensagemUsuarioException {
+//        return inputStream2List(is, "UTF-8");
+//    }
+//
+//    public static List<String> inputStream2List(InputStream is, String charsetName) throws UnicoMensagemUsuarioException {
+//        try (BufferedReader buffer = new BufferedReader(new InputStreamReader(is, charsetName))) {
+//            return buffer.lines().collect(Collectors.toList());
+//        } catch (IOException e) {
+//            throw new UnicoMensagemUsuarioException("COM23636", "Não foi possível carregar o arquivo", e);
+//        }
+//    }
+//
+//    /**
+//     * Verifica se o percentual Ã© maior que 1000 (funÃ§Ã£o criada para validar percentuais no XML
+//     * de NF-e que vinham errado, ao invÃ©s de 17.00, vinham 1700)
+//     * 
+//     * @param percentual
+//     * @return percentual correto
+//     */
+//    public static BigDecimal verificaSePercentualMaiorQue1000(BigDecimal percentual) {
+//        if (!bigDecimalNullOrZero(percentual) && percentual.compareTo(new BigDecimal(1000)) >= 0) {
+//            percentual = percentual.divide(new BigDecimal(100), BigDecimal.ROUND_HALF_EVEN);
+//        }
+//        return percentual;
+//    }
+//
+//    public static int getQuantidadeDigitosAntesVirgula(BigDecimal numero) {
+//        if (numero == null) {
+//            return 0;
+//        }
+//        return numero.setScale(0, BigDecimal.ROUND_FLOOR).precision();
+//    }
+//
+//    public static Long[] getListaIds(List<? extends AbstractPojo> pojos) {
+//        Long[] ids = new Long[pojos.size()];
+//        for (int i = 0; i < pojos.size(); i++) {
+//            ids[i] = pojos.get(i).getId();
+//        }
+//        return ids;
+//    }
+//
+//    public static void gravarEmArquivo(String diretorio, String arquivo, String xml) {
+//        Util.criarDiretorio(new File(diretorio));
+//        File f = new File(diretorio + arquivo);
+//        Util.excluirArquivo(f);
+//        try (FileWriter fileWriter = new FileWriter(f, true)) {
+//            fileWriter.write(xml);
+//            fileWriter.flush();
+//        } catch (IOException ex) {
+//            LogSistema.escreve(Log.ERROFATAL, "Erro ao gravar arquivo", false);
+//        }
+//    }
+//
+//    public static String getValorTag(String str) {
+//        if (str != null && str.isEmpty()) {
+//            return null;
+//        }
+//        return str;
+//    }
+//
+//    public static BigDecimal getValorTag(BigDecimal bd) {
+//        if (bd != null && bd.compareTo(BigDecimal.ZERO) == 0) {
+//            return null;
+//        }
+//        return bd;
+//    }
+//
+//    public static String getAnoData(LocalDate data) {
+//        String strData = localDate2String(data, "dd/MM/yyyy");
+//        if (strData != null) {
+//            return strData.substring(6);
+//        }
+//        return null;
+//    }
+//
+//    public static String getAnoData(LocalDateTime dataHora) {
+//        String strData = localDateTime2String(dataHora, "dd/MM/yyyy");
+//        if (strData != null) {
+//            return strData.substring(6);
+//        }
+//        return null;
+//    }
+//
+//    public static String getMesData(LocalDate data) {
+//        String strData = localDate2String(data, "dd/MM/yyyy");
+//        if (strData != null) {
+//            return strData.substring(3, 5);
+//        }
+//        return null;
+//    }
+//
+//    /**
+//     * Formata inscrição estadual com zeros a esquerda de acordo com o estado de entrada
+//     * 
+//     * @param estado
+//     * @param ie
+//     * @return inscrição estado formatada com zeros a esquerda
+//     */
+//    public static String formatarInscricaoEstadualPorEstado(String estado, String ie) {
+//        if (estado.equalsIgnoreCase("RS")) {
+//            ie = zeroEsquerda(apenasNumeros(ie), 10);
+//        }
+//        return ie;
+//    }
+//
+//    public static String getHexString(String str) {
+//        return getHexString(str.getBytes());
+//    }
+//
+//    public static String getHexString(byte[] raw) {
+//        byte[] hex = new byte[2 * raw.length];
+//        int index = 0;
+//
+//        for (byte b : raw) {
+//            int v = b & 0xFF;
+//            hex[index++] = HEX_CHAR_TABLE[v >>> 4];
+//            hex[index++] = HEX_CHAR_TABLE[v & 0xF];
+//        }
+//        return new String(hex);
+//    }
+//
+//    public static UUID string2UUID(String str) {
+//        try {
+//            return UUID.fromString(str.trim());
+//        } catch (IllegalArgumentException e) {
+//            return null;
+//        }
+//    }
+//
+//    public static String formatarMensagemExcecao(String codigoErro, String identificador, String msg) {
+//
+//        // verifica se já tem um código de erro, se sim, retorna a mesma mensagem
+//        if (msg.length() > 20) {
+//            String fimMsg = msg.substring(msg.length() - 20);
+//            if (fimMsg.contains("(") && fimMsg.contains(")")) {
+//                return msg;
+//            }
+//        } else if (msg.endsWith(")")) {
+//            return msg;
+//        }
+//
+//        String sufixo = "";
+//
+//        if (codigoErro != null) {
+//
+//            String modulo = "";
+//            Integer numero = 0;
+//
+//            for (int i = codigoErro.length() - 1; i >= 0; i--) {
+//                char l = codigoErro.charAt(i);
+//                if (Character.isLetter(l)) {
+//                    modulo = codigoErro.substring(0, i + 1);
+//                    numero = Integer.parseInt(codigoErro.substring(i + 1));
+//                    break;
+//                }
+//            }
+//
+//            sufixo = modulo + identificador + numero;
+//            if (!stringNullOrEmpty(msg)) {
+//                sufixo = " (" + sufixo + ")";
+//            }
+//        }
+//        return msg + sufixo;
+//    }
+//
+//    public static String getUserDir() {
+//        return System.getProperty("user.dir");
+//    }
+//
+//    public static boolean existeArquivo(File file) {
+//        return file.exists() && !file.isDirectory();
+//    }
+//
+//    /**
+//     * Compacta map de arquivos em memória.
+//     * 
+//     * @param arquivos {@link Map} <{@link String}, {@link ByteArrayOutputStream} >
+//     * @return {@link Byte}[]
+//     */
+//    public static ByteArrayOutputStream comprimirArquivos(Map<String, ByteArrayOutputStream> arquivos) {
+//        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+//        try (ZipOutputStream zipFile = new ZipOutputStream(bos)) {
+//            for (Entry<String, ByteArrayOutputStream> entry : arquivos.entrySet()) {
+//                ZipEntry zipEntry = new ZipEntry(entry.getKey());
+//                zipFile.putNextEntry(zipEntry);
+//                zipFile.write(entry.getValue().toByteArray());
+//            }
+//            zipFile.flush();
+//        } catch (IOException ex) {
+//            return null;
+//        }
+//        return bos;
+//    }
+//
+//    public static byte[] comprimirArquivoDeDiscoNaMemoria(File arquivoDeDisco) {
+//
+//        try (FileInputStream fis = new FileInputStream(arquivoDeDisco);
+//                BufferedInputStream bis = new BufferedInputStream(fis);
+//                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//                ZipOutputStream zos = new ZipOutputStream(baos)) {
+//
+//            zos.putNextEntry(new ZipEntry(arquivoDeDisco.getName()));
+//
+//            final int TAMANHO_BUFFER = 2048;
+//            byte[] buffer = new byte[TAMANHO_BUFFER];
+//            int bytesLidos = 0;
+//            while ((bytesLidos = bis.read(buffer)) > 0) {
+//                zos.write(buffer, 0, bytesLidos);
+//            }
+//
+//            zos.close();
+//
+//            return baos.toByteArray();
+//
+//        } catch (IOException e) {
+//            return null;
+//        }
+//    }
+//
+//    public static void descomprimirArquivoDeMemoriaNoDisco(byte[] bytesComprimidos, File arquivoNoDisco) {
+//
+//        try (ByteArrayInputStream bais = new ByteArrayInputStream(bytesComprimidos);
+//                ZipInputStream zis = new ZipInputStream(bais);
+//                FileOutputStream fos = new FileOutputStream(arquivoNoDisco);
+//                BufferedOutputStream bos = new BufferedOutputStream(fos)) {
+//
+//            zis.getNextEntry();
+//
+//            final int TAMANHO_BUFFER = 2048;
+//            byte[] buffer = new byte[TAMANHO_BUFFER];
+//            int bytesLidos = 0;
+//            while ((bytesLidos = zis.read(buffer)) > 0) {
+//                bos.write(buffer, 0, bytesLidos);
+//            }
+//
+//            bos.flush();
+//
+//        } catch (IOException e) {
+//            throw new UnicoException("COM235457", e);
+//        }
+//    }
+//
+//    public static BigDecimal string2BigDecimalAceitaPonto(String str) {
+//        BigDecimal valor = BigDecimal.ZERO;
+//        try {
+//            valor = new BigDecimal(str.replace(',', '.'));
+//        } catch (NumberFormatException e) {
+//            valor = BigDecimal.ZERO;
+//        }
+//        return valor;
+//    }
+//
+//    public static int string2int(String str, int base) {
+//        int valor = 0;
+//        try {
+//            valor = Integer.parseInt(str, base);
+//        } catch (NumberFormatException numberFormatException) {
+//            valor = 0;
+//        }
+//        return valor;
+//    }
+//
+//    public static long string2long(String str) {
+//        long valor = 0;
+//        try {
+//            valor = Long.parseLong(str);
+//        } catch (NumberFormatException numberFormatException) {
+//            valor = 0;
+//        }
+//        return valor;
+//    }
+//
+//    public static String removeChars(String s, char... c) {
+//        String r = s;
+//        for (char cc : c) {
+//            r = Util.removeChar(r, cc);
+//        }
+//        return r;
+//    }
+//
+//    public static String removeChar(String s, char c) {
+//        String r = "";
+//        for (int i = 0; i < s.length(); i++) {
+//            if (s.charAt(i) != c) {
+//                r += s.charAt(i);
+//            }
+//        }
+//        return r;
+//    }
+//
+//    /**
+//     * Verifica se o arquivo é válido ou não e apaga seu conteúdo
+//     *
+//     * @param arquivo a ser validado
+//     * @return true se arquivo é válido
+//     */
+//    public static boolean arquivoValido(String arquivo) {
+//        boolean sucesso = false;
+//        try {
+//            File file = new File(arquivo);
+//            if (file.isFile()) {
+//                Util.excluirArquivo(file);
+//                sucesso = true;
+//            } else {
+//                if (file.createNewFile()) {
+//                    Util.excluirArquivo(file);
+//                    sucesso = true;
+//                }
+//            }
+//        } catch (IOException iOException) {
+//            sucesso = false;
+//        }
+//        return sucesso;
+//    }
+//
+//    public static String getAppDir() {
+//        return System.getProperty("user.dir");
+//    }
+//
+//    /**
+//     * Calcula digito verificador EAN/UCC-8,UCC-12,EAN/UCC-13,EAN/UCC-14 ou SSCC
+//     *
+//     * @param numero
+//     * @param digito
+//     * @return
+//     */
+//    public static String getDigitoCodigoBarras(String numero) {
+//        String digito = "";
+//        int factor = 3;
+//        int sum = 0;
+//        int numlen = numero.length();
+//        if (((((numlen == 7) || (numlen == 11)) || (numlen == 12)) || (numlen == 13)) || (numlen == 17)) {
+//            for (int index = numero.length(); index > 0; --index) {
+//                sum = sum + string2int(numero.substring(index - 1, index)) * factor;
+//                factor = 4 - factor;
+//            }
+//            digito = Integer.toString((1000 - sum) % 10);
+//        }
+//        return digito;
+//    }
+//
+//    /**
+//     * Verifica se um código de barras é válido
+//     *
+//     * @param numero
+//     * @return
+//     */
+//    public static boolean getCodigoBarrasValido(String numero) {
+//        if (numero.length() > 0) {
+//            String digito = getDigitoCodigoBarras(numero.substring(0, numero.length() - 1));
+//            String ultimoDigito = numero.substring(numero.length() - 1);
+//            return digito.equals(ultimoDigito);
+//        }
+//        return false;
+//    }
+//
+//    public static boolean isClientePesquisavel(String texto, int minimoCaracteresPesquisar) {
+//        return isPesquisavel(texto, minimoCaracteresPesquisar);
+//    }
+//
+//    public static boolean isPesquisavel(String texto, int minimoCaracteresPesquisar) {
+//        boolean pesquisavel = false;
+//        if (minimoCaracteresPesquisar > 0) {
+//            int numero = 0;
+//            for (int i = 0; i < texto.length(); i++) {
+//                char car = texto.charAt(i);
+//                if (Character.isLetter(car) || Character.isWhitespace(car)) {
+//                    numero++;
+//                }
+//            }
+//            pesquisavel = numero >= minimoCaracteresPesquisar;
+//        }
+//        return pesquisavel;
+//    }
+//
+//    public static String getLocalHost() {
+//        String hostname = "";
+//        try {
+//            InetAddress addr = InetAddress.getLocalHost();
+//            hostname = addr.getHostAddress();
+//        } catch (UnknownHostException e) {
+//            hostname = "";
+//        }
+//        return hostname;
+//    }
+//
+//    public static boolean isLocalHost(String host) {
+//        boolean isLocalHost = false;
+//        if (host.equalsIgnoreCase("LOCALHOST") || host.equals("127.0.0.1") || host.equalsIgnoreCase(getLocalHost())) {
+//            isLocalHost = true;
+//        }
+//        return isLocalHost;
+//    }
+//
+//    /**
+//     * Copia um arquivo para o destino especificado
+//     * 
+//     * @param in arquivo de origem
+//     * @param out destino para o arquivo de origem
+//     * @throws UnicoMensagemUsuarioException
+//     */
+//    public static void copiarArquivo(File in, File out) throws UnicoMensagemUsuarioException {
+//        try {
+//            Files.copy(in.toPath(), out.toPath());
+//        } catch (IOException e) {
+//            throw new UnicoMensagemUsuarioException("COM235493", "Não foi possível copiar o arquivo " + in.getAbsolutePath() + " para " + out.getAbsolutePath());
+//        }
+//    }
+//
+//    /**
+//     * Utilizar o método {@link Util}{@link #copiarArquivo(File, File)}
+//     * 
+//     * @param in arquivo de origem
+//     * @param out destino para o arquivo de origem
+//     * @return true se sucesso
+//     */
+//    @Deprecated
+//    public static boolean copyFile(File in, File out) {
+//        if (isLinux()) {
+//
+//            try (FileInputStream fis = new FileInputStream(in); FileOutputStream fos = new FileOutputStream(out); FileChannel inChannel = fis.getChannel(); FileChannel outChannel = fos.getChannel()) {
+//
+//                inChannel.transferTo(0, inChannel.size(), outChannel);
+//                return true;
+//            } catch (IOException e) {
+//                return false;
+//            }
+//        } else {
+//            try {
+//                String comando = "COPY " + in.getAbsolutePath() + " " + out.getAbsolutePath() + " /Y";
+//                File exec = new File("exec.bat");
+//                Util.excluirArquivo(exec);
+//                FileWriter fileWriter = new FileWriter(exec, true);
+//                fileWriter.write(comando + Util.newLine());
+//                fileWriter.close();
+//                Process externo = Runtime.getRuntime().exec(exec.getName());
+//                boolean sucesso = externo.waitFor() == 0;
+//                Util.excluirArquivo(exec);
+//                return sucesso;
+//            } catch (InterruptedException | IOException ex) {
+//                return false;
+//            }
+//        }
+//    }
+//
+//    public static String getMesExtenso(int mes) {
+//        String[] meses = {"JANEIRO", "FEVEREIRO", "MARCO", "ABRIL", "MAIO", "JUNHO", "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"};
+//        return meses[mes - 1];
+//    }
+//
+//    public static String senhaDoDia(int multiplicar, int somar) {
+//        LocalDateTime ldt = DataHoraFactory.getDataHora();
+//        int senha = ldt.getDayOfMonth() * ldt.getMonthValue() * (ldt.getYear() - 2000);
+//        senha = senha * multiplicar + somar;
+//        return Integer.toString(senha);
+//    }
+//
+//    public static String trataCodigoProduto(String codigo) {
+//        StringBuilder sb = new StringBuilder();
+//        for (int i = 0; i < codigo.length(); i++) {
+//            char car = codigo.charAt(i);
+//            if (Character.isDigit(car)) {
+//                sb.append(car);
+//            }
+//        }
+//        if (sb.length() == 0) {
+//            sb.append('1');
+//        }
+//        return sb.toString();
+//    }
+//
+//    /**
+//     * Toca apenas wav, para tocar mp3 teria que baixar a biblioteca JLayer;
+//     *
+//     * @see http://www.javazoom.net/javalayer/sources.html
+//     * @param arquivo - Caminho com o nome do arquivo .wav a ser tocado
+//     */
+//    public static void tocarSom(File arquivo) {
+//        class AudioListener implements LineListener {
+//            private boolean done = false;
+//
+//            @Override
+//            public synchronized void update(LineEvent event) {
+//                Type eventType = event.getType();
+//                if (eventType == Type.STOP || eventType == Type.CLOSE) {
+//                    done = true;
+//                    notifyAll();
+//                }
+//            }
+//
+//            public synchronized void waitUntilDone() {
+//                while (!done) {
+//                    try {
+//                        wait();
+//                    } catch (InterruptedException e) {
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//        AudioListener audio = new AudioListener();
+//        try (AudioInputStream audioIn = AudioSystem.getAudioInputStream(arquivo.toURI().toURL()); Clip clip = AudioSystem.getClip();) {
+//            if (arquivo.exists()) {
+//                clip.open(audioIn);
+//                clip.addLineListener(audio);
+//                clip.start();
+//                audio.waitUntilDone();
+//            }
+//        } catch (IOException | UnsupportedAudioFileException | LineUnavailableException | IllegalArgumentException e) {
+//            UnicoTratamentoExcecao.logar(e);
+//        }
+//    }
+//
+//    public static String formatarString(String texto, String mascara) {
+//        try {
+//            MaskFormatter mf = new MaskFormatter(mascara);
+//            mf.setValueContainsLiteralCharacters(false);
+//            return mf.valueToString(texto);
+//        } catch (ParseException ex) {
+//            return texto;
+//        }
+//    }
+//
+//    private static boolean isAnoBissexto(int ano) {
+//        if ((ano % 4) == 0 && ((ano % 100) != 0 || (ano % 400) == 0)) {
+//            return true;
+//        }
+//        return false;
+//    }
+//
+//    private static boolean isMesTem31Dias(LocalDate data) {
+//        data = data.withDayOfMonth(1);
+//        data = data.plusMonths(1);
+//        data = data.minusDays(1);
+//        return data.getDayOfMonth() == 31;
+//    }
+//
+//    public static int trataDiaVencimento(int diaVencimento, LocalDate dataBase) {
+//        if (diaVencimento > 28 && dataBase.getMonth() == Month.FEBRUARY) {
+//            if (Util.isAnoBissexto(dataBase.getYear())) {
+//                diaVencimento = 29;
+//            } else {
+//                diaVencimento = 28;
+//            }
+//        } else if (diaVencimento == 31 && !Util.isMesTem31Dias(dataBase)) {
+//            diaVencimento = 30;
+//        } else if (diaVencimento == 0) {
+//            diaVencimento = dataBase.getDayOfMonth();
+//        }
+//
+//        return diaVencimento;
+//    }
+//
+//    public static String subString(String str, int inicio, int tamanho) {
+//
+//        if (inicio < 1) {
+//            throw new UnicoException("COM2181", "inicio < 1");
+//        }
+//
+//        if (str == null) {
+//            return "";
+//        }
+//
+//        if (inicio > str.length()) {
+//            return "";
+//        }
+//
+//        inicio--;
+//        int fim = inicio + tamanho;
+//        if (fim > str.length()) {
+//            fim = str.length();
+//        }
+//        return str.substring(inicio, fim);
+//    }
+//
+//    public static String subString(String str, int inicio) {
+//        if (str == null) {
+//            return "";
+//        }
+//        return subString(str, inicio, str.length());
+//    }
+//
+//    public static String formataDocumento(String documento) {
+//        if (documento.matches("[0-9]{19}")) {
+//            documento = documento.substring(0, 15) + "-" + documento.substring(15, 17) + "/" + documento.substring(17, 19);
+//        }
+//        return documento;
+//    }
+//
+//    public static Long firstNonNull(Long a, Long b) {
+//        return a != null ? a : b;
+//    }
+//
+//    public static Integer firstNonNull(Integer a, Integer b) {
+//        return a != null ? a : b;
+//    }
+//
+//    public static String firstNonNull(String a, String b) {
+//        return a != null ? a : b;
+//    }
+//
+//    public static String formatDuration(String mask, long seconds) {
+//        final int SECONDS_PER_MINUTE = 60;
+//        final int MINUTES_PER_HOUR = 60;
+//        final int SECONDS_PER_HOUR = SECONDS_PER_MINUTE * MINUTES_PER_HOUR;
+//
+//        long hours = seconds / SECONDS_PER_HOUR;
+//        int minutes = (int) ((seconds % SECONDS_PER_HOUR) / SECONDS_PER_MINUTE);
+//        int secs = (int) (seconds % SECONDS_PER_MINUTE);
+//
+//        return String.format(mask, hours, minutes, secs);
+//    }
+//
+//    public static String decodeBase64GZip(String strZip) {
+//        try {
+//            byte[] decoded = Base64.decodeBase64(strZip.getBytes());
+//            GZIPInputStream gis = new GZIPInputStream(new ByteArrayInputStream(decoded));
+//            BufferedReader bf = new BufferedReader(new InputStreamReader(gis, "UTF-8"));
+//            String outStr = "";
+//            String line;
+//            while ((line = bf.readLine()) != null) {
+//                outStr += line;
+//            }
+//            return outStr;
+//        } catch (UnsupportedEncodingException e) {
+//            return null;
+//        } catch (IOException e) {
+//            return null;
+//        }
+//    }
+//
+//    public static void configuraProxy() {
+//        if (PropriedadeRN.getInstance().getPropriedadeBoolean(null, PropriedadeRN.USA_PROXY)) {
+//            final String proxyHost = PropriedadeRN.getInstance().getPropriedadeString(null, PropriedadeRN.PROXY_HOST);
+//            final String proxyPorta = PropriedadeRN.getInstance().getPropriedadeString(null, PropriedadeRN.PROXY_PORTA);
+//            final String proxyUser = PropriedadeRN.getInstance().getPropriedadeString(null, PropriedadeRN.PROXY_USER);
+//            final String proxySenha = PropriedadeRN.getInstance().getPropriedadeString(null, PropriedadeRN.PROXY_SENHA);
+//
+//            System.setProperty("http.proxyHost", proxyHost);
+//            System.setProperty("http.proxyPort", proxyPorta);
+//            System.setProperty("https.proxyHost", proxyHost);
+//            System.setProperty("https.proxyPort", proxyPorta);
+//            Authenticator.setDefault(new Authenticator() {
+//                @Override
+//                protected PasswordAuthentication getPasswordAuthentication() {
+//                    return new PasswordAuthentication(proxyUser, proxySenha.toCharArray());
+//                }
+//            });
+//        }
+//    }
+//
+//    /**
+//     * Converte uma string em um array inteiro
+//     * 
+//     * @param str passar strin no formato ex: [1,2,3,4]
+//     * @return array int
+//     */
+//    public static int[] convertStringToArrayInt(String str) {
+//        String[] arr = str.replaceAll("\\[", "").replaceAll("\\]", "").split(",");
+//
+//        int[] result = new int[arr.length];
+//
+//        for (int i = 0; i < arr.length; i++) {
+//            try {
+//                result[i] = Integer.parseInt(arr[i]);
+//            } catch (NumberFormatException nfe) {
+//                throw new UnicoException("NTF815", nfe.getMessage());
+//            }
+//        }
+//        return result;
+//    }
+//
+//    /**
+//     * Método responsável por pegar uma data válida. Isso evitará erros de formação de datas do tipo
+//     * 30/02/2015.
+//     * 
+//     * @param ano
+//     * @param mes
+//     * @param dia
+//     * @return uma data válida.
+//     */
+//    public static LocalDate getDataValida(int ano, int mes, int dia) {
+//        LocalDate dataValida = null;
+//        while (dataValida == null) {
+//            try {
+//                dataValida = LocalDate.of(ano, mes, dia);
+//            } catch (DateTimeException e) {
+//                dataValida = null;
+//                dia--;
+//            }
+//        }
+//        return dataValida;
+//    }
+//
+//    public static boolean isIntegerValue(BigDecimal bd) {
+//        return bd.signum() == 0 || bd.scale() <= 0 || bd.stripTrailingZeros().scale() <= 0;
+//    }
+//
+//    /**
+//     * Normaliza a primeira tag do XML para remover possíveis caracteres especiais. Ex: ï��
+//     * 
+//     * @param file
+//     * @return XML InputStream
+//     * @throws Exception
+//     */
+//    public static byte[] file2ByteArrayNormalizerXML(File file) {
+//        String arquivo = file2String(file);
+//
+//        String xmlMontado = null;
+//        /*
+//         * Não é o melhor modo de verificar, mas por enquanto foi o único encontrado.
+//         */
+//        String caracteres = arquivo.substring(0, arquivo.indexOf(">") + 1);
+//        String caracteresNormalizados = normalizar(caracteres);
+//        xmlMontado = caracteresNormalizados + arquivo.substring(arquivo.indexOf(">") + 1);
+//
+//        byte[] xml;
+//        try {
+//            xml = xmlMontado.getBytes("UTF-8");
+//        } catch (UnsupportedEncodingException e) {
+//            xml = null;
+//        }
+//        return xml;
+//    }
+//
+//    private static String normalizar(String stringAcentuada) {
+//        return Normalizer.normalize(stringAcentuada, Form.NFC).replaceAll("[^\\p{ASCII}]", "");
+//    }
+//
+//    public static void excluirArquivo(String arquivo) {
+//        excluirArquivo(new File(arquivo));
+//    }
+//
+//    public static void excluirArquivo(File arquivo) {
+//        if (arquivo.exists()) {
+//            if (!arquivo.delete()) {
+//                throw new UnicoException("COM23368", "Erro ao excluir arquivo " + arquivo);
+//            }
+//        }
+//    }
+//
+//    public static void renomearArquivo(String origem, String destino) {
+//        renomearArquivo(new File(origem), new File(destino));
+//    }
+//
+//    public static void renomearArquivo(File origem, File destino) {
+//        if (destino.exists() && !destino.delete()) {
+//            throw new UnicoException("COM235459", "Arquivo destino: " + destino + " já existe e não pode ser excluido");
+//        }
+//
+//        if (!origem.renameTo(destino)) {
+//            throw new UnicoException("COM23369", "Erro ao renomear arquivo " + origem + " para " + destino);
+//        }
+//    }
+//
+//    public static void criarDiretorio(String dir) {
+//        criarDiretorio(new File(dir));
+//    }
+//
+//    public static void criarDiretorio(File dir) {
+//        if (!dir.exists()) {
+//            if (!dir.mkdir()) {
+//                throw new UnicoException("COM23374", "Erro ao criar diretorio " + dir);
+//            }
+//        }
+//    }
+//
+//    public static void excluirDiretorio(String diretorio) {
+//        Path start = Paths.get(diretorio);
+//        if (!Files.exists(start)) {
+//            return;
+//        }
+//        try {
+//            FileUtils.deleteDirectory(new File(diretorio));
+//        } catch (IOException ex) {
+//            throw new UnicoException("COM23656", "Erro ao excluir diretório " + diretorio);
+//        }
+//    }
+//
+//    public static String extrairDDDTelefone(String telefone) {
+//        if (Util.stringNullOrEmpty(telefone)) {
+//            return null;
+//        }
+//        telefone = telefone.replaceAll("[^0-9+]", "");
+//        if (telefone.length() < 3) {
+//            return null;
+//        }
+//        return telefone.substring(0, 3);
+//    }
+//
+//    public static String formatarLinhaDigitavelConvenio(String linhaDigitavel) {
+//        String mask = "###########-#   ###########-#   ###########-#   ###########-#";
+//        return UtilDesktop.formatarString(linhaDigitavel, mask);
+//    }
+//
+//    public static boolean isOS32bits() {
+//        return System.getProperty("os.arch").contains("32");
+//    }
+//
+//    public static boolean isOS64bits() {
+//        return System.getProperty("os.arch").contains("64");
+//    }
+//
+//    public static <E> E getOrElse(E valor, E alternativa) {
+//        return valor == null ? alternativa : valor;
+//    }
+//
+//    public static Color getRGB(String cor) {
+//        String[] rgb = cor.split(",");
+//        if (rgb.length == 3) {
+//            int r = Util.string2int(rgb[0]);
+//            int g = Util.string2int(rgb[1]);
+//            int b = Util.string2int(rgb[2]);
+//            return new Color(r, g, b);
+//        } else {
+//            return Color.BLACK;
+//        }
+//    }
+//
+//    public static boolean cmc7IsValido(String cmc7) {
+//        boolean retorno = true;
+//        if (cmc7.length() == 30) {
+//            try {
+//                if (Util.modulo10(cmc7.substring(0, 7)) != Integer.parseInt(cmc7.substring(18, 19))) {
+//                    retorno = false;
+//                } else {
+//                    if (Util.modulo10(cmc7.substring(8, 18)) != Integer.parseInt(cmc7.substring(7, 8))) {
+//                        retorno = false;
+//                    } else {
+//                        if (Util.modulo10(cmc7.substring(19, 29)) != Integer.parseInt(cmc7.substring(29, 30))) {
+//                            retorno = false;
+//                        }
+//                    }
+//                }
+//            } catch (NumberFormatException numberFormatException) {
+//                retorno = false;
+//            }
+//        } else {
+//            retorno = false;
+//        }
+//        return retorno;
+//    }
+//
+//    /**
+//     * Verifica se os dois valores passados são diferentes com tolerância de um centavo positivo ou
+//     * negativo.
+//     * 
+//     * @param valor1 {@link BigDecimal}
+//     * @param valor2 {@link BigDecimal}
+//     * @return true se os valores possuirem diferença maior que um centavo
+//     */
+//    public static boolean isDiferencaMaiorQueUmCentavo(BigDecimal valor1, BigDecimal valor2) {
+//        BigDecimal umCentavo = new BigDecimal("0.01");
+//        BigDecimal diferenca = valor1.subtract(valor2);
+//
+//        if (diferenca.compareTo(BigDecimal.ZERO) != 0) {
+//            if ((diferenca.signum() == 1 && diferenca.compareTo(umCentavo) != 0) || (diferenca.signum() == -1 && diferenca.compareTo(umCentavo.negate()) != 0)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+//
+//    /**
+//     * Calcula a margem de lucro.
+//     * 
+//     * @param lucro {@link BigDecimal}
+//     * @param valorTotal {@link BigDecimal}
+//     * @return margem {@link BigDecimal}
+//     */
+//    public static BigDecimal getMargemLucro(BigDecimal lucro, BigDecimal valorTotal) {
+//        if (valorTotal.compareTo(BigDecimal.ZERO) > 0) {
+//            return lucro.multiply(Util.CEM).divide(valorTotal, 2, RoundingMode.HALF_EVEN);
+//        } else {
+//            return BigDecimal.ZERO;
+//        }
+//    }
+//
+//    /**
+//     * Retorna a quantidade de memória RAM do computador em MB
+//     * 
+//     * @return int memória
+//     */
+//    public static int getMemoriaOS() {
+//        try {
+//            MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
+//            Object attribute = mBeanServer.getAttribute(new ObjectName("java.lang", "type", "OperatingSystem"), "TotalPhysicalMemorySize");
+//            BigDecimal memoriaEmBytes = new BigDecimal(attribute.toString());
+//            if (memoriaEmBytes.compareTo(BigDecimal.ZERO) > 0) {
+//                BigDecimal mb = new BigDecimal(1024 * 1024);
+//                return memoriaEmBytes.divide(mb, BigDecimal.ROUND_HALF_EVEN, 0).intValue();
+//            }
+//        } catch (AttributeNotFoundException | InstanceNotFoundException | MalformedObjectNameException | MBeanException | ReflectionException e) {
+//            UnicoTratamentoExcecao.logar(e);
+//        }
+//        return 0;
+//    }
+//
+//    /**
+//     * Retorna o caminho da pasta onde se encontra a instalação do PostgreSQL
+//     * 
+//     * @return caminho do PostgreSQL
+//     */
+//    public static String getDiretorioPostgres() {
+//        String dir = Contexto.getInstance().getProperties().getProperty(UnicoProperties.DIRETORIO_PG);
+//        if (!Util.stringNullOrEmpty(dir)) {
+//            dir = dir.trim();
+//            if (Files.exists(Paths.get(dir))) {
+//                dir = dir.replace("\\", "/");
+//                if (!dir.endsWith("/")) {
+//                    dir += "/";
+//                }
+//                return dir + "bin/";
+//            } else {
+//                return getDiretorioAplicacao() + "/pg/bin/";
+//            }
+//        } else {
+//            return getDiretorioAplicacao() + "/pg/bin/";
+//        }
+//    }
+//
+//    /**
+//     * Selecioa uma arquivo de imagem.
+//     * 
+//     * @param formato {@link Array} passar o formato que vai ser permitido
+//     * @return {@link String} Caminho da imagem
+//     * @throws UnicoMensagemUsuarioException
+//     */
+//    public static String selecionarImagem(String... formato) throws UnicoMensagemUsuarioException {
+//        File arquivo = UtilDesktop.chamarDialogoArquivo(Util.getDiretorioAplicacao(), "", "");
+//        if (arquivo != null) {
+//            String formatos = "";
+//            if (!arrayNullOrEmpty(formato)) {
+//                for (String s : formato) {
+//                    formatos += s + "  ";
+//                    if (arquivo.getPath().toUpperCase().endsWith(s.toUpperCase())) {
+//                        return arquivo.getPath().replaceAll("\\\\", "/");
+//                    }
+//                }
+//                throw new UnicoMensagemUsuarioException("COM23578", "Arquivo inválido. O arquivo tem que ser do tipo " + formatos);
+//            }
+//        }
+//        return "";
+//    }
+//
+//    /**
+//     * Calcula os valores das parcelas.
+//     * 
+//     * @param valorFinanciado
+//     * @param taxaFinanciamento
+//     * @param n
+//     * @param temEntrada
+//     * @return
+//     */
+//    public static BigDecimal valorPrestacao(BigDecimal valorFinanciado, BigDecimal taxaFinanciamento, int n, boolean temEntrada) {
+//        BigDecimal pmt = BigDecimal.ZERO;
+//        if (taxaFinanciamento.compareTo(BigDecimal.ZERO) > 0) {
+//            if (temEntrada) {
+//                BigDecimal dividendo = valorFinanciado.multiply(taxaFinanciamento.movePointLeft(2).add(BigDecimal.ONE).pow(n - 1).multiply(taxaFinanciamento).movePointLeft(2));
+//                BigDecimal divisor = taxaFinanciamento.movePointLeft(2).add(BigDecimal.ONE).pow(n).subtract(BigDecimal.ONE);
+//                pmt = dividendo.divide(divisor, 2, BigDecimal.ROUND_DOWN);
+//            } else {
+//                BigDecimal dividendo = valorFinanciado.multiply(taxaFinanciamento.movePointLeft(2).add(BigDecimal.ONE).pow(n).multiply(taxaFinanciamento).movePointLeft(2));
+//                BigDecimal divisor = taxaFinanciamento.movePointLeft(2).add(BigDecimal.ONE).pow(n).subtract(BigDecimal.ONE);
+//                pmt = dividendo.divide(divisor, 2, BigDecimal.ROUND_DOWN);
+//                return pmt;
+//            }
+//        } else {
+//            pmt = valorFinanciado.divide(new BigDecimal(n), 2, BigDecimal.ROUND_DOWN);
+//        }
+//        return pmt;
+//    }
+//
+//    /**
+//     * Calcula o valor das parcelas utilizando o prazo da condição de pagamento.
+//     * 
+//     * @param valor {@link BigDecimal}
+//     * @param prazos {@link String}
+//     * @return valorParcela {@link BigDecimal}
+//     */
+//    public static BigDecimal calculaValorParcelaCondicaoPgmto(BigDecimal valor, String prazos) {
+//        BigDecimal valorParcelas = valor.divide(new BigDecimal(prazos.split("\\.").length), 2, BigDecimal.ROUND_HALF_DOWN);
+//        return valorParcelas;
+//    }
+//
+//    public static byte[] extractBytes(ImageIcon icon) {
+//        byte[] bytes = null;
+//
+//        BufferedImage img = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+//        Graphics2D g2d = img.createGraphics();
+//        icon.paintIcon(null, g2d, 0, 0);
+//        g2d.dispose();
+//
+//        try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+//            ImageOutputStream ios = ImageIO.createImageOutputStream(baos);
+//            try {
+//                ImageIO.write(img, "png", ios);
+//                bytes = baos.toByteArray();
+//            } finally {
+//                ios.close();
+//            }
+//        } catch (IOException ex) {
+//            UnicoTratamentoExcecao.logar(ex);
+//        }
+//
+//        return (bytes);
+//    }
+//
+//    public static String printDurationToString(Duration duration) {
+//        long durationMs;
+//        try {
+//            durationMs = duration.toMillis();
+//        } catch (ArithmeticException ex) {
+//            durationMs = 0;
+//        }
+//        return Util.formatDuration("%02d:%02d:%02d", durationMs / 1000); // ms -> s
+//    }
+//
+//    public static String formataCpfCnpj(String cpfCnpj) {
+//        if (cpfCnpj == null) {
+//            return null;
+//        }
+//        cpfCnpj = Util.limpaMascara(cpfCnpj, "./-");
+//        if (cpfCnpj.length() == 11) {
+//            cpfCnpj = cpfCnpj.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+//        } else {
+//            cpfCnpj = cpfCnpj.replaceAll("(\\d{2})(\\d{3})(\\d{3})(\\d{4})(\\d{2})", "$1.$2.$3/$4-$5");
+//        }
+//        return cpfCnpj;
+//    }
+//
+//    /**
+//     * Verificar se a imagem pode ser lida pelo sistema
+//     * 
+//     * @param arquivo
+//     * @return true se a imagem pode ser lida pelo sistema
+//     */
+//    public static boolean isImagemValida(String arquivo) {
+//        boolean isImagemValida = false;
+//        try {
+//            isImagemValida = ImageIO.read(new File(arquivo)) != null;
+//        } catch (Throwable ex) {
+//            // Se algum erro acontecer ao carregar a imagem do DANFE, desconsidera o erro e tambem a
+//            // imagem
+//            isImagemValida = false;
+//        }
+//        return isImagemValida;
+//    }
+//}

@@ -1,0 +1,30 @@
+package br.intelidata.service;
+
+import br.intelidata.component.LogComponent;
+import br.intelidata.component.ResponseComponent;
+import br.intelidata.component.UnicoCryptComponent;
+import br.intelidata.config.Entity;
+import br.intelidata.config.Service;
+import br.intelidata.entity.SomethingIsWrongEntity;
+
+public class SomethingIsWrongService extends Service
+{
+	public static Entity parseRequest(LogComponent logComponent, SomethingIsWrongEntity somethingIsWrongEntity) throws Exception
+	{
+		try {
+			
+			String info = UnicoCryptComponent.decript(
+							somethingIsWrongEntity.getInfo()
+						);
+			
+			String history = UnicoCryptComponent.decript(
+							somethingIsWrongEntity.getHistory()	
+						);
+			
+	        logComponent.logarSomethingIsWrong(info, history);
+	        return somethingIsWrongEntity;
+	    } catch (Exception e) {
+	        throw e;
+	    }
+	}
+}

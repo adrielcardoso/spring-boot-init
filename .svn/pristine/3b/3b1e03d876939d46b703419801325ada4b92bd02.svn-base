@@ -1,0 +1,17 @@
+package br.intelidata.controllers;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.intelidata.config.Controller;
+
+@RestController
+public class PingController extends Controller 
+{
+    @RequestMapping("/ping")
+    public String showLuckyWord() 
+    {
+        return "ping";
+    }
+}
+

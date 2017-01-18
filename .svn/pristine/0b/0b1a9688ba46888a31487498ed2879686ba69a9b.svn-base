@@ -1,0 +1,128 @@
+package br.intelidata.component;
+
+public enum FamiliaComponent implements AbstractEnumComponent<Integer> {
+
+    NENHUMA(0, "Nenhuma", 0, 0, 0, 0, false, false, 0, 0, 0, 0, "", "", "", false, false),
+    PLUS_START(1, " Uniplus Starter Edition", 3, 3, 1, 30, true, true, 0, 10, 15, 30, "", "A licença do sistema não foi validada", "A licença do sistema não é válida", true, true),
+    START(2, "Unico START", 2, 8, 1, 365, false, false, 30, 0, 0, 0, "", "", "", false, false),
+    MANAGER(3, "Unico Manager", 2, 25, 5, 365, false, false, 30, 0, 0, 0, "", "", "", false, false),
+    PLUS(4, " Uniplus", 2, 9999, 9999, 30, true, true, 0, 10, 15, 30, "", "A licença do sistema não foi validada", "A licença do sistema não é válida", true, true),
+    GNIO(5, "G-nio", 2, 9999, 9999, 30, true, true, 0, 10, 15, 30, "", "A licença do sistema não foi validada", "A licença do sistema não é válida", true, true);
+
+    private Integer id;
+    private String descricao;
+    private int numeroUsuariosDefault;
+    private int numeroMaximoUsuarios;
+    private int numeroMaximoFiliais;
+    private int diasValidadeLicenca;
+    private boolean travaSistemaAposVencerLicenca;
+    private boolean utilizarWS;
+    private int diasAntesVencimentoLicencaParaNotificarUsuario;
+    private int diasAposVencimentoLicencaParaTomarAcao;
+    private int diasAposVencimentoLicencaParaNotificarUsuario;
+    private int diasAposVencimentoParaExpirarLicenca;
+    private String textoContrato;
+    private String mensagemLicencaAVencer;
+    private String mensagemLicencaVencida;
+    private boolean utilizarWSParaAtivarLicenca;
+    private boolean utilizarWSParaControlarNumeroUsuario;
+
+    FamiliaComponent(Integer id, String descricao, int numeroUsuariosDefault, int numeroMaximoUsuarios, int numeroMaximoFiliais, int diasValidadeLicenca, boolean travaSistemaAposVencerLicenca,
+            boolean utilizarWS, int diasAntesVencimentoLicencaParaNotificarUsuario, int diasAposVencimentoLicencaParaTomarAcao, int diasAposVencimentoLicencaParaNotificarUsuario,
+            int diasAposVencimentoParaExpirarLicenca, String textoContrato, String mensagemLicencaAVencer, String mensagemLicencaVencida, boolean utilizarWSParaAtivarLicenca,
+            boolean utilizarWSParaControlarNumeroUsuario) {
+        this.id = id;
+        this.descricao = descricao;
+        this.numeroUsuariosDefault = numeroUsuariosDefault;
+        this.numeroMaximoUsuarios = numeroMaximoUsuarios;
+        this.numeroMaximoFiliais = numeroMaximoFiliais;
+        this.diasValidadeLicenca = diasValidadeLicenca;
+        this.travaSistemaAposVencerLicenca = travaSistemaAposVencerLicenca;
+        this.utilizarWS = utilizarWS;
+        this.diasAntesVencimentoLicencaParaNotificarUsuario = diasAntesVencimentoLicencaParaNotificarUsuario;
+        this.diasAposVencimentoLicencaParaTomarAcao = diasAposVencimentoLicencaParaTomarAcao;
+        this.diasAposVencimentoLicencaParaNotificarUsuario = diasAposVencimentoLicencaParaNotificarUsuario;
+        this.diasAposVencimentoParaExpirarLicenca = diasAposVencimentoParaExpirarLicenca;
+        this.textoContrato = textoContrato;
+        this.mensagemLicencaAVencer = mensagemLicencaAVencer;
+        this.mensagemLicencaVencida = mensagemLicencaVencida;
+        this.utilizarWSParaAtivarLicenca = utilizarWSParaAtivarLicenca;
+        this.utilizarWSParaControlarNumeroUsuario = utilizarWSParaControlarNumeroUsuario;
+    }
+
+    @Override
+    public Integer getId() {
+        return id;
+    }
+
+    @Override
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public int getNumeroUsuariosDefault() {
+        return numeroUsuariosDefault;
+    }
+
+    public int getNumeroMaximoUsuarios() {
+        return numeroMaximoUsuarios;
+    }
+
+    public int getNumeroMaximoFiliais() {
+        return numeroMaximoFiliais;
+    }
+
+    public int getDiasValidadeLicenca() {
+        return diasValidadeLicenca;
+    }
+
+    public boolean isTravaSistemaAposVencerLicenca() {
+        return travaSistemaAposVencerLicenca;
+    }
+
+    public boolean isUtilizarWS() {
+        return utilizarWS;
+    }
+
+    public int getDiasAposVencimentoLicencaParaTomarAcao() {
+        return diasAposVencimentoLicencaParaTomarAcao;
+    }
+
+    public int getDiasAposVencimentoLicencaParaNotificarUsuario() {
+        return diasAposVencimentoLicencaParaNotificarUsuario;
+    }
+
+    public int getDiasAposVencimentoParaExpirarLicenca() {
+        return diasAposVencimentoParaExpirarLicenca;
+    }
+
+    public String getTextoContrato() {
+        return textoContrato;
+    }
+
+    public String getMensagemLicencaAVencer() {
+        return mensagemLicencaAVencer;
+    }
+
+    public String getMensagemLciencaVencida() {
+        return mensagemLicencaVencida;
+    }
+
+    public boolean isUtilizarWSParaAtivarLicenca() {
+        return utilizarWSParaAtivarLicenca;
+    }
+
+    public int getDiasAntesVencimentoLicencaParaNotificarUsuario() {
+        return diasAntesVencimentoLicencaParaNotificarUsuario;
+    }
+
+    public boolean isUtilizarWSParaControlarNumeroUsuario() {
+        return utilizarWSParaControlarNumeroUsuario;
+    }
+
+    @Override
+    public String toString() {
+        return getDescricao();
+    }
+
+}

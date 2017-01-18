@@ -1,0 +1,11 @@
+package br.intelidata.interace;
+
+public interface IEnviaArquivoAutorizacaoInterface {
+
+	 /**
+     * Metodo criado para tratar o enviao do arquivo de autorização
+     * 
+     * @return
+     */
+    public abstract String enviaArquivo();
+}

@@ -1,0 +1,15 @@
+//package br.intelidata.service;
+//
+//public class ValidadorEnterpriseManager extends ValidadorEnterpriseBase
+//{
+//	@Override
+//    public void validar(String chave, String cnpj) throws UnicoMensagemUsuarioException {
+//        super.validar(chave, cnpj);
+//
+//        if (!Util.isCnpjFilhoDe(cnpj, LicencaManager.getInstance().getLicencaPrincipal().getCnpj())) {
+//            if (!LicencaManager.getInstance().contemLicencaPorCNPJ(ProdutoLicenca.MULTICNPJ, cnpj)) {
+//                throw new UnicoMensagemUsuarioException("COM355", "CNPJ: " + cnpj + " não é uma filial da licença principal. Você precisa de uma licença de Multi-CNPJ para completar essa operação.");
+//            }
+//        }
+//    }
+//}

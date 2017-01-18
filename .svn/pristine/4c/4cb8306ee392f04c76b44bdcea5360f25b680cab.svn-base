@@ -1,0 +1,200 @@
+package br.intelidata.entity;
+
+import br.intelidata.config.Entity;
+
+public class InfoFilial extends Entity
+{
+    private String razaoSocial;
+    private String nome;
+    private String cnpj;
+    private String cidade;
+    private String estado;
+    private String bairro;
+    private String endereco;
+    private String numero;
+    private String complemento;
+    private String cep;
+    private String email;
+    private String telefone;
+    private String inscricaoEstadual;
+    private String inscricaoMunicipal;
+    private String reponsavel;
+    private String site;
+    private String cnae;
+
+    public InfoFilial() 
+    {
+    	super();
+    }
+
+    public String getRazaoSocial() 
+    {
+        return razaoSocial;
+    }
+
+    public void setRazaoSocial(String razaoSocial) 
+    {
+        this.razaoSocial = razaoSocial;
+    }
+
+    public String getCnpj() 
+    {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) 
+    {
+        this.cnpj = cnpj;
+    }
+
+    public String getCidade() 
+    {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) 
+    {
+        this.cidade = cidade;
+    }
+
+    public String getEstado() 
+    {
+        return estado;
+    }
+
+    public void setEstado(String estado) 
+    {
+        this.estado = estado;
+    }
+
+    public String getEndereco() 
+    {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) 
+    {
+        this.endereco = endereco;
+    }
+
+    public String getNumero() 
+    {
+        return numero;
+    }
+
+    public void setNumero(String numero) 
+    {
+        this.numero = numero;
+    }
+
+    public String getCep() 
+    {
+        return cep;
+    }
+
+    public void setCep(String cep) 
+    {
+        this.cep = cep;
+    }
+
+    public String getEmail() 
+    {
+        return email;
+    }
+
+    public void setEmail(String email) 
+    {
+        this.email = email;
+    }
+
+    public String getTelefone() 
+    {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) 
+    {
+        this.telefone = telefone;
+    }
+
+    public String getNome() 
+    {
+        return nome;
+    }
+
+    public void setNome(String nome) 
+    {
+        this.nome = nome;
+    }
+
+    public String getBairro() 
+    {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) 
+    {
+        this.bairro = bairro;
+    }
+
+    public String getComplemento() 
+    {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) 
+    {
+        this.complemento = complemento;
+    }
+
+    public String getInscricaoEstadual() 
+    {
+        return inscricaoEstadual;
+    }
+
+    public void setInscricaoEstadual(String inscricaoEstadual) 
+    {
+        this.inscricaoEstadual = inscricaoEstadual;
+    }
+
+    public String getInscricaoMunicipal() 
+    {
+        return inscricaoMunicipal;
+    }
+
+    public void setInscricaoMunicipal(String inscricaoMunicipal) 
+    {
+        this.inscricaoMunicipal = inscricaoMunicipal;
+    }
+
+    public String getReponsavel() 
+    {
+        return reponsavel;
+    }
+
+    public void setReponsavel(String reponsavel) 
+    {
+        this.reponsavel = reponsavel;
+    }
+
+    public String getSite() 
+    {
+        return site;
+    }
+
+    public void setSite(String site) 
+    {
+        this.site = site;
+    }
+
+    public String getCnae() 
+    {
+        return cnae;
+    }
+
+    public void setCnae(String cnae) 
+    {
+        this.cnae = cnae;
+    }
+
+}

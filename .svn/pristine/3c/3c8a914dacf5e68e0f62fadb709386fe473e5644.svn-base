@@ -1,0 +1,4 @@
+br\intelidata\entity\PedidoDesinstalacao.class
+br\intelidata\controllers\PedidoDesinstalacaoController.class
+br\intelidata\service\PedidoDesinstalacaoService.class
+br\intelidata\entity\PedidoDesinstalacaoRequest.class

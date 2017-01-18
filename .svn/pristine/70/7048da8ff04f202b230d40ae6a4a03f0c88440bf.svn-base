@@ -1,0 +1,44 @@
+package br.intelidata.entity;
+
+import br.intelidata.config.Entity;
+
+public class SomethingIsWrong extends Entity
+{	
+	private String history;
+	private Object info;
+	private long dataHora;
+	private IsItOkEntityRequestRelation me;
+	
+	public String getHistory() 
+	{
+		return history;
+	}
+	public void setHistory(String history) 
+	{
+		this.history = history;
+	}
+	public Object getInfo() 
+	{
+		return info;
+	}
+	public void setInfo(Object info) 
+	{
+		this.info = info;
+	}
+	public long getDataHora() 
+	{
+		return dataHora;
+	}
+	public void setDataHora(long dataHora) 
+	{
+		this.dataHora = dataHora;
+	}
+	public IsItOkEntityRequestRelation getMe() 
+	{
+		return me;
+	}
+	public void setMe(IsItOkEntityRequestRelation me) 
+	{
+		this.me = me;
+	}
+}

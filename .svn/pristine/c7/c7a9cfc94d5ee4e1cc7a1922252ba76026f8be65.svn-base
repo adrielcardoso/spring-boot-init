@@ -1,0 +1,73 @@
+package br.intelidata.entity;
+
+import java.sql.Connection;
+
+import javax.sql.DataSource;
+
+import br.intelidata.config.Entity;
+import br.intelidata.controllers.LogComponent;
+import br.intelidata.service.DadosEcfAutorizadaService;
+
+public class DadosEcfAutorizadaEntity extends Entity
+{
+	private Long id;
+    private String email;
+    private String codigoRevenda;
+    private String nomeRevenda;
+    private Long idEstado;
+
+    public Long getId() 
+    {
+        return id;
+    }
+
+    public void setId(Long id) 
+    {
+        this.id = id;
+    }
+
+    public String getEmail() 
+    {
+        return email;
+    }
+
+    public void setEmail(String email) 
+    {
+        this.email = email;
+    }
+
+    public String getCodigoRevenda() 
+    {
+        return codigoRevenda;
+    }
+
+    public void setCodigoRevenda(String codigoRevenda) 
+    {
+        this.codigoRevenda = codigoRevenda;
+    }
+
+    public String getNomeRevenda() 
+    {
+        return nomeRevenda;
+    }
+
+    public void setNomeRevenda(String nomeRevenda) 
+    {
+        this.nomeRevenda = nomeRevenda;
+    }
+
+    public Long getIdEstado() 
+    {
+        return idEstado;
+    }
+
+    public void setIdEstado(Long idEstado) 
+    {
+        this.idEstado = idEstado;
+    }
+
+    public static DadosEcfAutorizadaEntity getDadosEcfAutorizada(DataSource dataSource, String numeroSerie, String cnpj) 
+    {
+        return DadosEcfAutorizadaService.buscaDadosEcfAutorizada(dataSource, numeroSerie, cnpj);
+    }
+}

@@ -1,0 +1,113 @@
+package br.intelidata.component;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
+
+public class GeradorLicencaComponent 
+{
+	private static GeradorLicencaComponent instance;
+
+    public static GeradorLicencaComponent getInstance() 
+    {
+        if (instance == null) {
+            instance = new GeradorLicencaComponent();
+        }
+        return instance;
+    }
+
+    private GeradorLicencaComponent() {}
+
+    private String getChaveInstalacao(String licenciadoPara, String cnpj, String cnpjMatriz) 
+    {
+        String hexaCnpj = ChaveComponent.getInstance().string2Chave(cnpj, true);
+        String hexaLicenciadoPara = ChaveComponent.getInstance().string2Chave(licenciadoPara, true);
+        String hexaCnpjMatriz = ChaveComponent.getInstance().string2Chave(cnpjMatriz, true);
+        String hexaTempo = ChaveComponent.getInstance().string2Chave(Long.toString(getDataInstalacao()), true);
+        return hexaCnpj + "." + hexaLicenciadoPara + "." + hexaCnpjMatriz + "." + hexaTempo;
+    }
+
+    private long getDataInstalacao() 
+    {
+        // 24/01/2007 00:42
+        return 1169606520000L;
+    }
+
+    private String gerarChaveAtivacao(String prefixo, Long idRevenda, Long idClienteFinal, String chaveInstalacao, LocalDate dataInstalacao) 
+    {
+        String chaveAtivacao = prefixo + "." + zeroEsquerda(idRevenda, 6) + "." + zeroEsquerda(idClienteFinal, 6);
+
+        String[] partes = chaveInstalacao.split("\\.");
+        int somaChaveInstalacao = 0;
+        for (int i = 0; i < partes.length; i++) {
+            somaChaveInstalacao += Integer.parseInt(partes[i], 16);
+        }
+        int primosChaveInstalacao = Integer.parseInt(ChaveComponent.getInstance().string2Chave(Integer.toString(somaChaveInstalacao), false));
+        int primosChaveAtivacao = Integer.parseInt(ChaveComponent.getInstance().string2Chave(chaveAtivacao, false));
+        int somaGeral = primosChaveInstalacao + primosChaveAtivacao;
+
+        chaveAtivacao += "." + somaGeral;
+
+        if (dataInstalacao != null) {
+            chaveAtivacao += "." + gerarSufixoReinstalacao(chaveAtivacao, dataInstalacao);
+        }
+
+        return chaveAtivacao;
+    }
+
+    private String gerarSufixoReinstalacao(String chaveAtivacao, LocalDate data) 
+    {
+        LocalDate dataBase = LocalDate.of(1999, 7, 25);
+        int diasDiferenca = new Long(ChronoUnit.DAYS.between(dataBase, data)).intValue();
+
+        String hexa1 = Integer.toHexString(diasDiferenca);
+
+        Long soma = getSomaNumeros(chaveAtivacao + diasDiferenca);
+
+        String hexa2 = Long.toHexString(soma);
+        String chave = hexa1 + "G" + hexa2;
+        chave = chave.toUpperCase();
+        return chave;
+    }
+
+    // de acordo conversa com Roberto 
+    // 30-12-2016
+    // para geração de licenças o parametro de IdClienteFinal foi alterado para idContrato.
+    public HashMap<String, String> getLicenca(String razaoSocial, String cnpj, Long idRevenda, Long idContrato, String prefixo) 
+    {
+        cnpj = cnpj.replace(".", "").replace("-", "").replace("/", "");
+        String chaveInstalacao = getChaveInstalacao(razaoSocial, cnpj, cnpj);
+        String chaveAtivacao = gerarChaveAtivacao(prefixo, idRevenda, idContrato, chaveInstalacao, LocalDate.now());
+        
+        HashMap<String, String> chaves = new HashMap<String, String>();
+        
+        chaves.put("chaveInstalacao", chaveInstalacao);
+        chaves.put("chaveAtivacao", chaveAtivacao);
+        
+        return chaves;
+    }
+
+    private long getSomaNumeros(String numeros) 
+    {
+        long soma = 1;
+        for (int i = 0; i < numeros.length(); i++) {
+            String c = numeros.charAt(i) + "";
+            if (Character.isDigit(c.charAt(0))) {
+                int numero = Integer.parseInt(c);
+                if (numero > 0) {
+                    soma = soma * numero;
+                }
+            }
+        }
+        return soma;
+    }
+
+    public String zeroEsquerda(Object obj, int tamanho) 
+    {
+        String string = obj.toString();
+        for (int i = string.length(); i < tamanho; i++) {
+            string = "0" + string;
+        }
+        return string;
+    }
+}

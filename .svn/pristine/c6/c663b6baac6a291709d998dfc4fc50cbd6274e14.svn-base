@@ -1,0 +1,133 @@
+package br.intelidata.entity;
+
+import java.math.BigDecimal;
+import br.intelidata.component.UtilComponent;
+import br.intelidata.config.Entity;
+
+public class DadosAutorizacaoEcfEntity extends Entity
+{
+    private String numeroSerie;
+    private BigDecimal gt;
+    private String cro;
+    private String cnpj;
+    private String md5;
+    private String modelo;
+    private String fabricante;
+    private String codigoModelo;
+    private String razaoSocial;
+    private String observacao;
+    private String versaoPaf;
+    
+    public DadosAutorizacaoEcfEntity()
+    {
+    	super();
+    }
+
+    public String getNumeroSerie() {
+        return numeroSerie;
+    }
+
+    public void setNumeroSerie(String numeroSerie) {
+        this.numeroSerie = numeroSerie;
+    }
+
+    public BigDecimal getGt() {
+        return gt;
+    }
+
+    public void setGt(BigDecimal gt) {
+        this.gt = gt;
+    }
+
+    public String getCro() {
+        return cro;
+    }
+
+    public void setCro(String cro) {
+        this.cro = cro;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public String getMd5() {
+        return md5;
+    }
+
+    public void setMd5(String md5) {
+        this.md5 = md5;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public String getFabricante() {
+        return fabricante;
+    }
+
+    public void setFabricante(String fabricante) {
+        this.fabricante = fabricante;
+    }
+
+    public String getCodigoModelo() {
+        return codigoModelo;
+    }
+
+    public void setCodigoModelo(String codigoModelo) {
+        this.codigoModelo = codigoModelo;
+    }
+
+    public String getRazaoSocial() {
+        return razaoSocial;
+    }
+
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+
+    public String getVersaoPaf() {
+        return versaoPaf;
+    }
+
+    public void setVersaoPaf(String versaoPaf) {
+        this.versaoPaf = versaoPaf;
+    }
+
+    public static DadosAutorizacaoEcfEntity converte(String dados) {
+    	DadosAutorizacaoEcfEntity dadosAutorizacao = null;
+        String[] parametros = dados.split("\\|");
+        if (parametros.length == 11) {
+            dadosAutorizacao = new DadosAutorizacaoEcfEntity();
+            dadosAutorizacao.setNumeroSerie(parametros[0]);
+            dadosAutorizacao.setGt(UtilComponent.string2BigDecimal(parametros[1], 2));
+            dadosAutorizacao.setCro(parametros[2]);
+            dadosAutorizacao.setCnpj(UtilComponent.formataCnpj(parametros[3]));
+            dadosAutorizacao.setMd5(parametros[4]);
+            dadosAutorizacao.setCodigoModelo(parametros[5]);
+            dadosAutorizacao.setFabricante(parametros[6]);
+            dadosAutorizacao.setModelo(parametros[7]);
+            dadosAutorizacao.setRazaoSocial(parametros[8]);
+            dadosAutorizacao.setObservacao(parametros[9].replace('\'', ' '));
+            dadosAutorizacao.setVersaoPaf(parametros[10]);
+        }
+        return dadosAutorizacao;
+    }
+}

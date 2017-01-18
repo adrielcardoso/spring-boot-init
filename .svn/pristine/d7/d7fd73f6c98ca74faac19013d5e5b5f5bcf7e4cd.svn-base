@@ -1,0 +1,48 @@
+package br.intelidata.component;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.util.Collections;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.Properties;
+import java.util.Vector;
+
+public class SortedPropertiesComponent extends Properties
+{
+	static final long serialVersionUID = 1L;
+
+    @Override
+    public synchronized Enumeration keys() 
+    {
+        Enumeration keysEnum = super.keys();
+        Vector keyList = new Vector();
+        while (keysEnum.hasMoreElements()) {
+            keyList.add(keysEnum.nextElement());
+        }
+        Collections.sort(keyList);
+        return keyList.elements();
+    }
+
+    public void sortedStore(OutputStream paramOutputStream, String comentario) throws IOException 
+    {
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(paramOutputStream, "8859_1"));
+        bufferedWriter.write("#" + comentario);
+        bufferedWriter.newLine();
+        bufferedWriter.write("#" + new Date().toString());
+        bufferedWriter.newLine();
+        synchronized (this) {
+            Enumeration localEnumeration = keys();
+            while (localEnumeration.hasMoreElements()) {
+                String key = (String) localEnumeration.nextElement();
+                String value = getProperty(key);
+                bufferedWriter.write(key + "=" + value);
+                bufferedWriter.newLine();
+            }
+        }
+        bufferedWriter.flush();
+        bufferedWriter.close();
+    }
+}

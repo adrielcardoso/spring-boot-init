@@ -1,0 +1,63 @@
+package br.intelidata.component;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ChaveComponent 
+{
+    private static ChaveComponent instance;
+
+    private List<Integer> primos;
+    private int qtdeMaximoPrimos = 100;
+
+    public int getPrimoFromIndex(int index) {
+        return getPrimos().get(index);
+    }
+
+    private void geraPrimos() {
+        primos = new ArrayList<Integer>();
+        int i = 0;
+        while (primos.size() < qtdeMaximoPrimos) {
+            if (isPrimo(++i)) {
+                primos.add(i);
+            }
+        }
+    }
+
+    public List<Integer> getPrimos() {
+        if (primos == null) {
+            geraPrimos();
+        }
+        return primos;
+    }
+
+    private boolean isPrimo(int nro) {
+        int divisivel = 0;
+        for (int i = 1; i <= nro; i++) {
+            if (nro % i == 0) {
+                ++divisivel;
+            }
+        }
+        return (divisivel == 2);
+    }
+
+    public String string2Chave(String texto, boolean retornaHexa) {
+        int soma = 0;
+        for (int i = 0; i < texto.length(); i++) {
+            int valor = (i + 1) * getPrimoFromIndex(i) * texto.charAt(i);
+            soma += valor;
+        }
+        if (retornaHexa) {
+            return Integer.toHexString(soma).toUpperCase();
+        } else {
+            return Integer.toString(soma);
+        }
+    }
+
+    public static ChaveComponent getInstance() {
+        if (instance == null) {
+            instance = new ChaveComponent();
+        }
+        return instance;
+    }
+}

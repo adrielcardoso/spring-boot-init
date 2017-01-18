@@ -1,0 +1,135 @@
+package br.intelidata.component;
+
+import java.io.ByteArrayOutputStream;
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
+import java.security.Security;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+
+public class EmailComponent 
+{
+	private static final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+
+    public static boolean enviarPadrao(
+    		String emailDestino, 
+    		String emailCC, 
+    		String assunto, 
+    		String mensagem, 
+    		String nomeArquivo, 
+    		String mimeType, 
+    		ByteArrayOutputStream baos, 
+    		boolean msgHtml) throws MessagingException{
+        
+    	return enviar(
+    			emailDestino, 
+    			emailCC, 
+    			assunto, 
+    			mensagem, 
+    			nomeArquivo,
+    			mimeType, 
+    			baos, 
+    			"pafecf@sistemaunico.com.br", 
+    			"5b4m3%}1xb~u5", 
+    			"smtp.gmail.com", 
+    			"465", 
+    			true, 
+    			false,
+    			msgHtml);
+    }
+
+    
+    public static boolean enviar(
+    		String emailDestino, 
+    		String emailCC, 
+    		String assunto, 
+    		String mensagem, 
+    		String nomeArquivo, 
+    		String mimeType, 
+    		ByteArrayOutputStream baos, 
+    		String emailEnvio,
+            final String senha, 
+            String servidorSmtp, 
+            String porta, 
+            boolean usaSSL, 
+            boolean usaTLS, 
+            boolean msgHtml) throws MessagingException {
+    	
+        final String usuario = emailEnvio;
+
+        Properties mailProps = new Properties();
+        mailProps.put("mail.user", usuario);
+        mailProps.put("mail.from", emailEnvio);
+        mailProps.put("mail.to", emailDestino);
+
+        mailProps.put("mail.smtp.host", servidorSmtp);
+        mailProps.put("mail.smtp.auth", "true");
+        mailProps.put("mail.debug", "true");
+
+        if (usaTLS) {
+            mailProps.put("mail.smtp.starttls.enable", "true");
+        }
+
+        if (usaSSL) {
+            Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+            mailProps.put("mail.smtp.socketFactory.class", SSL_FACTORY);
+        }
+
+        Session mailSession = Session.getInstance(mailProps);
+
+        mailSession.setDebug(true);
+
+        MimeMessage email = new MimeMessage(mailSession);
+
+        String[] emails = emailDestino.split(";");
+        if (emails != null && emails.length > 1) {
+            InternetAddress[] listaDestinatarios = new InternetAddress[emails.length];
+            for (int i = 0; i < emails.length; i++) {
+                listaDestinatarios[i] = new InternetAddress(emails[i]);
+            }
+            email.setRecipients(Message.RecipientType.TO, listaDestinatarios);
+        } else {
+            email.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailDestino));
+        }
+
+        if (emailCC != null && !emailCC.trim().equals("")) {
+            email.addRecipients(Message.RecipientType.CC, InternetAddress.parse(emailCC));
+        }
+
+        MimeBodyPart mbp1 = new MimeBodyPart();
+        if (msgHtml) {
+            mbp1.setContent(mensagem, "text/html; charset=UTF-8");
+        } else {
+            mbp1.setText(mensagem);
+        }
+        Multipart mp = new MimeMultipart();
+        mp.addBodyPart(mbp1);
+
+        if (baos != null) {
+            MimeBodyPart attachment = new MimeBodyPart();
+            attachment.setFileName(nomeArquivo);
+            attachment.setContent(baos.toByteArray(), mimeType);
+            mp.addBodyPart(attachment);
+        }
+
+        email.setFrom(new InternetAddress(emailEnvio));
+        email.setSubject(assunto);
+        email.setContent(mp);
+
+        Transport tr = mailSession.getTransport("smtp");
+        tr.connect(servidorSmtp, Integer.valueOf(porta), usuario, senha);
+        // email.saveChanges(); // don't forget this
+        tr.sendMessage(email, email.getAllRecipients());
+        tr.close();
+        return true;
+    }
+}

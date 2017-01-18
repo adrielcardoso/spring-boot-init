@@ -1,0 +1,101 @@
+package br.intelidata.controllers;
+
+import java.time.LocalDate;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.intelidata.controllers.requisicao.IsItOkRequisicao;
+import br.intelidata.controllers.retorno.RetornoIsItOk;
+import br.intelidata.excecao.ErroAoGravarException;
+import br.intelidata.pojo.ContratoVenda;
+import br.intelidata.pojo.InfoFilial;
+import br.intelidata.pojo.InfoLicenca;
+import br.intelidata.pojo.IsItOk;
+import br.intelidata.pojo.enums.TipoAutorizado;
+import br.intelidata.regranegocio.ContratoVendaRN;
+import br.intelidata.util.Util;
+
+@RestController
+@RequestMapping("/isitok")
+public class IsItOkController {
+
+    @Autowired
+    private DataSource dataSource;
+
+    @Autowired
+    private LogComponent logComponent;
+
+    @RequestMapping(method = RequestMethod.POST)
+    public RetornoIsItOk isItOk(@RequestBody IsItOkRequisicao requisicao) {
+        TipoAutorizado tipoAutorizado = TipoAutorizado.NAO;
+        ContratoVendaRN contratoVendaRN = new ContratoVendaRN();
+        ContratoVenda contratoVenda = contratoVendaRN.buscarPorChave(dataSource, requisicao.getLicenca());
+        if (contratoVenda != null) {
+            if (contratoVenda.isAutorizado()) {
+                tipoAutorizado = TipoAutorizado.SIM;
+            }
+        } else {
+            tipoAutorizado = TipoAutorizado.CONTRATO_NAO_ENCONTRADO;
+        }
+
+        // verifica o cnpj da licenca com as filiais
+        boolean cnpjLicencaOk = false;
+        boolean possuiPacotePlus = false;
+        LocalDate vencimento = null;
+        String cnpj = null;
+        if (requisicao.getInfo().getLicencas() != null) {
+            for (InfoLicenca licenca : requisicao.getInfo().getLicencas()) {
+                if (licenca.getLicenca().startsWith("PLUS") || licenca.getLicenca().startsWith("G-nio")) {
+                    cnpj = licenca.getCnpj();
+                    vencimento = licenca.getVencimento();
+                } else if (licenca.getLicenca().startsWith("PPLUS")) {
+                    possuiPacotePlus = true;
+                }
+            }
+        }
+
+        if (cnpj != null && requisicao.getInfo().getFiliais() != null) { // se achou o cnpj da
+                                                                         // licenca PLUS
+            for (InfoFilial filial : requisicao.getInfo().getFiliais()) {
+                if (filial.getCnpj().equals(cnpj)) {
+                    cnpjLicencaOk = true;
+                }
+            }
+        }
+
+        if (requisicao.getLicenca().startsWith("PLUSSTRT") && possuiPacotePlus && contratoVenda != null) {
+            if (contratoVenda.getTipoSistema() != null && !contratoVenda.getTipoSistema().equals("PLUS")) {
+                tipoAutorizado = TipoAutorizado.NAO;
+            }
+        }
+
+        int statusAchou = contratoVenda != null ? 1 : 0;
+        if (cnpjLicencaOk == false) {
+            statusAchou = 2;
+            tipoAutorizado = TipoAutorizado.NAO;
+        }
+
+        IsItOk isItOk = new IsItOk();
+        isItOk.setAchou(statusAchou);
+        isItOk.setAutorizado(tipoAutorizado.getId());
+        isItOk.setDataHora(System.currentTimeMillis());
+        isItOk.setDependents(requisicao.getLicenca());
+        isItOk.setInfo(Util.formatarInfo(requisicao.getInfo()));
+        isItOk.setLicenca(requisicao.getLicenca());
+        isItOk.setUsuarios(contratoVenda != null ? contratoVenda.getUsuariosLiberados().toString() : "0");
+
+        try {
+            logComponent.logarIsItOk(isItOk);
+        } catch (ErroAoGravarException e) {
+
+        }
+
+        return new RetornoIsItOk(100, "Ok");
+    }
+}

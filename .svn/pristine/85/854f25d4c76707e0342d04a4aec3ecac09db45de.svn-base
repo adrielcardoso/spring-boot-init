@@ -1,0 +1,34 @@
+package br.intelidata.component;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Properties;
+
+public class TagComponent 
+{
+	private static Properties prop = null;
+	static OutputStream output = null;
+	
+	public static String _t(String tag) throws IOException
+	{
+		getInstance();
+		return prop.getProperty(tag).toString();
+	}
+	
+	public static Object getInstance() throws IOException
+	{
+		if(prop == null){
+			loadFile();
+		}
+		return prop;
+	}
+	
+	public static void loadFile() throws IOException
+	{
+		Properties properties = new Properties();
+		InputStream resource = getInstance().getClass().getResourceAsStream("br-translater.properties");
+		properties.load(resource);
+		prop=properties;
+	}
+}

@@ -1,0 +1,22 @@
+package br.intelidata.entity;
+
+import java.io.Serializable;
+
+public class AgrupamentoEntity implements Serializable 
+{
+    private static final long serialVersionUID = 1L;
+
+    private String alias;
+
+    public AgrupamentoEntity() {}
+
+    public AgrupamentoEntity(String alias) 
+    {
+        this.alias = alias;
+    }
+
+    public String getAlias() 
+    {
+        return alias;
+    }
+}

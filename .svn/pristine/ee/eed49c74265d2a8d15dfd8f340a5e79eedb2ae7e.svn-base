@@ -1,0 +1,19 @@
+package br.intelidata.entity;
+
+import br.intelidata.config.Entity;
+
+public class AbstractEntity extends Entity
+{
+    public Long id;
+
+    public Long getId() 
+    {
+        return id;
+    }
+
+    public void setId(Long id) 
+    {
+        this.id = id;
+    }
+
+}

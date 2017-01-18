@@ -1,0 +1,76 @@
+package br.intelidata.entity;
+
+import java.io.Serializable;
+
+public class AtributoPojoEntity implements Serializable 
+{
+    public static final long serialVersionUID = -8206775059706545016L;
+    private String nomeAtributo;
+    private String colunaTabela;
+    private Class<?> tipo;
+    private boolean enumeracao;
+    private ComponentePojoNovoEntity componente;
+    private boolean BDLazy;
+
+    public String getNomeAtributo() {
+        return nomeAtributo;
+    }
+
+    public void setNomeAtributo(String atributo) {
+        this.nomeAtributo = atributo;
+    }
+
+    public String getColunaTabela() {
+        return colunaTabela;
+    }
+
+    public void setColunaTabela(String campo) {
+        this.colunaTabela = campo;
+    }
+
+    public Class<?> getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Class<?> tipo) {
+        this.tipo = tipo;
+    }
+
+    public ComponentePojoNovoEntity getComponente() {
+        return componente;
+    }
+
+    public void setComponente(ComponentePojoNovoEntity componente) {
+        componente.setAtributo(this);
+        this.componente = componente;
+    }
+
+    public boolean isEnumeracao() {
+        return enumeracao;
+    }
+
+    public void setEnumeracao(boolean enumeracao) {
+        this.enumeracao = enumeracao;
+    }
+
+    public boolean isBDLazy() {
+        return BDLazy;
+    }
+
+    public void setBDLazy(boolean bDLazy) {
+        BDLazy = bDLazy;
+    }
+
+    @Override
+    public String toString() {
+
+        if (!nomeAtributo.equals(colunaTabela)) {
+            return new StringBuilder().append(nomeAtributo).append(" -> ").append(colunaTabela).toString();
+
+        } else {
+            return nomeAtributo;
+        }
+
+    }
+
+}

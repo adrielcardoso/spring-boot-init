@@ -1,0 +1,43 @@
+package br.intelidata.regranegocio;
+
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import br.intelidata.excecao.ErroAoGravarException;
+import br.intelidata.pojo.AbstractPojo;
+
+public class AbstractRegraNegocio<E extends AbstractPojo> {
+
+    private DBUtil dbUtil;
+    private Class<?> classe;
+
+    public AbstractRegraNegocio() {
+        dbUtil = new DBUtil();
+    }
+
+    public Class<?> getClasse() {
+        if (classe == null) {
+            Type tp = getClass().getGenericSuperclass();
+            if (tp instanceof ParameterizedType) {
+                classe = (Class<?>) ((ParameterizedType) tp).getActualTypeArguments()[0];
+            }
+        }
+        return classe;
+    }
+
+    public void incluir(DataSource dataSource, E pojo) throws ErroAoGravarException {
+        dbUtil.incluirObjeto(dataSource, pojo);
+    }
+
+    public E buscarPor(DataSource dataSource, String where) {
+        return dbUtil.buscar(dataSource, getClasse(), where);
+    }
+
+    public List<E> buscarListaDetail(DataSource dataSource, String where) {
+        return dbUtil.buscarLista(dataSource, getClasse(), where);
+    }
+
+}

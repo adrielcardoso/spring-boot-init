@@ -1,0 +1,32 @@
+package br.intelidata.entity;
+
+import br.intelidata.component.AbstractEnumComponent;
+
+public enum IdentificadorTipoCasoEntity implements AbstractEnumComponent<Integer> 
+{
+    RECADO(0, "Recado"), TAREFA(1, "Tarefa"), ATENDIMENTO(2, "Atendimento"), ;
+
+    private Integer id;
+    private String descricao;
+
+    IdentificadorTipoCasoEntity(Integer id, String descricao) {
+        this.id = id;
+        this.descricao = descricao;
+    }
+
+    @Override
+    public Integer getId() {
+        return id;
+    }
+
+    @Override
+    public String getDescricao() {
+        return descricao;
+    }
+
+    @Override
+    public String toString() {
+        return descricao;
+    }
+
+}

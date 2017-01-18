@@ -1,0 +1,27 @@
+package br.intelidata.service;
+
+import br.intelidata.component.LogComponent;
+import br.intelidata.component.ResponseComponent;
+import br.intelidata.component.UtilComponent;
+import br.intelidata.config.Entity;
+import br.intelidata.config.Service;
+import br.intelidata.entity.IAmHere;
+import br.intelidata.entity.IsItOkEntityRequest;
+
+public class IAmHereService extends Service
+{
+	public static Entity parseRequest(LogComponent logComponent, IsItOkEntityRequest isItOkEntityRequest)
+	{
+		try {
+			IAmHere iAmHere = new IAmHere();
+			
+			iAmHere.setInfo(UtilComponent.formatarInfo(isItOkEntityRequest.getMe().getInfo()));
+			iAmHere.setDataHora(System.currentTimeMillis());
+			logComponent.persist(iAmHere);
+			
+			return isItOkEntityRequest.getMe();
+		} catch (Exception e) {
+			return new ResponseComponent().handleResourceNotFoundException(400, e.getMessage());
+		}
+	}	
+}

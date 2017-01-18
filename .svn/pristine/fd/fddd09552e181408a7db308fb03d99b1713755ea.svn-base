@@ -1,0 +1,7 @@
+package br.intelidata.service;
+
+public interface CopiarValoresListenerService<E, T> 
+{
+    public void copiandoValor(E origem, T destino, String atributo, Object valor);
+    public void valorNaoEncontrado(E origem, T destino, String atributo, Object valor);
+}

@@ -1,0 +1,20 @@
+package br.intelidata.entity;
+
+public class IsItOkEntityRequest 
+{	
+	private IsItOkEntityRequestRelation me;
+	private String dependents;
+	
+	public String getDependents() {
+		return dependents;
+	}
+	public void setDependents(String dependents) {
+		this.dependents = dependents;
+	}
+	public IsItOkEntityRequestRelation getMe() {
+		return me;
+	}
+	public void setMe(IsItOkEntityRequestRelation me) {
+		this.me = me;
+	}
+}

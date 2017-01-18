@@ -1,0 +1,367 @@
+package br.intelidata.entity;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import br.intelidata.component.AbstractPojoComponent;
+
+public class CasoEntity extends AbstractPojoComponent 
+{
+    public static final long serialVersionUID = -6283076911098474209L;
+    private Long id;
+    private String titulo;
+    private String descricao;
+    private LocalDateTime dataHoraAbertura;
+    private Long idEntidade;
+    private Long idUsuario;
+    private Long idEntidadeContato;
+    private Long tipoRegistro;
+    private Long idProduto;
+    private LocalDateTime dataHoraUltimaOcorrencia;
+    private Long idSetorAtual;
+    private Long idUsuarioAtual;
+    private LocalDateTime dataHoraEncerramento;
+    private String extra1;
+    private String extra2;
+    private String extra3;
+    private String extra4;
+    private String extra5;
+    private String extra6;
+    private Long idCategoria;
+    private LocalDateTime dataPrevisaoEntrega;
+    private Long idPrioridadeCaso;
+    private IdentificadorTipoCasoEntity tipoCaso;
+    private Long idSeveridadeCaso;
+    private BigDecimal tempoReal;
+    private BigDecimal tempoEstimado;
+    private Long idCausaRaiz;
+    private Long idTipoStatus;
+    private VisibilidadeCasoEntity visibilidadeCaso;
+    private String ultimaOcorrencia;
+
+    // Intelidata
+    private BuildEntity build;
+    private String subversion;
+    private String casoTeste;
+    private String releaseNotes;
+    private String releaseNotesSuporte;
+    private String revisaoCliente;
+
+//    @BDTransient
+    private List<CasoArquivoEntity> arquivos;
+//    @BDTransient
+    private List<OcorrenciaEntity> ocorrencias;
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public LocalDateTime getDataHoraAbertura() {
+        return dataHoraAbertura;
+    }
+
+    public void setDataHoraAbertura(LocalDateTime dataHoraAbertura) {
+        this.dataHoraAbertura = dataHoraAbertura;
+    }
+
+    public Long getIdEntidade() {
+        return idEntidade;
+    }
+
+    public void setIdEntidade(Long idEntidade) {
+        this.idEntidade = idEntidade;
+    }
+
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public Long getIdEntidadeContato() {
+        return idEntidadeContato;
+    }
+
+    public void setIdEntidadeContato(Long idEntidadeContato) {
+        this.idEntidadeContato = idEntidadeContato;
+    }
+
+    public Long getTipoRegistro() {
+        return tipoRegistro;
+    }
+
+    public void setTipoRegistro(Long tipoRegistro) {
+        this.tipoRegistro = tipoRegistro;
+    }
+
+    public Long getIdProduto() {
+        return idProduto;
+    }
+
+    public void setIdProduto(Long idProduto) {
+        this.idProduto = idProduto;
+    }
+
+    public LocalDateTime getDataHoraUltimaOcorrencia() {
+        return dataHoraUltimaOcorrencia;
+    }
+
+    public void setDataHoraUltimaOcorrencia(LocalDateTime dataHoraUltimaOcorrencia) {
+        this.dataHoraUltimaOcorrencia = dataHoraUltimaOcorrencia;
+    }
+
+    public Long getIdSetorAtual() {
+        return idSetorAtual;
+    }
+
+    public void setIdSetorAtual(Long idSetorAtual) {
+        this.idSetorAtual = idSetorAtual;
+    }
+
+    public Long getIdUsuarioAtual() {
+        return idUsuarioAtual;
+    }
+
+    public void setIdUsuarioAtual(Long idUsuarioAtual) {
+        this.idUsuarioAtual = idUsuarioAtual;
+    }
+
+    public LocalDateTime getDataHoraEncerramento() {
+        return dataHoraEncerramento;
+    }
+
+    public void setDataHoraEncerramento(LocalDateTime dataHoraEncerramento) {
+        this.dataHoraEncerramento = dataHoraEncerramento;
+    }
+
+    public String getExtra1() {
+        return extra1;
+    }
+
+    public void setExtra1(String extra1) {
+        this.extra1 = extra1;
+    }
+
+    public String getExtra2() {
+        return extra2;
+    }
+
+    public void setExtra2(String extra2) {
+        this.extra2 = extra2;
+    }
+
+    public String getExtra3() {
+        return extra3;
+    }
+
+    public void setExtra3(String extra3) {
+        this.extra3 = extra3;
+    }
+
+    public String getExtra4() {
+        return extra4;
+    }
+
+    public void setExtra4(String extra4) {
+        this.extra4 = extra4;
+    }
+
+    public String getExtra5() {
+        return extra5;
+    }
+
+    public void setExtra5(String extra5) {
+        this.extra5 = extra5;
+    }
+
+    public String getExtra6() {
+        return extra6;
+    }
+
+    public void setExtra6(String extra6) {
+        this.extra6 = extra6;
+    }
+
+    public Long getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(Long idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
+    public LocalDateTime getDataPrevisaoEntrega() {
+        return dataPrevisaoEntrega;
+    }
+
+    public void setDataPrevisaoEntrega(LocalDateTime dataPrevisaoEntrega) {
+        this.dataPrevisaoEntrega = dataPrevisaoEntrega;
+    }
+
+    public Long getIdPrioridadeCaso() {
+        return idPrioridadeCaso;
+    }
+
+    public void setIdPrioridadeCaso(Long idPrioridadeCaso) {
+        this.idPrioridadeCaso = idPrioridadeCaso;
+    }
+
+    public List<CasoArquivoEntity> getArquivos() {
+        if (arquivos == null) {
+            arquivos = new ArrayList<CasoArquivoEntity>();
+        }
+        return arquivos;
+    }
+
+    public void setArquivos(List<CasoArquivoEntity> arquivos) {
+        this.arquivos = arquivos;
+    }
+
+    public List<OcorrenciaEntity> getOcorrencias() {
+        if (ocorrencias == null) {
+            ocorrencias = new ArrayList<OcorrenciaEntity>();
+        }
+        return ocorrencias;
+    }
+
+    public void setOcorrencias(List<OcorrenciaEntity> ocorrencias) {
+        this.ocorrencias = ocorrencias;
+    }
+
+    public IdentificadorTipoCasoEntity getTipoCaso() {
+        return tipoCaso;
+    }
+
+    public void setTipoCaso(IdentificadorTipoCasoEntity tipoCaso) {
+        this.tipoCaso = tipoCaso;
+    }
+
+    public BuildEntity getBuild() {
+        return build;
+    }
+
+    public void setBuild(BuildEntity build) {
+        this.build = build;
+    }
+
+    public String getSubversion() {
+        return subversion;
+    }
+
+    public void setSubversion(String subversion) {
+        this.subversion = subversion;
+    }
+
+    public String getCasoTeste() {
+        return casoTeste;
+    }
+
+    public void setCasoTeste(String casoTeste) {
+        this.casoTeste = casoTeste;
+    }
+
+    public String getReleaseNotes() {
+        return releaseNotes;
+    }
+
+    public void setReleaseNotes(String releaseNotes) {
+        this.releaseNotes = releaseNotes;
+    }
+
+    public Long getIdSeveridadeCaso() {
+        return idSeveridadeCaso;
+    }
+
+    public void setIdSeveridadeCaso(Long idSeveridadeCaso) {
+        this.idSeveridadeCaso = idSeveridadeCaso;
+    }
+
+    public BigDecimal getTempoReal() {
+        return tempoReal;
+    }
+
+    public void setTempoReal(BigDecimal tempoReal) {
+        this.tempoReal = tempoReal;
+    }
+
+    public BigDecimal getTempoEstimado() {
+        return tempoEstimado;
+    }
+
+    public void setTempoEstimado(BigDecimal tempoEstimado) {
+        this.tempoEstimado = tempoEstimado;
+    }
+
+    public Long getIdCausaRaiz() {
+        return idCausaRaiz;
+    }
+
+    public void setIdCausaRaiz(Long idCausaRaiz) {
+        this.idCausaRaiz = idCausaRaiz;
+    }
+
+    public Long getIdTipoStatus() {
+        return idTipoStatus;
+    }
+
+    public void setIdTipoStatus(Long idTipoStatus) {
+        this.idTipoStatus = idTipoStatus;
+    }
+
+    public String getReleaseNotesSuporte() {
+        return releaseNotesSuporte;
+    }
+
+    public void setReleaseNotesSuporte(String releaseNotesSuporte) {
+        this.releaseNotesSuporte = releaseNotesSuporte;
+    }
+
+    public VisibilidadeCasoEntity getVisibilidadeCaso() {
+        return visibilidadeCaso;
+    }
+
+    public void setVisibilidadeCaso(VisibilidadeCasoEntity visibilidadeCaso) {
+        this.visibilidadeCaso = visibilidadeCaso;
+    }
+
+    public String getRevisaoCliente() {
+        return revisaoCliente;
+    }
+
+    public void setRevisaoCliente(String revisaoCliente) {
+        this.revisaoCliente = revisaoCliente;
+    }
+
+    public String getUltimaOcorrencia() {
+        return ultimaOcorrencia;
+    }
+
+    public void setUltimaOcorrencia(String ultimaOcorrencia) {
+        this.ultimaOcorrencia = ultimaOcorrencia;
+    }
+}

@@ -1,0 +1,16 @@
+package br.intelidata.entity;
+
+import br.intelidata.config.Entity;
+
+public class ClienteAutenticate extends Entity
+{
+	private String token;
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+}

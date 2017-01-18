@@ -1,0 +1,107 @@
+package br.intelidata.service;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import javax.sql.DataSource;
+import br.intelidata.component.Base35Component;
+import br.intelidata.component.CodificacaoComponent;
+import br.intelidata.component.LogComponent;
+import br.intelidata.component.UtilComponent;
+import br.intelidata.config.Entity;
+import br.intelidata.config.Service;
+import br.intelidata.entity.ContratoVenda;
+import br.intelidata.entity.InfoFilial;
+import br.intelidata.entity.InfoLicenca;
+import br.intelidata.entity.IsItOk;
+import br.intelidata.entity.IsItOkEntityRequest;
+import br.intelidata.entity.TipoAutorizado;
+
+public class IsItOkService extends Service
+{
+	
+	static String numeroUsuariosMobile = "0";
+	static String numeroUsuariosComanda = "0";
+	
+	public static Entity parseRequest(
+			DataSource dataSource, 
+			LogComponent logComponent, 
+			IsItOkEntityRequest body) throws Exception
+	{		
+		try{
+			TipoAutorizado tipoAutorizado = TipoAutorizado.NAO;
+	        ContratoVendaService contratoVendaRN = new ContratoVendaService();
+	        ContratoVenda contratoVenda = contratoVendaRN.buscarPorChave(dataSource, body.getDependents());
+	        if (contratoVenda != null) {
+	            if (contratoVenda.isAutorizado()) {
+	                tipoAutorizado = TipoAutorizado.SIM;
+	            }
+	            numeroUsuariosMobile = contratoVenda.getExtra10();
+	            numeroUsuariosComanda = contratoVenda.getExtra11();
+	        } else {
+	            tipoAutorizado = TipoAutorizado.CONTRATO_NAO_ENCONTRADO;
+	        }
+	        
+	        // verificando CNPJ da licenca com filiais
+	        boolean cnpjLicencaOk = false;
+	        boolean possuiPacotePlus = false;
+	        LocalDate vencimento = null;
+	        String cnpj = null;
+	        if (body.getMe().getInfo().getLicencas() != null) {
+	            for (InfoLicenca licenca : body.getMe().getInfo().getLicencas()) {
+	                if (licenca.getLicenca().startsWith("PLUS") || licenca.getLicenca().startsWith("G-nio")) {
+	                    cnpj = licenca.getCnpj();
+	                    vencimento = licenca.getVencimento();
+	                } else if (licenca.getLicenca().startsWith("PPLUS")) {
+	                    possuiPacotePlus = true;
+	                }
+	            }
+	        }
+
+	        if (cnpj != null && body.getMe().getInfo().getFiliais() != null) { // se achou o cnpj da
+	                                                                         // licenca PLUS
+	            for (InfoFilial filial : body.getMe().getInfo().getFiliais()) {
+	                if (filial.getCnpj().equals(cnpj)) {
+	                    cnpjLicencaOk = true;
+	                }
+	            }
+	        }
+
+	        if (body.getDependents().startsWith("PLUSSTRT") && possuiPacotePlus && contratoVenda != null) {
+	            if (contratoVenda.getTipoSistema() != null && !contratoVenda.getTipoSistema().equals("PLUS")) {
+	                tipoAutorizado = TipoAutorizado.NAO;
+	            }
+	        }
+
+	        int statusAchou = contratoVenda != null ? 1 : 0;
+	        if (cnpjLicencaOk == false) {
+	            statusAchou = 2;
+	            tipoAutorizado = TipoAutorizado.NAO;
+	        }
+	        
+	        IsItOk isItOk = new IsItOk();
+	        isItOk.setAchou(statusAchou);
+	        isItOk.setAutorizado(tipoAutorizado.getId());
+	        isItOk.setDataHora(System.currentTimeMillis());
+	        isItOk.setDependents(body.getDependents());
+	        isItOk.setInfo(UtilComponent.formatarInfo(body.getMe().getInfo()));
+	        isItOk.setLicenca(body.getDependents());
+	        isItOk.setUsuarios(contratoVenda != null ? contratoVenda.getUsuariosLiberados().toString() : "0");
+
+	        LocalDate agora = LocalDate.now();
+            Long codData = ChronoUnit.DAYS.between(CodificacaoComponent.getDataBaseCalculo(), agora);
+            String dataBase35 = Base35Component.gerarBase35(codData.intValue());
+            
+	        logComponent.logarIsItOk(isItOk);
+	        
+	        isItOk.setToken(tipoAutorizado + ";" +
+	            	   isItOk.getUsuarios() + ";" + 
+	            	   numeroUsuariosMobile + ";" + 
+	            	   numeroUsuariosComanda + ";" + 
+	            	   dataBase35 + ";");
+
+            return isItOk;
+		}catch(Exception e){
+			throw e;
+		}
+	}
+}

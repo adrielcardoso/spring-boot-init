@@ -1,0 +1,133 @@
+package br.intelidata.component;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.sql.DataSource;
+import org.jooq.DSLContext;
+import org.jooq.InsertSetStep;
+import org.jooq.Record;
+import org.jooq.Result;
+import org.jooq.SQLDialect;
+import org.jooq.impl.DSL;
+import org.springframework.stereotype.Component;
+import org.springframework.util.ReflectionUtils;
+import br.intelidata.config.Entity;
+import br.intelidata.entity.AtributoEntity;
+import br.intelidata.entity.BDDetailEntity;
+import br.intelidata.entity.BDIgnoreEntity;
+
+@Component
+public class DBUtilComponent 
+{
+    private Map<String, List<AtributoEntity>> mapClasseAtributos;
+
+    public DBUtilComponent() 
+    {
+        this.mapClasseAtributos = new HashMap<>();
+    }
+
+    private List<AtributoEntity> getAtributos(Entity pojo) throws Exception 
+    {
+        if (mapClasseAtributos == null) {
+            mapClasseAtributos = new HashMap<>();
+        }
+        List<AtributoEntity> atributos = mapClasseAtributos.getOrDefault(pojo.getClass().getSimpleName(), new ArrayList<>());
+        if (atributos.isEmpty()) {
+            buscarAtributos(pojo.getClass(), atributos);
+        }
+        return atributos;
+    }
+
+    private void buscarAtributos(Class<?> classePojo, List<AtributoEntity> atributos) throws Exception 
+    {
+        try {
+            for (Field field : classePojo.getDeclaredFields()) {
+                if (field.isAnnotationPresent(BDIgnoreEntity.class)) {
+                    continue;
+                }
+                atributos.add(new AtributoEntity(field.getName(), field.getDeclaringClass()));
+            }
+            if (!classePojo.getSuperclass().equals(Object.class)) {
+                buscarAtributos(classePojo.getSuperclass(), atributos);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    private Object getValorPojo(Entity pojo, AtributoEntity atributo) throws Exception 
+    {
+        try {
+            String metodo = atributo.getNome().substring(0, 1).toUpperCase() + atributo.getNome().substring(1);
+            if (atributo.getClasse().isInstance(Boolean.class) || atributo.getClasse().isInstance(boolean.class)) {
+                metodo = "is" + metodo;
+            } else {
+                metodo = "get" + metodo;
+            }
+            return pojo.getClass().getMethod(metodo).invoke(pojo);
+        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+            throw new Exception("Nãoi foi possível recuperar o valor do atributo " + atributo.getNome() + " no POJO " + pojo.getClass().getName(), e);
+        }
+    }
+
+    public void incluirObjeto(DataSource dataSource, Entity pojo) throws Exception 
+    {
+        List<AtributoEntity> atributos = getAtributos(pojo);
+        Map<org.jooq.Field<Object>, Object> camposValoresInsert = new HashMap<>();
+        for (AtributoEntity atributo : atributos) {
+            Object obj = getValorPojo(pojo, atributo);
+            if (obj != null) {
+                camposValoresInsert.put(DSL.field(atributo.getNome()), obj);
+            }
+        }
+
+        try (DSLContext create = DSL.using(dataSource.getConnection(), SQLDialect.POSTGRES)) {
+            InsertSetStep<Record> insert = create.insertInto(DSL.table(pojo.getClass().getSimpleName().toLowerCase()));
+            Result<Record> resultado = insert.set(camposValoresInsert).returning(DSL.field("id")).fetch();
+            Long id = (Long) resultado.getValue(0, "id");
+            pojo.setId(id);
+        } catch (SQLException e) {
+            throw new Exception("Não foi possível inserir o objeto " + pojo.getClass().getName(), e);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public <E extends Entity> E buscar(DataSource dataSource, Class<?> classePojo, String where) 
+    {
+        try (DSLContext create = DSL.using(dataSource.getConnection(), SQLDialect.POSTGRES)) {
+            E e = (E) create.select().from(classePojo.getSimpleName().toLowerCase()).where(where).fetchAny().into(classePojo);
+            if (e != null) {
+                for (Field field : classePojo.getDeclaredFields()) {
+                    BDDetailEntity bdDetail = field.getAnnotation(BDDetailEntity.class);
+                    if (bdDetail != null) {
+                        AbstractDataSourceComponent<E> regraNegocio = (AbstractDataSourceComponent<E>) bdDetail.rn().newInstance();
+                        String whereDetail = bdDetail.campoWhere();
+                        if (whereDetail.isEmpty()) {
+                            whereDetail = "id" + classePojo.getSimpleName();
+                        }
+                        whereDetail += " = " + e.getId();
+                        field.setAccessible(true);
+                        ReflectionUtils.setField(field, e, regraNegocio.buscarListaDetail(dataSource, whereDetail));
+                    }
+                }
+            }
+            return e;
+        } catch (SQLException | InstantiationException | IllegalAccessException e1) {
+            throw new RuntimeException("Não foi possível selecionar o objeto " + classePojo.getName(), e1);
+        }
+    }
+
+    public <E> List<E> buscarLista(DataSource dataSource, Class classePojo, String where) 
+    {
+        try (DSLContext create = DSL.using(dataSource.getConnection(), SQLDialect.POSTGRES)) {
+            return create.select().from(classePojo.getSimpleName().toLowerCase()).where(where).fetchInto(classePojo);
+        } catch (SQLException e) {
+            throw new RuntimeException("Não foi possível selecionar o objeto " + classePojo.getName(), e);
+        }
+    }
+}

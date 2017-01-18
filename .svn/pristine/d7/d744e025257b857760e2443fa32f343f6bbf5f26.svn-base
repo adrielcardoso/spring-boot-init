@@ -1,0 +1,58 @@
+package br.intelidata.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import javax.sql.DataSource;
+import br.intelidata.component.LogComponent;
+import br.intelidata.component.UtilComponent;
+import br.intelidata.config.Service;
+import br.intelidata.entity.DadosAutorizacaoEcfEntity;
+import br.intelidata.entity.DadosEcfAutorizadaEntity;
+
+public class ValidarDadosAutorizacaoService extends Service 
+{
+	public static void validarDados(LogComponent logComponent, DataSource connection, DadosAutorizacaoEcfEntity dadosAutorizacao, DadosEcfAutorizadaEntity ecfAutorizada, boolean validaEmail, Long agora) throws Exception
+	{
+        if (dadosAutorizacao == null) {
+            throw new Exception("Pedido invalido");
+        }
+
+        if (ecfAutorizada == null) {
+        	UtilComponent.geraEventoSistema(logComponent, connection,
+                    "ECF não autorizado: série: " + dadosAutorizacao.getNumeroSerie() + " cnpj: " + dadosAutorizacao.getCnpj() + " nome: " + dadosAutorizacao.getRazaoSocial(), agora);
+            throw new Exception("Numero de serie ou cnpj nao autorizado");
+        }
+
+        if (ecfAutorizada.getIdEstado() == null) {
+        	UtilComponent.geraEventoSistema(logComponent, connection, "ECF sem o estado: série: " + dadosAutorizacao.getNumeroSerie() + " cnpj: " + dadosAutorizacao.getCnpj() + " nome: " + dadosAutorizacao.getRazaoSocial(),
+                    agora);
+            throw new Exception("ECF sem o estado cadastrado");
+        }
+
+        List<String> versaoPafEstado = null;
+        String estado = null;
+        
+        Map<String, ArrayList<String>> buscaVersaoPafPorEstado = UtilComponent.buscaVersaoPafPorEstado(connection, ecfAutorizada.getIdEstado());
+        for (Entry<String, ArrayList<String>> entry : buscaVersaoPafPorEstado.entrySet()) {
+            estado = entry.getKey();
+            versaoPafEstado = entry.getValue();
+        }
+
+        if (versaoPafEstado == null) {
+        	UtilComponent.geraEventoSistema(logComponent, connection, "Não foi encontrado versão cadastrada para o estado.", agora);
+            throw new Exception("Não foi encontrado versão cadastrada para o estado.");
+        }
+
+        if (!versaoPafEstado.contains(dadosAutorizacao.getVersaoPaf())) {
+            UtilComponent.geraEventoSistema(logComponent, connection, "Esta versão do paf não está homologada para o estado " + estado, agora);
+            throw new Exception("Esta versão do paf não está homologada para o estado " + estado);
+        }
+
+        if (validaEmail && (ecfAutorizada.getEmail() == null || ecfAutorizada.getEmail().isEmpty())) {
+        	UtilComponent.geraEventoSistema(logComponent, connection, "Email nao cadastrado para a revenda: " + ecfAutorizada.getCodigoRevenda() + "-" + ecfAutorizada.getNomeRevenda(), agora);
+            throw new Exception("Email para o envio da autorização não cadastrado. Favor contactar a Intelidata para cadastrar um email técnico");
+        }
+    }
+}

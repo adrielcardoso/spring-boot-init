@@ -1,0 +1,396 @@
+package br.intelidata.component;
+
+import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.Temporal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.sql.DataSource;
+import javax.swing.text.MaskFormatter;
+
+import br.intelidata.controllers.LogComponent;
+import br.intelidata.entity.DadosAutorizacaoEcfEntity;
+import br.intelidata.entity.InfoEntity;
+import br.intelidata.entity.InfoFilialEntity;
+import br.intelidata.entity.InfoLicencaEntity;
+
+public class UtilComponent 
+{
+    private static final String separadorCampo = ";";
+    private static final String separadorLista = "||";
+    private static final String separadorGrupo = "##";
+
+    public static String formatarInfo(InfoEntity info) 
+    {
+        StringBuilder builder = new StringBuilder();
+        String dadosMaquina = info.getNomeMaquina() + separadorCampo + info.getIp() + separadorCampo + info.getEnderecoMAC() + separadorCampo + info.getVersaoSistema() + separadorCampo
+                + info.getBuildSistema() + separadorCampo + info.getCompilacaoSistema() + separadorCampo + info.getEnderecoServidorBaseDados() + separadorCampo + info.getNomeBaseDados();
+
+        builder = builder.append(dadosMaquina).append(separadorGrupo);
+
+        String dadosFiliais = "";
+        if (info.getFiliais() != null) {
+            for (InfoFilialEntity filial : info.getFiliais()) {
+                if (!dadosFiliais.isEmpty()) {
+                    dadosFiliais += separadorLista;
+                }
+                dadosFiliais += filial.getRazaoSocial() + separadorCampo + filial.getCnpj() + separadorCampo + filial.getCidade() + separadorCampo + filial.getEstado() + separadorCampo
+                        + filial.getEndereco() + separadorCampo + filial.getNumero() + separadorCampo + filial.getCep() + separadorCampo + filial.getEmail() + separadorCampo + filial.getTelefone();
+            }
+        }
+
+        builder = builder.append(dadosFiliais).append(separadorGrupo);
+
+        if (info.getLicencas() != null) {
+            String dadosLicencas = "";
+            for (InfoLicencaEntity licenca : info.getLicencas()) {
+                if (!dadosLicencas.isEmpty()) {
+                    dadosLicencas += separadorLista;
+                }
+                dadosLicencas += licenca.getRazaoSocial() + separadorCampo + licenca.getCnpj() + separadorCampo + licenca.getChaveInstalacao() + separadorCampo + licenca.getLicenca() + separadorCampo
+                        + formataDataHora(licenca.getAtivacao(), "dd/MM/yyyy") + separadorCampo + licenca.getVersaoAtual() + separadorCampo + licenca.getBuildAtual() + separadorCampo
+                        + formataDataHora(licenca.getVencimento(), "dd/MM/yyyy");
+            }
+
+            builder = builder.append(dadosLicencas);
+        }
+
+        builder = builder.append(separadorGrupo).append(info.getNumeroUsuariosLicenca());
+        return builder.toString();
+    }
+
+    public static String formataDataHora(Temporal dataHora, String mascara) 
+    {
+        if (dataHora == null) {
+            return "";
+        }
+        try {
+            DateTimeFormatter formatador = DateTimeFormatter.ofPattern(mascara);
+            String dateStr = formatador.format(dataHora);
+            return dateStr;
+        } catch (DateTimeException ex) {
+            return "";
+        }
+    }
+
+    public static LocalDate string2LocalDate(String str, String mascara) 
+    {
+        LocalDate data;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat();
+            sdf.applyPattern(mascara);
+            data = sdf.parse(str).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        } catch (IllegalArgumentException | NullPointerException | ParseException e) {
+            data = null;
+        }
+        return data;
+    }
+
+    public static boolean intNullOuZero(Integer valor) 
+    {
+        return valor == null || valor.equals(0);
+    }
+
+    public static boolean stringNullOrEmpty(String txt) 
+    {
+        return txt == null || txt.trim().isEmpty();
+    }
+
+    public static Integer string2Integer(String str) 
+    {
+        int valor;
+        try {
+            valor = Integer.parseInt(str);
+        } catch (NumberFormatException | NullPointerException e) {
+            valor = 0;
+        }
+        return valor;
+    }
+    
+    public static String filtra(String texto) 
+    {
+        return texto.replace('\'', ' ');
+    }
+    
+    /**
+     * Converte String para BigDecimal Exemplo: "0000001051",8,2 retorna 10.51
+     */
+    public static BigDecimal string2BigDecimal(String str, @SuppressWarnings("unused") int inteiro, int decimal) 
+    {
+        BigDecimal valor;
+        try {
+
+            if (stringNullOrEmpty(str)) {
+                str = "0";
+            }
+
+            valor = new BigDecimal(str);
+        } catch (NumberFormatException e) {
+            valor = BigDecimal.ZERO;
+        }
+        valor = valor.movePointLeft(decimal);
+        return valor;
+    }
+    
+    public static BigDecimal string2BigDecimal(String str, int decimal) 
+    {
+        BigDecimal valor = BigDecimal.ZERO;
+        try {
+            str = str.replace(".", "");
+            str = str.replace(',', '.');
+            valor = new BigDecimal(str);
+        } catch (NullPointerException | NumberFormatException e) {
+            valor = BigDecimal.ZERO;
+        }
+        valor = valor.setScale(decimal, BigDecimal.ROUND_HALF_EVEN);
+        return valor;
+    }
+    
+    public static String formataCnpj(String cpfCnpj) 
+    {
+        if (cpfCnpj == null) {
+            return null;
+        }
+        cpfCnpj = UtilComponent.limpaMascara(cpfCnpj, "./-");
+        return formatarString(cpfCnpj, "##.###.###/####-##");
+    }
+    
+    public static String formatarString(String texto, String mascara) 
+    {
+        try {
+            MaskFormatter mf = new MaskFormatter(mascara);
+            mf.setValueContainsLiteralCharacters(false);
+            return mf.valueToString(texto);
+        } catch (ParseException ex) {
+            return texto;
+        }
+    }
+    
+    public static String limpaMascara(String valorOriginal, String mascara) 
+    {
+        if (valorOriginal == null) {
+            return null;
+        } else {
+            String valor = valorOriginal;
+            for (int i = 0; i < mascara.length(); i++) {
+                valor = valor.replace(mascara.substring(i, i + 1), "");
+            }
+            return valor.trim();
+        }
+    }
+    
+    //@Todo
+    public static void geraEventoSistema(DataSource dataSource, String texto, Long agora) 
+    {
+//        String comando = "INSERT INTO eventosistema (categoria,millis,descricao,avisar,currenttimemillis) VALUES " + "(8," + agora + ",'" + texto + "',0," + agora + ")";
+//        try (Statement stm = connection.createStatement()) {
+//            stm.executeUpdate(comando);
+//        } catch (SQLException ex) {
+//            FileLogComponent.getInstance().write(ex);
+//            FileLogComponent.getInstance().write(comando);
+//        }
+    }
+    
+    // @Todo
+//    public static Map<String, List<String>> buscaVersaoPafPorEstado(DataSource dataSource, Long idEstado) 
+//    {
+//        String comando = "select versaopaf, codigo as estado from versaopafestado " + "left join estado on (estado.id = versaopafestado.idestado) where idestado = " + idEstado;
+//        HashMap<String, List<String>> mapParametros = null;
+//        try {
+//            Statement statement = connection.createStatement();
+//            ResultSet rs = statement.executeQuery(comando);
+//            List<String> listVersao = new ArrayList<String>();
+//            while (rs.next()) {
+//                String estado = rs.getString("estado");
+//                String versao = rs.getString("versaopaf");
+//                if (mapParametros == null) {
+//                    mapParametros = new HashMap<String, List<String>>();
+//                    listVersao.add(versao);
+//                    mapParametros.put(estado, listVersao);
+//                } else {
+//                    mapParametros.get(estado).add(versao);
+//                }
+//            }
+//            rs.close();
+//            statement.close();
+//        } catch (SQLException e) {
+//            FileLogComponent.getInstance().write(comando);
+//            FileLogComponent.getInstance().write(e.getMessage());
+//        }
+//
+//        return mapParametros;
+//    }
+    
+    public static String upper(String s) 
+    {
+        int i = s.length();
+        int j = -1;
+        for (int k = i - 1; k >= 0; k--) {
+            char c = s.charAt(k);
+            if (Character.toUpperCase(c) == c) {
+                continue;
+            }
+            j = k;
+            break;
+        }
+
+        if (j == -1) {
+            return s;
+        }
+        char ac[] = new char[i];
+        s.getChars(0, i, ac, 0);
+        for (int l = j; l >= 0; l--) {
+            ac[l] = Character.toUpperCase(ac[l]);
+        }
+
+        return new String(ac);
+    }
+    
+    public static String padl(String s, int i, String s1) {
+        String s2 = new String(ltrim(s));
+        int j = s2.length();
+        if (i > j) {
+            int k = (i - j) / s1.length() + 1;
+            String s3 = left(replicate(s1, k), i - j);
+            return left(s3 + s2, i);
+        } else {
+            return left(s2, i);
+        }
+    }
+    
+    public static String ltrim(String s) {
+        int i;
+        for (i = 0; i < s.length() && s.charAt(i) == ' '; i++);
+        return s.substring(i, s.length());
+    }
+    
+    public static String left(String s, int i) {
+        if (s == null) {
+            return "";
+        }
+        int j = s.length();
+        if (j < i || i < 0) {
+            return s;
+        } else {
+            return s.substring(0, i >= j ? j : i);
+        }
+    }
+    
+    /**
+     * Gera um sequencia de n caracteres
+     */
+    public static String replicate(char caracter, int tamanho) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < tamanho; i++) {
+            sb.append(caracter);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Gera um sequencia de n String
+     */
+    public static String replicate(String texto, int tamanho) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < tamanho; i++) {
+            sb.append(texto);
+        }
+        return sb.toString();
+    }
+    
+    public static String rtrim(String s) {
+        if (s != null) {
+            int i = 0;
+            int j;
+            for (j = s.length() - 1; j >= 0; j--) {
+                if (s.charAt(j) == ' ') {
+                    continue;
+                }
+                i = j;
+                break;
+            }
+            if (j < 0) {
+                return "";
+            } else {
+                return s.substring(0, i + 1);
+            }
+        } else {
+            return "";
+        }
+    }
+    
+    public static String formataNumero(BigDecimal valor, String mascara, int tamanho) {
+        DecimalFormat formatoNumero = new DecimalFormat();
+        formatoNumero.applyPattern(mascara);
+        return padr(formatoNumero.format(valor), tamanho);
+    }
+    
+    public static String padr(String string, int tamanho) {
+        StringBuilder sb = new StringBuilder(string);
+        for (int i = sb.length(); i < tamanho; i++) {
+            sb.insert(0, ' ');
+        }
+        return sb.toString();
+    }
+    
+//    /**
+//     * Grava os dados do pedido de autorização na tabela ecfautorizada, e cria um historico na
+//     * tabela ecfautorizadahistorico
+//     * 
+//     * @param connection
+//     * @param dadosAutorizacao
+//     * @param currentTimeMillis
+//     * @param id
+//     */
+    
+    //@Todo
+//    public static void gravaPedidoUso(DataSource dataSource, DadosAutorizacaoEcfEntity dadosAutorizacao, Long currentTimeMillis, Long id) {
+//        // Grava o pedido de uso
+//        String comando2 = "update ecfautorizada set razaosocial='" + UtilComponent.left(dadosAutorizacao.getRazaoSocial(), 80) + "',marca='" + UtilComponent.left(dadosAutorizacao.getCnpj(), 20) + "',modelo='"
+//                + UtilComponent.left(dadosAutorizacao.getModelo(), 20) + "',currenttimemillis=" + currentTimeMillis + " where id=" + id;
+//        try {
+//            Statement statement2 = connection.createStatement();
+//            statement2.executeUpdate(comando2);
+//            statement2.close();
+//        } catch (SQLException ex) {
+//            FileLogComponent.getInstance().write(ex.getMessage());
+//            FileLogComponent.getInstance().write(comando2);
+//        }
+//
+//        // grava o registro de historico
+//        String comando3 = "insert into ecfautorizadahistorico(idecfautorizada,gt,cro,observacao," + "currenttimemillis,versaopaf) values (" + id + ","
+//                + UtilComponent.formataNumero(dadosAutorizacao.getGt(), "###############0.00", 0).replace(',', '.') + "," + dadosAutorizacao.getCro() + "," + "'" + dadosAutorizacao.getObservacao() + "',"
+//                + currentTimeMillis + "," + UtilComponent.string2int(dadosAutorizacao.getVersaoPaf()) + ")";
+//        try {
+//            Statement statement3 = connection.createStatement();
+//            statement3.executeUpdate(comando3);
+//            statement3.close();
+//        } catch (SQLException ex) {
+//            FileLogComponent.getInstance().write(ex.getMessage());
+//            FileLogComponent.getInstance().write(comando3);
+//        }
+//    }
+    
+    public static int string2int(String str) {
+        int valor = 0;
+        try {
+            valor = Integer.parseInt(str);
+        } catch (NumberFormatException numberFormatException) {
+        }
+        return valor;
+    }
+
+}

@@ -1,0 +1,18 @@
+package br.intelidata.entity;
+
+public enum EnumJoinEntity {
+
+    LEFT_JOIN(" left join "), RIGHT_JOIN(" right join "), INNER_JOIN(" inner join ");
+
+
+    private String comandoSQL;
+
+    private EnumJoinEntity(String descricao) {
+        this.comandoSQL = descricao;
+    }
+
+    public String getComandoSQL() {
+        return comandoSQL;
+    }
+
+}

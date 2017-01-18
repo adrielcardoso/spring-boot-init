@@ -1,0 +1,5 @@
+package br.intelidata.component;
+
+public class ConnectionPoolGnioComponent {
+
+}

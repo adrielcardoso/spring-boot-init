@@ -1,0 +1,24 @@
+package br.intelidata.entity;
+
+import java.io.Serializable;
+
+public class ConstanteEntity implements Serializable 
+{
+    public static final long serialVersionUID = -2373263024545423938L;
+    private Object valor;
+
+    public ConstanteEntity() {}
+
+    public ConstanteEntity(Object valor) {
+        this.valor = valor;
+    }
+
+    public Object getValor() {
+        return valor;
+    }
+
+    public void setValor(Object valor) {
+        this.valor = valor;
+    }
+
+}

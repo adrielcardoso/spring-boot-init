@@ -1,0 +1,32 @@
+package br.intelidata.entity;
+
+import java.io.Serializable;
+
+public class OrdemEntity implements Serializable 
+{
+    private static final long serialVersionUID = 1L;
+
+    private String alias;
+    private boolean descendente;
+    
+    public OrdemEntity() {}
+
+    public OrdemEntity(String alias) {
+        this.alias = alias;
+        this.descendente = false;
+    }
+
+    public OrdemEntity(String alias, boolean descendente) {
+        this.alias = alias;
+        this.descendente = descendente;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public boolean isDescendente() {
+        return descendente;
+    }
+
+}

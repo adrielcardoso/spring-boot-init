@@ -1,0 +1,33 @@
+package br.intelidata.entity;
+
+import br.intelidata.interace.AbstractEnum;
+
+public enum TipoMovimento implements AbstractEnum<Integer>
+{
+    NENHUMA(0, "Nenhuma"),
+    ENTRADA(1, "Entrada"),
+    SAIDA(2, "Saída"),;
+
+    private Integer id;
+    private String descricao;
+
+    private TipoMovimento(Integer id, String descricao) {
+        this.id = id;
+        this.descricao = descricao;
+    }
+
+    @Override
+    public Integer getId() {
+        return id;
+    }
+
+    @Override
+    public String getDescricao() {
+        return descricao;
+    }
+
+    @Override
+    public String toString() {
+        return descricao;
+    }
+}

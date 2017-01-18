@@ -1,0 +1,93 @@
+package br.intelidata.component;
+
+import java.util.Random;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+
+public class UnicoCryptComponent 
+{
+	private static String passfrase = "WyTgLpWkXbGsQyQ";
+
+    public static final String cript(String str) throws Exception 
+    {
+        String strCript = str;
+        try {
+            Cipher ch = Cipher.getInstance("Blowfish");
+            SecretKey k1 = new SecretKeySpec(passfrase.getBytes(), "Blowfish");
+            
+            ch.init(Cipher.ENCRYPT_MODE, k1);
+            byte b[] = ch.doFinal(strCript.getBytes("UTF8"));
+            String s1 = ConversionComponent.byteArrayToBase64String(b);
+            strCript = s1;
+        } catch (Exception ex) {
+        	throw ex;
+        }
+        return strCript;
+    }
+
+    public static final String cript(byte b1[]) 
+    {
+        String strCript = "";
+        try {
+            Cipher ch = Cipher.getInstance("Blowfish");
+            SecretKey k1 = new SecretKeySpec(passfrase.getBytes(), "Blowfish");
+            ch.init(Cipher.ENCRYPT_MODE, k1);
+            byte b[] = ch.doFinal(b1);
+            String s1 = ConversionComponent.byteArrayToBase64String(b);
+            strCript = s1;
+        } catch (Exception ex) {
+        }
+
+        return strCript;
+    }
+
+
+    public static final String decript(String str) 
+    {
+        String strDecript = str;
+
+        try {
+            Cipher ch = Cipher.getInstance("Blowfish");
+            SecretKey k1 = new SecretKeySpec(passfrase.getBytes(), "Blowfish");
+            ch.init(Cipher.DECRYPT_MODE, k1);
+            byte b[] = ConversionComponent.base64StringToByteArray(strDecript);
+            byte b1[] = ch.doFinal(b);
+            String s1 = new String(b1);
+            strDecript = s1;
+        } catch (Exception ex) {
+        }
+        return strDecript;
+    }
+
+    public static final String criptComLixo(String str) throws Exception 
+    {
+        return cript(gerarStringComLixo(str));
+    }
+
+    public static String gerarStringComLixo(String dados) 
+    {
+        int tamanhoLixo = 1024;
+        Random r = new Random();
+        double percParte1 = r.nextInt(100);
+        double percParte2 = 100 - percParte1;
+        double parte1 = (percParte1 / (double) 100) * tamanhoLixo;
+        double parte2 = (percParte2 / (double) 100) * tamanhoLixo;
+
+        String saida = generateDumyData(Double.valueOf(parte1).intValue()) + ";" + dados + ";" + generateDumyData(Double.valueOf(parte2).intValue());
+        saida = saida.indexOf(dados) + ";" + saida + ";" + dados.length();
+        return saida;
+    }
+
+    private static String generateDumyData(int tamanho) 
+    {
+        String saida = "";
+        String dat = "AUinrO9(8&7%34$21+=?/><mnhgbV64AB2GDV@!poR1TOig%6*)rabdgfg{asd7f}qw[]wbg";
+        Random r = new Random(dat.length());
+        for (int i = 0; i < tamanho; i++) {
+            int pos = r.nextInt(dat.length());
+            saida += dat.charAt(pos) + "";
+        }
+        return saida;
+    }
+}

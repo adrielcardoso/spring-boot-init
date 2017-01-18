@@ -1,0 +1,20 @@
+package br.intelidata.interace;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public interface InterfaceIdentificadorProdutoLicenca 
+{	
+	public boolean identificar(String chave);
+
+    default boolean achou(String prefixo, String... expressao) {
+        for (String exp : expressao) {
+            Pattern pattern = Pattern.compile(exp);
+            Matcher matcher = pattern.matcher(prefixo);
+            if (matcher.matches()) {
+                return true;
+            }
+        }
+        return false;
+    }
+}

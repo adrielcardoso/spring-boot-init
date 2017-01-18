@@ -1,0 +1,246 @@
+package br.intelidata.service;
+
+import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import javax.sql.DataSource;
+import br.intelidata.component.FileLogComponent;
+import br.intelidata.component.GeradorLicencaComponent;
+import br.intelidata.component.LogComponent;
+import br.intelidata.config.Service;
+import br.intelidata.entity.ClienteEntity;
+import br.intelidata.entity.ContratoVenda;
+import br.intelidata.entity.LicencaEntity;
+import br.intelidata.entity.Produto;
+import br.intelidata.entity.SaldoLicenca;
+import br.intelidata.entity.SaldoLicencaParse;
+import br.intelidata.entity.SalesLicenceLog;
+import br.intelidata.entity.UsuarioSite;
+
+public class SalesService extends Service
+{
+	private static javax.sql.DataSource cDataSource;	
+	private static LogComponent cLogComponent;
+	private static ClienteEntity cliente;
+	private static UsuarioSite userReference;
+	private static UsuarioSiteService usuarioSiteService;
+	private static SaldoLicencaParse saldoLicenca;
+//	private static final String intelidataCNPJ = "08.419.176/0001-94";
+	
+	public static Object parseSaleLicence(
+			javax.sql.DataSource cDataSourceParam,
+			LogComponent cLogComponentParam, 
+			SalesLicenceLog salesLicenceEntity) throws Exception
+	{
+		cDataSource = cDataSourceParam;
+		cLogComponent = cLogComponentParam;
+		
+		usuarioSiteService = new UsuarioSiteService(cDataSourceParam, cLogComponentParam);
+	
+		userReference = (UsuarioSite) usuarioSiteService.autenticateUserByToken(salesLicenceEntity.getUsuario());
+		
+		cliente = (ClienteEntity) findEntidade(
+					cDataSource, userReference.getIdRevenda());
+		
+		saldoLicenca = (SaldoLicencaParse) findLicenca(cliente.getId(), salesLicenceEntity.getLicence());
+		
+		HashMap<String, String> chaves = GeradorLicencaComponent.getInstance()
+								.getLicenca(salesLicenceEntity.getRazaosocial(), 
+											salesLicenceEntity.getCnpj(), 
+											Long.valueOf(userReference.getIdRevenda()), 
+											Long.valueOf(2), // idContrato 
+											salesLicenceEntity.getLicence());
+		
+		ContratoVenda contratoVenda = (ContratoVenda) findContrato(salesLicenceEntity.getCnpj());
+		
+		if(salesLicenceEntity.getLicence().toString().equals("PLUS") || 
+				salesLicenceEntity.getLicence().toString().equals("PLUSSTART")){
+			
+			if(contratoVenda == null){
+				LicencaEntity licenca = new LicencaEntity();
+				LocalDate localData = LocalDate.now();
+			
+				licenca.setcDataAtivacao(localData);
+				licenca.setCnpj(salesLicenceEntity.getCnpj());
+				
+				FileLogComponent.getInstance().write("Criando novo contrato");
+				
+				HashMap<String, Object> tempContratoItem = ContratoService.create(cDataSource, cLogComponent, cliente, licenca, salesLicenceEntity, chaves);
+				contratoVenda = (ContratoVenda) tempContratoItem.get("contrato");
+			}
+		}
+		
+		if(contratoVenda == null){
+			throw new Exception("Ocorreu algum problema ao tentar registrar os itens do contrato");
+		}
+		
+		FileLogComponent.getInstance().write("Inserindo item no contrato");
+		Object itemTemp = ContratoService.addItemContrato(cDataSource, cLogComponent, contratoVenda);
+		
+		Produto produtoTemp = (Produto) ContratoService.findProdutoByPrefixo(
+									salesLicenceEntity.getLicence().toString());
+		
+		// realizar baixa de estoque da licenca
+		
+		Long idRepresentante = new Long(cliente.getIdRepresentante());
+		baixaProduto(
+				userReference.getId(), 
+				idRepresentante, 
+				produtoTemp.getId(), 
+				LocalDateTime.now(), 
+				br.intelidata.entity.TipoMovimentoLicenca.ATIVACAO, 
+				BigDecimal.ONE, 
+				chaves.get("chaveAtivacao"), 
+				"", 
+				userReference.getId(), 
+				contratoVenda.getId());
+		
+		return itemTemp;
+		// gravar licenca no contrato
+		// movimento de estoque da licenca
+		//desconto de saldo da licenca na revenda 
+		//	return chaves;
+	}
+	
+	public static void baixaProduto(
+			long idUsuario,
+			Long idCliente, 
+			Long idProduto, 
+			LocalDateTime dataHora, 
+			br.intelidata.entity.TipoMovimentoLicenca tipo, 
+			BigDecimal quantidade, 
+			String chaveAtivacao, 
+			String historico,
+            Long idUsuarioSite, 
+            Long idContrato) throws Exception
+	{
+		br.intelidata.entity.MovimentoLicenca movimentoLicenca = new br.intelidata.entity.MovimentoLicenca();
+        movimentoLicenca.setChaveAtivacao(chaveAtivacao);
+        movimentoLicenca.setDataHora(dataHora);
+        movimentoLicenca.setHistorico(historico);
+        movimentoLicenca.setIdCliente(idCliente);
+        movimentoLicenca.setIdContrato(idContrato);
+        movimentoLicenca.setIdProduto(idProduto);
+        movimentoLicenca.setIdUsuario(idUsuario);
+        movimentoLicenca.setIdUsuarioSite(idUsuarioSite);
+        movimentoLicenca.setQuantidade(quantidade);
+        movimentoLicenca.setTipo(tipo);
+//        incluir(movimentoLicenca, sessao);
+
+        if (!br.intelidata.entity.TipoMovimento.NENHUMA.equals(tipo.getTipoMovimento())) {
+        	SaldoLicencaService.atualizarSaldo(
+        			cDataSource, 
+        			cLogComponent, 
+        			idCliente, 
+        			idProduto, 
+        			br.intelidata.entity.TipoMovimento.SAIDA, 
+        			quantidade);
+        }
+		FileLogComponent.getInstance().write("baixando produto");
+	}
+	
+	public static Object findEntidade(
+			DataSource cDataSource, 
+			long idEntidade) throws Exception
+	{	
+		Connection connection = cDataSource.getConnection();
+        String comando = "select * from entidade where id = ?";
+        PreparedStatement statement = connection.prepareStatement(comando);        
+        statement.setLong(1, idEntidade);
+        
+        ResultSet rs = statement.executeQuery();
+        
+        if (rs.next()) {
+        	ClienteEntity cliente = new ClienteEntity();
+        	cliente.setCnpjCpf(rs.getString("cnpjcpf"));
+        	long id = rs.getInt("id");
+        	cliente.setId(id);
+        	cliente.setRazaoSocial(rs.getString("razaosocial"));
+        	cliente.setIdRepresentante(rs.getString("idrepresentante"));
+        	cliente.setExtra7(rs.getString("extra7"));
+        	cliente.setNome(rs.getString("nome"));
+        	return cliente;
+        }else{
+        	throw new Exception("Não foi possível identificar a entidade");
+        }
+	}
+	
+	private static Object findLicenca(long idCliente, String prefixoLicenca) throws Exception
+	{
+		String sql = "select p.nome produto_nome, p.tipo produto_tipo, p.extra1 produto_prefixo, sl.quantidade, sl.idCliente revenda_id, e.nome revenda_nome, sl.id saldoLicencaId from produto as p "+
+			"join saldoLicenca sl on sl.idproduto = p.id "+
+			"join entidade e on e.id = sl.idCliente "+
+		"where "+
+			"p.extra1 = ? and "+ 
+			"sl.idCliente = ? and "
+			+ "sl.quantidade > 0";
+		
+		Connection connection = cDataSource.getConnection();
+		PreparedStatement statement = connection.prepareStatement(sql);
+		
+        statement.setString(1, prefixoLicenca);
+        statement.setLong(2, idCliente);
+        ResultSet rs = statement.executeQuery();
+        
+        if (rs.next()) {
+        	SaldoLicencaParse saldoLicenca = new SaldoLicencaParse();
+        	saldoLicenca.setId(rs.getLong("saldoLicencaId"));
+        	saldoLicenca.setIdCliente(rs.getString("revenda_id"));
+        	saldoLicenca.setProdutoNome(rs.getString("produto_nome"));
+        	saldoLicenca.setProdutoPrefixo(rs.getString("produto_prefixo"));
+        	saldoLicenca.setProdutoTipo(rs.getString("produto_tipo"));
+        	saldoLicenca.setQuantidade(rs.getString("quantidade"));
+        	saldoLicenca.setRevendaNome(rs.getString("revenda_nome"));
+        	return saldoLicenca;
+        }else{
+        	throw new Exception("Não encontramos referencia da licença para esse revendedor, favor verificar se existe em estoque");
+        }
+	}
+	
+	public static Object findSaldoLicenca(long idCliente, long idProduto) throws Exception
+	{
+		String sql = "select * from saldolicenca where idcliente = ? and idproduto = ?";
+		Connection connection = cDataSource.getConnection();
+		PreparedStatement statement = connection.prepareStatement(sql);
+		
+        statement.setLong(1, idCliente);
+        statement.setLong(2, idProduto);
+        ResultSet rs = statement.executeQuery();
+        
+        if (rs.next()) {
+        	SaldoLicenca saldoLicenca = new SaldoLicenca();
+        	saldoLicenca.setId(rs.getLong("id"));
+        	saldoLicenca.setIdCliente(rs.getLong("idcliente"));
+        	saldoLicenca.setIdProduto(rs.getLong("idproduto"));
+        	return saldoLicenca;
+        }else{
+        	throw new Exception("Não foi possível encontrar saldo de licença");
+        }
+	}
+	
+	public static Object findContrato(String cnpj) throws Exception
+	{	
+		FileLogComponent.getInstance().write("cnpj: "+cnpj);
+		Connection connection = cDataSource.getConnection();
+        String comando = "select * from contratovenda where extra2 = ? and idtipocontrato in ('4', '15', '23') and status = 1";
+        PreparedStatement statement = connection.prepareStatement(comando);        
+        statement.setString(1, cnpj);
+        ResultSet rs = statement.executeQuery();
+        if (rs.next()) {
+        	ContratoVenda contratoVenda = new ContratoVenda();
+        	contratoVenda.setId(rs.getLong("id"));
+        	contratoVenda.setIdTipoContrato(rs.getLong("idTipoContrato"));
+        	contratoVenda.setExtra1(rs.getString("extra1"));
+        	contratoVenda.setExtra2(rs.getString("extra2"));
+        	contratoVenda.setObservacao(rs.getString("observacao"));
+        	return contratoVenda;
+        }else{
+        	return null;
+        }
+	}
+	
+}

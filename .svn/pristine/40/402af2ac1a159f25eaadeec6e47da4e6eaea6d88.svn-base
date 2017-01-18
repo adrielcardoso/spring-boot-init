@@ -1,0 +1,31 @@
+package br.intelidata.entity;
+
+import br.intelidata.component.AbstractEnumComponent;
+
+public enum OperadorDatasEntity implements AbstractEnumComponent<String> 
+{
+    IGUAL("=", "Igual"), DIFERENTE("<>", "Diferente"), MAIOR_QUE(">", "Maior que"), MENOR_QUE("<", "Menor que"), MAIOR_IGUAL_QUE(">=", "Maior igual que"), MENOR_IGUAL_QUE("<=", "Menor igual que");
+
+    private OperadorDatasEntity(String id, String descricao) {
+        this.id = id;
+        this.descricao = descricao;
+    }
+
+    private String id;
+    private String descricao;
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public String getDescricao() {
+        return descricao;
+    }
+
+    @Override
+    public String toString() {
+        return descricao;
+    }
+}

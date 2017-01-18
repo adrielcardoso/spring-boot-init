@@ -1,0 +1,62 @@
+//package br.intelidata.entity;
+//
+//public class UniSyncLoggerEntity {
+//
+//    /** Nome desse logger. */
+//    private final String loggerName;
+//
+//    /** Todo logger tem que ter um nome. */
+//    public UniSyncLoggerEntity(String loggerName) {
+//        super();
+//        this.loggerName = loggerName;
+//    }
+//
+//    /** Propaga uma mensagem com nível {@link UniSyncNivelLog.INFO}. */
+//    public void info(String message) {
+//        dispatch(UniSyncNivelLog.INFO, getLoggerName(), message);
+//    }
+//
+//    /** Propaga uma mensagem com nível {@link UniSyncNivelLog.DEBUG}. */
+//    public void debug(String message) {
+//        dispatch(UniSyncNivelLog.DEBUG, getLoggerName(), message);
+//    }
+//
+//    /** Propaga uma mensagem com nível {@link UniSyncNivelLog.ERROR}. */
+//    public void error(String message) {
+//        dispatch(UniSyncNivelLog.ERROR, getLoggerName(), message);
+//    }
+//
+//    /**
+//     * Propaga uma mensagem com nível {@link UniSyncNivelLog.DEBUG}, acompanhada de exceção lançada.
+//     * A exceção será impressa no log.
+//     */
+//    public void debug(String message, Throwable throwable) {
+//        dispatch(UniSyncNivelLog.DEBUG, getLoggerName(), message, throwable);
+//    }
+//
+//    /**
+//     * Propaga uma mensagem com nível {@link UniSyncNivelLog.ERROR}, acompanhada de exceção lançada.
+//     * A exceção será impressa no log.
+//     */
+//    public void error(String message, Throwable throwable) {
+//        dispatch(UniSyncNivelLog.ERROR, getLoggerName(), message, throwable);
+//    }
+//
+//    /**
+//     * Esse método efetivamente despacha a mensagem de log e a exceção para o
+//     * {@link UniSyncLogManager}.
+//     */
+//    private void dispatch(UniSyncNivelLog level, String loggerName, String message, Throwable throwable) {
+//        UniSyncLogManager.logMessage(level, loggerName, message, throwable);
+//    }
+//
+//    /** Esse método efetivamente despacha a mensagem de log para o {@link UniSyncLogManager}. */
+//    private void dispatch(UniSyncNivelLog level, String loggerName, String message) {
+//        UniSyncLogManager.logMessage(level, loggerName, message);
+//    }
+//
+//    /** Informa o nome deste logger. */
+//    public String getLoggerName() {
+//        return loggerName;
+//    }
+//}

@@ -1,0 +1,15 @@
+package br.intelidata.entity;
+
+import br.intelidata.config.Entity;
+
+public class ResponseEntity extends Entity{
+	
+	public Entity response;
+	public String message;
+	
+	public ResponseEntity(Entity response, String message)
+	{
+		this.response = response;
+		this.message = message;
+	}
+}

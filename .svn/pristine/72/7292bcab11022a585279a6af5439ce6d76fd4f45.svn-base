@@ -1,0 +1,40 @@
+package br.intelidata.component;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+public class CodificacaoComponent
+{
+	private static Integer[] posicoesEmbaralhamento = new Integer[] {16, 8, 14, 6, 13, 5, 17, 11, 3, 1, 12, 9, 7, 4, 10, 15, 2, 0};
+
+    public static LocalDate getDataBaseCalculo() {
+        return LocalDate.of(1999, 7, 30);
+    }
+
+    public static String codificarData(LocalDate data) {
+        Long diasValidade = ChronoUnit.DAYS.between(getDataBaseCalculo(), data);
+        return Base35Component.gerarBase35(diasValidade.intValue());
+    }
+
+    public static LocalDate decodificarData(String dataComBase35) {
+        int dias = Base35Component.decodificaBase35(dataComBase35);
+        return getDataBaseCalculo().plusDays(dias);
+    }
+
+    public static String embaralhar(String chave) {
+        String str = "";
+        for (Integer pos : posicoesEmbaralhamento) {
+            str += chave.charAt(pos);
+        }
+        return str;
+    }
+
+    public static String desembaralhar(String chave) {
+        String[] resultado = new String[16];
+        for (int i = 0; i < posicoesEmbaralhamento.length; i++) {
+            resultado[posicoesEmbaralhamento[i]] = "" + chave.charAt(i);
+        }
+        return String.join("", resultado);
+    }
+
+}

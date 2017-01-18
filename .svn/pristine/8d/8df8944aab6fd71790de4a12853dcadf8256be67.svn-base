@@ -1,0 +1,42 @@
+package br.intelidata.entity;
+
+import br.intelidata.config.Entity;
+
+public class IAmHereEntity extends Entity 
+{
+    private long dataHora;
+    private String info;
+
+    public IAmHereEntity() 
+    {
+        super();
+    }
+
+    public IAmHereEntity(long dataHora, String info) 
+    {
+        super();
+        this.dataHora = dataHora;
+        this.info = info;
+    }
+    
+    public long getDataHora() 
+    {
+        return dataHora;
+    }
+
+    public void setDataHora(long dataHora) 
+    {
+        this.dataHora = dataHora;
+    }
+
+    public String getInfo() 
+    {
+        return info;
+    }
+
+    public void setInfo(String info) 
+    {
+        this.info = info;
+    }
+
+}

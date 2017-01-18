@@ -1,0 +1,75 @@
+package br.intelidata.entity;
+
+import br.intelidata.component.AbstractEnumComponent;
+
+public enum BuildEntity implements AbstractEnumComponent<String>
+{
+    BUILD_2013_008("2013.008", "2013.008"),
+    BUILD_2013_009("2013.009", "2013.009"),
+    BUILD_2014_001("2014.001", "2014.001"),
+    BUILD_2014_002("2014.002", "2014.002"),
+    BUILD_2014_003("2014.003", "2014.003"),
+    BUILD_2014_004("2014.004", "2014.004"),
+    BUILD_2014_005("2014.005", "2014.005"),
+    BUILD_2014_006("2014.006", "2014.006"),
+    BUILD_2014_007("2014.007", "2014.007"),
+    BUILD_2014_008("2014.008", "2014.008"),
+    @Deprecated
+    BUILD_2011_001("2011.001", "2011.001"),
+    @Deprecated
+    BUILD_2011_002("2011.002", "2011.002"),
+    @Deprecated
+    BUILD_2011_003("2011.003", "2011.003"),
+    @Deprecated
+    BUILD_2011_004("2011.004", "2011.004"),
+    @Deprecated
+    BUILD_2012_001("2012.001", "2012.001"),
+    @Deprecated
+    BUILD_2012_002("2012.002", "2012.002"),
+    @Deprecated
+    BUILD_2012_003("2012.003", "2012.003"),
+    @Deprecated
+    BUILD_2012_004("2012.004", "2012.004"),
+    @Deprecated
+    BUILD_2012_005("2012.005", "2012.005"),
+    @Deprecated
+    BUILD_2013_001("2013.001", "2013.001"),
+    @Deprecated
+    BUILD_2013_002("2013.002", "2013.002"),
+    @Deprecated
+    BUILD_2013_003("2013.003", "2013.003"),
+    @Deprecated
+    BUILD_2013_004("2013.004", "2013.004"),
+    @Deprecated
+    BUILD_2013_005("2013.005", "2013.005"),
+    @Deprecated
+    BUILD_2013_006("2013.006", "2013.006"),
+    @Deprecated
+    BUILD_2013_007("2013.007", "2013.007"),
+
+    ;
+
+    private String id;
+    private String descricao;
+
+    BuildEntity(String id, String descricao) {
+        this.id = id;
+        this.descricao = descricao;
+    }
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public String getDescricao() {
+        return descricao;
+    }
+
+    @Override
+    public String toString() {
+        return descricao;
+    }
+
+}

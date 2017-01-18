@@ -1,0 +1,20 @@
+package br.intelidata.service;
+
+import br.intelidata.component.ResponseComponent;
+import br.intelidata.config.Entity;
+import br.intelidata.config.Service;
+import br.intelidata.controllers.LogComponent;
+import br.intelidata.entity.SomethingIsWrongEntity;
+
+public class SomethingIsWrongService extends Service
+{
+	public static Entity parseRequest(LogComponent logComponent, SomethingIsWrongEntity somethingIsWrongEntity)
+	{
+		try {
+	        logComponent.logarSomethingIsWrong(somethingIsWrongEntity.getInfo(), somethingIsWrongEntity.getHistory());
+	        return somethingIsWrongEntity;
+	    } catch (Exception e) {
+	        return new ResponseComponent().handleResourceNotFoundException(400, e.getMessage());
+	    }
+	}
+}

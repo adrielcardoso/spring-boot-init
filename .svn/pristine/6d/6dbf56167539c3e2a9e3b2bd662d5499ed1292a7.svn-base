@@ -1,0 +1,61 @@
+package br.intelidata.component;
+
+import java.io.Serializable;
+import org.apache.commons.lang3.SerializationUtils;
+
+public abstract class AbstractPojoComponent implements Serializable, Cloneable {
+
+    /**
+     * 
+     */
+    public static final long serialVersionUID = 5802780559331211647L;
+
+    public abstract Long getId();
+
+    public abstract void setId(Long id);
+
+    private Long currentTimeMillis;
+
+    public Long getCurrentTimeMillis() {
+        return currentTimeMillis;
+    }
+
+    public void setCurrentTimeMillis(Long currentTimeMillis) {
+        this.currentTimeMillis = currentTimeMillis;
+    }
+
+    protected String aparar(String str, int fim) {
+        if (str == null || str.length() < fim) {
+            return str;
+        }
+        return str.substring(0, fim);
+    }
+
+    public Object getCodigo() {
+        return null;
+    }
+
+    @Override
+    public int hashCode() {
+        return getId() == null ? 0 : getId().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj instanceof AbstractPojoComponent) {
+        	AbstractPojoComponent outroObj = (AbstractPojoComponent) obj;
+            if (getId() != null) {
+                return getId().equals(outroObj.getId());
+            }
+        }
+        return false;
+    }
+
+    public Object clonar() {
+        return SerializationUtils.clone(this);
+    }
+
+}

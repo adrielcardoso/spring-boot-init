@@ -1,0 +1,119 @@
+package br.intelidata.controllers;
+
+import javax.sql.DataSource;
+import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import br.intelidata.component.FileLogComponent;
+import br.intelidata.component.LogComponent;
+import br.intelidata.component.ResponseComponent;
+import br.intelidata.entity.UsuarioSite;
+import br.intelidata.entity.UsuarioSiteLogin;
+import br.intelidata.exception.FormErrorException;
+import br.intelidata.service.UsuarioSiteService;
+
+@RestController
+public class UsuarioSiteController 
+{
+	@Autowired
+    private DataSource dataSource;
+    
+    @Autowired
+    private LogComponent logComponent;
+    
+    // usuario site login
+   	@RequestMapping(
+       		value="/usuario/login", 
+       		method = RequestMethod.POST)
+   	public Object runLogin(
+   			@RequestBody 
+   			@Valid UsuarioSiteLogin usuarioSiteLogin, 
+   			BindingResult bindingResult)
+   	{
+   		try{
+   			if(bindingResult.hasErrors()){
+   				throw new FormErrorException("O Formulário contem erro, favor validar os campos obrigatórios");
+   			}
+   			return UsuarioSiteService.parseLogin(dataSource, logComponent, usuarioSiteLogin);
+   		}catch(Exception e){
+   			FileLogComponent.getInstance().write(e.getMessage());
+       		return new ResponseComponent().handleResourceNotFoundException(e.getMessage());
+   		}
+   	}
+    
+    // parse create
+	@RequestMapping(
+    		value="/usuario", 
+    		method = RequestMethod.POST)
+	public Object runCreate(
+			@RequestBody 
+			@Valid UsuarioSite usuarioSite, 
+			BindingResult bindingResult)
+	{
+		try{
+			if(bindingResult.hasErrors()){
+				throw new FormErrorException("O Formulário contem erro, favor validar os campos obrigatórios");
+			}
+			return UsuarioSiteService.parseCreate(dataSource, logComponent, usuarioSite);
+		}catch(Exception e){
+			FileLogComponent.getInstance().write(e.getMessage());
+    		return new ResponseComponent().handleResourceNotFoundException(e.getMessage());
+		}
+	}
+	
+	// parse update
+	@RequestMapping(
+    		value="/usuario", 
+    		method = RequestMethod.PUT)
+	public Object runUpdate(
+			@RequestBody 
+			@Valid UsuarioSite usuarioSite, 
+			BindingResult bindingResult)
+	{
+		try{
+			if(bindingResult.hasErrors()){
+				throw new FormErrorException("O Formulário contem erro, favor validar os campos obrigatórios");
+			}
+			return UsuarioSiteService.parseUpdate(dataSource, logComponent, usuarioSite);
+		}catch(Exception e){
+			FileLogComponent.getInstance().write(e.getMessage());
+    		return new ResponseComponent().handleResourceNotFoundException(e.getMessage());
+		}
+	}
+	
+	// parse delete
+	@RequestMapping(
+    		value="/usuario/{id}", 
+    		method = RequestMethod.DELETE)
+	public Object runDelete(
+			@PathVariable("id") String id)
+	{
+		try{
+			return UsuarioSiteService.parseDelete(dataSource, logComponent, id);
+		}catch(Exception e){
+			FileLogComponent.getInstance().write(e.getMessage());
+    		return new ResponseComponent().handleResourceNotFoundException(e.getMessage());
+		}
+	}
+	
+	// parse find by id
+	@RequestMapping(
+    		value="/usuario/{id}", 
+    		method = RequestMethod.GET)
+	public Object runGet(
+			@PathVariable("id") String id)
+	{
+		try{
+			return UsuarioSiteService.parseFindById(dataSource, logComponent, id);
+		}catch(Exception e){
+			FileLogComponent.getInstance().write(e.getMessage());
+    		return new ResponseComponent().handleResourceNotFoundException(e.getMessage());
+		}
+	}
+	
+}

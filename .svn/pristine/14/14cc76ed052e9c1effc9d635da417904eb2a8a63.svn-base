@@ -1,0 +1,16 @@
+package br.intelidata.service;
+
+import javax.sql.DataSource;
+import br.intelidata.component.AbstractDataSourceComponent;
+import br.intelidata.entity.ContratoVendaEntity;
+
+public class ContratoVendaService extends AbstractDataSourceComponent<ContratoVendaEntity> 
+{
+    public ContratoVendaService() {}
+
+    public ContratoVendaEntity buscarPorChave(DataSource dataSource, String chave) 
+    {
+        return buscarPor(dataSource, "extra7='" + chave + "'");
+    }
+
+}

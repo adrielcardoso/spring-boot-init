@@ -1,0 +1,67 @@
+package br.intelidata.entity;
+
+import br.intelidata.config.Entity;
+
+import java.util.Date;
+
+/**
+ * Created by Adriel.Cardoso on 13/01/2017.
+ */
+public class PedidoDesinstalacao extends Entity
+{
+    private long id;
+    private long idcontrato;
+    private Date data;
+    private String chave;
+    private long idusuario;
+    private int utilizado;
+    private long currenttimemillis;
+
+    public long getIdcontrato() {
+        return idcontrato;
+    }
+
+    public void setIdcontrato(long idcontrato) {
+        this.idcontrato = idcontrato;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public String getChave() {
+        return chave;
+    }
+
+    public void setChave(String chave) {
+        this.chave = chave;
+    }
+
+    public long getIdusuario() {
+        return idusuario;
+    }
+
+    public void setIdusuario(long idusuario) {
+        this.idusuario = idusuario;
+    }
+
+    public int getUtilizado() {
+        return utilizado;
+    }
+
+    public void setUtilizado(int utilizado) {
+        this.utilizado = utilizado;
+    }
+
+    public long getCurrenttimemillis() {
+        return currenttimemillis;
+    }
+
+    public void setCurrenttimemillis(long currenttimemillis) {
+        this.currenttimemillis = currenttimemillis;
+    }
+}

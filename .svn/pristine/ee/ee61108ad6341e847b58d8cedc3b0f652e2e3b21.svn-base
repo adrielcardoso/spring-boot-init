@@ -1,0 +1,88 @@
+package br.intelidata.entity;
+
+public class IsItOkEntity extends AbstractEntity 
+{
+    private long dataHora;
+    private InfoEntity info;
+    private String dependents;
+    private int achou;
+    private int autorizado;
+    private String licenca;
+    private String usuarios;
+
+    public IsItOkEntity() 
+    {
+        super();
+    }
+
+    public long getDataHora() 
+    {
+        return dataHora;
+    }
+
+    public void setDataHora(long dataHora) 
+    {
+        this.dataHora = dataHora;
+    }
+
+    public InfoEntity getInfo() 
+    {
+        return info;
+    }
+
+    public void setInfo(InfoEntity info) 
+    {
+        this.info = info;
+    }
+
+    public String getDependents() 
+    {
+        return dependents;
+    }
+
+    public void setDependents(String dependents) 
+    {
+        this.dependents = dependents;
+    }
+
+    public int getAchou() 
+    {
+        return achou;
+    }
+
+    public void setAchou(int achou) 
+    {
+        this.achou = achou;
+    }
+
+    public int getAutorizado() 
+    {
+        return autorizado;
+    }
+
+    public void setAutorizado(int autorizado) 
+    {
+        this.autorizado = autorizado;
+    }
+
+    public String getLicenca() 
+    {
+        return licenca;
+    }
+
+    public void setLicenca(String licenca) 
+    {
+        this.licenca = licenca;
+    }
+
+    public String getUsuarios() 
+    {
+        return usuarios;
+    }
+
+    public void setUsuarios(String usuarios) 
+    {
+        this.usuarios = usuarios;
+    }
+
+}

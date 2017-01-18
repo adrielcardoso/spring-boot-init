@@ -1,0 +1,29 @@
+package br.intelidata.component;
+
+public class Base35Component 
+{	
+	private static String caracterEspaco = "X";
+    private static String escala = "ABCDEFGHIJKLMNOPQRSTUVWYZ0123456789";
+
+    public static String gerarBase35(int numero) {
+        String text = "";
+        int j = (int) Math.ceil(Math.log(numero) / Math.log(escala.length()));
+        for (int i = 0; i < j; i++) {
+            // i goes to log base code.length() of num (using change of base formula)
+            text += escala.charAt(numero % escala.length());
+            numero /= escala.length();
+        }
+        return UtilComponent.padl(text, 3, caracterEspaco);
+    }
+
+    public static int decodificaBase35(String text) {
+        text = text.replace(caracterEspaco, "");
+        int num = 0;
+        int j = text.length();
+        for (int i = 0; i < j; i++) {
+            num += escala.indexOf(text.charAt(0)) * Math.pow(escala.length(), i);
+            text = text.substring(1);
+        }
+        return num;
+    }
+}

@@ -1,0 +1,53 @@
+package br.intelidata.entity;
+
+import br.intelidata.component.AbstractEnumComponent;
+
+public enum FuncaoEntity implements AbstractEnumComponent<String> 
+{
+    LENGTH("length()", "Retorna o tamanho de uma string", false),
+    BYTELENGHT("datalength()", "Retorna o tamanho de um blob/clob", false),
+    UPPER("upper()", "Retorna o upper case de uma string", false),
+    LOWER("lower()", "Retorna o lower case de uma string", false),
+    SUBSTR("substr(p1,p2)", "Retorna uma substring da posição p1 ate a posição p2", false),
+    CONCAT("concat(p1)", "Concatena uma string", false),
+    TRIM("trim(p1", "Retira os espaços a direita e esquerda de p1", false),
+    YEAR("year(p1)", "Retorna o ano de uma data", false),
+    MONTH("month(p1)", "Retorna o mês de uma data", false),
+    STR2INT("STR2INT(p1)", "Converte um valor string para inteiro", false),
+    STR2INTEAN("STR2INT(p1)", "Converte um valor string para inteiro para código de barras", false),
+    DATEGT("dategt(p1)", "Retorna 1 caso coluna data > p1 0 caso contrário", false),
+    COUNT("count()", "Retorna o número de registros", true),
+    MAX("max(p1)", "Retorna o valor máximo de uma coluna", true),
+    MAXSTR("maxstr(p1)", "Retorna o valor máximo de uma coluna string", true),
+    MIN("min(p1)", "Retorna o valor mínimo de uma coluna", true),
+    SUM("sum(p1)", "Retorna a soma de uma coluna", true);
+
+    private FuncaoEntity(String id, String descricao, boolean agrupamento) {
+        this.id = id;
+        this.descricao = descricao;
+        this.agrupamento = agrupamento;
+    }
+
+    private String id;
+    private String descricao;
+    private boolean agrupamento;
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public boolean isAgrupamento() {
+        return agrupamento;
+    }
+
+    @Override
+    public String toString() {
+        return descricao;
+    }
+}

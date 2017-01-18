@@ -1,0 +1,19 @@
+package br.intelidata.service;
+
+import br.intelidata.component.InterfaceIdentificadorProdutoLicencaComponent;
+
+public class IdentificadorIncrementoUsuarioService implements InterfaceIdentificadorProdutoLicencaComponent 
+{
+    private String codigoReduzido;
+
+    public IdentificadorIncrementoUsuarioService(String codigoReduzido) 
+    {
+        this.codigoReduzido = codigoReduzido;
+    }
+
+    @Override
+    public boolean identificar(String chave) 
+    {
+        return achou(LicencaCommonService.getPrefixo(chave), codigoReduzido + "\\d{3,3}", codigoReduzido + "\\d{2,2}");
+    }
+}

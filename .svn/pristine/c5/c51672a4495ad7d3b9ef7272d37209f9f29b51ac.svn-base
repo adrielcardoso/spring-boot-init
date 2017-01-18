@@ -1,0 +1,54 @@
+package br.intelidata.component;
+
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.intelidata.config.Controller;
+import br.intelidata.config.Entity;
+import br.intelidata.entity.InfoEntity;
+import br.intelidata.entity.SomethingIsWrongEntity;
+
+@RestController
+public class LogComponent extends Controller
+{
+    private DBUtilComponent dbUtil;
+    private DataSource dataSource;
+
+    public LogComponent(@Autowired DBUtilComponent dbUtil, @Qualifier("logtrackerDataSource") DataSource dataSource) 
+    {
+        this.dbUtil = dbUtil;
+        this.dataSource = dataSource;
+    }
+
+    public void logarIAmHere(Entity iAmHere) throws Exception 
+    {
+    	dbUtil.incluirObjeto(dataSource, iAmHere);
+    }
+
+    public void logarSomethingIsWrong(InfoEntity info, String history) throws Exception 
+    {
+        SomethingIsWrongEntity somethingIsWrong = new SomethingIsWrongEntity(System.currentTimeMillis(), history, info);
+        dbUtil.incluirObjeto(dataSource, somethingIsWrong);
+    }
+
+    public void logarIsItOk(Entity isItOk) throws Exception 
+    {
+        dbUtil.incluirObjeto(dataSource, isItOk);
+    }
+    
+    
+    // comunication db: persist
+    public void persist(Entity object) throws Exception
+    {
+    	dbUtil.incluirObjeto(dataSource, object);
+    }
+
+    // comunication db: search 
+    public Entity buscar(Class<?> object, String where)
+    {
+    	return dbUtil.buscar(dataSource, object, where);
+    }
+    
+}

@@ -1,0 +1,105 @@
+package br.intelidata.service;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import br.intelidata.component.FileLogComponent;
+import br.intelidata.component.LogComponent;
+import br.intelidata.config.Service;
+import br.intelidata.entity.ClienteEntity;
+import br.intelidata.entity.SaldoLicenca;
+import br.intelidata.entity.SalesLicenceLog;
+import br.intelidata.entity.UsuarioSite;
+
+public class SalesService extends Service
+{
+	private static javax.sql.DataSource cDataSource;	
+	private static LogComponent cLogComponent;
+	
+	public static Object parseSaleLicence(
+			javax.sql.DataSource cDataSourceParam,
+			LogComponent cLogComponentParam, 
+			SalesLicenceLog salesLicenceEntity) throws Exception
+	{
+		cDataSource = cDataSourceParam;
+		cLogComponent = cLogComponentParam;
+		
+		UsuarioSiteService usuarioSiteService = new UsuarioSiteService(cDataSourceParam, cLogComponentParam);
+		
+		//verificar se usuario existe
+		UsuarioSite userReference = (UsuarioSite) usuarioSiteService.autenticateUserByToken(salesLicenceEntity.getUsuario());
+		
+		//verificar revenda
+		ClienteEntity cliente = (ClienteEntity) parseRevenda(userReference.getIdSubRevenda());
+		
+		//verificar compatibilidade do cnpj
+		// aguardando cleyton para verificar esse ponto
+		
+		//verificar compatibilidade da licenca
+		//analisar estoque da revenda sobre o tipo de licenca
+		SaldoLicenca saldoLicenca = (SaldoLicenca) findLicenca(cliente.getId(), salesLicenceEntity.getLicence());
+		
+		FileLogComponent.getInstance().write(saldoLicenca.getRevendaNome());
+		
+		//se tiver em estoque gerar chave de instalacao e ativacao
+		// gravar licenca no contrato
+		// movimento de estoque da licenca
+		//desconto de saldo da licenca na revenda 
+
+		return userReference;
+	}
+	
+	private static Object parseRevenda(long idRevenda) throws Exception
+	{
+		Connection connection = cDataSource.getConnection();
+        String comando = "select * from entidade where id = ?";
+        PreparedStatement statement = connection.prepareStatement(comando);
+        statement.setLong(1, idRevenda);
+        ResultSet rs = statement.executeQuery();
+        if (rs.next()) {
+        	ClienteEntity cliente = new ClienteEntity();
+        	cliente.setCnpjCpf(rs.getString("cnpjcpf"));
+        	long id = rs.getInt("id");
+        	cliente.setId(id);
+        	cliente.setRazaoSocial(rs.getString("razaosocial"));
+        	cliente.setIdRepresentante(rs.getString("idrepresentante"));
+        	return cliente;
+        }else{
+        	throw new Exception("Não foi possível identificar a revenda do usuário");
+        }
+	}
+	
+	private static Object findLicenca(long idCliente, String prefixoLicenca) throws Exception
+	{
+		String sql = "select p.nome produto_nome, p.tipo produto_tipo, p.extra1 produto_prefixo, sl.quantidade, sl.idCliente revenda_id, e.nome revenda_nome, sl.id saldoLicencaId from produto as p "+
+			"join saldoLicenca sl on sl.idproduto = p.id "+
+			"join entidade e on e.id = sl.idCliente "+
+		"where "+
+			"p.extra1 = ? and "+ 
+			"sl.idCliente = ?";
+		
+		Connection connection = cDataSource.getConnection();
+		PreparedStatement statement = connection.prepareStatement(sql);
+		
+        statement.setString(1, prefixoLicenca);
+        statement.setLong(2, idCliente);
+        ResultSet rs = statement.executeQuery();
+        
+        if (rs.next()) {
+        	
+        	SaldoLicenca saldoLicenca = new SaldoLicenca();
+        	saldoLicenca.setId(rs.getLong("saldoLicencaId"));
+        	saldoLicenca.setIdCliente(rs.getString("revenda_id"));
+        	saldoLicenca.setProdutoNome(rs.getString("produto_nome"));
+        	saldoLicenca.setProdutoPrefixo(rs.getString("produto_prefixo"));
+        	saldoLicenca.setProdutoTipo(rs.getString("produto_tipo"));
+        	saldoLicenca.setQuantidade(rs.getString("quantidade"));
+        	saldoLicenca.setRevendaNome(rs.getString("revenda_nome"));
+        	
+        	return saldoLicenca;
+        }else{
+        	throw new Exception("Não encontramos referencia da licença para esse revendedor, favor verificar se existe em estoque");
+        }
+	}
+	
+}

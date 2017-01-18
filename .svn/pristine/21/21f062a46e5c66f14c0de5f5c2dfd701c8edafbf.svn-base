@@ -1,0 +1,12 @@
+package br.intelidata.entity;
+
+import java.util.ArrayList;
+
+public class GenericEntity 
+{	
+	
+	private ArrayList<Object> object = new ArrayList<Object>();
+	
+	public ArrayList<Object> getObject() { return object; }
+	public void setObject(ArrayList<Object> object) { this.object = object; }
+}

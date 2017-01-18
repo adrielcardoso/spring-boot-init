@@ -1,0 +1,5 @@
+package br.intelidata.interace;
+
+public interface InterfaceValidadorLicenca {
+//	public void validar(String chave, String cnpj) throws Exception;
+}

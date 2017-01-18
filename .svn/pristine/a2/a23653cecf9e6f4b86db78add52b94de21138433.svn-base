@@ -1,0 +1,111 @@
+package br.intelidata.entity;
+
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import br.intelidata.component.LocalDateDeserializerComponent;
+
+public class InfoLicencaEntity 
+{
+    private String razaoSocial;
+    private String cnpj;
+    private String chaveInstalacao;
+    private String licenca;
+    @JsonDeserialize(using = LocalDateDeserializerComponent.class)
+    private LocalDate ativacao;
+    private String versaoAtual;
+    private String buildAtual;
+    @JsonDeserialize(using = LocalDateDeserializerComponent.class)
+    private LocalDate vencimento;
+
+    public InfoLicencaEntity() 
+    {}
+
+    public String getRazaoSocial() 
+    {
+        return razaoSocial;
+    }
+
+    public void setRazaoSocial(String razaoSocial) 
+    {
+        this.razaoSocial = razaoSocial;
+    }
+
+    public String getCnpj() 
+    {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) 
+    {
+        this.cnpj = cnpj;
+    }
+
+    public String getChaveInstalacao() 
+    {
+        return chaveInstalacao;
+    }
+
+    public void setChaveInstalacao(String chaveInstalacao) 
+    {
+        this.chaveInstalacao = chaveInstalacao;
+    }
+
+    public String getLicenca() 
+    {
+        return licenca;
+    }
+
+    public void setLicenca(String licenca) 
+    {
+        this.licenca = licenca;
+    }
+
+    public LocalDate getAtivacao() 
+    {
+        return ativacao;
+    }
+
+    public void setAtivacao(LocalDate ativacao) 
+    {
+        this.ativacao = ativacao;
+    }
+
+    public String getVersaoAtual() 
+    {
+        return versaoAtual;
+    }
+
+    public void setVersaoAtual(String versaoAtual) 
+    {
+        this.versaoAtual = versaoAtual;
+    }
+
+    public String getBuildAtual() 
+    {
+        return buildAtual;
+    }
+
+    public void setBuildAtual(String buildAtual) 
+    {
+        this.buildAtual = buildAtual;
+    }
+
+    public LocalDate getVencimento() 
+    {
+        return vencimento;
+    }
+
+    public void setVencimento(LocalDate vencimento) 
+    {
+        this.vencimento = vencimento;
+    }
+
+    @Override
+    public String toString() 
+    {
+        return licenca;
+    }
+
+}

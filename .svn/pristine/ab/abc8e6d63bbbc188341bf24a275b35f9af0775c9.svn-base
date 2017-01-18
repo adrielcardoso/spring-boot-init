@@ -1,0 +1,56 @@
+package br.intelidata.entity;
+
+import br.intelidata.component.AbstractPojoComponent;
+
+public class CasoArquivoEntity extends AbstractPojoComponent 
+{
+    public static final long serialVersionUID = -4939437456051489517L;
+    private Long id;
+    private Long idCaso;
+//    @BDTransient
+    private byte[] arquivo;
+    private String descricao;
+    private String extensao;
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getIdCaso() {
+        return idCaso;
+    }
+
+    public void setIdCaso(Long idCaso) {
+        this.idCaso = idCaso;
+    }
+
+    public byte[] getArquivo() {
+        return arquivo;
+    }
+
+    public void setArquivo(byte[] arquivo) {
+        this.arquivo = arquivo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getExtensao() {
+        return extensao;
+    }
+
+    public void setExtensao(String extensao) {
+        this.extensao = extensao;
+    }
+}

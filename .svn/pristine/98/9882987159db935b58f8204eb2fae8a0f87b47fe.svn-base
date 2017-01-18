@@ -1,0 +1,14 @@
+//package br.intelidata.interace;
+//
+//import br.intelidata.entity.LicencaEntity;
+//import br.intelidata.entity.UtilEntity;
+//import br.intelidata.service.LicencaCommonService;
+//
+//public interface InterfaceIncrementoLicenca {
+//
+//	public int getIncremento(LicencaEntity licenca);
+//
+//    default int get(LicencaEntity licenca) {
+//        return Integer.parseInt(UtilEntity.apenasNumeros(LicencaCommonService.getPrefixo(licenca.getChaveAtivacao())));
+//    }
+//}

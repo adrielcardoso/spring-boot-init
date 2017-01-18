@@ -1,0 +1,25 @@
+package br.intelidata.service;
+
+import br.intelidata.component.LogComponent;
+import br.intelidata.component.ResponseComponent;
+import br.intelidata.component.UnicoCryptComponent;
+import br.intelidata.config.Entity;
+import br.intelidata.config.Service;
+import br.intelidata.entity.IAmHere;
+
+public class IAmHereService extends Service
+{
+	public static Entity parseRequest(LogComponent logComponent, IAmHere iAmHereEntity)
+	{
+		try {
+    		iAmHereEntity.setInfo(UnicoCryptComponent.decript(iAmHereEntity.getInfo()));
+			iAmHereEntity.setDataHora(System.currentTimeMillis());
+			logComponent.logarIAmHere(iAmHereEntity);
+			iAmHereEntity.setInfo(UnicoCryptComponent.cript(iAmHereEntity.getInfo()));
+			
+			return iAmHereEntity;
+		} catch (Exception e) {
+			return new ResponseComponent().handleResourceNotFoundException(400, e.getMessage());
+		}
+	}	
+}

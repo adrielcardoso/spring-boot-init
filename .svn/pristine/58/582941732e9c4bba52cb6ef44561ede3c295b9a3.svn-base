@@ -1,0 +1,31 @@
+package br.intelidata.pojo.enums;
+
+public enum StatusContrato implements AbstractEnum<Integer> {
+
+    ABERTO(1, "Aberto"),
+    ENCERRADO(2, "Encerrado"),;
+
+    StatusContrato(Integer id, String descricao) {
+        this.id = id;
+        this.descricao = descricao;
+    }
+
+    private Integer id;
+    private String descricao;
+
+    @Override
+    public Integer getId() {
+        return id;
+    }
+
+    @Override
+    public String getDescricao() {
+        return descricao;
+    }
+
+    @Override
+    public String toString() {
+        return descricao;
+    }
+
+}

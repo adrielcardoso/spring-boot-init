@@ -1,0 +1,45 @@
+package br.intelidata.component;
+
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.List;
+import javax.sql.DataSource;
+import br.intelidata.config.Entity;
+
+public class AbstractDataSourceComponent<E extends Entity> 
+{
+    private DBUtilComponent dbUtil;
+    private Class<?> classe;
+
+    public AbstractDataSourceComponent() 
+    {
+        dbUtil = new DBUtilComponent();
+    }
+
+    public Class<?> getClasse() 
+    {
+        if (classe == null) {
+            Type tp = getClass().getGenericSuperclass();
+            if (tp instanceof ParameterizedType) {
+                classe = (Class<?>) ((ParameterizedType) tp).getActualTypeArguments()[0];
+            }
+        }
+        return classe;
+    }
+
+    public void incluir(DataSource dataSource, E pojo) throws Exception 
+    {
+        dbUtil.incluirObjeto(dataSource, pojo);
+    }
+
+    public E buscarPor(DataSource dataSource, String where) 
+    {
+        return dbUtil.buscar(dataSource, getClasse(), where);
+    }
+
+    public List<E> buscarListaDetail(DataSource dataSource, String where) 
+    {
+        return dbUtil.buscarLista(dataSource, getClasse(), where);
+    }
+
+}

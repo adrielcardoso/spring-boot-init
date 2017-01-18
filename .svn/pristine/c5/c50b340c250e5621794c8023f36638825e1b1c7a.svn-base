@@ -1,0 +1,15 @@
+package br.intelidata.excecao;
+
+public class ErroAoGravarException extends Exception {
+
+    private static final long serialVersionUID = 1L;
+
+    public ErroAoGravarException(String message) {
+        super(message);
+    }
+
+    public ErroAoGravarException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+}

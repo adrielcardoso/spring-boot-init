@@ -1,0 +1,36 @@
+package br.intelidata.entity;
+
+import br.intelidata.config.Entity;
+
+public class SalesLicenceLog extends Entity
+{
+	private String licence;
+	private Info info;
+	private String cnpj;
+	private String usuario; // uk: token de acesso sem credencial
+	
+	public String getLicence() {
+		return licence;
+	}
+	public void setLicence(String licence) {
+		this.licence = licence;
+	}
+	public Info getInfo() {
+		return info;
+	}
+	public void setInfo(Info info) {
+		this.info = info;
+	}
+	public String getCnpj() {
+		return cnpj;
+	}
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+	public String getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+}

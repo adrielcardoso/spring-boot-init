@@ -1,0 +1,2724 @@
+06/01/2017 10:52:10 N�o encontramos referencia da licen�a para esse revendedor, favor verificar se existe em estoque
+06/01/2017 10:54:05 N�o encontramos referencia da licen�a para esse revendedor, favor verificar se existe em estoque
+06/01/2017 10:54:10 N�o encontramos referencia da licen�a para esse revendedor, favor verificar se existe em estoque
+06/01/2017 10:55:27 Pedido instalacao: razao
+06/01/2017 10:55:27 Pedido instalacao: cnpj
+06/01/2017 10:55:48 Pedido instalacao: razao
+06/01/2017 10:55:48 Pedido instalacao: cnpj
+06/01/2017 10:55:55 Pedido instalacao: razao
+06/01/2017 10:55:55 Pedido instalacao: cnpj
+06/01/2017 10:55:59 Pedido instalacao: razao
+06/01/2017 10:55:59 Pedido instalacao: cnpj
+06/01/2017 10:56:00 Pedido instalacao: razao
+06/01/2017 10:56:00 Pedido instalacao: cnpj
+06/01/2017 10:56:02 Pedido instalacao: razao
+06/01/2017 10:56:02 Pedido instalacao: cnpj
+06/01/2017 10:56:04 Pedido instalacao: razao
+06/01/2017 10:56:04 Pedido instalacao: cnpj
+06/01/2017 10:58:07 Pedido instalacao: razao
+06/01/2017 10:58:07 Pedido instalacao: cnpj
+06/01/2017 10:58:11 Pedido instalacao: razao
+06/01/2017 10:58:11 Pedido instalacao: cnpj
+06/01/2017 13:19:18 Pedido instalacao: razao
+06/01/2017 13:19:18 Pedido instalacao: cnpj
+06/01/2017 13:19:24 Pedido instalacao: razao
+06/01/2017 13:19:24 Pedido instalacao: cnpj
+06/01/2017 13:19:27 Pedido instalacao: razao
+06/01/2017 13:19:27 Pedido instalacao: cnpj
+06/01/2017 14:10:12 parsePedidoInstalacao
+06/01/2017 14:15:53 parsePedidoInstalacao
+06/01/2017 14:15:54 N�o encontramos registros de pedido para instala��o
+06/01/2017 15:08:32 parsePedidoInstalacao
+06/01/2017 15:08:33 N�o encontramos registros de pedido para instala��o
+10/01/2017 09:48:44 parsePedidoInstalacao
+10/01/2017 09:48:45 N�o encontramos registros de pedido para instala��o
+10/01/2017 09:49:02 N�o encontramos referencia da licen�a para esse revendedor, favor verificar se existe em estoque
+10/01/2017 09:54:55 N�o encontramos referencia da licen�a para esse revendedor, favor verificar se existe em estoque
+10/01/2017 09:56:02 N�o encontramos referencia da licen�a para esse revendedor, favor verificar se existe em estoque
+10/01/2017 09:56:31 ERROR: operator does not exist: bigint = character varying
+  Dica: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Posi��o: 40
+10/01/2017 09:56:34 ERROR: operator does not exist: bigint = character varying
+  Dica: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Posi��o: 40
+10/01/2017 09:56:42 usu�rio n�o encontrado na base de dados
+10/01/2017 09:56:45 IdRevenda: 0
+10/01/2017 09:56:45 init
+10/01/2017 09:56:45 E-mail j� utilizado por outro usu�rio
+10/01/2017 09:56:51 IdRevenda: 0
+10/01/2017 09:56:51 init
+10/01/2017 09:56:52 id 5
+10/01/2017 09:57:11 N�o encontramos referencia da licen�a para esse revendedor, favor verificar se existe em estoque
+10/01/2017 10:12:45 parsePedidoInstalacao
+10/01/2017 10:12:46 pedidoInstalacao.size(): 1
+10/01/2017 10:22:06 parsePedidoInstalacao
+10/01/2017 10:22:06 pedidoInstalacao.size(): 2
+10/01/2017 10:22:10 parsePedidoInstalacao
+10/01/2017 10:22:10 pedidoInstalacao.size(): 2
+10/01/2017 10:22:10 parsePedidoInstalacao
+10/01/2017 10:22:10 pedidoInstalacao.size(): 2
+10/01/2017 10:22:13 parsePedidoInstalacao
+10/01/2017 10:22:13 pedidoInstalacao.size(): 2
+10/01/2017 10:23:32 parsePedidoInstalacao
+10/01/2017 10:23:32 pedidoInstalacao.size(): 2
+10/01/2017 10:24:42 parsePedidoInstalacao
+10/01/2017 10:24:42 pedidoInstalacao.size(): 2
+10/01/2017 10:48:21 parsePedidoInstalacao
+10/01/2017 10:48:21 ERROR: syntax error at or near "p"
+  Posi��o: 127
+10/01/2017 10:51:53 parsePedidoInstalacao
+10/01/2017 10:51:53 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ?
+10/01/2017 10:51:54 ERROR: syntax error at or near "p"
+  Posi��o: 127
+10/01/2017 10:53:50 parsePedidoInstalacao
+10/01/2017 10:53:50 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ?
+10/01/2017 10:53:50 N�o encontramos registros de pedido para instala��o
+10/01/2017 10:53:57 parsePedidoInstalacao
+10/01/2017 10:53:57 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ?
+10/01/2017 10:53:57 N�o encontramos registros de pedido para instala��o
+10/01/2017 10:57:34 parsePedidoInstalacao
+10/01/2017 10:57:34 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ?
+10/01/2017 10:57:34 N�o encontramos registros de pedido para instala��o
+10/01/2017 11:18:56 parsePedidoInstalacao
+10/01/2017 11:18:56 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ?
+10/01/2017 11:18:56 N�o encontramos registros de pedido para instala��o
+10/01/2017 11:19:02 parsePedidoInstalacao
+10/01/2017 11:19:02 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ?
+10/01/2017 11:19:02 N�o encontramos registros de pedido para instala��o
+10/01/2017 11:27:23 parsePedidoInstalacao
+10/01/2017 11:27:23 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ?
+10/01/2017 11:27:23 N�o encontramos registros de pedido para instala��o
+10/01/2017 11:33:59 parsePedidoInstalacao
+10/01/2017 11:33:59 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ?
+10/01/2017 11:33:59 N�o encontramos registros de pedido para instala��o
+10/01/2017 11:43:06 parsePedidoInstalacao
+10/01/2017 11:43:06 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ?
+10/01/2017 11:43:06 N�o encontramos registros de pedido para instala��o
+10/01/2017 11:43:26 parsePedidoInstalacao
+10/01/2017 11:43:26 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ?
+10/01/2017 11:43:26 N�o encontramos registros de pedido para instala��o
+10/01/2017 11:52:25 parsePedidoInstalacao
+10/01/2017 11:52:25 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ?
+10/01/2017 11:52:25 N�o encontramos registros de pedido para instala��o
+10/01/2017 11:52:36 parsePedidoInstalacao
+10/01/2017 11:52:36 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ?
+10/01/2017 11:52:36 N�o encontramos registros de pedido para instala��o
+10/01/2017 11:52:41 parsePedidoInstalacao
+10/01/2017 11:52:41 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ?
+10/01/2017 11:52:41 N�o encontramos registros de pedido para instala��o
+10/01/2017 11:57:43 parsePedidoInstalacao
+10/01/2017 11:57:43 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ?
+10/01/2017 11:57:43 N�o encontramos registros de pedido para instala��o
+10/01/2017 13:41:23 parsePedidoInstalacao
+10/01/2017 13:41:23 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ?
+10/01/2017 13:41:24 N�o encontramos registros de pedido para instala��o
+10/01/2017 14:00:42 parsePedidoInstalacao
+10/01/2017 14:00:42 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+10/01/2017 14:00:43 pedido:getIdproduto: 104
+10/01/2017 14:00:43 pedidoInstalacao.size(): 1
+10/01/2017 14:00:51 parsePedidoInstalacao
+10/01/2017 14:00:51 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+10/01/2017 14:00:52 pedido:getIdproduto: 104
+10/01/2017 14:00:52 pedidoInstalacao.size(): 1
+10/01/2017 14:21:59 parsePedidoInstalacao
+10/01/2017 14:21:59 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+10/01/2017 14:21:59 pedido:getIdproduto: 104
+10/01/2017 14:21:59 pedidoInstalacao.size(): 1
+10/01/2017 14:22:07 parsePedidoInstalacao
+10/01/2017 14:22:07 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+10/01/2017 14:22:07 pedido:getIdproduto: 104
+10/01/2017 14:22:07 pedidoInstalacao.size(): 1
+10/01/2017 14:22:32 parsePedidoInstalacao
+10/01/2017 14:22:32 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+10/01/2017 14:22:32 pedido:getIdproduto: 104
+10/01/2017 14:22:32 pedidoInstalacao.size(): 1
+10/01/2017 14:22:36 parsePedidoInstalacao
+10/01/2017 14:22:36 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+10/01/2017 14:22:36 pedido:getIdproduto: 104
+10/01/2017 14:22:36 pedidoInstalacao.size(): 1
+10/01/2017 14:22:59 parsePedidoInstalacao
+10/01/2017 14:22:59 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+10/01/2017 14:22:59 pedido:getIdproduto: 104
+10/01/2017 14:22:59 pedidoInstalacao.size(): 1
+10/01/2017 14:23:39 parsePedidoInstalacao
+10/01/2017 14:23:39 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+10/01/2017 14:23:39 pedido:getIdproduto: 104
+10/01/2017 14:23:39 pedidoInstalacao.size(): 1
+10/01/2017 14:23:44 parsePedidoInstalacao
+10/01/2017 14:23:44 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+10/01/2017 14:23:44 pedido:getIdproduto: 104
+10/01/2017 14:23:44 pedidoInstalacao.size(): 1
+10/01/2017 14:42:54 parsePedidoInstalacao
+10/01/2017 14:42:54 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+10/01/2017 14:42:54 pedido:getIdproduto: 104
+10/01/2017 14:42:54 pedidoInstalacao.size(): 1
+10/01/2017 14:43:01 parsePedidoInstalacao
+10/01/2017 14:43:01 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+10/01/2017 14:43:01 pedido:getIdproduto: 104
+10/01/2017 14:43:01 pedidoInstalacao.size(): 1
+10/01/2017 14:45:30 parsePedidoInstalacao
+10/01/2017 14:45:30 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+10/01/2017 14:45:30 pedido:getIdproduto: 104
+10/01/2017 14:45:30 pedidoInstalacao.size(): 1
+10/01/2017 15:03:33 parsePedidoInstalacao
+10/01/2017 15:03:33 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+10/01/2017 15:03:33 idCliente: 15
+10/01/2017 15:03:33 idProduto: 104
+10/01/2017 15:03:33 N�o foi poss�vel encontrar saldo de licen�a
+10/01/2017 15:04:22 parsePedidoInstalacao
+10/01/2017 15:04:22 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+10/01/2017 15:04:22 idCliente: 15
+10/01/2017 15:04:22 idProduto: 103
+10/01/2017 15:05:44 parsePedidoInstalacao
+10/01/2017 15:05:44 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+10/01/2017 15:05:44 idCliente: 15
+10/01/2017 15:05:44 idProduto: 103
+10/01/2017 15:05:48 parsePedidoInstalacao
+10/01/2017 15:05:48 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+10/01/2017 15:05:48 idCliente: 15
+10/01/2017 15:05:48 idProduto: 103
+10/01/2017 15:09:24 parsePedidoInstalacao
+10/01/2017 15:09:24 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+10/01/2017 15:09:24 idCliente: 15
+10/01/2017 15:09:24 idProduto: 103
+10/01/2017 15:09:37 permiss�o de acesso negada, verificar token de acesso.
+10/01/2017 15:09:40 parsePedidoInstalacao
+10/01/2017 15:09:40 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+10/01/2017 15:09:40 idCliente: 15
+10/01/2017 15:09:40 idProduto: 103
+10/01/2017 15:22:39 parsePedidoInstalacao
+10/01/2017 15:22:39 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+10/01/2017 15:22:39 idCliente: 15
+10/01/2017 15:22:39 idProduto: 103
+10/01/2017 15:22:41 parsePedidoInstalacao
+10/01/2017 15:22:41 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+10/01/2017 15:22:41 idCliente: 15
+10/01/2017 15:22:41 idProduto: 103
+10/01/2017 15:22:43 parsePedidoInstalacao
+10/01/2017 15:22:43 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+10/01/2017 15:22:43 idCliente: 15
+10/01/2017 15:22:43 idProduto: 103
+12/01/2017 10:45:36 parsePedidoInstalacao
+12/01/2017 10:45:36 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ? group by p.id id limit 1
+12/01/2017 10:45:36 ERROR: syntax error at or near "id"
+  Posição: 463
+12/01/2017 10:59:09 here 1
+12/01/2017 10:59:10 here 2
+12/01/2017 10:59:10 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ? group by p.id id limit 1
+12/01/2017 10:59:10 ERROR: syntax error at or near "id"
+  Posição: 463
+12/01/2017 11:23:16 here 1
+12/01/2017 11:23:16 here 2
+12/01/2017 11:23:16 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ? group by p.id id limit 1
+12/01/2017 11:23:16 ERROR: syntax error at or near "id"
+  Posição: 463
+12/01/2017 11:23:23 here 1
+12/01/2017 11:23:23 here 2
+12/01/2017 11:23:23 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ? group by p.id id limit 1
+12/01/2017 11:23:23 ERROR: syntax error at or near "id"
+  Posição: 463
+12/01/2017 11:24:53 here 1
+12/01/2017 11:24:53 here 2
+12/01/2017 11:24:53 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ? group by p.id id limit 1
+12/01/2017 11:24:53 ERROR: syntax error at or near "id"
+  Posição: 463
+12/01/2017 11:25:00 here 1
+12/01/2017 11:25:00 here 2
+12/01/2017 11:25:00 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ? group by p.id id limit 1
+12/01/2017 11:25:00 ERROR: syntax error at or near "id"
+  Posição: 463
+12/01/2017 11:25:55 here 1
+12/01/2017 11:25:55 here 2
+12/01/2017 11:25:55 0
+12/01/2017 11:25:55 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ? group by p.id id limit 1
+12/01/2017 11:25:55 1
+12/01/2017 11:25:55 ERROR: syntax error at or near "id"
+  Posição: 463
+12/01/2017 11:28:09 here 1
+12/01/2017 11:28:09 here 2
+12/01/2017 11:28:09 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ? group by p.id p.id limit 1
+12/01/2017 11:28:09 ERROR: syntax error at or near "p"
+  Posição: 463
+12/01/2017 11:29:24 here 1
+12/01/2017 11:29:25 here 2
+12/01/2017 11:29:25 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ? group by p.id limit 1
+12/01/2017 11:29:25 ERROR: column "pi.id" must appear in the GROUP BY clause or be used in an aggregate function
+  Posição: 274
+12/01/2017 11:30:26 here 1
+12/01/2017 11:30:26 here 2
+12/01/2017 11:30:26 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ? limit 1
+12/01/2017 11:30:26 here PT 2
+12/01/2017 11:30:26 here 3
+12/01/2017 11:30:26 here 4
+12/01/2017 11:30:26 cnpj: 02386002000196
+12/01/2017 11:30:36 here 1
+12/01/2017 11:30:37 here 2
+12/01/2017 11:30:37 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ? limit 1
+12/01/2017 11:30:37 here PT 2
+12/01/2017 11:30:37 here 3
+12/01/2017 11:30:37 here 4
+12/01/2017 11:30:37 cnpj: 02386002000196
+12/01/2017 11:30:37 here 1
+12/01/2017 11:30:37 here 2
+12/01/2017 11:30:37 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ? limit 1
+12/01/2017 11:30:37 here PT 2
+12/01/2017 11:30:37 here 3
+12/01/2017 11:30:37 here 4
+12/01/2017 11:30:37 cnpj: 02386002000196
+12/01/2017 11:30:38 here 1
+12/01/2017 11:30:38 here 2
+12/01/2017 11:30:38 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ? limit 1
+12/01/2017 11:30:38 here PT 2
+12/01/2017 11:30:38 here 3
+12/01/2017 11:30:38 here 4
+12/01/2017 11:30:38 cnpj: 02386002000196
+12/01/2017 11:30:39 here 1
+12/01/2017 11:30:39 here 2
+12/01/2017 11:30:39 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ? limit 1
+12/01/2017 11:30:39 here PT 2
+12/01/2017 11:30:39 here 3
+12/01/2017 11:30:39 here 4
+12/01/2017 11:30:39 cnpj: 02386002000196
+12/01/2017 11:30:40 here 1
+12/01/2017 11:30:40 here 2
+12/01/2017 11:30:40 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ? limit 1
+12/01/2017 11:30:40 here PT 2
+12/01/2017 11:30:40 here 3
+12/01/2017 11:30:40 here 4
+12/01/2017 11:30:40 cnpj: 02386002000196
+12/01/2017 11:30:40 here 1
+12/01/2017 11:30:40 here 2
+12/01/2017 11:30:40 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ? limit 1
+12/01/2017 11:30:40 here PT 2
+12/01/2017 11:30:40 here 3
+12/01/2017 11:30:40 here 4
+12/01/2017 11:30:40 cnpj: 02386002000196
+12/01/2017 11:42:37 here 1
+12/01/2017 11:42:37 here 2
+12/01/2017 11:42:37 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ? limit 1
+12/01/2017 11:42:37 here PT 2
+12/01/2017 11:42:37 here 3
+12/01/2017 11:42:37 here 4
+12/01/2017 11:42:37 cnpj: 02386002000196
+12/01/2017 11:43:19 here 1
+12/01/2017 11:43:20 here 2
+12/01/2017 11:43:20 select p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ? limit 1
+12/01/2017 11:43:20 Type class java.util.ArrayList is not supported in dialect POSTGRES
+12/01/2017 11:49:00 idCliente: 15
+12/01/2017 11:49:00 idProduto: 103
+12/01/2017 11:49:00 cnpj: 02386002000196
+12/01/2017 11:49:00 java.lang.NullPointerException
+	at br.intelidata.service.ContratoService.addItemContrato(ContratoService.java:46)
+	at br.intelidata.service.PedidoInstalacaService.parsePedidoInstalacao(PedidoInstalacaService.java:84)
+	at br.intelidata.controllers.PedidoInstalacaoController.run(PedidoInstalacaoController.java:32)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:114)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:827)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:897)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:648)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:230)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:192)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:192)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:87)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:192)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:77)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:192)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:192)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:108)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:522)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:349)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:1110)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:785)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1425)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+
+12/01/2017 11:49:00 java.lang.NullPointerException
+12/01/2017 11:51:12 idCliente: 15
+12/01/2017 11:51:12 idProduto: 103
+12/01/2017 11:51:12 cnpj: 02386002000196
+12/01/2017 11:51:12 HERE
+12/01/2017 11:51:12 null
+12/01/2017 11:54:16 idCliente: 15
+12/01/2017 11:54:16 idProduto: 103
+12/01/2017 11:54:16 cnpj: 02386002000196
+12/01/2017 11:54:16 Não foi possível encontrar o contrato pelo CNPJ: 02386002000196
+12/01/2017 11:54:23 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 0238600200019
+12/01/2017 11:54:32 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 0238600200011
+12/01/2017 11:54:34 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 0238600200018
+12/01/2017 11:54:35 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 0238600200019
+12/01/2017 13:56:40 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 0238600200019
+12/01/2017 13:57:58 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 0238600200019
+12/01/2017 13:59:09 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 0238600200019
+12/01/2017 13:59:15 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 13:59:37 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 14:02:04 HERE 1
+12/01/2017 14:02:05 HERE entity.getCnpj(): 02386002000196
+12/01/2017 14:02:05 HERE 2
+12/01/2017 14:02:05 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 14:04:13 HERE 1
+12/01/2017 14:04:13 HERE entity.getCnpj(): 02386002000196
+12/01/2017 14:04:13 HERE 2
+12/01/2017 14:04:13 idCliente: 15
+12/01/2017 14:04:13 idProduto: 103
+12/01/2017 14:04:13 cnpj: 02386002000196
+12/01/2017 14:04:13 Não foi possível encontrar o contrato pelo CNPJ: 02386002000196
+12/01/2017 14:06:57 cnpj: 02386002000196
+12/01/2017 14:06:57 Não foi possível encontrar o contrato pelo CNPJ: 02386002000196
+12/01/2017 14:07:09 cnpj: 02386002000196
+12/01/2017 14:07:09 Não foi possível encontrar o contrato pelo CNPJ: 02386002000196
+12/01/2017 14:25:39 cnpj: 02386002000196
+12/01/2017 14:25:39 Não foi possível identificar o gerente: id-0
+12/01/2017 14:25:39 Contrato tentando registrar: ID:null
+12/01/2017 14:25:40 id 9347
+12/01/2017 14:25:40 id 42340
+12/01/2017 14:25:40 id 42341
+12/01/2017 14:25:40 inicial: 0
+12/01/2017 14:25:40 valor: 0
+12/01/2017 14:25:40 somando: 50000000.00
+12/01/2017 14:25:40 total: 50000000.00
+12/01/2017 14:25:40 total: 50000000.00
+12/01/2017 14:25:40 idCliente: 15
+12/01/2017 14:25:40 idProduto: 103
+12/01/2017 14:25:41 Baixa do pedido: 103 realizada com sucesso
+12/01/2017 14:25:43 Não encontramos referencia da licença para esse revendedor, favor verificar se existe em estoque
+12/01/2017 14:25:49 Não encontramos referencia da licença para esse revendedor, favor verificar se existe em estoque
+12/01/2017 14:25:54 HERE 1
+12/01/2017 14:25:54 HERE entity.getCnpj(): 02386002000196
+12/01/2017 14:25:54 HERE 2
+12/01/2017 14:25:54 idCliente: 15
+12/01/2017 14:25:54 idProduto: 103
+12/01/2017 14:25:54 cnpj: 02386002000196
+12/01/2017 14:25:54 id 42342
+12/01/2017 14:25:55 inicial: 0
+12/01/2017 14:25:55 valor: 0
+12/01/2017 14:25:55 somando: 50000000.00
+12/01/2017 14:25:55 total: 50000000.00
+12/01/2017 14:25:55 valor: 50000000.00
+12/01/2017 14:25:55 somando: 50000000.00
+12/01/2017 14:25:55 total: 100000000.00
+12/01/2017 14:25:55 total: 100000000.00
+12/01/2017 14:25:55 idCliente: 15
+12/01/2017 14:25:55 idProduto: 103
+12/01/2017 14:25:55 Baixa do pedido: 103 realizada com sucesso
+12/01/2017 14:25:55 Type class java.util.ArrayList is not supported in dialect POSTGRES
+12/01/2017 14:26:01 HERE 1
+12/01/2017 14:26:01 HERE entity.getCnpj(): 02386002000196
+12/01/2017 14:26:01 HERE 2
+12/01/2017 14:26:01 idCliente: 15
+12/01/2017 14:26:01 idProduto: 103
+12/01/2017 14:26:01 cnpj: 02386002000196
+12/01/2017 14:26:01 id 42343
+12/01/2017 14:26:01 inicial: 0
+12/01/2017 14:26:01 valor: 0
+12/01/2017 14:26:01 somando: 50000000.00
+12/01/2017 14:26:01 total: 50000000.00
+12/01/2017 14:26:01 valor: 50000000.00
+12/01/2017 14:26:01 somando: 50000000.00
+12/01/2017 14:26:01 total: 100000000.00
+12/01/2017 14:26:01 valor: 100000000.00
+12/01/2017 14:26:01 somando: 50000000.00
+12/01/2017 14:26:01 total: 150000000.00
+12/01/2017 14:26:01 total: 150000000.00
+12/01/2017 14:26:01 idCliente: 15
+12/01/2017 14:26:01 idProduto: 103
+12/01/2017 14:26:02 Baixa do pedido: 103 realizada com sucesso
+12/01/2017 14:26:02 Type class java.util.ArrayList is not supported in dialect POSTGRES
+12/01/2017 14:26:32 HERE 1
+12/01/2017 14:26:32 HERE entity.getCnpj(): 02386002000196
+12/01/2017 14:26:32 HERE 2
+12/01/2017 14:26:32 idCliente: 15
+12/01/2017 14:26:32 idProduto: 103
+12/01/2017 14:26:32 cnpj: 02386002000196
+12/01/2017 14:26:32 id 42344
+12/01/2017 14:26:32 inicial: 0
+12/01/2017 14:26:32 valor: 0
+12/01/2017 14:26:32 somando: 50000000.00
+12/01/2017 14:26:32 total: 50000000.00
+12/01/2017 14:26:32 valor: 50000000.00
+12/01/2017 14:26:32 somando: 50000000.00
+12/01/2017 14:26:32 total: 100000000.00
+12/01/2017 14:26:32 valor: 100000000.00
+12/01/2017 14:26:32 somando: 50000000.00
+12/01/2017 14:26:32 total: 150000000.00
+12/01/2017 14:26:32 valor: 150000000.00
+12/01/2017 14:26:32 somando: 50000000.00
+12/01/2017 14:26:32 total: 200000000.00
+12/01/2017 14:26:32 total: 200000000.00
+12/01/2017 14:26:32 idCliente: 15
+12/01/2017 14:26:32 idProduto: 103
+12/01/2017 14:26:33 Baixa do pedido: 103 realizada com sucesso
+12/01/2017 14:26:33 Type class java.util.ArrayList is not supported in dialect POSTGRES
+12/01/2017 14:34:32 HERE 1
+12/01/2017 14:34:33 HERE entity.getCnpj(): 02386002000196
+12/01/2017 14:34:33 HERE 2
+12/01/2017 14:34:33 idCliente: 15
+12/01/2017 14:34:33 idProduto: 103
+12/01/2017 14:34:33 cnpj: 02386002000196
+12/01/2017 14:34:33 id 42345
+12/01/2017 14:34:33 inicial: 0
+12/01/2017 14:34:33 valor: 0
+12/01/2017 14:34:33 somando: 50000000.00
+12/01/2017 14:34:33 total: 50000000.00
+12/01/2017 14:34:33 valor: 50000000.00
+12/01/2017 14:34:33 somando: 50000000.00
+12/01/2017 14:34:33 total: 100000000.00
+12/01/2017 14:34:33 valor: 100000000.00
+12/01/2017 14:34:33 somando: 50000000.00
+12/01/2017 14:34:33 total: 150000000.00
+12/01/2017 14:34:33 valor: 150000000.00
+12/01/2017 14:34:33 somando: 50000000.00
+12/01/2017 14:34:33 total: 200000000.00
+12/01/2017 14:34:33 valor: 200000000.00
+12/01/2017 14:34:33 somando: 50000000.00
+12/01/2017 14:34:33 total: 250000000.00
+12/01/2017 14:34:33 total: 250000000.00
+12/01/2017 14:34:33 null
+12/01/2017 14:34:41 HERE 1
+12/01/2017 14:34:41 HERE entity.getCnpj(): 02386002000196
+12/01/2017 14:34:41 HERE 2
+12/01/2017 14:34:41 idCliente: 15
+12/01/2017 14:34:41 idProduto: 103
+12/01/2017 14:34:41 cnpj: 02386002000196
+12/01/2017 14:34:41 id 42346
+12/01/2017 14:34:41 inicial: 0
+12/01/2017 14:34:41 valor: 0
+12/01/2017 14:34:41 somando: 50000000.00
+12/01/2017 14:34:41 total: 50000000.00
+12/01/2017 14:34:41 valor: 50000000.00
+12/01/2017 14:34:41 somando: 50000000.00
+12/01/2017 14:34:41 total: 100000000.00
+12/01/2017 14:34:41 valor: 100000000.00
+12/01/2017 14:34:41 somando: 50000000.00
+12/01/2017 14:34:41 total: 150000000.00
+12/01/2017 14:34:41 valor: 150000000.00
+12/01/2017 14:34:41 somando: 50000000.00
+12/01/2017 14:34:41 total: 200000000.00
+12/01/2017 14:34:41 valor: 200000000.00
+12/01/2017 14:34:41 somando: 50000000.00
+12/01/2017 14:34:41 total: 250000000.00
+12/01/2017 14:34:41 valor: 250000000.00
+12/01/2017 14:34:41 somando: 50000000.00
+12/01/2017 14:34:41 total: 300000000.00
+12/01/2017 14:34:41 total: 300000000.00
+12/01/2017 14:34:42 null
+12/01/2017 14:35:59 HERE 1
+12/01/2017 14:35:59 HERE entity.getCnpj(): 02386002000196
+12/01/2017 14:35:59 HERE 2
+12/01/2017 14:35:59 idCliente: 15
+12/01/2017 14:35:59 idProduto: 103
+12/01/2017 14:35:59 HERE 3
+12/01/2017 14:35:59 cnpj: 02386002000196
+12/01/2017 14:35:59 id 42347
+12/01/2017 14:35:59 inicial: 0
+12/01/2017 14:35:59 valor: 0
+12/01/2017 14:35:59 somando: 50000000.00
+12/01/2017 14:35:59 total: 50000000.00
+12/01/2017 14:35:59 valor: 50000000.00
+12/01/2017 14:35:59 somando: 50000000.00
+12/01/2017 14:35:59 total: 100000000.00
+12/01/2017 14:35:59 valor: 100000000.00
+12/01/2017 14:35:59 somando: 50000000.00
+12/01/2017 14:35:59 total: 150000000.00
+12/01/2017 14:35:59 valor: 150000000.00
+12/01/2017 14:35:59 somando: 50000000.00
+12/01/2017 14:35:59 total: 200000000.00
+12/01/2017 14:35:59 valor: 200000000.00
+12/01/2017 14:35:59 somando: 50000000.00
+12/01/2017 14:35:59 total: 250000000.00
+12/01/2017 14:35:59 valor: 250000000.00
+12/01/2017 14:35:59 somando: 50000000.00
+12/01/2017 14:35:59 total: 300000000.00
+12/01/2017 14:35:59 valor: 300000000.00
+12/01/2017 14:35:59 somando: 50000000.00
+12/01/2017 14:35:59 total: 350000000.00
+12/01/2017 14:35:59 total: 350000000.00
+12/01/2017 14:35:59 null
+12/01/2017 14:36:07 HERE 1
+12/01/2017 14:36:07 HERE entity.getCnpj(): 02386002000196
+12/01/2017 14:36:07 HERE 2
+12/01/2017 14:36:07 idCliente: 15
+12/01/2017 14:36:07 idProduto: 103
+12/01/2017 14:36:07 HERE 3
+12/01/2017 14:36:07 cnpj: 02386002000196
+12/01/2017 14:36:07 id 42348
+12/01/2017 14:36:07 inicial: 0
+12/01/2017 14:36:07 valor: 0
+12/01/2017 14:36:07 somando: 50000000.00
+12/01/2017 14:36:07 total: 50000000.00
+12/01/2017 14:36:07 valor: 50000000.00
+12/01/2017 14:36:07 somando: 50000000.00
+12/01/2017 14:36:07 total: 100000000.00
+12/01/2017 14:36:07 valor: 100000000.00
+12/01/2017 14:36:07 somando: 50000000.00
+12/01/2017 14:36:07 total: 150000000.00
+12/01/2017 14:36:07 valor: 150000000.00
+12/01/2017 14:36:07 somando: 50000000.00
+12/01/2017 14:36:07 total: 200000000.00
+12/01/2017 14:36:07 valor: 200000000.00
+12/01/2017 14:36:07 somando: 50000000.00
+12/01/2017 14:36:07 total: 250000000.00
+12/01/2017 14:36:07 valor: 250000000.00
+12/01/2017 14:36:07 somando: 50000000.00
+12/01/2017 14:36:07 total: 300000000.00
+12/01/2017 14:36:07 valor: 300000000.00
+12/01/2017 14:36:07 somando: 50000000.00
+12/01/2017 14:36:07 total: 350000000.00
+12/01/2017 14:36:07 valor: 350000000.00
+12/01/2017 14:36:07 somando: 50000000.00
+12/01/2017 14:36:07 total: 400000000.00
+12/01/2017 14:36:07 total: 400000000.00
+12/01/2017 14:36:07 null
+12/01/2017 14:38:12 HERE 1
+12/01/2017 14:38:13 HERE entity.getCnpj(): 02386002000196
+12/01/2017 14:38:13 HERE 2
+12/01/2017 14:38:13 HERE 2 A
+12/01/2017 14:38:13 HERE 2 B
+12/01/2017 14:38:13 HERE 2 CCC
+12/01/2017 14:38:13 idCliente: 15
+12/01/2017 14:38:13 idProduto: 103
+12/01/2017 14:38:13 HERE 3
+12/01/2017 14:38:13 cnpj: 02386002000196
+12/01/2017 14:38:13 id 42349
+12/01/2017 14:38:13 inicial: 0
+12/01/2017 14:38:13 valor: 0
+12/01/2017 14:38:13 somando: 50000000.00
+12/01/2017 14:38:13 total: 50000000.00
+12/01/2017 14:38:13 valor: 50000000.00
+12/01/2017 14:38:13 somando: 50000000.00
+12/01/2017 14:38:13 total: 100000000.00
+12/01/2017 14:38:13 valor: 100000000.00
+12/01/2017 14:38:13 somando: 50000000.00
+12/01/2017 14:38:13 total: 150000000.00
+12/01/2017 14:38:13 valor: 150000000.00
+12/01/2017 14:38:13 somando: 50000000.00
+12/01/2017 14:38:13 total: 200000000.00
+12/01/2017 14:38:13 valor: 200000000.00
+12/01/2017 14:38:13 somando: 50000000.00
+12/01/2017 14:38:13 total: 250000000.00
+12/01/2017 14:38:13 valor: 250000000.00
+12/01/2017 14:38:13 somando: 50000000.00
+12/01/2017 14:38:13 total: 300000000.00
+12/01/2017 14:38:13 valor: 300000000.00
+12/01/2017 14:38:13 somando: 50000000.00
+12/01/2017 14:38:13 total: 350000000.00
+12/01/2017 14:38:13 valor: 350000000.00
+12/01/2017 14:38:13 somando: 50000000.00
+12/01/2017 14:38:13 total: 400000000.00
+12/01/2017 14:38:13 valor: 400000000.00
+12/01/2017 14:38:13 somando: 50000000.00
+12/01/2017 14:38:13 total: 450000000.00
+12/01/2017 14:38:13 total: 450000000.00
+12/01/2017 14:38:13 null
+12/01/2017 14:38:22 HERE 1
+12/01/2017 14:38:22 HERE entity.getCnpj(): 02386002000196
+12/01/2017 14:38:22 HERE 2
+12/01/2017 14:38:22 HERE 2 A
+12/01/2017 14:38:22 HERE 2 B
+12/01/2017 14:38:22 HERE 2 CCC
+12/01/2017 14:38:22 idCliente: 15
+12/01/2017 14:38:22 idProduto: 103
+12/01/2017 14:38:22 HERE 3
+12/01/2017 14:38:22 cnpj: 02386002000196
+12/01/2017 14:38:22 id 42350
+12/01/2017 14:38:22 inicial: 0
+12/01/2017 14:38:22 valor: 0
+12/01/2017 14:38:22 somando: 50000000.00
+12/01/2017 14:38:22 total: 50000000.00
+12/01/2017 14:38:22 valor: 50000000.00
+12/01/2017 14:38:22 somando: 50000000.00
+12/01/2017 14:38:22 total: 100000000.00
+12/01/2017 14:38:22 valor: 100000000.00
+12/01/2017 14:38:22 somando: 50000000.00
+12/01/2017 14:38:22 total: 150000000.00
+12/01/2017 14:38:22 valor: 150000000.00
+12/01/2017 14:38:22 somando: 50000000.00
+12/01/2017 14:38:22 total: 200000000.00
+12/01/2017 14:38:22 valor: 200000000.00
+12/01/2017 14:38:22 somando: 50000000.00
+12/01/2017 14:38:22 total: 250000000.00
+12/01/2017 14:38:22 valor: 250000000.00
+12/01/2017 14:38:22 somando: 50000000.00
+12/01/2017 14:38:22 total: 300000000.00
+12/01/2017 14:38:22 valor: 300000000.00
+12/01/2017 14:38:22 somando: 50000000.00
+12/01/2017 14:38:22 total: 350000000.00
+12/01/2017 14:38:22 valor: 350000000.00
+12/01/2017 14:38:22 somando: 50000000.00
+12/01/2017 14:38:22 total: 400000000.00
+12/01/2017 14:38:22 valor: 400000000.00
+12/01/2017 14:38:22 somando: 50000000.00
+12/01/2017 14:38:22 total: 450000000.00
+12/01/2017 14:38:22 valor: 450000000.00
+12/01/2017 14:38:22 somando: 50000000.00
+12/01/2017 14:38:22 total: 500000000.00
+12/01/2017 14:38:22 total: 500000000.00
+12/01/2017 14:38:22 null
+12/01/2017 14:59:53 HERE 1
+12/01/2017 14:59:54 HERE entity.getCnpj(): 02386002000196
+12/01/2017 14:59:54 HERE 2
+12/01/2017 14:59:54 HERE 2 A
+12/01/2017 14:59:54 HERE 2 B
+12/01/2017 14:59:54 HERE 2 CCC
+12/01/2017 14:59:54 idCliente: 15
+12/01/2017 14:59:54 idProduto: 103
+12/01/2017 14:59:54 HERE 3
+12/01/2017 14:59:54 cnpj: 02386002000196
+12/01/2017 14:59:54 tamos aqui
+12/01/2017 14:59:54 id 42351
+12/01/2017 14:59:54 inicial: 0
+12/01/2017 14:59:54 valor: 0
+12/01/2017 14:59:54 somando: 50000000.00
+12/01/2017 14:59:54 total: 50000000.00
+12/01/2017 14:59:54 valor: 50000000.00
+12/01/2017 14:59:54 somando: 50000000.00
+12/01/2017 14:59:54 total: 100000000.00
+12/01/2017 14:59:54 valor: 100000000.00
+12/01/2017 14:59:54 somando: 50000000.00
+12/01/2017 14:59:54 total: 150000000.00
+12/01/2017 14:59:54 valor: 150000000.00
+12/01/2017 14:59:54 somando: 50000000.00
+12/01/2017 14:59:54 total: 200000000.00
+12/01/2017 14:59:54 valor: 200000000.00
+12/01/2017 14:59:54 somando: 50000000.00
+12/01/2017 14:59:54 total: 250000000.00
+12/01/2017 14:59:54 valor: 250000000.00
+12/01/2017 14:59:54 somando: 50000000.00
+12/01/2017 14:59:54 total: 300000000.00
+12/01/2017 14:59:54 valor: 300000000.00
+12/01/2017 14:59:54 somando: 50000000.00
+12/01/2017 14:59:54 total: 350000000.00
+12/01/2017 14:59:54 valor: 350000000.00
+12/01/2017 14:59:54 somando: 50000000.00
+12/01/2017 14:59:54 total: 400000000.00
+12/01/2017 14:59:54 valor: 400000000.00
+12/01/2017 14:59:54 somando: 50000000.00
+12/01/2017 14:59:54 total: 450000000.00
+12/01/2017 14:59:54 valor: 450000000.00
+12/01/2017 14:59:54 somando: 50000000.00
+12/01/2017 14:59:54 total: 500000000.00
+12/01/2017 14:59:54 valor: 500000000.00
+12/01/2017 14:59:54 somando: 50000000.00
+12/01/2017 14:59:54 total: 550000000.00
+12/01/2017 14:59:54 total: 550000000.00
+12/01/2017 14:59:54 tamos aqui 2
+12/01/2017 14:59:54 null
+12/01/2017 15:00:21 HERE 1
+12/01/2017 15:00:22 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:00:22 HERE 2
+12/01/2017 15:00:22 HERE 2 A
+12/01/2017 15:00:22 HERE 2 B
+12/01/2017 15:00:22 HERE 2 CCC
+12/01/2017 15:00:22 idCliente: 15
+12/01/2017 15:00:22 idProduto: 103
+12/01/2017 15:00:22 HERE 3
+12/01/2017 15:00:22 cnpj: 02386002000196
+12/01/2017 15:00:22 tamos aqui
+12/01/2017 15:00:22 id 42352
+12/01/2017 15:00:22 inicial: 0
+12/01/2017 15:00:22 valor: 0
+12/01/2017 15:00:22 somando: 50000000.00
+12/01/2017 15:00:22 total: 50000000.00
+12/01/2017 15:00:22 valor: 50000000.00
+12/01/2017 15:00:22 somando: 50000000.00
+12/01/2017 15:00:22 total: 100000000.00
+12/01/2017 15:00:22 valor: 100000000.00
+12/01/2017 15:00:22 somando: 50000000.00
+12/01/2017 15:00:22 total: 150000000.00
+12/01/2017 15:00:22 valor: 150000000.00
+12/01/2017 15:00:22 somando: 50000000.00
+12/01/2017 15:00:22 total: 200000000.00
+12/01/2017 15:00:22 valor: 200000000.00
+12/01/2017 15:00:22 somando: 50000000.00
+12/01/2017 15:00:22 total: 250000000.00
+12/01/2017 15:00:22 valor: 250000000.00
+12/01/2017 15:00:22 somando: 50000000.00
+12/01/2017 15:00:22 total: 300000000.00
+12/01/2017 15:00:22 valor: 300000000.00
+12/01/2017 15:00:22 somando: 50000000.00
+12/01/2017 15:00:22 total: 350000000.00
+12/01/2017 15:00:22 valor: 350000000.00
+12/01/2017 15:00:22 somando: 50000000.00
+12/01/2017 15:00:22 total: 400000000.00
+12/01/2017 15:00:22 valor: 400000000.00
+12/01/2017 15:00:22 somando: 50000000.00
+12/01/2017 15:00:22 total: 450000000.00
+12/01/2017 15:00:22 valor: 450000000.00
+12/01/2017 15:00:22 somando: 50000000.00
+12/01/2017 15:00:22 total: 500000000.00
+12/01/2017 15:00:22 valor: 500000000.00
+12/01/2017 15:00:22 somando: 50000000.00
+12/01/2017 15:00:22 total: 550000000.00
+12/01/2017 15:00:22 valor: 550000000.00
+12/01/2017 15:00:22 somando: 50000000.00
+12/01/2017 15:00:22 total: 600000000.00
+12/01/2017 15:00:22 total: 600000000.00
+12/01/2017 15:00:22 tamos aqui 2
+12/01/2017 15:00:22 null
+12/01/2017 15:01:33 HERE 1
+12/01/2017 15:01:33 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:01:33 HERE 2
+12/01/2017 15:01:33 HERE 2 A
+12/01/2017 15:01:33 HERE 2 B
+12/01/2017 15:01:33 HERE 2 CCC
+12/01/2017 15:01:33 idCliente: 15
+12/01/2017 15:01:33 idProduto: 103
+12/01/2017 15:01:33 HERE 3
+12/01/2017 15:01:33 cnpj: 02386002000196
+12/01/2017 15:01:33 tamos aqui
+12/01/2017 15:01:33 id 42353
+12/01/2017 15:01:33 inicial: 0
+12/01/2017 15:01:33 valor: 0
+12/01/2017 15:01:33 somando: 50000000.00
+12/01/2017 15:01:33 total: 50000000.00
+12/01/2017 15:01:33 valor: 50000000.00
+12/01/2017 15:01:33 somando: 50000000.00
+12/01/2017 15:01:33 total: 100000000.00
+12/01/2017 15:01:33 valor: 100000000.00
+12/01/2017 15:01:33 somando: 50000000.00
+12/01/2017 15:01:33 total: 150000000.00
+12/01/2017 15:01:33 valor: 150000000.00
+12/01/2017 15:01:33 somando: 50000000.00
+12/01/2017 15:01:33 total: 200000000.00
+12/01/2017 15:01:33 valor: 200000000.00
+12/01/2017 15:01:33 somando: 50000000.00
+12/01/2017 15:01:33 total: 250000000.00
+12/01/2017 15:01:33 valor: 250000000.00
+12/01/2017 15:01:33 somando: 50000000.00
+12/01/2017 15:01:33 total: 300000000.00
+12/01/2017 15:01:33 valor: 300000000.00
+12/01/2017 15:01:33 somando: 50000000.00
+12/01/2017 15:01:33 total: 350000000.00
+12/01/2017 15:01:33 valor: 350000000.00
+12/01/2017 15:01:33 somando: 50000000.00
+12/01/2017 15:01:33 total: 400000000.00
+12/01/2017 15:01:33 valor: 400000000.00
+12/01/2017 15:01:33 somando: 50000000.00
+12/01/2017 15:01:33 total: 450000000.00
+12/01/2017 15:01:33 valor: 450000000.00
+12/01/2017 15:01:33 somando: 50000000.00
+12/01/2017 15:01:33 total: 500000000.00
+12/01/2017 15:01:33 valor: 500000000.00
+12/01/2017 15:01:33 somando: 50000000.00
+12/01/2017 15:01:33 total: 550000000.00
+12/01/2017 15:01:33 valor: 550000000.00
+12/01/2017 15:01:33 somando: 50000000.00
+12/01/2017 15:01:33 total: 600000000.00
+12/01/2017 15:01:33 valor: 600000000.00
+12/01/2017 15:01:33 somando: 50000000.00
+12/01/2017 15:01:33 total: 650000000.00
+12/01/2017 15:01:33 total: 650000000.00
+12/01/2017 15:01:34 tamos aqui 2
+12/01/2017 15:01:34 tamos aqui 3
+12/01/2017 15:01:34 null
+12/01/2017 15:06:03 HERE 1
+12/01/2017 15:06:04 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:06:04 HERE 2
+12/01/2017 15:06:04 HERE 2 A
+12/01/2017 15:06:04 HERE 2 B
+12/01/2017 15:06:04 HERE 2 CCC
+12/01/2017 15:06:04 idCliente: 15
+12/01/2017 15:06:04 idProduto: 103
+12/01/2017 15:06:04 HERE 3
+12/01/2017 15:06:04 cnpj: 02386002000196
+12/01/2017 15:06:04 tamos aqui
+12/01/2017 15:06:04 id 42354
+12/01/2017 15:06:04 inicial: 0
+12/01/2017 15:06:04 valor: 0
+12/01/2017 15:06:04 somando: 50000000.00
+12/01/2017 15:06:04 total: 50000000.00
+12/01/2017 15:06:04 valor: 50000000.00
+12/01/2017 15:06:04 somando: 50000000.00
+12/01/2017 15:06:04 total: 100000000.00
+12/01/2017 15:06:04 valor: 100000000.00
+12/01/2017 15:06:04 somando: 50000000.00
+12/01/2017 15:06:04 total: 150000000.00
+12/01/2017 15:06:04 valor: 150000000.00
+12/01/2017 15:06:04 somando: 50000000.00
+12/01/2017 15:06:04 total: 200000000.00
+12/01/2017 15:06:04 valor: 200000000.00
+12/01/2017 15:06:04 somando: 50000000.00
+12/01/2017 15:06:04 total: 250000000.00
+12/01/2017 15:06:04 valor: 250000000.00
+12/01/2017 15:06:04 somando: 50000000.00
+12/01/2017 15:06:04 total: 300000000.00
+12/01/2017 15:06:04 valor: 300000000.00
+12/01/2017 15:06:04 somando: 50000000.00
+12/01/2017 15:06:04 total: 350000000.00
+12/01/2017 15:06:04 valor: 350000000.00
+12/01/2017 15:06:04 somando: 50000000.00
+12/01/2017 15:06:04 total: 400000000.00
+12/01/2017 15:06:04 valor: 400000000.00
+12/01/2017 15:06:04 somando: 50000000.00
+12/01/2017 15:06:04 total: 450000000.00
+12/01/2017 15:06:04 valor: 450000000.00
+12/01/2017 15:06:04 somando: 50000000.00
+12/01/2017 15:06:04 total: 500000000.00
+12/01/2017 15:06:04 valor: 500000000.00
+12/01/2017 15:06:04 somando: 50000000.00
+12/01/2017 15:06:04 total: 550000000.00
+12/01/2017 15:06:04 valor: 550000000.00
+12/01/2017 15:06:04 somando: 50000000.00
+12/01/2017 15:06:04 total: 600000000.00
+12/01/2017 15:06:04 valor: 600000000.00
+12/01/2017 15:06:04 somando: 50000000.00
+12/01/2017 15:06:04 total: 650000000.00
+12/01/2017 15:06:04 valor: 650000000.00
+12/01/2017 15:06:04 somando: 50000000.00
+12/01/2017 15:06:04 total: 700000000.00
+12/01/2017 15:06:04 total: 700000000.00
+12/01/2017 15:06:04 tamos aqui 2
+12/01/2017 15:06:04 tamos aqui 3
+12/01/2017 15:06:04 java.lang.NullPointerException
+	at br.intelidata.service.SaldoLicencaService.atualizarSaldo(SaldoLicencaService.java:24)
+	at br.intelidata.service.SalesService.baixaProduto(SalesService.java:106)
+	at br.intelidata.service.PedidoInstalacaService.parsePedidoInstalacao(PedidoInstalacaService.java:107)
+	at br.intelidata.controllers.PedidoInstalacaoController.run(PedidoInstalacaoController.java:32)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:114)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:827)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:897)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:648)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:230)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:192)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:192)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:87)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:192)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:77)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:192)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:192)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:108)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:522)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:349)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:1110)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:785)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1425)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+
+12/01/2017 15:06:04 null
+12/01/2017 15:08:29 HERE 1
+12/01/2017 15:08:29 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:08:29 HERE 2
+12/01/2017 15:08:29 HERE 2 A
+12/01/2017 15:08:29 HERE 2 B
+12/01/2017 15:08:29 HERE 2 CCC
+12/01/2017 15:08:29 idCliente: 15
+12/01/2017 15:08:29 idProduto: 103
+12/01/2017 15:08:29 HERE 3
+12/01/2017 15:08:29 cnpj: 02386002000196
+12/01/2017 15:08:29 tamos aqui
+12/01/2017 15:08:29 id 42355
+12/01/2017 15:08:29 inicial: 0
+12/01/2017 15:08:29 valor: 0
+12/01/2017 15:08:29 somando: 50000000.00
+12/01/2017 15:08:29 total: 50000000.00
+12/01/2017 15:08:29 valor: 50000000.00
+12/01/2017 15:08:29 somando: 50000000.00
+12/01/2017 15:08:29 total: 100000000.00
+12/01/2017 15:08:29 valor: 100000000.00
+12/01/2017 15:08:29 somando: 50000000.00
+12/01/2017 15:08:29 total: 150000000.00
+12/01/2017 15:08:29 valor: 150000000.00
+12/01/2017 15:08:29 somando: 50000000.00
+12/01/2017 15:08:29 total: 200000000.00
+12/01/2017 15:08:29 valor: 200000000.00
+12/01/2017 15:08:29 somando: 50000000.00
+12/01/2017 15:08:29 total: 250000000.00
+12/01/2017 15:08:29 valor: 250000000.00
+12/01/2017 15:08:29 somando: 50000000.00
+12/01/2017 15:08:29 total: 300000000.00
+12/01/2017 15:08:29 valor: 300000000.00
+12/01/2017 15:08:29 somando: 50000000.00
+12/01/2017 15:08:29 total: 350000000.00
+12/01/2017 15:08:29 valor: 350000000.00
+12/01/2017 15:08:29 somando: 50000000.00
+12/01/2017 15:08:29 total: 400000000.00
+12/01/2017 15:08:29 valor: 400000000.00
+12/01/2017 15:08:29 somando: 50000000.00
+12/01/2017 15:08:29 total: 450000000.00
+12/01/2017 15:08:29 valor: 450000000.00
+12/01/2017 15:08:29 somando: 50000000.00
+12/01/2017 15:08:29 total: 500000000.00
+12/01/2017 15:08:29 valor: 500000000.00
+12/01/2017 15:08:29 somando: 50000000.00
+12/01/2017 15:08:29 total: 550000000.00
+12/01/2017 15:08:29 valor: 550000000.00
+12/01/2017 15:08:29 somando: 50000000.00
+12/01/2017 15:08:29 total: 600000000.00
+12/01/2017 15:08:29 valor: 600000000.00
+12/01/2017 15:08:29 somando: 50000000.00
+12/01/2017 15:08:29 total: 650000000.00
+12/01/2017 15:08:29 valor: 650000000.00
+12/01/2017 15:08:29 somando: 50000000.00
+12/01/2017 15:08:29 total: 700000000.00
+12/01/2017 15:08:29 valor: 700000000.00
+12/01/2017 15:08:29 somando: 50000000.00
+12/01/2017 15:08:29 total: 750000000.00
+12/01/2017 15:08:29 total: 750000000.00
+12/01/2017 15:08:29 tamos aqui 2
+12/01/2017 15:08:29 tamos aqui 3
+12/01/2017 15:08:29 idCliente: 15
+12/01/2017 15:08:29 idProduto: 103
+12/01/2017 15:08:29 java.lang.NullPointerException
+	at br.intelidata.service.SaldoLicencaService.atualizarSaldo(SaldoLicencaService.java:41)
+	at br.intelidata.service.SalesService.baixaProduto(SalesService.java:106)
+	at br.intelidata.service.PedidoInstalacaService.parsePedidoInstalacao(PedidoInstalacaService.java:107)
+	at br.intelidata.controllers.PedidoInstalacaoController.run(PedidoInstalacaoController.java:32)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:114)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:827)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:897)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:648)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:230)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:192)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:192)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:87)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:192)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:77)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:192)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:192)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:108)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:522)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:349)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:1110)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:785)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1425)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+
+12/01/2017 15:08:29 null
+12/01/2017 15:09:42 HERE 1
+12/01/2017 15:09:43 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:09:43 HERE 2
+12/01/2017 15:09:43 HERE 2 A
+12/01/2017 15:09:43 HERE 2 B
+12/01/2017 15:09:43 HERE 2 CCC
+12/01/2017 15:09:43 idCliente: 15
+12/01/2017 15:09:43 idProduto: 103
+12/01/2017 15:09:43 HERE 3
+12/01/2017 15:09:43 cnpj: 02386002000196
+12/01/2017 15:09:43 tamos aqui
+12/01/2017 15:09:43 id 42356
+12/01/2017 15:09:43 inicial: 0
+12/01/2017 15:09:43 valor: 0
+12/01/2017 15:09:43 somando: 50000000.00
+12/01/2017 15:09:43 total: 50000000.00
+12/01/2017 15:09:43 valor: 50000000.00
+12/01/2017 15:09:43 somando: 50000000.00
+12/01/2017 15:09:43 total: 100000000.00
+12/01/2017 15:09:43 valor: 100000000.00
+12/01/2017 15:09:43 somando: 50000000.00
+12/01/2017 15:09:43 total: 150000000.00
+12/01/2017 15:09:43 valor: 150000000.00
+12/01/2017 15:09:43 somando: 50000000.00
+12/01/2017 15:09:43 total: 200000000.00
+12/01/2017 15:09:43 valor: 200000000.00
+12/01/2017 15:09:43 somando: 50000000.00
+12/01/2017 15:09:43 total: 250000000.00
+12/01/2017 15:09:43 valor: 250000000.00
+12/01/2017 15:09:43 somando: 50000000.00
+12/01/2017 15:09:43 total: 300000000.00
+12/01/2017 15:09:43 valor: 300000000.00
+12/01/2017 15:09:43 somando: 50000000.00
+12/01/2017 15:09:43 total: 350000000.00
+12/01/2017 15:09:43 valor: 350000000.00
+12/01/2017 15:09:43 somando: 50000000.00
+12/01/2017 15:09:43 total: 400000000.00
+12/01/2017 15:09:43 valor: 400000000.00
+12/01/2017 15:09:43 somando: 50000000.00
+12/01/2017 15:09:43 total: 450000000.00
+12/01/2017 15:09:43 valor: 450000000.00
+12/01/2017 15:09:43 somando: 50000000.00
+12/01/2017 15:09:43 total: 500000000.00
+12/01/2017 15:09:43 valor: 500000000.00
+12/01/2017 15:09:43 somando: 50000000.00
+12/01/2017 15:09:43 total: 550000000.00
+12/01/2017 15:09:43 valor: 550000000.00
+12/01/2017 15:09:43 somando: 50000000.00
+12/01/2017 15:09:43 total: 600000000.00
+12/01/2017 15:09:43 valor: 600000000.00
+12/01/2017 15:09:43 somando: 50000000.00
+12/01/2017 15:09:43 total: 650000000.00
+12/01/2017 15:09:43 valor: 650000000.00
+12/01/2017 15:09:43 somando: 50000000.00
+12/01/2017 15:09:43 total: 700000000.00
+12/01/2017 15:09:43 valor: 700000000.00
+12/01/2017 15:09:43 somando: 50000000.00
+12/01/2017 15:09:43 total: 750000000.00
+12/01/2017 15:09:43 valor: 750000000.00
+12/01/2017 15:09:43 somando: 50000000.00
+12/01/2017 15:09:43 total: 800000000.00
+12/01/2017 15:09:43 total: 800000000.00
+12/01/2017 15:09:43 tamos aqui 2
+12/01/2017 15:09:43 tamos aqui 3
+12/01/2017 15:09:43 java.lang.NullPointerException
+	at br.intelidata.service.SaldoLicencaService.atualizarSaldo(SaldoLicencaService.java:23)
+	at br.intelidata.service.SalesService.baixaProduto(SalesService.java:106)
+	at br.intelidata.service.PedidoInstalacaService.parsePedidoInstalacao(PedidoInstalacaService.java:107)
+	at br.intelidata.controllers.PedidoInstalacaoController.run(PedidoInstalacaoController.java:32)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:114)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:827)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:897)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:648)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:230)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:192)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:192)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:87)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:192)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:77)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:192)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:192)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:165)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:108)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:522)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:349)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:1110)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:785)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1425)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+
+12/01/2017 15:09:43 null
+12/01/2017 15:12:55 HERE 1
+12/01/2017 15:12:55 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:12:55 HERE 2
+12/01/2017 15:12:55 HERE 2 A
+12/01/2017 15:12:55 HERE 2 B
+12/01/2017 15:12:55 HERE 2 CCC
+12/01/2017 15:12:55 idCliente: 15
+12/01/2017 15:12:55 idProduto: 103
+12/01/2017 15:12:55 HERE 3
+12/01/2017 15:12:55 cnpj: 02386002000196
+12/01/2017 15:12:55 tamos aqui
+12/01/2017 15:12:56 id 42357
+12/01/2017 15:12:56 inicial: 0
+12/01/2017 15:12:56 valor: 0
+12/01/2017 15:12:56 somando: 50000000.00
+12/01/2017 15:12:56 total: 50000000.00
+12/01/2017 15:12:56 valor: 50000000.00
+12/01/2017 15:12:56 somando: 50000000.00
+12/01/2017 15:12:56 total: 100000000.00
+12/01/2017 15:12:56 valor: 100000000.00
+12/01/2017 15:12:56 somando: 50000000.00
+12/01/2017 15:12:56 total: 150000000.00
+12/01/2017 15:12:56 valor: 150000000.00
+12/01/2017 15:12:56 somando: 50000000.00
+12/01/2017 15:12:56 total: 200000000.00
+12/01/2017 15:12:56 valor: 200000000.00
+12/01/2017 15:12:56 somando: 50000000.00
+12/01/2017 15:12:56 total: 250000000.00
+12/01/2017 15:12:56 valor: 250000000.00
+12/01/2017 15:12:56 somando: 50000000.00
+12/01/2017 15:12:56 total: 300000000.00
+12/01/2017 15:12:56 valor: 300000000.00
+12/01/2017 15:12:56 somando: 50000000.00
+12/01/2017 15:12:56 total: 350000000.00
+12/01/2017 15:12:56 valor: 350000000.00
+12/01/2017 15:12:56 somando: 50000000.00
+12/01/2017 15:12:56 total: 400000000.00
+12/01/2017 15:12:56 valor: 400000000.00
+12/01/2017 15:12:56 somando: 50000000.00
+12/01/2017 15:12:56 total: 450000000.00
+12/01/2017 15:12:56 valor: 450000000.00
+12/01/2017 15:12:56 somando: 50000000.00
+12/01/2017 15:12:56 total: 500000000.00
+12/01/2017 15:12:56 valor: 500000000.00
+12/01/2017 15:12:56 somando: 50000000.00
+12/01/2017 15:12:56 total: 550000000.00
+12/01/2017 15:12:56 valor: 550000000.00
+12/01/2017 15:12:56 somando: 50000000.00
+12/01/2017 15:12:56 total: 600000000.00
+12/01/2017 15:12:56 valor: 600000000.00
+12/01/2017 15:12:56 somando: 50000000.00
+12/01/2017 15:12:56 total: 650000000.00
+12/01/2017 15:12:56 valor: 650000000.00
+12/01/2017 15:12:56 somando: 50000000.00
+12/01/2017 15:12:56 total: 700000000.00
+12/01/2017 15:12:56 valor: 700000000.00
+12/01/2017 15:12:56 somando: 50000000.00
+12/01/2017 15:12:56 total: 750000000.00
+12/01/2017 15:12:56 valor: 750000000.00
+12/01/2017 15:12:56 somando: 50000000.00
+12/01/2017 15:12:56 total: 800000000.00
+12/01/2017 15:12:56 valor: 800000000.00
+12/01/2017 15:12:56 somando: 50000000.00
+12/01/2017 15:12:56 total: 850000000.00
+12/01/2017 15:12:56 total: 850000000.00
+12/01/2017 15:12:56 tamos aqui 2
+12/01/2017 15:12:56 tamos aqui 3
+12/01/2017 15:12:56 idCliente: 15
+12/01/2017 15:12:56 idProduto: 103
+12/01/2017 15:12:56 Baixa do pedido: 103 realizada com sucesso
+12/01/2017 15:12:56 tamos aqui 444
+12/01/2017 15:12:56 HERE 4
+12/01/2017 15:12:56 Type class java.util.ArrayList is not supported in dialect POSTGRES
+12/01/2017 15:27:20 HERE 1
+12/01/2017 15:27:20 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:27:20 HERE 2
+12/01/2017 15:27:20 HERE 2 A
+12/01/2017 15:27:20 HERE 2 B
+12/01/2017 15:27:20 HERE 2 CCC
+12/01/2017 15:27:20 idCliente: 15
+12/01/2017 15:27:20 idProduto: 103
+12/01/2017 15:27:20 HERE 3
+12/01/2017 15:27:20 cnpj: 02386002000196
+12/01/2017 15:27:20 tamos aqui
+12/01/2017 15:27:20 id 42358
+12/01/2017 15:27:20 inicial: 0
+12/01/2017 15:27:20 valor: 0
+12/01/2017 15:27:20 somando: 50000000.00
+12/01/2017 15:27:20 total: 50000000.00
+12/01/2017 15:27:20 valor: 50000000.00
+12/01/2017 15:27:20 somando: 50000000.00
+12/01/2017 15:27:20 total: 100000000.00
+12/01/2017 15:27:20 valor: 100000000.00
+12/01/2017 15:27:20 somando: 50000000.00
+12/01/2017 15:27:20 total: 150000000.00
+12/01/2017 15:27:20 valor: 150000000.00
+12/01/2017 15:27:20 somando: 50000000.00
+12/01/2017 15:27:20 total: 200000000.00
+12/01/2017 15:27:20 valor: 200000000.00
+12/01/2017 15:27:20 somando: 50000000.00
+12/01/2017 15:27:20 total: 250000000.00
+12/01/2017 15:27:20 valor: 250000000.00
+12/01/2017 15:27:20 somando: 50000000.00
+12/01/2017 15:27:20 total: 300000000.00
+12/01/2017 15:27:20 valor: 300000000.00
+12/01/2017 15:27:20 somando: 50000000.00
+12/01/2017 15:27:20 total: 350000000.00
+12/01/2017 15:27:20 valor: 350000000.00
+12/01/2017 15:27:20 somando: 50000000.00
+12/01/2017 15:27:20 total: 400000000.00
+12/01/2017 15:27:20 valor: 400000000.00
+12/01/2017 15:27:20 somando: 50000000.00
+12/01/2017 15:27:20 total: 450000000.00
+12/01/2017 15:27:20 valor: 450000000.00
+12/01/2017 15:27:20 somando: 50000000.00
+12/01/2017 15:27:20 total: 500000000.00
+12/01/2017 15:27:20 valor: 500000000.00
+12/01/2017 15:27:20 somando: 50000000.00
+12/01/2017 15:27:20 total: 550000000.00
+12/01/2017 15:27:20 valor: 550000000.00
+12/01/2017 15:27:20 somando: 50000000.00
+12/01/2017 15:27:20 total: 600000000.00
+12/01/2017 15:27:20 valor: 600000000.00
+12/01/2017 15:27:20 somando: 50000000.00
+12/01/2017 15:27:20 total: 650000000.00
+12/01/2017 15:27:20 valor: 650000000.00
+12/01/2017 15:27:20 somando: 50000000.00
+12/01/2017 15:27:20 total: 700000000.00
+12/01/2017 15:27:20 valor: 700000000.00
+12/01/2017 15:27:20 somando: 50000000.00
+12/01/2017 15:27:20 total: 750000000.00
+12/01/2017 15:27:20 valor: 750000000.00
+12/01/2017 15:27:20 somando: 50000000.00
+12/01/2017 15:27:20 total: 800000000.00
+12/01/2017 15:27:20 valor: 800000000.00
+12/01/2017 15:27:20 somando: 50000000.00
+12/01/2017 15:27:20 total: 850000000.00
+12/01/2017 15:27:20 valor: 850000000.00
+12/01/2017 15:27:20 somando: 50000000.00
+12/01/2017 15:27:20 total: 900000000.00
+12/01/2017 15:27:20 total: 900000000.00
+12/01/2017 15:27:21 tamos aqui 2
+12/01/2017 15:27:21 tamos aqui 3
+12/01/2017 15:27:21 idCliente: 15
+12/01/2017 15:27:21 idProduto: 103
+12/01/2017 15:27:21 Baixa do pedido: 103 realizada com sucesso
+12/01/2017 15:27:21 tamos aqui 444
+12/01/2017 15:27:21 HERE 4
+12/01/2017 15:27:21 Type class java.util.ArrayList is not supported in dialect POSTGRES
+12/01/2017 15:29:44 HERE 1
+12/01/2017 15:29:45 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:29:45 HERE 2
+12/01/2017 15:29:45 HERE 2 A
+12/01/2017 15:29:45 HERE 2 B
+12/01/2017 15:29:45 HERE 2 CCC
+12/01/2017 15:29:45 idCliente: 15
+12/01/2017 15:29:45 idProduto: 103
+12/01/2017 15:29:45 HERE 3
+12/01/2017 15:29:45 cnpj: 02386002000196
+12/01/2017 15:29:45 tamos aqui
+12/01/2017 15:29:45 id 42359
+12/01/2017 15:29:45 inicial: 0
+12/01/2017 15:29:45 valor: 0
+12/01/2017 15:29:45 somando: 50000000.00
+12/01/2017 15:29:45 total: 50000000.00
+12/01/2017 15:29:45 valor: 50000000.00
+12/01/2017 15:29:45 somando: 50000000.00
+12/01/2017 15:29:45 total: 100000000.00
+12/01/2017 15:29:45 valor: 100000000.00
+12/01/2017 15:29:45 somando: 50000000.00
+12/01/2017 15:29:45 total: 150000000.00
+12/01/2017 15:29:45 valor: 150000000.00
+12/01/2017 15:29:45 somando: 50000000.00
+12/01/2017 15:29:45 total: 200000000.00
+12/01/2017 15:29:45 valor: 200000000.00
+12/01/2017 15:29:45 somando: 50000000.00
+12/01/2017 15:29:45 total: 250000000.00
+12/01/2017 15:29:45 valor: 250000000.00
+12/01/2017 15:29:45 somando: 50000000.00
+12/01/2017 15:29:45 total: 300000000.00
+12/01/2017 15:29:45 valor: 300000000.00
+12/01/2017 15:29:45 somando: 50000000.00
+12/01/2017 15:29:45 total: 350000000.00
+12/01/2017 15:29:45 valor: 350000000.00
+12/01/2017 15:29:45 somando: 50000000.00
+12/01/2017 15:29:45 total: 400000000.00
+12/01/2017 15:29:45 valor: 400000000.00
+12/01/2017 15:29:45 somando: 50000000.00
+12/01/2017 15:29:45 total: 450000000.00
+12/01/2017 15:29:45 valor: 450000000.00
+12/01/2017 15:29:45 somando: 50000000.00
+12/01/2017 15:29:45 total: 500000000.00
+12/01/2017 15:29:45 valor: 500000000.00
+12/01/2017 15:29:45 somando: 50000000.00
+12/01/2017 15:29:45 total: 550000000.00
+12/01/2017 15:29:45 valor: 550000000.00
+12/01/2017 15:29:45 somando: 50000000.00
+12/01/2017 15:29:45 total: 600000000.00
+12/01/2017 15:29:45 valor: 600000000.00
+12/01/2017 15:29:45 somando: 50000000.00
+12/01/2017 15:29:45 total: 650000000.00
+12/01/2017 15:29:45 valor: 650000000.00
+12/01/2017 15:29:45 somando: 50000000.00
+12/01/2017 15:29:45 total: 700000000.00
+12/01/2017 15:29:45 valor: 700000000.00
+12/01/2017 15:29:45 somando: 50000000.00
+12/01/2017 15:29:45 total: 750000000.00
+12/01/2017 15:29:45 valor: 750000000.00
+12/01/2017 15:29:45 somando: 50000000.00
+12/01/2017 15:29:45 total: 800000000.00
+12/01/2017 15:29:45 valor: 800000000.00
+12/01/2017 15:29:45 somando: 50000000.00
+12/01/2017 15:29:45 total: 850000000.00
+12/01/2017 15:29:45 valor: 850000000.00
+12/01/2017 15:29:45 somando: 50000000.00
+12/01/2017 15:29:45 total: 900000000.00
+12/01/2017 15:29:45 valor: 900000000.00
+12/01/2017 15:29:45 somando: 50000000.00
+12/01/2017 15:29:45 total: 950000000.00
+12/01/2017 15:29:45 total: 950000000.00
+12/01/2017 15:29:45 tamos aqui 2
+12/01/2017 15:29:45 tamos aqui 3
+12/01/2017 15:29:45 idCliente: 15
+12/01/2017 15:29:45 idProduto: 103
+12/01/2017 15:29:45 HELLO
+12/01/2017 15:29:45 HELLO 3
+12/01/2017 15:29:45 HELLO 3 A
+12/01/2017 15:29:45 HELLO 4
+12/01/2017 15:29:45 HELLO 2 
+12/01/2017 15:29:45 Baixa do pedido: 103 realizada com sucesso
+12/01/2017 15:29:45 tamos aqui 444
+12/01/2017 15:29:45 HERE 4
+12/01/2017 15:29:45 Type class java.util.ArrayList is not supported in dialect POSTGRES
+12/01/2017 15:35:41 HERE 1
+12/01/2017 15:35:41 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:35:41 HERE 2
+12/01/2017 15:35:41 HERE 2 A
+12/01/2017 15:35:41 HERE 2 B
+12/01/2017 15:35:41 HERE 2 CCC
+12/01/2017 15:35:41 idCliente: 15
+12/01/2017 15:35:41 idProduto: 103
+12/01/2017 15:35:41 HERE 3
+12/01/2017 15:35:41 cnpj: 02386002000196
+12/01/2017 15:35:41 tamos aqui
+12/01/2017 15:35:41 id 42360
+12/01/2017 15:35:41 inicial: 0
+12/01/2017 15:35:41 valor: 0
+12/01/2017 15:35:41 somando: 50000000.00
+12/01/2017 15:35:41 total: 50000000.00
+12/01/2017 15:35:41 valor: 50000000.00
+12/01/2017 15:35:41 somando: 50000000.00
+12/01/2017 15:35:41 total: 100000000.00
+12/01/2017 15:35:41 valor: 100000000.00
+12/01/2017 15:35:41 somando: 50000000.00
+12/01/2017 15:35:41 total: 150000000.00
+12/01/2017 15:35:41 valor: 150000000.00
+12/01/2017 15:35:41 somando: 50000000.00
+12/01/2017 15:35:41 total: 200000000.00
+12/01/2017 15:35:41 valor: 200000000.00
+12/01/2017 15:35:41 somando: 50000000.00
+12/01/2017 15:35:41 total: 250000000.00
+12/01/2017 15:35:41 valor: 250000000.00
+12/01/2017 15:35:41 somando: 50000000.00
+12/01/2017 15:35:41 total: 300000000.00
+12/01/2017 15:35:41 valor: 300000000.00
+12/01/2017 15:35:41 somando: 50000000.00
+12/01/2017 15:35:41 total: 350000000.00
+12/01/2017 15:35:41 valor: 350000000.00
+12/01/2017 15:35:41 somando: 50000000.00
+12/01/2017 15:35:41 total: 400000000.00
+12/01/2017 15:35:41 valor: 400000000.00
+12/01/2017 15:35:41 somando: 50000000.00
+12/01/2017 15:35:41 total: 450000000.00
+12/01/2017 15:35:41 valor: 450000000.00
+12/01/2017 15:35:41 somando: 50000000.00
+12/01/2017 15:35:41 total: 500000000.00
+12/01/2017 15:35:41 valor: 500000000.00
+12/01/2017 15:35:41 somando: 50000000.00
+12/01/2017 15:35:41 total: 550000000.00
+12/01/2017 15:35:41 valor: 550000000.00
+12/01/2017 15:35:41 somando: 50000000.00
+12/01/2017 15:35:41 total: 600000000.00
+12/01/2017 15:35:41 valor: 600000000.00
+12/01/2017 15:35:41 somando: 50000000.00
+12/01/2017 15:35:41 total: 650000000.00
+12/01/2017 15:35:41 valor: 650000000.00
+12/01/2017 15:35:41 somando: 50000000.00
+12/01/2017 15:35:41 total: 700000000.00
+12/01/2017 15:35:41 valor: 700000000.00
+12/01/2017 15:35:41 somando: 50000000.00
+12/01/2017 15:35:41 total: 750000000.00
+12/01/2017 15:35:41 valor: 750000000.00
+12/01/2017 15:35:41 somando: 50000000.00
+12/01/2017 15:35:41 total: 800000000.00
+12/01/2017 15:35:41 valor: 800000000.00
+12/01/2017 15:35:41 somando: 50000000.00
+12/01/2017 15:35:41 total: 850000000.00
+12/01/2017 15:35:41 valor: 850000000.00
+12/01/2017 15:35:41 somando: 50000000.00
+12/01/2017 15:35:41 total: 900000000.00
+12/01/2017 15:35:41 valor: 900000000.00
+12/01/2017 15:35:41 somando: 50000000.00
+12/01/2017 15:35:41 total: 950000000.00
+12/01/2017 15:35:41 valor: 950000000.00
+12/01/2017 15:35:41 somando: 50000000.00
+12/01/2017 15:35:41 total: 1000000000.00
+12/01/2017 15:35:41 total: 1000000000.00
+12/01/2017 15:35:42 tamos aqui 2
+12/01/2017 15:35:42 tamos aqui 3
+12/01/2017 15:35:42 idCliente: 15
+12/01/2017 15:35:42 idProduto: 103
+12/01/2017 15:35:42 HELLO
+12/01/2017 15:35:42 HELLO 3
+12/01/2017 15:35:42 HELLO 3 A
+12/01/2017 15:35:42 HELLO 4
+12/01/2017 15:35:42 HELLO 2 
+12/01/2017 15:35:42 Baixa do pedido: 103 realizada com sucesso
+12/01/2017 15:35:42 tamos aqui 444
+12/01/2017 15:35:42 HERE 4
+12/01/2017 15:36:05 HERE 1
+12/01/2017 15:36:05 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:36:05 HERE 2
+12/01/2017 15:36:05 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 15:36:07 HERE 1
+12/01/2017 15:36:07 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:36:07 HERE 2
+12/01/2017 15:36:07 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 15:36:08 HERE 1
+12/01/2017 15:36:08 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:36:08 HERE 2
+12/01/2017 15:36:08 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 15:37:05 HERE 1
+12/01/2017 15:37:05 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:37:05 HERE 2
+12/01/2017 15:37:05 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 15:37:44 HERE 1
+12/01/2017 15:37:44 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:37:44 HERE 2
+12/01/2017 15:37:44 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 15:37:52 HERE 1
+12/01/2017 15:37:52 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:37:52 HERE 2
+12/01/2017 15:37:52 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 15:37:53 HERE 1
+12/01/2017 15:37:53 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:37:53 HERE 2
+12/01/2017 15:37:53 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 15:38:53 HERE 1
+12/01/2017 15:38:53 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:38:53 HERE 2
+12/01/2017 15:38:53 HERE 2 A
+12/01/2017 15:38:53 HERE 2 B
+12/01/2017 15:38:53 HERE 2 CCC
+12/01/2017 15:38:53 idCliente: 15
+12/01/2017 15:38:53 idProduto: 103
+12/01/2017 15:38:53 HERE 3
+12/01/2017 15:38:53 cnpj: 02386002000196
+12/01/2017 15:38:53 tamos aqui
+12/01/2017 15:38:53 id 42361
+12/01/2017 15:38:53 inicial: 0
+12/01/2017 15:38:53 valor: 0
+12/01/2017 15:38:53 somando: 50000000.00
+12/01/2017 15:38:53 total: 50000000.00
+12/01/2017 15:38:53 valor: 50000000.00
+12/01/2017 15:38:53 somando: 50000000.00
+12/01/2017 15:38:53 total: 100000000.00
+12/01/2017 15:38:53 valor: 100000000.00
+12/01/2017 15:38:53 somando: 50000000.00
+12/01/2017 15:38:53 total: 150000000.00
+12/01/2017 15:38:53 valor: 150000000.00
+12/01/2017 15:38:53 somando: 50000000.00
+12/01/2017 15:38:53 total: 200000000.00
+12/01/2017 15:38:53 valor: 200000000.00
+12/01/2017 15:38:53 somando: 50000000.00
+12/01/2017 15:38:53 total: 250000000.00
+12/01/2017 15:38:53 valor: 250000000.00
+12/01/2017 15:38:53 somando: 50000000.00
+12/01/2017 15:38:53 total: 300000000.00
+12/01/2017 15:38:53 valor: 300000000.00
+12/01/2017 15:38:53 somando: 50000000.00
+12/01/2017 15:38:53 total: 350000000.00
+12/01/2017 15:38:53 valor: 350000000.00
+12/01/2017 15:38:53 somando: 50000000.00
+12/01/2017 15:38:53 total: 400000000.00
+12/01/2017 15:38:53 valor: 400000000.00
+12/01/2017 15:38:53 somando: 50000000.00
+12/01/2017 15:38:53 total: 450000000.00
+12/01/2017 15:38:53 valor: 450000000.00
+12/01/2017 15:38:53 somando: 50000000.00
+12/01/2017 15:38:53 total: 500000000.00
+12/01/2017 15:38:53 valor: 500000000.00
+12/01/2017 15:38:53 somando: 50000000.00
+12/01/2017 15:38:53 total: 550000000.00
+12/01/2017 15:38:53 valor: 550000000.00
+12/01/2017 15:38:53 somando: 50000000.00
+12/01/2017 15:38:53 total: 600000000.00
+12/01/2017 15:38:53 valor: 600000000.00
+12/01/2017 15:38:53 somando: 50000000.00
+12/01/2017 15:38:53 total: 650000000.00
+12/01/2017 15:38:53 valor: 650000000.00
+12/01/2017 15:38:53 somando: 50000000.00
+12/01/2017 15:38:53 total: 700000000.00
+12/01/2017 15:38:53 valor: 700000000.00
+12/01/2017 15:38:53 somando: 50000000.00
+12/01/2017 15:38:53 total: 750000000.00
+12/01/2017 15:38:53 valor: 750000000.00
+12/01/2017 15:38:53 somando: 50000000.00
+12/01/2017 15:38:53 total: 800000000.00
+12/01/2017 15:38:53 valor: 800000000.00
+12/01/2017 15:38:53 somando: 50000000.00
+12/01/2017 15:38:53 total: 850000000.00
+12/01/2017 15:38:53 valor: 850000000.00
+12/01/2017 15:38:53 somando: 50000000.00
+12/01/2017 15:38:53 total: 900000000.00
+12/01/2017 15:38:53 valor: 900000000.00
+12/01/2017 15:38:53 somando: 50000000.00
+12/01/2017 15:38:53 total: 950000000.00
+12/01/2017 15:38:53 valor: 950000000.00
+12/01/2017 15:38:53 somando: 50000000.00
+12/01/2017 15:38:53 total: 1000000000.00
+12/01/2017 15:38:53 valor: 1000000000.00
+12/01/2017 15:38:53 somando: 50000000.00
+12/01/2017 15:38:53 total: 1050000000.00
+12/01/2017 15:38:53 total: 1050000000.00
+12/01/2017 15:38:54 tamos aqui 2
+12/01/2017 15:38:54 tamos aqui 3
+12/01/2017 15:38:54 idCliente: 15
+12/01/2017 15:38:54 idProduto: 103
+12/01/2017 15:38:54 HELLO
+12/01/2017 15:38:54 HELLO 3
+12/01/2017 15:38:54 HELLO 3 A
+12/01/2017 15:38:54 HELLO 4
+12/01/2017 15:38:54 HELLO 2 
+12/01/2017 15:38:54 Baixa do pedido: 103 realizada com sucesso
+12/01/2017 15:38:54 tamos aqui 444
+12/01/2017 15:38:54 HERE 4
+12/01/2017 15:39:02 HERE 1
+12/01/2017 15:39:02 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:39:02 HERE 2
+12/01/2017 15:39:02 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 15:39:41 HERE 1
+12/01/2017 15:39:41 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:39:41 HERE 2
+12/01/2017 15:39:41 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 15:39:41 HERE 1
+12/01/2017 15:39:41 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:39:41 HERE 2
+12/01/2017 15:39:41 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 15:40:31 HERE 1
+12/01/2017 15:40:31 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:40:31 HERE 2
+12/01/2017 15:40:31 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 15:40:36 HERE 1
+12/01/2017 15:40:36 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:40:36 HERE 2
+12/01/2017 15:40:36 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 15:43:21 HERE 1
+12/01/2017 15:43:21 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:43:21 HERE 2
+12/01/2017 15:43:21 HERE 2 A
+12/01/2017 15:43:21 HERE 2 B
+12/01/2017 15:43:21 HERE 2 CCC
+12/01/2017 15:43:21 idCliente: 15
+12/01/2017 15:43:21 idProduto: 103
+12/01/2017 15:43:21 HERE 3
+12/01/2017 15:43:21 cnpj: 02386002000196
+12/01/2017 15:43:21 tamos aqui
+12/01/2017 15:43:21 id 42362
+12/01/2017 15:43:21 inicial: 0
+12/01/2017 15:43:21 valor: 0
+12/01/2017 15:43:21 somando: 50000000.00
+12/01/2017 15:43:21 total: 50000000.00
+12/01/2017 15:43:21 valor: 50000000.00
+12/01/2017 15:43:21 somando: 50000000.00
+12/01/2017 15:43:21 total: 100000000.00
+12/01/2017 15:43:21 valor: 100000000.00
+12/01/2017 15:43:21 somando: 50000000.00
+12/01/2017 15:43:21 total: 150000000.00
+12/01/2017 15:43:21 valor: 150000000.00
+12/01/2017 15:43:21 somando: 50000000.00
+12/01/2017 15:43:21 total: 200000000.00
+12/01/2017 15:43:21 valor: 200000000.00
+12/01/2017 15:43:21 somando: 50000000.00
+12/01/2017 15:43:21 total: 250000000.00
+12/01/2017 15:43:21 valor: 250000000.00
+12/01/2017 15:43:21 somando: 50000000.00
+12/01/2017 15:43:21 total: 300000000.00
+12/01/2017 15:43:21 valor: 300000000.00
+12/01/2017 15:43:21 somando: 50000000.00
+12/01/2017 15:43:21 total: 350000000.00
+12/01/2017 15:43:21 valor: 350000000.00
+12/01/2017 15:43:21 somando: 50000000.00
+12/01/2017 15:43:21 total: 400000000.00
+12/01/2017 15:43:21 valor: 400000000.00
+12/01/2017 15:43:21 somando: 50000000.00
+12/01/2017 15:43:21 total: 450000000.00
+12/01/2017 15:43:21 valor: 450000000.00
+12/01/2017 15:43:21 somando: 50000000.00
+12/01/2017 15:43:21 total: 500000000.00
+12/01/2017 15:43:21 valor: 500000000.00
+12/01/2017 15:43:21 somando: 50000000.00
+12/01/2017 15:43:21 total: 550000000.00
+12/01/2017 15:43:21 valor: 550000000.00
+12/01/2017 15:43:21 somando: 50000000.00
+12/01/2017 15:43:21 total: 600000000.00
+12/01/2017 15:43:21 valor: 600000000.00
+12/01/2017 15:43:21 somando: 50000000.00
+12/01/2017 15:43:21 total: 650000000.00
+12/01/2017 15:43:21 valor: 650000000.00
+12/01/2017 15:43:21 somando: 50000000.00
+12/01/2017 15:43:21 total: 700000000.00
+12/01/2017 15:43:21 valor: 700000000.00
+12/01/2017 15:43:21 somando: 50000000.00
+12/01/2017 15:43:21 total: 750000000.00
+12/01/2017 15:43:21 valor: 750000000.00
+12/01/2017 15:43:21 somando: 50000000.00
+12/01/2017 15:43:21 total: 800000000.00
+12/01/2017 15:43:21 valor: 800000000.00
+12/01/2017 15:43:21 somando: 50000000.00
+12/01/2017 15:43:21 total: 850000000.00
+12/01/2017 15:43:21 valor: 850000000.00
+12/01/2017 15:43:21 somando: 50000000.00
+12/01/2017 15:43:21 total: 900000000.00
+12/01/2017 15:43:21 valor: 900000000.00
+12/01/2017 15:43:21 somando: 50000000.00
+12/01/2017 15:43:21 total: 950000000.00
+12/01/2017 15:43:21 valor: 950000000.00
+12/01/2017 15:43:21 somando: 50000000.00
+12/01/2017 15:43:21 total: 1000000000.00
+12/01/2017 15:43:21 valor: 1000000000.00
+12/01/2017 15:43:21 somando: 50000000.00
+12/01/2017 15:43:21 total: 1050000000.00
+12/01/2017 15:43:21 valor: 1050000000.00
+12/01/2017 15:43:21 somando: 50000000.00
+12/01/2017 15:43:21 total: 1100000000.00
+12/01/2017 15:43:21 total: 1100000000.00
+12/01/2017 15:43:22 tamos aqui 2
+12/01/2017 15:43:22 tamos aqui 3
+12/01/2017 15:43:22 idCliente: 15
+12/01/2017 15:43:22 idProduto: 103
+12/01/2017 15:43:22 HELLO
+12/01/2017 15:43:22 HELLO 3
+12/01/2017 15:43:22 HELLO 3 A
+12/01/2017 15:43:22 HELLO 4
+12/01/2017 15:43:22 HELLO 2 
+12/01/2017 15:43:22 Baixa do pedido: 103 realizada com sucesso
+12/01/2017 15:43:22 tamos aqui 444
+12/01/2017 15:43:22 HERE 4
+12/01/2017 15:45:51 HERE 1
+12/01/2017 15:45:51 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:45:51 HERE 2
+12/01/2017 15:45:51 HERE 2 A
+12/01/2017 15:45:51 HERE 2 B
+12/01/2017 15:45:51 HERE 2 CCC
+12/01/2017 15:45:51 idCliente: 15
+12/01/2017 15:45:51 idProduto: 103
+12/01/2017 15:45:51 Quantidade: br.intelidata.entity.SaldoLicenca@435229e9
+12/01/2017 15:45:51 HERE 3
+12/01/2017 15:45:51 cnpj: 02386002000196
+12/01/2017 15:45:51 tamos aqui
+12/01/2017 15:45:51 id 42363
+12/01/2017 15:45:51 inicial: 0
+12/01/2017 15:45:51 valor: 0
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 50000000.00
+12/01/2017 15:45:51 valor: 50000000.00
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 100000000.00
+12/01/2017 15:45:51 valor: 100000000.00
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 150000000.00
+12/01/2017 15:45:51 valor: 150000000.00
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 200000000.00
+12/01/2017 15:45:51 valor: 200000000.00
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 250000000.00
+12/01/2017 15:45:51 valor: 250000000.00
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 300000000.00
+12/01/2017 15:45:51 valor: 300000000.00
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 350000000.00
+12/01/2017 15:45:51 valor: 350000000.00
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 400000000.00
+12/01/2017 15:45:51 valor: 400000000.00
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 450000000.00
+12/01/2017 15:45:51 valor: 450000000.00
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 500000000.00
+12/01/2017 15:45:51 valor: 500000000.00
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 550000000.00
+12/01/2017 15:45:51 valor: 550000000.00
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 600000000.00
+12/01/2017 15:45:51 valor: 600000000.00
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 650000000.00
+12/01/2017 15:45:51 valor: 650000000.00
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 700000000.00
+12/01/2017 15:45:51 valor: 700000000.00
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 750000000.00
+12/01/2017 15:45:51 valor: 750000000.00
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 800000000.00
+12/01/2017 15:45:51 valor: 800000000.00
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 850000000.00
+12/01/2017 15:45:51 valor: 850000000.00
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 900000000.00
+12/01/2017 15:45:51 valor: 900000000.00
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 950000000.00
+12/01/2017 15:45:51 valor: 950000000.00
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 1000000000.00
+12/01/2017 15:45:51 valor: 1000000000.00
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 1050000000.00
+12/01/2017 15:45:51 valor: 1050000000.00
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 1100000000.00
+12/01/2017 15:45:51 valor: 1100000000.00
+12/01/2017 15:45:51 somando: 50000000.00
+12/01/2017 15:45:51 total: 1150000000.00
+12/01/2017 15:45:51 total: 1150000000.00
+12/01/2017 15:45:51 tamos aqui 2
+12/01/2017 15:45:52 tamos aqui 3
+12/01/2017 15:45:52 idCliente: 15
+12/01/2017 15:45:52 idProduto: 103
+12/01/2017 15:45:52 HELLO
+12/01/2017 15:45:52 HELLO 3
+12/01/2017 15:45:52 HELLO 3 A
+12/01/2017 15:45:52 HELLO 4
+12/01/2017 15:45:52 HELLO 2 
+12/01/2017 15:45:52 Baixa do pedido: 103 realizada com sucesso
+12/01/2017 15:45:52 tamos aqui 444
+12/01/2017 15:45:52 HERE 4
+12/01/2017 15:48:10 HERE 1
+12/01/2017 15:48:10 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:48:10 HERE 2
+12/01/2017 15:48:10 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 15:48:31 HERE 1
+12/01/2017 15:48:31 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:48:31 HERE 2
+12/01/2017 15:48:31 HERE 2 A
+12/01/2017 15:48:31 HERE 2 B
+12/01/2017 15:48:31 HERE 2 CCC
+12/01/2017 15:48:31 idCliente: 15
+12/01/2017 15:48:31 idProduto: 103
+12/01/2017 15:48:31 Quantidade: br.intelidata.entity.SaldoLicenca@77638c5b
+12/01/2017 15:48:31 HERE 3
+12/01/2017 15:48:31 cnpj: 02386002000196
+12/01/2017 15:48:31 tamos aqui
+12/01/2017 15:48:31 id 42364
+12/01/2017 15:48:31 inicial: 0
+12/01/2017 15:48:31 valor: 0
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 50000000.00
+12/01/2017 15:48:31 valor: 50000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 100000000.00
+12/01/2017 15:48:31 valor: 100000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 150000000.00
+12/01/2017 15:48:31 valor: 150000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 200000000.00
+12/01/2017 15:48:31 valor: 200000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 250000000.00
+12/01/2017 15:48:31 valor: 250000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 300000000.00
+12/01/2017 15:48:31 valor: 300000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 350000000.00
+12/01/2017 15:48:31 valor: 350000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 400000000.00
+12/01/2017 15:48:31 valor: 400000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 450000000.00
+12/01/2017 15:48:31 valor: 450000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 500000000.00
+12/01/2017 15:48:31 valor: 500000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 550000000.00
+12/01/2017 15:48:31 valor: 550000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 600000000.00
+12/01/2017 15:48:31 valor: 600000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 650000000.00
+12/01/2017 15:48:31 valor: 650000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 700000000.00
+12/01/2017 15:48:31 valor: 700000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 750000000.00
+12/01/2017 15:48:31 valor: 750000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 800000000.00
+12/01/2017 15:48:31 valor: 800000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 850000000.00
+12/01/2017 15:48:31 valor: 850000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 900000000.00
+12/01/2017 15:48:31 valor: 900000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 950000000.00
+12/01/2017 15:48:31 valor: 950000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 1000000000.00
+12/01/2017 15:48:31 valor: 1000000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 1050000000.00
+12/01/2017 15:48:31 valor: 1050000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 1100000000.00
+12/01/2017 15:48:31 valor: 1100000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 1150000000.00
+12/01/2017 15:48:31 valor: 1150000000.00
+12/01/2017 15:48:31 somando: 50000000.00
+12/01/2017 15:48:31 total: 1200000000.00
+12/01/2017 15:48:31 total: 1200000000.00
+12/01/2017 15:48:31 tamos aqui 2
+12/01/2017 15:48:31 tamos aqui 3
+12/01/2017 15:48:31 idCliente: 15
+12/01/2017 15:48:31 idProduto: 103
+12/01/2017 15:48:31 HELLO
+12/01/2017 15:48:31 HELLO 3
+12/01/2017 15:48:31 HELLO 3 A
+12/01/2017 15:48:31 HELLO 4
+12/01/2017 15:48:31 HELLO 2 
+12/01/2017 15:48:31 Baixa do pedido: 103 realizada com sucesso
+12/01/2017 15:48:31 tamos aqui 444
+12/01/2017 15:48:31 HERE 4
+12/01/2017 15:56:26 HERE 1
+12/01/2017 15:56:26 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:56:26 HERE 2
+12/01/2017 15:56:26 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 15:56:38 HERE 1
+12/01/2017 15:56:38 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:56:38 HERE 2
+12/01/2017 15:56:38 HERE 2 A
+12/01/2017 15:56:38 HERE 2 B
+12/01/2017 15:56:38 HERE 2 CCC
+12/01/2017 15:56:38 idCliente: 15
+12/01/2017 15:56:38 idProduto: 103
+12/01/2017 15:56:38 Quantidade: -11
+12/01/2017 15:56:38 Existe licenças para esse cliente que não está com saldo suficiente para realizar a instalação, favor analisar todos os pedidos de instalação e validar se estão com saldo suficiente.
+12/01/2017 15:57:36 HERE 1
+12/01/2017 15:57:36 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:57:36 HERE 2
+12/01/2017 15:57:36 HERE 2 A
+12/01/2017 15:57:36 HERE 2 B
+12/01/2017 15:57:36 HERE 2 CCC
+12/01/2017 15:57:36 idCliente: 15
+12/01/2017 15:57:36 idProduto: 103
+12/01/2017 15:57:36 Quantidade: 1
+12/01/2017 15:57:36 HERE 3
+12/01/2017 15:57:36 cnpj: 02386002000196
+12/01/2017 15:57:37 tamos aqui
+12/01/2017 15:57:37 id 42365
+12/01/2017 15:57:37 inicial: 0
+12/01/2017 15:57:37 valor: 0
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 50000000.00
+12/01/2017 15:57:37 valor: 50000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 100000000.00
+12/01/2017 15:57:37 valor: 100000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 150000000.00
+12/01/2017 15:57:37 valor: 150000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 200000000.00
+12/01/2017 15:57:37 valor: 200000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 250000000.00
+12/01/2017 15:57:37 valor: 250000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 300000000.00
+12/01/2017 15:57:37 valor: 300000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 350000000.00
+12/01/2017 15:57:37 valor: 350000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 400000000.00
+12/01/2017 15:57:37 valor: 400000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 450000000.00
+12/01/2017 15:57:37 valor: 450000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 500000000.00
+12/01/2017 15:57:37 valor: 500000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 550000000.00
+12/01/2017 15:57:37 valor: 550000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 600000000.00
+12/01/2017 15:57:37 valor: 600000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 650000000.00
+12/01/2017 15:57:37 valor: 650000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 700000000.00
+12/01/2017 15:57:37 valor: 700000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 750000000.00
+12/01/2017 15:57:37 valor: 750000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 800000000.00
+12/01/2017 15:57:37 valor: 800000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 850000000.00
+12/01/2017 15:57:37 valor: 850000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 900000000.00
+12/01/2017 15:57:37 valor: 900000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 950000000.00
+12/01/2017 15:57:37 valor: 950000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 1000000000.00
+12/01/2017 15:57:37 valor: 1000000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 1050000000.00
+12/01/2017 15:57:37 valor: 1050000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 1100000000.00
+12/01/2017 15:57:37 valor: 1100000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 1150000000.00
+12/01/2017 15:57:37 valor: 1150000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 1200000000.00
+12/01/2017 15:57:37 valor: 1200000000.00
+12/01/2017 15:57:37 somando: 50000000.00
+12/01/2017 15:57:37 total: 1250000000.00
+12/01/2017 15:57:37 total: 1250000000.00
+12/01/2017 15:57:37 tamos aqui 2
+12/01/2017 15:57:37 tamos aqui 3
+12/01/2017 15:57:37 idCliente: 15
+12/01/2017 15:57:37 idProduto: 103
+12/01/2017 15:57:37 HELLO
+12/01/2017 15:57:37 HELLO 3
+12/01/2017 15:57:37 HELLO 3 A
+12/01/2017 15:57:37 HELLO 4
+12/01/2017 15:57:37 HELLO 2 
+12/01/2017 15:57:37 Baixa do pedido: 103 realizada com sucesso
+12/01/2017 15:57:37 tamos aqui 444
+12/01/2017 15:57:37 HERE 4
+12/01/2017 15:57:43 HERE 1
+12/01/2017 15:57:43 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:57:43 HERE 2
+12/01/2017 15:57:43 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 15:57:55 HERE 1
+12/01/2017 15:57:55 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:57:55 HERE 2
+12/01/2017 15:57:55 HERE 2 A
+12/01/2017 15:57:55 HERE 2 B
+12/01/2017 15:57:55 HERE 2 CCC
+12/01/2017 15:57:55 idCliente: 15
+12/01/2017 15:57:55 idProduto: 103
+12/01/2017 15:57:55 Quantidade: 0
+12/01/2017 15:57:55 Existe licenças para esse cliente que não está com saldo suficiente para realizar a instalação, favor analisar todos os pedidos de instalação e validar se estão com saldo suficiente.
+12/01/2017 15:58:04 HERE 1
+12/01/2017 15:58:04 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:58:04 HERE 2
+12/01/2017 15:58:04 HERE 2 A
+12/01/2017 15:58:04 HERE 2 B
+12/01/2017 15:58:04 HERE 2 CCC
+12/01/2017 15:58:04 idCliente: 15
+12/01/2017 15:58:04 idProduto: 103
+12/01/2017 15:58:04 Quantidade: 1
+12/01/2017 15:58:04 HERE 3
+12/01/2017 15:58:04 cnpj: 02386002000196
+12/01/2017 15:58:04 tamos aqui
+12/01/2017 15:58:04 id 42366
+12/01/2017 15:58:04 inicial: 0
+12/01/2017 15:58:04 valor: 0
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 50000000.00
+12/01/2017 15:58:04 valor: 50000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 100000000.00
+12/01/2017 15:58:04 valor: 100000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 150000000.00
+12/01/2017 15:58:04 valor: 150000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 200000000.00
+12/01/2017 15:58:04 valor: 200000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 250000000.00
+12/01/2017 15:58:04 valor: 250000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 300000000.00
+12/01/2017 15:58:04 valor: 300000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 350000000.00
+12/01/2017 15:58:04 valor: 350000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 400000000.00
+12/01/2017 15:58:04 valor: 400000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 450000000.00
+12/01/2017 15:58:04 valor: 450000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 500000000.00
+12/01/2017 15:58:04 valor: 500000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 550000000.00
+12/01/2017 15:58:04 valor: 550000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 600000000.00
+12/01/2017 15:58:04 valor: 600000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 650000000.00
+12/01/2017 15:58:04 valor: 650000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 700000000.00
+12/01/2017 15:58:04 valor: 700000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 750000000.00
+12/01/2017 15:58:04 valor: 750000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 800000000.00
+12/01/2017 15:58:04 valor: 800000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 850000000.00
+12/01/2017 15:58:04 valor: 850000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 900000000.00
+12/01/2017 15:58:04 valor: 900000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 950000000.00
+12/01/2017 15:58:04 valor: 950000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 1000000000.00
+12/01/2017 15:58:04 valor: 1000000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 1050000000.00
+12/01/2017 15:58:04 valor: 1050000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 1100000000.00
+12/01/2017 15:58:04 valor: 1100000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 1150000000.00
+12/01/2017 15:58:04 valor: 1150000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 1200000000.00
+12/01/2017 15:58:04 valor: 1200000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 1250000000.00
+12/01/2017 15:58:04 valor: 1250000000.00
+12/01/2017 15:58:04 somando: 50000000.00
+12/01/2017 15:58:04 total: 1300000000.00
+12/01/2017 15:58:04 total: 1300000000.00
+12/01/2017 15:58:04 tamos aqui 2
+12/01/2017 15:58:04 tamos aqui 3
+12/01/2017 15:58:04 idCliente: 15
+12/01/2017 15:58:04 idProduto: 103
+12/01/2017 15:58:04 HELLO
+12/01/2017 15:58:04 HELLO 3
+12/01/2017 15:58:04 HELLO 3 A
+12/01/2017 15:58:04 HELLO 4
+12/01/2017 15:58:04 HELLO 2 
+12/01/2017 15:58:04 Baixa do pedido: 103 realizada com sucesso
+12/01/2017 15:58:04 tamos aqui 444
+12/01/2017 15:58:04 HERE 4
+12/01/2017 15:58:06 HERE 1
+12/01/2017 15:58:06 HERE entity.getCnpj(): 02386002000196
+12/01/2017 15:58:06 HERE 2
+12/01/2017 15:58:06 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:01:39 ERROR: column "p.id" must appear in the GROUP BY clause or be used in an aggregate function
+  Posição: 8
+12/01/2017 16:05:43 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:18:46 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:19:14 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:22:23 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:24:29 rs.next(): false
+12/01/2017 16:24:29 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:26:03 rs.next(): false
+12/01/2017 16:26:03 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:27:51 rs.next(): false
+12/01/2017 16:27:51 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:27:51 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:28:11 rs.next(): false
+12/01/2017 16:28:11 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:28:11 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:35:45 rs.next(): true
+12/01/2017 16:35:45 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:35:45 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:36:21 rs.next(): true
+12/01/2017 16:36:21 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:36:21 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:40:47 rs.next(): true
+12/01/2017 16:40:47 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:40:47 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:41:02 rs.next(): true
+12/01/2017 16:41:02 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:41:02 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:42:04 rs.next(): true
+12/01/2017 16:42:04 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:42:04 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:43:03 rs.next(): true
+12/01/2017 16:43:03 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:43:03 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:43:05 rs.next(): true
+12/01/2017 16:43:05 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:43:05 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:45:35 rs.next(): true
+12/01/2017 16:45:35 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:45:35 pedidoInstalacao: null
+12/01/2017 16:45:35 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:47:07 rs.next(): true
+12/01/2017 16:47:07 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:47:07 pedidoInstalacao: null
+12/01/2017 16:47:07 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:48:34 rs.next(): true
+12/01/2017 16:48:34 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:48:34 pedidoInstalacao: null
+12/01/2017 16:48:34 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:48:43 rs.next(): true
+12/01/2017 16:48:43 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:48:43 pedidoInstalacao: null
+12/01/2017 16:48:43 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:52:29 rs.next(): true
+12/01/2017 16:52:29 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:52:29 pedidoInstalacao: null
+12/01/2017 16:52:29 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:54:00 rs.next(): true
+12/01/2017 16:54:00 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:54:00 0
+12/01/2017 16:54:00 pedidoInstalacao: null
+12/01/2017 16:54:00 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:56:20 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:56:20 0
+12/01/2017 16:56:20 1
+12/01/2017 16:56:20 2
+12/01/2017 16:56:20 pedidoInstalacao in: br.intelidata.entity.PedidoInstalacao@65a002fd
+12/01/2017 16:56:20 select * from pedidoinstalacaoitem where idpedidoinstalacao = ?
+12/01/2017 16:56:20 pedidoInstalacao: br.intelidata.entity.PedidoInstalacao@65a002fd
+12/01/2017 16:56:20 cnpj: 02386002000196
+12/01/2017 16:56:46 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:56:46 0
+12/01/2017 16:56:46 NADA
+12/01/2017 16:56:46 pedidoInstalacao: null
+12/01/2017 16:56:46 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:56:47 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:56:47 0
+12/01/2017 16:56:47 NADA
+12/01/2017 16:56:47 pedidoInstalacao: null
+12/01/2017 16:56:47 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:56:48 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:56:48 0
+12/01/2017 16:56:48 NADA
+12/01/2017 16:56:48 pedidoInstalacao: null
+12/01/2017 16:56:48 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:56:48 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:56:48 0
+12/01/2017 16:56:48 NADA
+12/01/2017 16:56:48 pedidoInstalacao: null
+12/01/2017 16:56:48 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:56:49 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:56:49 0
+12/01/2017 16:56:49 NADA
+12/01/2017 16:56:49 pedidoInstalacao: null
+12/01/2017 16:56:49 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:56:49 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:56:49 0
+12/01/2017 16:56:49 NADA
+12/01/2017 16:56:49 pedidoInstalacao: null
+12/01/2017 16:56:49 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:57:39 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:57:39 0
+12/01/2017 16:57:39 1
+12/01/2017 16:57:39 2
+12/01/2017 16:57:39 pedidoInstalacao in: br.intelidata.entity.PedidoInstalacao@5764263b
+12/01/2017 16:57:39 select * from pedidoinstalacaoitem where idpedidoinstalacao = ?
+12/01/2017 16:57:39 pedidoInstalacao: br.intelidata.entity.PedidoInstalacao@5764263b
+12/01/2017 16:57:39 cnpj: 02386002000196
+12/01/2017 16:57:44 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:57:44 0
+12/01/2017 16:57:44 NADA
+12/01/2017 16:57:44 pedidoInstalacao: null
+12/01/2017 16:57:44 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 16:59:08 select distinct(p.cnpjclientefinal), p.id id, p.razaosocialclientefinal razaosocialclientefinal, p.idcliente idcliente, p.cnpjclientefinal cnpjclientefinal, p.idusuariositecadastro idusuariositecadastro, p.idusuariositeutilizacao idusuariositeutilizacao, p.idcontrato idcontrato, p.utilizado utilizado, pi.id piid, pi.idproduto piidproduto  from pedidoinstalacao p join pedidoinstalacaoitem pi on pi.idpedidoinstalacao = p.id  where p.cnpjclientefinal = ? and p.utilizado = ?
+12/01/2017 16:59:08 0
+12/01/2017 16:59:08 1
+12/01/2017 16:59:08 2
+12/01/2017 16:59:08 pedidoInstalacao in: br.intelidata.entity.PedidoInstalacao@7dd05709
+12/01/2017 16:59:08 select * from pedidoinstalacaoitem where idpedidoinstalacao = ?
+12/01/2017 16:59:08 pedidoInstalacao: br.intelidata.entity.PedidoInstalacao@7dd05709
+12/01/2017 16:59:08 cnpj: 02386002000196
+12/01/2017 16:59:57 NADA
+12/01/2017 16:59:57 pedidoInstalacao: null
+12/01/2017 16:59:57 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 17:00:14 select * from pedidoinstalacaoitem where idpedidoinstalacao = ?
+12/01/2017 17:00:14 Quantidade: 0
+12/01/2017 17:00:14 pedidoInstalacao: br.intelidata.entity.PedidoInstalacao@3cd1b859
+12/01/2017 17:00:14 cnpj: 02386002000196
+12/01/2017 17:00:16 NADA
+12/01/2017 17:00:16 pedidoInstalacao: null
+12/01/2017 17:00:16 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 17:11:15 NADA
+12/01/2017 17:11:15 pedidoInstalacao: null
+12/01/2017 17:11:15 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 17:11:42 select * from pedidoinstalacaoitem where idpedidoinstalacao = ?
+12/01/2017 17:11:42 Quantidade: 0
+12/01/2017 17:11:42 pedidoInstalacao: br.intelidata.entity.PedidoInstalacao@28561057
+12/01/2017 17:11:42 cnpj: 02386002000196
+12/01/2017 17:26:20 NADA
+12/01/2017 17:26:20 pedidoInstalacao: null
+12/01/2017 17:26:20 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 17:26:37 select * from pedidoinstalacaoitem where idpedidoinstalacao = ?
+12/01/2017 17:26:37 Quantidade: 0
+12/01/2017 17:26:37 pedidoInstalacao: br.intelidata.entity.PedidoInstalacao@63d697a9
+12/01/2017 17:26:37 Não encontramos itens do pedido de instalação para o cliente: 02386002000196
+12/01/2017 17:29:47 select * from pedidoinstalacaoitem where idpedidoinstalacao = ?
+12/01/2017 17:29:47 pedidoInstalacao.getId(): 10
+12/01/2017 17:29:47 Quantidade: 0
+12/01/2017 17:29:47 pedidoInstalacao: br.intelidata.entity.PedidoInstalacao@2704a5d4
+12/01/2017 17:29:47 Não encontramos itens do pedido de instalação para o cliente: 02386002000196
+12/01/2017 17:33:26 select * from pedidoinstalacaoitem where idpedidoinstalacao = ?
+12/01/2017 17:33:26 pedidoInstalacao.getId(): 10
+12/01/2017 17:33:26 OK
+12/01/2017 17:33:26 Quantidade: 0
+12/01/2017 17:33:26 pedidoInstalacao: br.intelidata.entity.PedidoInstalacao@3e1bb22d
+12/01/2017 17:33:26 Não encontramos itens do pedido de instalação para o cliente: 02386002000196
+12/01/2017 17:34:29 select * from pedidoinstalacaoitem where idpedidoinstalacao = ?
+12/01/2017 17:34:29 pedidoInstalacao.getId(): 10
+12/01/2017 17:34:29 OK
+12/01/2017 17:34:29 Quantidade: 0
+12/01/2017 17:34:29 pedidoInstalacao: br.intelidata.entity.PedidoInstalacao@563608ba
+12/01/2017 17:34:29 Não encontramos itens do pedido de instalação para o cliente: 02386002000196
+12/01/2017 17:35:50 select * from pedidoinstalacaoitem where idpedidoinstalacao = ?
+12/01/2017 17:35:50 pedidoInstalacao.getId(): 10
+12/01/2017 17:35:50 !5
+12/01/2017 17:35:50 Quantidade: 1
+12/01/2017 17:35:50 pedidoInstalacao: br.intelidata.entity.PedidoInstalacao@47714abc
+12/01/2017 17:35:50 idCliente: 15
+12/01/2017 17:35:50 idProduto: 103
+12/01/2017 17:35:50 Existe licenças para esse cliente que não está com saldo suficiente para realizar a instalação, favor analisar todos os pedidos de instalação e validar se estão com saldo suficiente.
+12/01/2017 17:35:57 select * from pedidoinstalacaoitem where idpedidoinstalacao = ?
+12/01/2017 17:35:57 pedidoInstalacao.getId(): 10
+12/01/2017 17:35:57 !5
+12/01/2017 17:35:57 Quantidade: 1
+12/01/2017 17:35:57 pedidoInstalacao: br.intelidata.entity.PedidoInstalacao@16a3d2e2
+12/01/2017 17:35:57 idCliente: 15
+12/01/2017 17:35:57 idProduto: 103
+12/01/2017 17:35:57 Existe licenças para esse cliente que não está com saldo suficiente para realizar a instalação, favor analisar todos os pedidos de instalação e validar se estão com saldo suficiente.
+12/01/2017 17:36:20 select * from pedidoinstalacaoitem where idpedidoinstalacao = ?
+12/01/2017 17:36:20 pedidoInstalacao.getId(): 10
+12/01/2017 17:36:20 !5
+12/01/2017 17:36:20 Quantidade: 1
+12/01/2017 17:36:20 pedidoInstalacao: br.intelidata.entity.PedidoInstalacao@693d43e6
+12/01/2017 17:36:20 idCliente: 15
+12/01/2017 17:36:20 idProduto: 103
+12/01/2017 17:36:20 Existe licenças para esse cliente que não está com saldo suficiente para realizar a instalação, favor analisar todos os pedidos de instalação e validar se estão com saldo suficiente.
+12/01/2017 17:36:33 select * from pedidoinstalacaoitem where idpedidoinstalacao = ?
+12/01/2017 17:36:33 pedidoInstalacao.getId(): 10
+12/01/2017 17:36:33 !5
+12/01/2017 17:36:33 Quantidade: 1
+12/01/2017 17:36:33 pedidoInstalacao: br.intelidata.entity.PedidoInstalacao@3e8939f3
+12/01/2017 17:36:33 idCliente: 15
+12/01/2017 17:36:33 idProduto: 103
+12/01/2017 17:36:33 cnpj: 02386002000196
+12/01/2017 17:36:34 id 42367
+12/01/2017 17:36:34 inicial: 0
+12/01/2017 17:36:34 valor: 0
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 50000000.00
+12/01/2017 17:36:34 valor: 50000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 100000000.00
+12/01/2017 17:36:34 valor: 100000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 150000000.00
+12/01/2017 17:36:34 valor: 150000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 200000000.00
+12/01/2017 17:36:34 valor: 200000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 250000000.00
+12/01/2017 17:36:34 valor: 250000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 300000000.00
+12/01/2017 17:36:34 valor: 300000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 350000000.00
+12/01/2017 17:36:34 valor: 350000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 400000000.00
+12/01/2017 17:36:34 valor: 400000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 450000000.00
+12/01/2017 17:36:34 valor: 450000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 500000000.00
+12/01/2017 17:36:34 valor: 500000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 550000000.00
+12/01/2017 17:36:34 valor: 550000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 600000000.00
+12/01/2017 17:36:34 valor: 600000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 650000000.00
+12/01/2017 17:36:34 valor: 650000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 700000000.00
+12/01/2017 17:36:34 valor: 700000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 750000000.00
+12/01/2017 17:36:34 valor: 750000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 800000000.00
+12/01/2017 17:36:34 valor: 800000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 850000000.00
+12/01/2017 17:36:34 valor: 850000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 900000000.00
+12/01/2017 17:36:34 valor: 900000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 950000000.00
+12/01/2017 17:36:34 valor: 950000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 1000000000.00
+12/01/2017 17:36:34 valor: 1000000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 1050000000.00
+12/01/2017 17:36:34 valor: 1050000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 1100000000.00
+12/01/2017 17:36:34 valor: 1100000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 1150000000.00
+12/01/2017 17:36:34 valor: 1150000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 1200000000.00
+12/01/2017 17:36:34 valor: 1200000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 1250000000.00
+12/01/2017 17:36:34 valor: 1250000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 1300000000.00
+12/01/2017 17:36:34 valor: 1300000000.00
+12/01/2017 17:36:34 somando: 50000000.00
+12/01/2017 17:36:34 total: 1350000000.00
+12/01/2017 17:36:34 total: 1350000000.00
+12/01/2017 17:36:34 idCliente: 15
+12/01/2017 17:36:34 idProduto: 103
+12/01/2017 17:36:34 HELLO
+12/01/2017 17:36:34 HELLO 3
+12/01/2017 17:36:34 HELLO 3 A
+12/01/2017 17:36:34 HELLO 4
+12/01/2017 17:36:34 HELLO 2 
+12/01/2017 17:36:34 Baixa do pedido: 103 realizada com sucesso
+12/01/2017 17:36:38 NADA
+12/01/2017 17:36:38 pedidoInstalacao: null
+12/01/2017 17:36:38 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+12/01/2017 17:36:49 select * from pedidoinstalacaoitem where idpedidoinstalacao = ?
+12/01/2017 17:36:49 pedidoInstalacao.getId(): 10
+12/01/2017 17:36:49 !5
+12/01/2017 17:36:49 Quantidade: 1
+12/01/2017 17:36:49 pedidoInstalacao: br.intelidata.entity.PedidoInstalacao@4a4633e3
+12/01/2017 17:36:49 idCliente: 15
+12/01/2017 17:36:49 idProduto: 103
+12/01/2017 17:36:49 Existe licenças para esse cliente que não está com saldo suficiente para realizar a instalação, favor analisar todos os pedidos de instalação e validar se estão com saldo suficiente.
+12/01/2017 17:37:01 select * from pedidoinstalacaoitem where idpedidoinstalacao = ?
+12/01/2017 17:37:01 pedidoInstalacao.getId(): 10
+12/01/2017 17:37:01 !5
+12/01/2017 17:37:01 Quantidade: 1
+12/01/2017 17:37:01 pedidoInstalacao: br.intelidata.entity.PedidoInstalacao@621be045
+12/01/2017 17:37:01 idCliente: 15
+12/01/2017 17:37:01 idProduto: 103
+12/01/2017 17:37:01 cnpj: 02386002000196
+12/01/2017 17:37:01 id 42368
+12/01/2017 17:37:01 inicial: 0
+12/01/2017 17:37:01 valor: 0
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 50000000.00
+12/01/2017 17:37:01 valor: 50000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 100000000.00
+12/01/2017 17:37:01 valor: 100000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 150000000.00
+12/01/2017 17:37:01 valor: 150000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 200000000.00
+12/01/2017 17:37:01 valor: 200000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 250000000.00
+12/01/2017 17:37:01 valor: 250000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 300000000.00
+12/01/2017 17:37:01 valor: 300000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 350000000.00
+12/01/2017 17:37:01 valor: 350000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 400000000.00
+12/01/2017 17:37:01 valor: 400000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 450000000.00
+12/01/2017 17:37:01 valor: 450000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 500000000.00
+12/01/2017 17:37:01 valor: 500000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 550000000.00
+12/01/2017 17:37:01 valor: 550000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 600000000.00
+12/01/2017 17:37:01 valor: 600000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 650000000.00
+12/01/2017 17:37:01 valor: 650000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 700000000.00
+12/01/2017 17:37:01 valor: 700000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 750000000.00
+12/01/2017 17:37:01 valor: 750000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 800000000.00
+12/01/2017 17:37:01 valor: 800000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 850000000.00
+12/01/2017 17:37:01 valor: 850000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 900000000.00
+12/01/2017 17:37:01 valor: 900000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 950000000.00
+12/01/2017 17:37:01 valor: 950000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 1000000000.00
+12/01/2017 17:37:01 valor: 1000000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 1050000000.00
+12/01/2017 17:37:01 valor: 1050000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 1100000000.00
+12/01/2017 17:37:01 valor: 1100000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 1150000000.00
+12/01/2017 17:37:01 valor: 1150000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 1200000000.00
+12/01/2017 17:37:01 valor: 1200000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 1250000000.00
+12/01/2017 17:37:01 valor: 1250000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 1300000000.00
+12/01/2017 17:37:01 valor: 1300000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 1350000000.00
+12/01/2017 17:37:01 valor: 1350000000.00
+12/01/2017 17:37:01 somando: 50000000.00
+12/01/2017 17:37:01 total: 1400000000.00
+12/01/2017 17:37:01 total: 1400000000.00
+12/01/2017 17:37:01 idCliente: 15
+12/01/2017 17:37:01 idProduto: 103
+12/01/2017 17:37:01 HELLO
+12/01/2017 17:37:01 HELLO 3
+12/01/2017 17:37:01 HELLO 3 A
+12/01/2017 17:37:01 HELLO 4
+12/01/2017 17:37:01 HELLO 2 
+12/01/2017 17:37:01 Baixa do pedido: 103 realizada com sucesso
+12/01/2017 17:37:03 NADA
+12/01/2017 17:37:03 pedidoInstalacao: null
+12/01/2017 17:37:03 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+13/01/2017 08:20:15 NADA
+13/01/2017 08:20:15 pedidoInstalacao: null
+13/01/2017 08:20:15 Não encontramos pedido de instalação com disponibilidade de uso para o cliente: 02386002000196
+13/01/2017 11:07:10 Pedido de desinstalacao
+13/01/2017 11:30:11 Pedido de desinstalacao token: null
+13/01/2017 11:30:11 Pedido de desinstalacao chave: null
+13/01/2017 11:30:26 Pedido de desinstalacao token: Token
+13/01/2017 11:30:26 Pedido de desinstalacao chave: chave
+13/01/2017 11:37:41 Pedido de desinstalacao token: Token
+13/01/2017 11:37:41 Pedido de desinstalacao chave: chave
+13/01/2017 11:38:02 Pedido de desinstalacao token: Token
+13/01/2017 11:38:02 Pedido de desinstalacao chave: chave
+13/01/2017 11:39:20 Pedido de desinstalacao token: Token
+13/01/2017 11:39:20 Pedido de desinstalacao chave: chave
+13/01/2017 13:58:29 Pedido de desinstalacao token: Token
+13/01/2017 13:58:29 Pedido de desinstalacao chave: chave
+13/01/2017 13:58:34 Pedido de desinstalacao token: Token
+13/01/2017 13:58:34 Pedido de desinstalacao chave: chave
+13/01/2017 13:58:35 Pedido de desinstalacao token: Token
+13/01/2017 13:58:35 Pedido de desinstalacao chave: chave
+13/01/2017 13:58:36 Pedido de desinstalacao token: Token
+13/01/2017 13:58:36 Pedido de desinstalacao chave: chave
+13/01/2017 13:58:38 Pedido de desinstalacao token: Token
+13/01/2017 13:58:38 Pedido de desinstalacao chave: chave
+13/01/2017 13:58:40 Pedido de desinstalacao token: Token
+13/01/2017 13:58:40 Pedido de desinstalacao chave: chave
+13/01/2017 13:58:41 Pedido de desinstalacao token: Token
+13/01/2017 13:58:41 Pedido de desinstalacao chave: chave
+13/01/2017 13:58:43 Pedido de desinstalacao token: Token
+13/01/2017 13:58:43 Pedido de desinstalacao chave: chave
+13/01/2017 13:58:52 Pedido de desinstalacao token: Token
+13/01/2017 13:58:52 Pedido de desinstalacao chave: chave
+13/01/2017 13:59:00 Pedido de desinstalacao token: Token
+13/01/2017 13:59:00 Pedido de desinstalacao chave: chave
+13/01/2017 15:32:26 Pedido de desinstalacao token: Token
+13/01/2017 15:32:26 Pedido de desinstalacao chave: null
+13/01/2017 15:39:13 Pedido de desinstalacao token: Token
+13/01/2017 15:39:13 Pedido de desinstalacao chave: null
+13/01/2017 15:54:09 Pedido de desinstalacao token: Token
+13/01/2017 15:54:09 Pedido de desinstalacao chave: null
+13/01/2017 15:58:00 HELLO
+13/01/2017 15:58:00 Pedido de desinstalacao token: Token
+13/01/2017 16:11:47 verificar se chave está valida
+13/01/2017 16:11:58 verificar se chave está valida
+13/01/2017 16:16:24 verificar se chave está valida
+13/01/2017 16:16:25 Não foi possível encontrar
+13/01/2017 16:17:40 verificar se chave está valida
+13/01/2017 16:17:41 Não foi possível encontrar a chave de desinstalação chave
+13/01/2017 16:19:29 verificar se chave está valida
+13/01/2017 16:19:29 Não foi possível encontrar a chave de desinstalação 'CHAVE'
+13/01/2017 16:20:05 verificar se chave está valida
+13/01/2017 16:20:05 Valor inválido para tipo int : 1484307503280
+13/01/2017 16:21:14 verificar se chave está valida
+13/01/2017 16:21:14 Valor inválido para tipo int : 1484307503280
+13/01/2017 16:24:08 verificar se chave está valida
+13/01/2017 16:24:08 Valor inválido para tipo int : 1484307503280
+13/01/2017 16:24:56 verificar se chave está valida
+13/01/2017 16:24:56 Valor inválido para tipo int : 1484307503280
+13/01/2017 16:25:59 verificar se chave está valida
+13/01/2017 16:26:00 pedidoDesinstalacaoLista: 3
+13/01/2017 16:26:00 Pedido de desinstalacao token: Token
+13/01/2017 16:26:03 verificar se chave está valida
+13/01/2017 16:26:03 pedidoDesinstalacaoLista: 3
+13/01/2017 16:26:03 Pedido de desinstalacao token: Token
+13/01/2017 16:26:13 verificar se chave está valida
+13/01/2017 16:26:13 pedidoDesinstalacaoLista: 3
+13/01/2017 16:26:13 Pedido de desinstalacao token: Token
+13/01/2017 16:30:26 verificar se chave está valida
+13/01/2017 16:30:27 pedidoDesinstalacaoLista: 3
+13/01/2017 16:30:27 Pedido de desinstalacao token: Token
+13/01/2017 16:31:00 verificar se chave está valida
+13/01/2017 16:31:00 Não foi possível encontrar a chave de desinstalação 'IXVQD3FZS'
+13/01/2017 16:31:02 verificar se chave está valida
+13/01/2017 16:31:02 pedidoDesinstalacaoLista: 3
+13/01/2017 16:31:02 Pedido de desinstalacao token: Token
+13/01/2017 16:38:47 verificar se chave está valida
+13/01/2017 16:38:47 pedidoDesinstalacaoLista: 3
+13/01/2017 16:38:47 Pedido de desinstalacao token: Token
+13/01/2017 16:42:04 verificando se token de acesso está vinculado a um usuário verdadeiro
+13/01/2017 16:42:05 permissão de acesso negada, verificar token de acesso.
+13/01/2017 16:43:18 verificando se token de acesso está vinculado a um usuário verdadeiro
+13/01/2017 16:43:18 permissão de acesso negada, verificar token de acesso.
+13/01/2017 16:43:45 verificando se token de acesso está vinculado a um usuário verdadeiro
+13/01/2017 16:43:45 verificar se chave está valida, com relação ao usuário site e verifiar se está vinculado a uma revenda com vinculo a essa chave de desinstalação
+13/01/2017 16:43:45 pedidoDesinstalacaoLista: 3
+13/01/2017 16:43:45 Pedido de desinstalacao token: [B@245182e
+13/01/2017 16:43:48 verificando se token de acesso está vinculado a um usuário verdadeiro
+13/01/2017 16:43:48 permissão de acesso negada, verificar token de acesso.
+13/01/2017 16:43:49 verificando se token de acesso está vinculado a um usuário verdadeiro
+13/01/2017 16:43:49 verificar se chave está valida, com relação ao usuário site e verifiar se está vinculado a uma revenda com vinculo a essa chave de desinstalação
+13/01/2017 16:43:49 pedidoDesinstalacaoLista: 3
+13/01/2017 16:43:49 Pedido de desinstalacao token: [B@245182e
+13/01/2017 16:43:51 verificando se token de acesso está vinculado a um usuário verdadeiro
+13/01/2017 16:43:51 verificar se chave está valida, com relação ao usuário site e verifiar se está vinculado a uma revenda com vinculo a essa chave de desinstalação
+13/01/2017 16:43:51 Não foi possível encontrar a chave de desinstalação 'IXVQD3FZS'
+13/01/2017 16:43:52 verificando se token de acesso está vinculado a um usuário verdadeiro
+13/01/2017 16:43:52 verificar se chave está valida, com relação ao usuário site e verifiar se está vinculado a uma revenda com vinculo a essa chave de desinstalação
+13/01/2017 16:43:52 pedidoDesinstalacaoLista: 3
+13/01/2017 16:43:52 Pedido de desinstalacao token: [B@245182e
+13/01/2017 17:23:46 verificando se token de acesso está vinculado a um usuário verdadeiro
+13/01/2017 17:23:47 verificar se chave está valida, com relação ao usuário site e verifiar se está vinculado a uma revenda com vinculo a essa chave de desinstalação
+13/01/2017 17:23:47 pedidoDesinstalacaoLista: 3
+13/01/2017 17:23:47 Pedido de desinstalacao token: [B@245182e
+13/01/2017 17:46:22 verificando se token de acesso está vinculado a um usuário verdadeiro
+13/01/2017 17:46:23 verificar se chave está valida, com relação ao usuário site e verifiar se está vinculado a uma revenda com vinculo a essa chave de desinstalação
+13/01/2017 17:46:23 validar periodoo de 24horas apos a criação
+13/01/2017 17:46:23 Pedido de desinstalacao token: [B@245182e
+13/01/2017 17:46:33 verificando se token de acesso está vinculado a um usuário verdadeiro
+13/01/2017 17:46:33 verificar se chave está valida, com relação ao usuário site e verifiar se está vinculado a uma revenda com vinculo a essa chave de desinstalação
+13/01/2017 17:46:33 validar periodoo de 24horas apos a criação
+13/01/2017 17:46:33 Pedido de desinstalacao token: [B@245182e
+13/01/2017 17:51:10 verificando se token de acesso está vinculado a um usuário verdadeiro
+13/01/2017 17:51:11 verificar se chave está valida, com relação ao usuário site e verifiar se está vinculado a uma revenda com vinculo a essa chave de desinstalação
+13/01/2017 17:51:11 validar periodoo de 24horas apos a criação
+13/01/2017 17:51:11 Horas de abertura até esse momento: 8 horas
+13/01/2017 17:51:11 Pedido de desinstalacao token: [B@245182e
+13/01/2017 17:51:17 verificando se token de acesso está vinculado a um usuário verdadeiro
+13/01/2017 17:51:17 verificar se chave está valida, com relação ao usuário site e verifiar se está vinculado a uma revenda com vinculo a essa chave de desinstalação
+13/01/2017 17:51:17 validar periodoo de 24horas apos a criação
+13/01/2017 17:51:17 Horas de abertura até esse momento: 8 horas
+13/01/2017 17:51:17 Pedido de desinstalacao token: [B@245182e

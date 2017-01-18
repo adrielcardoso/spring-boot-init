@@ -1,0 +1,64 @@
+package br.intelidata.entity;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class EscolhaEntity implements Serializable 
+{
+    public static final long serialVersionUID = 2246908077988991327L;
+    private List<CasoEntity> casos;
+    private String aliasDefault;
+    private ConstanteEntity valorDefault;
+    private OperacaoUnariaEntity operacaoUnariaDefault;
+
+    /**
+     * XXX - Contrutor usado para Json-Web.
+     */
+    public EscolhaEntity() {}
+
+    private void configEscolha() {
+        casos = new ArrayList<CasoEntity>();
+        aliasDefault = null;
+        valorDefault = null;
+        operacaoUnariaDefault = null;
+    }
+
+    public EscolhaEntity(CasoEntity caso, ConstanteEntity valorDefault) {
+        configEscolha();
+        casos.add(caso);
+        this.valorDefault = valorDefault;
+    }
+
+    public EscolhaEntity(CasoEntity caso, String aliasDefault) {
+        configEscolha();
+        casos.add(caso);
+        this.aliasDefault = aliasDefault;
+    }
+
+    public EscolhaEntity(CasoEntity caso, OperacaoUnariaEntity operacaoUnariaDefault) {
+        configEscolha();
+        casos.add(caso);
+        this.operacaoUnariaDefault = operacaoUnariaDefault;
+    }
+
+    public void add(CasoEntity caso) {
+        casos.add(caso);
+    }
+
+    public String getAliasDefault() {
+        return aliasDefault;
+    }
+
+    public List<CasoEntity> getCasos() {
+        return casos;
+    }
+
+    public ConstanteEntity getValorDefault() {
+        return valorDefault;
+    }
+
+    public OperacaoUnariaEntity getOperacaoUnaraoDefault() {
+        return operacaoUnariaDefault;
+    }
+}

@@ -1,0 +1,23 @@
+package br.intelidata.component;
+
+import java.io.IOException;
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+
+public class LocalDateDeserializerComponent extends JsonDeserializer<LocalDate> 
+{
+    @Override
+    public LocalDate deserialize(JsonParser jsonparser, DeserializationContext deserializationcontext) 
+    {
+        try {
+            return UtilComponent.string2LocalDate(
+            		jsonparser.getValueAsString(), 
+            		"yyyy/MM/dd");
+        } catch (IOException e) {
+            return null;
+        }
+    }
+}

@@ -1,0 +1,21 @@
+package br.intelidata.component;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+
+public class DataHoraFactoryComponent {
+
+    public static LocalDate getData() {
+        return LocalDate.now();
+    }
+
+    public static LocalDateTime getDataHora() {
+        return LocalDateTime.now();
+    }
+
+    public static ZonedDateTime getDataHoraTimeZone() {
+        return ZonedDateTime.now();
+    }
+
+}

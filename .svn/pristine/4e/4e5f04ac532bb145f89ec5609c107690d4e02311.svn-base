@@ -1,0 +1,18 @@
+package br.intelidata.entity;
+
+import java.math.BigDecimal;
+
+import br.intelidata.config.Entity;
+
+public class Produto extends Entity
+{
+	private BigDecimal extra5;
+
+	public BigDecimal getExtra5() {
+		return extra5;
+	}
+
+	public void setExtra5(BigDecimal extra5) {
+		this.extra5 = extra5;
+	}
+}

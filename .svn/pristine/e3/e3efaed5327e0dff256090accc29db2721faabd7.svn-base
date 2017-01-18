@@ -1,0 +1,29 @@
+package br.intelidata.entity;
+
+import java.io.Serializable;
+
+public class OperacaoUnariaEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private String alias;
+    private OperadorUnarioEntity operadorUnario;
+
+    /**
+     * XXX - Contrutor usado para Json-Web.
+     */
+    public OperacaoUnariaEntity() {}
+
+    public OperacaoUnariaEntity(String alias, OperadorUnarioEntity operadorUnario) {
+        this.alias = alias;
+        this.operadorUnario = operadorUnario;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public OperadorUnarioEntity getOperador() {
+        return operadorUnario;
+    }
+}

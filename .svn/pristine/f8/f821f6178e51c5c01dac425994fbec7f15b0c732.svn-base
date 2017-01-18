@@ -1,0 +1,66 @@
+package br.intelidata.entity;
+
+import br.intelidata.config.Entity;
+
+public class Ecfautorizadahistorico extends Entity
+{
+	private long idecfautorizada;
+	private String gt;
+	private String cro;
+	private String observacao;
+	private long currenttimemillis;
+	private int versaopaf;
+	
+	public Ecfautorizadahistorico()
+	{
+		super();
+	}
+	
+	public long getIdecfautorizada() {
+		return idecfautorizada;
+	}
+	public void setIdecfautorizada(long idecfautorizada) {
+		this.idecfautorizada = idecfautorizada;
+	}
+
+	public String getGt() {
+		return gt;
+	}
+
+	public void setGt(String gt) {
+		this.gt = gt;
+	}
+
+	public String getCro() {
+		return cro;
+	}
+
+	public void setCro(String cro) {
+		this.cro = cro;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+
+	public long getCurrenttimemillis() {
+		return currenttimemillis;
+	}
+
+	public void setCurrenttimemillis(long currenttimemillis) {
+		this.currenttimemillis = currenttimemillis;
+	}
+
+	public int getVersaopaf() {
+		return versaopaf;
+	}
+
+	public void setVersaopaf(int versaopaf) {
+		this.versaopaf = versaopaf;
+	}
+	
+}

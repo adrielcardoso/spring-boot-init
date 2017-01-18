@@ -1,0 +1,21 @@
+package br.intelidata.controllers;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+
+@Component
+public class LogComponent {
+
+    @Autowired
+    @Qualifier("logtrackerDataSource")
+    private DataSource dataSource;
+
+    public void loga(String ip, String valor) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        jdbcTemplate.update("insert into teste (ip,texto) values (?,?)", ip, valor);
+    }
+}

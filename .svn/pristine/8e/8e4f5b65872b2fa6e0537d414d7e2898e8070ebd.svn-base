@@ -1,0 +1,45 @@
+package br.intelidata.service;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.sql.DataSource;
+
+import br.intelidata.component.FileLogComponent;
+import br.intelidata.component.LogComponent;
+import br.intelidata.config.Service;
+import br.intelidata.entity.DadosEcfAutorizadaEntity;
+
+public class DadosEcfAutorizadaService extends Service
+{
+	
+	//@Todo
+	 public static DadosEcfAutorizadaEntity buscaDadosEcfAutorizada(DataSource dataSource, String numeroSerie, String cnpj) 
+	 {		 
+//        String comando = "select t1.id, t1.idestado, t2.emailtecnico, t2.codigo codigorevenda,t2.nome nomerevenda " + "from ecfautorizada t1 left join entidade t2 on (t2.id=t1.identidade) "
+//                + "where numeroserie='" + numeroSerie + "' and cnpj='" + cnpj + "'";
+//
+//        DadosEcfAutorizadaEntity dadosEcfAutorizada = null;
+//        try {
+//            Statement statement = dataSource.createStatement();
+//            ResultSet rs = statement.executeQuery(comando);
+//            if (rs.next()) {
+//                dadosEcfAutorizada = 
+//                dadosEcfAutorizada.setId(rs.getLong("id"));
+//                dadosEcfAutorizada.setEmail(rs.getString("emailtecnico"));
+//                dadosEcfAutorizada.setCodigoRevenda(rs.getString("codigorevenda"));
+//                dadosEcfAutorizada.setNomeRevenda(rs.getString("nomerevenda"));
+//                dadosEcfAutorizada.setIdEstado(rs.getLong("idestado"));
+//            }
+//            rs.close();
+//            statement.close();
+//        } catch (SQLException e) {
+//        	FileLogComponent.getInstance().write(comando);
+//        	FileLogComponent.getInstance().write(e.getMessage());
+//        }
+
+        return new DadosEcfAutorizadaEntity();
+    }
+}
